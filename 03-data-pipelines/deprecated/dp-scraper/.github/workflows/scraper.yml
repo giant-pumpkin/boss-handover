@@ -1,0 +1,36 @@
+name: Run Device Portal Scraper
+
+on:
+  # schedule:
+  #   - cron: "*/10 * * * *"   # every 10 mins
+  workflow_dispatch:          # allow manual trigger
+
+jobs:
+  dp-scraper:
+    runs-on: [self-hosted, dp-runner]
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        pip install python-dotenv
+        pip install playwright
+        pip install gspread gspread-dataframe pandas
+        playwright install chromium
+
+    - name: Run scraper
+      env:
+        DP_USER: ${{ secrets.DP_USER }}
+        DP_PASSWORD: ${{ secrets.DP_PASSWORD }}
+        URL: ${{ secrets.URL }}
+        GSHEET_ID: ${{ secrets.GSHEET_ID }}
+        GOOGLE_CREDS_JSON: ${{ secrets.GOOGLE_CREDS_JSON }}
+        AT_TOKEN: ${{ secrets.AT_TOKEN }}
+      run: python dp_scraper.py

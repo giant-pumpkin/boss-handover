@@ -2,7 +2,6 @@
 
 | Symptom | Runbook |
 | --- | --- |
-| Supabase mirror / dashboard numbers stale | [supabase-mirror-stale.md](supabase-mirror-stale.md) |
 | HS - Quotes not updating | [hubspot-sync-stopped.md](hubspot-sync-stopped.md) |
 | Subscription not created after a job | [subscription-missing.md](subscription-missing.md) |
 | n8n unreachable / droplet down | [droplet-down.md](droplet-down.md) |

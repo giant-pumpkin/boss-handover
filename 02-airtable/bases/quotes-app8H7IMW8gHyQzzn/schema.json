@@ -1,0 +1,4743 @@
+{
+    "tables": [
+        {
+            "id": "tblfA08VVwMAme3V3",
+            "name": "Subscriptions - Date range",
+            "primaryFieldId": "fldcrzd4v8gsdat97",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldlzR7NTpP8yEXr3}",
+                        "referencedFieldIds": [
+                            "fldlzR7NTpP8yEXr3"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldcrzd4v8gsdat97",
+                    "name": "M/Y"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "DATETIME_PARSE({fldcrzd4v8gsdat97}, 'MM/YY')",
+                        "referencedFieldIds": [
+                            "fldcrzd4v8gsdat97"
+                        ],
+                        "result": {
+                            "type": "date",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                }
+                            }
+                        }
+                    },
+                    "id": "flduU4XokSOrZzUIh",
+                    "name": "Month/Year - Date"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x"
+                    },
+                    "id": "fldCck6d5TEj5nMco",
+                    "name": "# Total"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbloG2fLQls9ESIrY",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldgEJtxrgudO8mH9"
+                    },
+                    "id": "fldLMdHtg3xJafb6x",
+                    "name": "Subscriptions"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzRNXv6tFfHDs0K",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldbLIaHhQ4TmrPPW"
+                    },
+                    "id": "fldYXzfHtJO05vUdf",
+                    "name": "Employees (All)"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldYXzfHtJO05vUdf"
+                    },
+                    "id": "fld5ZmhSfY3dPk71A",
+                    "name": "Headcount (All)"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x",
+                        "fieldIdInLinkedTable": "fldl2jGmLtLuuWMJx",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldKojFNP3uBpGduF",
+                    "name": "Digital Signage - Active Subscriptions"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbltxjiJgbUfajgaJ",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fld4QG4lnFa9JhqX3"
+                    },
+                    "id": "fldlzR7NTpP8yEXr3",
+                    "name": "Segment"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x"
+                    },
+                    "id": "fldgdSTuVNQGEGWIx",
+                    "name": "# Signage"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x"
+                    },
+                    "id": "fldIYwtFqjbOPhLB8",
+                    "name": "# Audio"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldk2Em877rb3GWS0",
+                        "fieldIdInLinkedTable": "fldCck6d5TEj5nMco",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "flde4FuG4IQgg6jqi",
+                    "name": "# Total - Previous month"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldvoayGdJcpJFawG"
+                    },
+                    "id": "fldk2Em877rb3GWS0",
+                    "name": "Previous M/Y"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldk2Em877rb3GWS0"
+                    },
+                    "id": "fldvoayGdJcpJFawG",
+                    "name": "From field: Previous M/Y"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldCck6d5TEj5nMco} - {flde4FuG4IQgg6jqi}",
+                        "referencedFieldIds": [
+                            "fldCck6d5TEj5nMco",
+                            "flde4FuG4IQgg6jqi"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fld5EaAcrNoSAQtnS",
+                    "name": "# New"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x",
+                        "fieldIdInLinkedTable": "fld0eBpFmBx1sWC8k",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldPOJfDFcDrcXoCG",
+                    "name": "Churned"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x",
+                        "fieldIdInLinkedTable": "fldr7wyD6Bx9D60Wr",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fld469kxOhv7TaW1Z",
+                    "name": "New"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldYXzfHtJO05vUdf",
+                        "fieldIdInLinkedTable": "fldS1fQVuKpsbZRKQ",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldCmihPebTXQBorO",
+                    "name": "Digital Signage - Employee Headcount"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldYXzfHtJO05vUdf",
+                        "fieldIdInLinkedTable": "fldS1fQVuKpsbZRKQ",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fld8U7kig6kD88frT",
+                    "name": "Music Streaming - Employee Headcount"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fld5ZmhSfY3dPk71A} = ({fldCmihPebTXQBorO}+ {fld8U7kig6kD88frT}), \"MATCH\", \"NOT MATCHING\")",
+                        "referencedFieldIds": [
+                            "fld5ZmhSfY3dPk71A",
+                            "fldCmihPebTXQBorO",
+                            "fld8U7kig6kD88frT"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld4qVPdE6qeCNmkl",
+                    "name": "Headcount Check"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x",
+                        "fieldIdInLinkedTable": "fldl2jGmLtLuuWMJx",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldlsJKGxaBlZTWZP",
+                    "name": "Music Streaming - Active Subscriptions"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldLMdHtg3xJafb6x",
+                        "fieldIdInLinkedTable": "fldl2jGmLtLuuWMJx",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldyaVcYtw9xTawRL",
+                    "name": "Active Subscriptions (All)"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldQ2SjSRRcQ8QHuz"
+                    },
+                    "id": "fldrLt2re0G7F8NHV",
+                    "name": "Segment - Previous"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldrLt2re0G7F8NHV"
+                    },
+                    "id": "fldQ2SjSRRcQ8QHuz",
+                    "name": "Segment - Next"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldrLt2re0G7F8NHV",
+                        "fieldIdInLinkedTable": "fldKojFNP3uBpGduF",
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldCtv4fshcb396dH",
+                    "name": "Subscriptions (Digital Signage) - Previous segment"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldrLt2re0G7F8NHV",
+                        "fieldIdInLinkedTable": "fldlsJKGxaBlZTWZP",
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldXxy8ZPPliPRY4n",
+                    "name": "Subscriptions (Music Streaming) - Previous segment"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldKojFNP3uBpGduF} -  {fldCtv4fshcb396dH}>0, {fldKojFNP3uBpGduF} -  {fldCtv4fshcb396dH}, 0)",
+                        "referencedFieldIds": [
+                            "fldKojFNP3uBpGduF",
+                            "fldCtv4fshcb396dH"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldDwCun3Ae8IcwfT",
+                    "name": "Digital Signage - New Subscriptions"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldKojFNP3uBpGduF} -  {fldCtv4fshcb396dH}<0, ABS({fldKojFNP3uBpGduF} -  {fldCtv4fshcb396dH}), 0)",
+                        "referencedFieldIds": [
+                            "fldKojFNP3uBpGduF",
+                            "fldCtv4fshcb396dH"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldqFNeRDusjeBYYI",
+                    "name": "Digital Signage - Subscription Churn"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldlsJKGxaBlZTWZP} - {fldXxy8ZPPliPRY4n} > 0, {fldlsJKGxaBlZTWZP} - {fldXxy8ZPPliPRY4n}, 0)",
+                        "referencedFieldIds": [
+                            "fldlsJKGxaBlZTWZP",
+                            "fldXxy8ZPPliPRY4n"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldxE0Kh1vTadAaRb",
+                    "name": "Music Streaming - New Subscriptions"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldlsJKGxaBlZTWZP} - {fldXxy8ZPPliPRY4n} < 0, ABS({fldlsJKGxaBlZTWZP} - {fldXxy8ZPPliPRY4n}), 0)",
+                        "referencedFieldIds": [
+                            "fldlsJKGxaBlZTWZP",
+                            "fldXxy8ZPPliPRY4n"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldAs2DwejZ4VQ9HO",
+                    "name": "Music Streaming - Subscription Churn"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwBMqEGhBK4w6whn",
+                    "name": "Dev",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwtsuLxH4Z5gT9Lx",
+                    "name": "Fathom Import",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwtDbglhjtGE0v8U",
+                    "name": "View Data",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblzRNXv6tFfHDs0K",
+            "name": "Employees",
+            "primaryFieldId": "fldS1fQVuKpsbZRKQ",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldLVXdH56sewmeZz} & \" \" & {fldLS2ZfJdYk0pNTK}",
+                        "referencedFieldIds": [
+                            "fldLVXdH56sewmeZz",
+                            "fldLS2ZfJdYk0pNTK"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldS1fQVuKpsbZRKQ",
+                    "name": "Employee"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldiszPokyMx7x2ir",
+                    "name": "ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLSFIuV0njsOpZR",
+                    "name": "Status"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLVXdH56sewmeZz",
+                    "name": "First Name"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLS2ZfJdYk0pNTK",
+                    "name": "Last Name"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldiTgGUdJnraunQ0",
+                    "name": "Start Date"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzUch1Ra0jrgqbH",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldaXsnaqz3z0c2la"
+                    },
+                    "id": "fldBvwJLJYDUHJ3ze",
+                    "name": "Terminated Employees"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldBvwJLJYDUHJ3ze",
+                        "fieldIdInLinkedTable": "fldUStNyQ33a7DI37",
+                        "result": {
+                            "type": "date",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "iso",
+                                    "format": "YYYY-MM-DD"
+                                }
+                            }
+                        }
+                    },
+                    "id": "fldYamwzKdI45okJN",
+                    "name": "Termination Date"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldYXzfHtJO05vUdf"
+                    },
+                    "id": "fldbLIaHhQ4TmrPPW",
+                    "name": "M/Y"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldHsHpBBudD1Q5hn} = \"f3a17cf7-861e-47dc-8b04-0b8bb063a3bb\", \"Giant Pumpkin\", \"Royal Streaming\")",
+                        "referencedFieldIds": [
+                            "fldHsHpBBudD1Q5hn"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld0eerikrEXOqpwB",
+                    "name": "Employee Legal Entity"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldsuJoTho7Fiy4J3",
+                    "name": "Department"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "local",
+                            "format": "l"
+                        }
+                    },
+                    "id": "fldYTOnVkkaDAgOH7",
+                    "name": "Reinstated Date"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "local",
+                                    "format": "l"
+                                },
+                                "timeFormat": {
+                                    "name": "12hour",
+                                    "format": "h:mma"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldXbi2TFUtHk00f7",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldHsHpBBudD1Q5hn",
+                    "name": "Legal Entity ID"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwh6i21aDzBGyzjw",
+                    "name": "Employees - All",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwylPEPC1O9HR7KU",
+                    "name": "Employees - Giant Pumpkin",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw7p1QvsVF0gRBsR",
+                    "name": "Employees - Royal Streaming",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbltxjiJgbUfajgaJ",
+            "name": "Date range",
+            "primaryFieldId": "fldsV5pPdtA3UDveP",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldsV5pPdtA3UDveP",
+                    "name": "ID"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldlzR7NTpP8yEXr3"
+                    },
+                    "id": "fld4QG4lnFa9JhqX3",
+                    "name": "Subscriptions - M/Y"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selzzeLa2cU8qfo5z",
+                                "name": "M/Y",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "flds6xcXWGIv1uZD8",
+                    "name": "Type"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "DATETIME_PARSE(\n  LEFT({fldsV5pPdtA3UDveP}, 2) & \"/01/\" & RIGHT({fldsV5pPdtA3UDveP}, 2),\n  \"MM/DD/YY\"\n)",
+                        "referencedFieldIds": [
+                            "fldsV5pPdtA3UDveP"
+                        ],
+                        "result": {
+                            "type": "date",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                }
+                            }
+                        }
+                    },
+                    "id": "fldJW3MYH32dfNMRT",
+                    "name": "ID - Date",
+                    "description": "Converts the ID field (MM/YY) into a date representing the first day of that month."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwZZlP2GV6hQo1ic",
+                    "name": "Sync to Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwqgCnHUT0aaXCXc",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbloG2fLQls9ESIrY",
+            "name": "Subscriptions",
+            "primaryFieldId": "fldl2jGmLtLuuWMJx",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldl2jGmLtLuuWMJx",
+                    "name": "ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLL7Y9rcqKrx57V",
+                    "name": "Month segments"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldiZr3QS1eLp0bcp",
+                    "name": "Start date"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldU2FpGswVU90AbQ},{fldU2FpGswVU90AbQ},{flde5Ad9IUhs6vJZQ})",
+                        "referencedFieldIds": [
+                            "fldU2FpGswVU90AbQ",
+                            "flde5Ad9IUhs6vJZQ"
+                        ],
+                        "result": {
+                            "type": "date",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                }
+                            }
+                        }
+                    },
+                    "id": "fldXHTKOfA54aNQu2",
+                    "name": "End date - Normalised"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldvBTyYMP4jbninb",
+                    "name": "Inventory"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldqo4e64PAwm1sVp",
+                    "name": "Country"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldSmsagoI4KaMI5T",
+                    "name": "Brand (From contract)"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldQ9ksVewATAQWdX",
+                    "name": "Brand owner (From contract)"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldD7ffmM03MzX3SN",
+                    "name": "Resource"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldTLrjkDEA0qBBXw",
+                    "name": "Subscription type - From contract"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selQI5At9Vd8hFHIN",
+                                "name": "1",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selBjNM9Ag33VQU6X",
+                                "name": "2",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel1bQhIdSyHLqhJ3",
+                                "name": "3",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selcYkavYY0UAJCQA",
+                                "name": "4",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selUBqTs51MWTsf4w",
+                                "name": "5",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selhtvAp1RddsMjVH",
+                                "name": "6",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selGml7nsdaAfrvVo",
+                                "name": "7",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldjfrojt7lZ24sb2",
+                    "name": "Duration - FoC"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selagLbOYkfg5Hqra",
+                                "name": "0",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selVPJThHot0FJodp",
+                                "name": "1",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selYXTaW5M58wT3W9",
+                                "name": "2",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel4bWnicM0g2v2rA",
+                                "name": "3",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selDK3DDknh0MBQvV",
+                                "name": "4",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selASrvH6XOBN5TEx",
+                                "name": "5",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selvEoRY3H1vXdazn",
+                                "name": "6",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selk91UkIzN9G1t87",
+                                "name": "7",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel6AEC1zdmg2QS6J",
+                                "name": "8",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selaUgqBj8nDHG6gg",
+                                "name": "9",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selbTB93vkieXoBj5",
+                                "name": "10",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel91CD9Dunvos2jX",
+                                "name": "11",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selr5v5io8aZ5E9n7",
+                                "name": "12",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selM556wTKPKHNhgh",
+                                "name": "15",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seltkwupNPJis5wLC",
+                                "name": "24",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel3zecwce9USKQb4",
+                                "name": "36",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selhCwzzK4udNlYt6",
+                                "name": "120",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selEmJOdRj7hgPbWf",
+                                "name": "0.5",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selOZWOWvBvx3gHt0",
+                                "name": "18",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selEAoieazUMLdHyI",
+                                "name": "19",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selHKaiHj94dN2Ued",
+                                "name": "16",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldd1qi43K4dmFWiy",
+                    "name": "Duration"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selFORMULADEFAULT",
+                                "name": "Error",
+                                "color": "redBright"
+                            },
+                            {
+                                "id": "selXtyxaN942pfuON",
+                                "name": "Terminated",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sel9wwHoqsYflZxXO",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel7dPNutFacYxZ43",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selXsi2cKInnvcLI1",
+                                "name": "Scheduled",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld8ekcxCD3Mn57wO",
+                    "name": "Status"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbloG2fLQls9ESIrY",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true
+                    },
+                    "id": "fldxoWUtrjFfE9ANZ",
+                    "name": "Renewed from"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selcrdEe3PXk4cgal",
+                                "name": "Adapters",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel2dT4elMyKhF2YI",
+                                "name": "Ceiling Mount",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selTabW6C2e8KrT33",
+                                "name": "Demo",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selfdcCIiOGgWbbrO",
+                                "name": "Display",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selVwr30Yef1jcLTY",
+                                "name": "Frames",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selGB3IQRkNxDnmVM",
+                                "name": "LED module",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seltVUHK0pST38RYY",
+                                "name": "Mounts",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selWBvD99j5rwKBWX",
+                                "name": "PC",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selzdQ6WNxJbqGBlu",
+                                "name": "Play box",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selNbUUFQV4vgPhVZ",
+                                "name": "Printer",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selnmuPpMl9zwKnD7",
+                                "name": "Routers",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selhwqcHa2oXosteq",
+                                "name": "Scent Diffuser",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selO5cpwm87ebsvx8",
+                                "name": "Scent Diffuser Tank",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selXIUGgAXguBOgGa",
+                                "name": "Services",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selJhczTMokFVvC7P",
+                                "name": "SIM card",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selzabDt52wJbKQGX",
+                                "name": "Smart camera",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selQJ7zGwsTa6ksvU",
+                                "name": "Software",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selimOaVd94gqng4m",
+                                "name": "Streaming Device",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selYnoSMrBntOJLrb",
+                                "name": "Switch",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seluwZ8NK2yj6CxtQ",
+                                "name": "TV stand - Vesa",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel9ACWOZOJA3vuUt",
+                                "name": "USB Cameras",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selHl68VhNAPHiYRm",
+                                "name": "USB Tracker",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel7MAdYSRM4q9XSr",
+                                "name": "Video processor",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seluDHoyUp8pxi0Ss",
+                                "name": "Warranty",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selm8IHi1Z41U7Q8N",
+                                "name": "Cable",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selBe0FEILMOMbkmG",
+                                "name": "Data storage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel50IVSe9Ck7DDBF",
+                                "name": "Office supplies",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldZTBbFKPkj3r63a",
+                    "name": "Resource - Category"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldyUm3XQBxfyKjex",
+                    "name": "Quote"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldU7kDfZCQoAIh3t",
+                    "name": "Subscription contract"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selOtTxHGc7vO6VLc",
+                                "name": "Digital signage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel0AG301B6lLj82h",
+                                "name": "Music streaming",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldXshiWm5nqvGSPH",
+                    "name": "Service"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldggtG5OiKqxaAS8",
+                    "name": "Contract ID"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldr7wyD6Bx9D60Wr",
+                    "name": "New"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fld0eBpFmBx1sWC8k",
+                    "name": "Churned"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblfA08VVwMAme3V3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldLMdHtg3xJafb6x"
+                    },
+                    "id": "fldgEJtxrgudO8mH9",
+                    "name": "Subscriptions - M/Y - Segments"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "flde5Ad9IUhs6vJZQ",
+                    "name": "End date"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldU2FpGswVU90AbQ",
+                    "name": "Last modified - Status - Terminated"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld5ndrAlDAfEx2Jn",
+                    "name": "Brand (From Inventory)"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0wcCTgDrbcvZQD",
+                    "name": "Brand owner (From Inventory)"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldvWZoirEMBYHvqt",
+                    "name": "Subscription type"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldoZx4TT8Wdb6VTZ",
+                    "name": "Auto renew"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "flddFnIVa7iiU2GR0",
+                    "name": "Auto renewed"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fld8rTlRYKwgp1Ib8",
+                    "name": "Days left"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldBnrbLYZ9tvdELN",
+                    "name": "Notes"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9GBvFsNyBnzbEG",
+                    "name": "Revenue - Monthly - THB"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldtumvnSUeuYHdsj",
+                    "name": "Location - Installation"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldL1qtxGKgmMNWgN",
+                    "name": "Location - Installation - Area"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldtZ7kxNJD9RA7Az",
+                    "name": "Check - Brand"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        },
+                        "timeFormat": {
+                            "name": "24hour",
+                            "format": "HH:mm"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fldSyvxaxwOQqZ66c",
+                    "name": "Created"
+                },
+                {
+                    "type": "singleCollaborator",
+                    "id": "fld7cxFN4mRSKKeKq",
+                    "name": "Last Modified By"
+                },
+                {
+                    "type": "singleCollaborator",
+                    "id": "fldRfT05mnsYjAQ6G",
+                    "name": "Created By"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        },
+                        "timeFormat": {
+                            "name": "24hour",
+                            "format": "HH:mm"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fldw9HQKXaQL0BXog",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldkoCv2BHIHXrgJK",
+                    "name": "Inventory ID"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fld9JsXr1RImA0Jru",
+                    "name": "Terminated"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldRT35XtnEB6kIGa",
+                    "name": "Trigger - Auto renew"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld81ClZT8RoMbqh3",
+                    "name": "Status - DS"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldq3DRRxaRGEK1I2",
+                    "name": "Installation date"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seld6ZRmO4dviZGkD",
+                                "name": "Available",
+                                "color": "greenLight1"
+                            },
+                            {
+                                "id": "selypfYKC8bUSNiR4",
+                                "name": "Defect",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selfF5zMYj2dPp3vO",
+                                "name": "Delivered",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selWHkt0UABBfSHEb",
+                                "name": "Demo",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selWrWXiQss4TuJZj",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selkVKGJvwlJ6EoU2",
+                                "name": "In production",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selDcTzjrnaFZj7T4",
+                                "name": "In transit",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selkf3JSmbEzlG5G5",
+                                "name": "Incomplete",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selHoervxurPKzgxT",
+                                "name": "Installed",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selljocEoBq2KQT08",
+                                "name": "Lost",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "seldsOhhyBFmwj1gJ",
+                                "name": "Pending",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selWuqAXg3RRt274z",
+                                "name": "Swapped",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selSl6sCNLorTRPi5",
+                                "name": "Spare",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldmkcVcnunQWzreQ",
+                    "name": "Inventory - Status"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldChsTi2JW9vk4QM",
+                    "name": "Address - EN"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld1SjyQN5lyrAAnj",
+                    "name": "Contract - Start date"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "dot",
+                        "color": "redBright"
+                    },
+                    "id": "fldXYchcfW0qemzXS",
+                    "name": "Alert - Start dates"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldlv0KbKXOz1sqYh",
+                    "name": "Trigger - Align start dates"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldreYJCz75xW9NhA",
+                    "name": "Customer"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldGFRiYrLtZiyZcG",
+                    "name": "Resource Type"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldE1rRcZc0xrOooy",
+                    "name": "Resource - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldDFr6fvbmtbIIqt",
+                    "name": "Spare?"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9hf8axC4lJIedN",
+                    "name": "Location - Region"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldfuj3LFzrRSncTO",
+                    "name": "Location - Subdivision"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldfXRb2bbyDn5wC9",
+                    "name": "Latitude"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0Xh0a7g8MvIlAp",
+                    "name": "Longitude"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selBetvFCf1UdpKLU",
+                                "name": "Royalty free",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selCIC0Zsk9XMHwqW",
+                                "name": "Commercial",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selwJvfwW9RTNO5Pn",
+                                "name": "Signage player",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldRh04zk3pCYbeoB",
+                    "name": "Subscription type - License type"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldUozApcREWCKigs",
+                    "name": "Customer - String"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldjnUsJpZFwtaCV1",
+                    "name": "Country - String"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "DATETIME_FORMAT({fldiZr3QS1eLp0bcp}, 'MM/YY')",
+                        "referencedFieldIds": [
+                            "fldiZr3QS1eLp0bcp"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldFMdAGwjGaSTDQm",
+                    "name": "Start date - M/Y"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "DATETIME_FORMAT({fldXHTKOfA54aNQu2}, 'MM/YY')",
+                        "referencedFieldIds": [
+                            "fldXHTKOfA54aNQu2"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld08vYQPQbTMzbwt",
+                    "name": "End date - M/Y"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fld1BlFbFLuitMzAX",
+                    "name": "Processed"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldbWLWY7dL04RZUc",
+                    "name": "is_FoC"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldVMZusWlB2iyJrd",
+                    "name": "Start date - Rollback"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldRczZZCdpJxOX0X",
+                    "name": "Start date - Check",
+                    "description": "True if Start date = Start date - Rollback"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viw5VU33EBS2aDA5z",
+                    "name": "DS018 - Subscriptions - Time segmented",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwrcMKMcannHPufb",
+                    "name": "DS018 - Subscriptions - Time segmented copy",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw43JoO6yfPQZ5BB",
+                    "name": "Processed",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwa4UFVpZhidecIG",
+                    "name": "Not processed",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwwTAq8qHYuktVoj",
+                    "name": "Dev",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw3KBf50o9lwMFmQ",
+                    "name": "Sebastians View",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblqL7FwSviDdnXC3",
+            "name": "Locations",
+            "primaryFieldId": "fldxDqQlga5WP7POm",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldxDqQlga5WP7POm",
+                    "name": "ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldHloQD6FCN5HV87",
+                    "name": "Location code"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldEjfEBjCylQRCca",
+                    "name": "Location - Name - EN"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldBuMj6sZd8ooNTA",
+                    "name": "Location - Name - TH"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld3VHXmj1vwEV1Ng",
+                    "name": "Address - EN"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXwqwgUigjEKIHK",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true
+                    },
+                    "id": "fldvGSFYjejizSO0Z",
+                    "name": "Customer"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldoXZzyl7vciiOTp",
+                    "name": "Brand"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldQuqFJ4vqTyFa7s",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldBsTxyumhEgAdT1",
+                    "name": "Store"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0CmGuHLF1N8Br1",
+                    "name": "Country"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld1PB5Fu2HKoK1ST",
+                    "name": "Contact name - EN"
+                },
+                {
+                    "type": "phoneNumber",
+                    "id": "fldZkcKqyFXpeKcBq",
+                    "name": "Phone number"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selHPtKFAF88dwR9M",
+                                "name": "On hold",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selfCstNTzoJuEVBw",
+                                "name": "In progress",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selhZnHRNUVG1uSw8",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selCyZGiLDZCrn2AN",
+                                "name": "Opening soon",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selmQEWkluaSBduTG",
+                                "name": "Imported",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldtI4Xg0dEda0xDL",
+                    "name": "Status"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldZgD9rg7aE8y7ui",
+                    "name": "Note"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel3QTYWOH5arMQjB",
+                                "name": "Refill"
+                            },
+                            {
+                                "id": "selSIHjB21RZnKlwM",
+                                "name": "Premium refill"
+                            }
+                        ]
+                    },
+                    "id": "fldbUKcL7X8T13xik",
+                    "name": "Price tier"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldkPJl28oxAgQerS",
+                    "name": "Opening hours"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldW4jTR6BwwihQxh",
+                    "name": "Content hours"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldGYDudPGlmryYUi",
+                    "name": "Location type"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldLLTOfQN8tqJORV",
+                    "name": "Drive-through"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldNjxtmFCPqygfoH",
+                    "name": "Extra numbers"
+                },
+                {
+                    "type": "email",
+                    "id": "fldbVc7ezQ5RwkjXx",
+                    "name": "Contact email"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldSkXJZl6x6brwzc",
+                    "name": "Images"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selT7Y72c0fPmxK9G",
+                                "name": "Digital signage"
+                            },
+                            {
+                                "id": "seljTmnUxawHlovyJ",
+                                "name": "Music streaming"
+                            }
+                        ]
+                    },
+                    "id": "fldfABQj96mMNetnU",
+                    "name": "Service"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldwsMyH6un7l1amX",
+                    "name": "Record ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldz6AWdkirQgZXs7",
+                    "name": "Lat"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldqPd9cSsZ9tKHJE",
+                    "name": "Lon"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld8rtApUJGxoG9Jj",
+                    "name": "Country code"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld3vWjZEKhlRUzIs",
+                    "name": "Edit location - Link"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldrU8wxbiauo8LWZ",
+                    "name": "Customer - Legal name"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldH1ZzOSlHHpInko",
+                    "name": "Customer - Address"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selnpXP0mgomVzwb2",
+                                "name": "3BB"
+                            },
+                            {
+                                "id": "selTQkUtZK6HbQPwx",
+                                "name": "AIS"
+                            },
+                            {
+                                "id": "sel06ZyFqCsJQ5Ku9",
+                                "name": "Cable Connect"
+                            },
+                            {
+                                "id": "sel9vxcKnRf37DTC1",
+                                "name": "DTAC"
+                            },
+                            {
+                                "id": "sel59vcRxSfSq3r5Q",
+                                "name": "Lintasarta"
+                            },
+                            {
+                                "id": "sel0r8RblKFJT5Z4H",
+                                "name": "Symphony"
+                            },
+                            {
+                                "id": "selSf7YXnIKp4RkQD",
+                                "name": "Telkom"
+                            },
+                            {
+                                "id": "selVddHPcaWZqneg6",
+                                "name": "True"
+                            },
+                            {
+                                "id": "selHyNnK7mVONSNuz",
+                                "name": "Uniqlo"
+                            }
+                        ]
+                    },
+                    "id": "fld0gExC3bbDVjfXz",
+                    "name": "Connectivity - Provider"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seldNNSL406GWxZQE",
+                                "name": "WiFi - Extender",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selo5q9FFpyX9u4Yo",
+                                "name": "WiFi - SIM card router",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selcoItpW0fwQanwx",
+                                "name": "Wired network",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldeAulutO8MIgios",
+                    "name": "Connectivity - Connection"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldLR4XooZ3UMoIYH",
+                    "name": "Region"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldVcKGKPNMWhIx7b",
+                    "name": "Subdivision"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seliwqQNRjD8xtzfw",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldQPofEmISS3Pfh0",
+                    "name": "KFC - Arigato"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selaAnajGkfFqhEV1",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel9R7qLyTVwIG4gE",
+                                "name": "TBD",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld6r5fdAPB2Bt78i",
+                    "name": "KFC - Cafe on left"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldCG2kgIV4XsZbEV",
+                    "name": "KFC - Content group"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selczkBYqQ7OZtvsg",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldmNEyhErsRd3YVO",
+                    "name": "KFC - Egg tart"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selHc76xvyebvnERS",
+                                "name": "Portrait",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selie4fTYuWJsa8NV",
+                                "name": "Landscape",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldFFu1D4vzDRMkyy",
+                    "name": "KFC - FOH"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selH2TAS9LuUYzbot",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldlrWqmJyhEu8lHo",
+                    "name": "KFC - No Orginal Tender (1MM)"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selxF7tC4PO6eC7nq",
+                                "name": "Premium",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selvQHdWwuqV0v1qc",
+                                "name": "Normal",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selpwxsx2ylx70PTj",
+                                "name": "Suwwanabhumi Tier",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldmvjQAmM7m3HEG9",
+                    "name": "KFC - Price tier"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seltZ8QKq05cxX0HW",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel2BSN9hzwkfmkeW",
+                                "name": "Premium Non-Refill",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel5bOwmpB5E46JRk",
+                                "name": "Non-Refill",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selDIQh33vHE8teUt",
+                                "name": "Premium Refill",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldxEYY3s48Lf9cYh",
+                    "name": "KFC - Refill"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selZcee33zwkJSkXN",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldUUykhd6DQN2tRV",
+                    "name": "KFC - So Coffee"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selu6rPJLYZEqRSJ0",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld8IteB1bHcYDPRG",
+                    "name": "KFC - SS"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel71k90FaRzp6EHw",
+                                "name": "Refill",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel11Wj7BzFptR9Wj",
+                                "name": "Non Refill",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldBiPVr6dGdTa5aX",
+                    "name": "KFC - Tank type"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldiXLrpOCodurYPP",
+                    "name": "Arrangement"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldnlGZU7v8H0Vqv5",
+                    "name": "Arrangement - Image"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selBoEdWk4Z0L6DlY",
+                                "name": "Done",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selgtA3ycALQZh7Gm",
+                                "name": "Incomplete",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "seltItuWsq1iVly3C",
+                                "name": "Installed",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selUCWFbZwJcB26Yl",
+                                "name": "Scheduled",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selCnuLS4M12XrABe",
+                                "name": "Tentative",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selThGf7ohJOFtWzO",
+                                "name": "Unscheduled",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sel2MRP9TQOIXRxAu",
+                                "name": "Cancelled",
+                                "color": "redBright"
+                            }
+                        ]
+                    },
+                    "id": "fldFdfOagWzhqkYcG",
+                    "name": "Jobs - Installation - Status"
+                },
+                {
+                    "type": "email",
+                    "id": "fld2lQP1rSh8jahx5",
+                    "name": "Ma - Contact email"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld60ieygI1F57d1m",
+                    "name": "Postal code"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld8EWhOoU8jtImgw",
+                    "name": "Time zone"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldVf0QwE02UumRLz",
+                    "name": "UTC offset"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldpqWgHfx0Zu8vjR",
+                    "name": "Location - Image - Floor plan"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwVzYx3f8NIXfNwA",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblXwqwgUigjEKIHK",
+            "name": "Customers",
+            "primaryFieldId": "flddXMEp7vyWq07hP",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "flddXMEp7vyWq07hP",
+                    "name": "ID"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selT7Y72c0fPmxK9G",
+                                "name": "Digital signage"
+                            },
+                            {
+                                "id": "seljTmnUxawHlovyJ",
+                                "name": "Music streaming"
+                            }
+                        ]
+                    },
+                    "id": "fldLIjussu2SUtzDl",
+                    "name": "Service"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldfDGMv0W1DSWIMY",
+                    "name": "Brand"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldCa8qF9gGaS0GW7",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9XlEo32XwRcaEo",
+                    "name": "Country"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9z2trCvomQAF1I",
+                    "name": "Country code"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldXVRhVVYMo3eDqJ",
+                    "name": "Notes"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selfi0cKHtB3ApSUw",
+                                "name": "On hold",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "seloRRih5R1mIA4rq",
+                                "name": "In progress",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "sel8bzprlPUj6vbz7",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldhxwc6SLT0Pp7rz",
+                    "name": "Status"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblqL7FwSviDdnXC3",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false
+                    },
+                    "id": "fldDiDwbagbU7iYZq",
+                    "name": "Locations"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldg06E6puK82vwlQ",
+                    "name": "Brand owner - Legal name"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldSEwcb0qZd9JsFc",
+                    "name": "Address"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldDiDwbagbU7iYZq"
+                    },
+                    "id": "fld01HIwP1tBVMBnT",
+                    "name": "Count (Locations)"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "local",
+                                    "format": "l"
+                                },
+                                "timeFormat": {
+                                    "name": "12hour",
+                                    "format": "h:mma"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldqtpCQNu4rxT0DL",
+                    "name": "Last Modified"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwVAA7szO1JuW4HD",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblzUch1Ra0jrgqbH",
+            "name": "Terminated Employees",
+            "primaryFieldId": "fldS4EarfrKwVCPVN",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldLYmxdQNNigZcaw}& \" \" &{fldLVrjLuUjoK2L4H}",
+                        "referencedFieldIds": [
+                            "fldLYmxdQNNigZcaw",
+                            "fldLVrjLuUjoK2L4H"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldS4EarfrKwVCPVN",
+                    "name": "Name"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldivY9U5f7BRa0to",
+                    "name": "ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLV420GHIncrnaO",
+                    "name": "Status"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLYmxdQNNigZcaw",
+                    "name": "First Name"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldLVrjLuUjoK2L4H",
+                    "name": "Last Name"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldiWF0qYqIvU7l1X",
+                    "name": "Start date"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldUStNyQ33a7DI37",
+                    "name": "End Date"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzRNXv6tFfHDs0K",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldBvwJLJYDUHJ3ze"
+                    },
+                    "id": "fldaXsnaqz3z0c2la",
+                    "name": "Employee"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwh9HmxVkUFqbxut",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblC3p1fkNrxk4tMO",
+            "name": "Signage Scraper",
+            "primaryFieldId": "fldjAAXZkVJbV0uYs",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldjAAXZkVJbV0uYs",
+                    "name": "SerialNumber"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld29n5fYGCvjXsaf",
+                    "name": "Client"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selF93NXEbhdSlACz",
+                                "name": "Online",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selyQnr8Q3YI6avl3",
+                                "name": "Offline",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selmN9cDFMWpAFx7D",
+                                "name": "Unpaired",
+                                "color": "purpleLight1"
+                            },
+                            {
+                                "id": "selFOuv2t59TAnxUe",
+                                "name": "Missing",
+                                "color": "grayDark1"
+                            }
+                        ]
+                    },
+                    "id": "fldlvepZK3s1kAATO",
+                    "name": "ScreenStatus"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0UxkUfWSQ8H2vM",
+                    "name": "ScreenModels"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldKgjvLp4g2yjpIO",
+                    "name": "Location"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldYNb305uLwvylTB",
+                    "name": "FirstContactDate"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldnq3gnwBCyKC7cv",
+                    "name": "LastContactDate"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldgo9z6IVNkhygE7",
+                    "name": "Software-only?"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "friendly",
+                                    "format": "LL"
+                                },
+                                "timeFormat": {
+                                    "name": "12hour",
+                                    "format": "h:mma"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldDSJz8XbtYSvVx0",
+                    "name": "Last updated"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldY8T0bD5TRhcVd8",
+                    "name": "PlayerCode",
+                    "description": "Upsert key"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldFe32UWJrQVmjql",
+                    "name": "ClientId"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldlT3xB2Mk0xdWCl",
+                    "name": "LocationId"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwQTE5JEBRkTBXEq",
+                    "name": "Signage - Sync to Monitor",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwkJi313Kzy9gBJb",
+                    "name": "Status = Missing (should be empty)",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwPtPSGDKfXfsyAP",
+                    "name": "Dev",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblgyESkug0TcBVHK",
+            "name": "Device Portal Scraper",
+            "primaryFieldId": "fldSfvpCZBQJpLLlA",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldSfvpCZBQJpLLlA",
+                    "name": "serial"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "\"TAR167 \" & {fldSfvpCZBQJpLLlA}",
+                        "referencedFieldIds": [
+                            "fldSfvpCZBQJpLLlA"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldFaVfmuBzdXmxr2",
+                    "name": "serial - Normalised"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel3BtmGuS71yQCbT",
+                                "name": "Online",
+                                "color": "greenLight1"
+                            },
+                            {
+                                "id": "selrHdbjtKbuVaiyK",
+                                "name": "Offline",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selZ7Loui3X1rYwYH",
+                                "name": "Unknown",
+                                "color": "grayLight1"
+                            },
+                            {
+                                "id": "selOgcbn6BzwJioGt",
+                                "name": "Missing",
+                                "color": "grayDark1"
+                            }
+                        ]
+                    },
+                    "id": "fldgWDglxJZ0vVLVa",
+                    "name": "status"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldy06Slpw0B8sYzs",
+                    "name": "client"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldDnTvNn44F6zAj5",
+                    "name": "location"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "local",
+                                    "format": "l"
+                                },
+                                "timeFormat": {
+                                    "name": "12hour",
+                                    "format": "h:mma"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldHEHx5e3xijXeVT",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldOh40muUrzA4tbk",
+                    "name": "Last Contact Date"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwQAdXh3mP8JuxAD",
+                    "name": "Audio - Sync to Monitor",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw7dEPrU03WBnAw3",
+                    "name": "Grid 2",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblhX7SNxLUje9Rac",
+            "name": "HS - Quotes",
+            "primaryFieldId": "fldSBttWEZDB9IQ0B",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fld6AcJKLlDq46bHa}=\"Music Streaming\",\n\"RS\" & \" - \" & {fldxTCpz8CDKOk7fB} & \" - \" & {fldhy8klYe0eavAhN},\n\"GP\" & \" - \" & {fldxTCpz8CDKOk7fB} & \" - \" & {fldhy8klYe0eavAhN})",
+                        "referencedFieldIds": [
+                            "fld6AcJKLlDq46bHa",
+                            "fldxTCpz8CDKOk7fB",
+                            "fldhy8klYe0eavAhN"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldSBttWEZDB9IQ0B",
+                    "name": "HS - Quote ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flddn4Y5tSF3PGyhH",
+                    "name": "Quote Owner Email"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flde30JH2odMzKu1H",
+                    "name": "Quote Owner Name"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldxTCpz8CDKOk7fB",
+                    "name": "Quote Number"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld46ZP58jaeWiXje",
+                    "name": "Template Type"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldzfJ8Y9KH8ebehv",
+                    "name": "Status (Raw)"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldq9Fehn7v6YZqPP",
+                    "name": "Deal Name"
+                },
+                {
+                    "type": "url",
+                    "id": "fldhb308llMCTuxZj",
+                    "name": "Public Quote URL"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld5pW1FenLBoCC6f",
+                    "name": "Currency"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld7frT542rh3OTxZ",
+                    "name": "T&Cs"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldzmvEJY7UaOr1aj",
+                    "name": "Sender Company"
+                },
+                {
+                    "type": "email",
+                    "id": "fldafJkB87ZwWXfvA",
+                    "name": "Customer Email"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldhy8klYe0eavAhN",
+                    "name": "Quote Title"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fld1dP3KX6CSl3osc",
+                    "name": "Deposit Invoiced"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldWBcTsHID9KF5cG",
+                    "name": "Deposit Paid"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "SWITCH(\n  {fldzfJ8Y9KH8ebehv},\n  \"LEGACY\", \"Legacy\",\n  \"ACCEPTED\", \"Accepted\",\n  \"DRAFT\", \"Draft\",\n  \"APPROVED\", \"Approved\",\n  \"VOID\", \"Void\",\n  \"PENDING_APPROVAL\", \"Pending Approval\",\n  \"ARCHIVED\", \"Archived\",\n  \"EXPIRED\", \"Expired\",\n  \"PUBLISHED\", \"Published\",\n  \"MISSING\", \"Missing\",\n  {fldzfJ8Y9KH8ebehv}\n)",
+                        "referencedFieldIds": [
+                            "fldzfJ8Y9KH8ebehv"
+                        ],
+                        "result": {
+                            "type": "singleSelect",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "id": "selFORMULADEFAULT",
+                                        "name": "Accepted",
+                                        "color": "greenLight1"
+                                    },
+                                    {
+                                        "id": "selEoxuh4wjTo89cS",
+                                        "name": "Approved",
+                                        "color": "greenLight2"
+                                    },
+                                    {
+                                        "id": "sel787Qt9vghqCg93",
+                                        "name": "Pending Approval",
+                                        "color": "cyanLight2"
+                                    },
+                                    {
+                                        "id": "selNhYe6ant1z7ElW",
+                                        "name": "Published",
+                                        "color": "yellowLight2"
+                                    },
+                                    {
+                                        "id": "sel3sNDgLc6D438Av",
+                                        "name": "Draft",
+                                        "color": "grayLight1"
+                                    },
+                                    {
+                                        "id": "selVLJnCyCjpsxxFM",
+                                        "name": "Expired",
+                                        "color": "redLight1"
+                                    },
+                                    {
+                                        "id": "seld7z3SEZnsZyOWr",
+                                        "name": "Void",
+                                        "color": "grayDark1"
+                                    },
+                                    {
+                                        "id": "selmB5OCgMLpt0oDd",
+                                        "name": "Archived",
+                                        "color": "grayDark1"
+                                    },
+                                    {
+                                        "id": "selJwzthNjLydSUPr",
+                                        "name": "Missing",
+                                        "color": "grayLight2"
+                                    },
+                                    {
+                                        "id": "selIghX86CoJInmmG",
+                                        "name": "Legacy",
+                                        "color": "yellowBright"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "id": "fldweTJN2b9TXwILa",
+                    "name": "Quote Status"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "friendly",
+                            "format": "LL"
+                        },
+                        "timeFormat": {
+                            "name": "12hour",
+                            "format": "h:mma"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fldLEL6e1EVetmwE9",
+                    "name": "Quote Created"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "friendly",
+                            "format": "LL"
+                        },
+                        "timeFormat": {
+                            "name": "12hour",
+                            "format": "h:mma"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fldXz6WYOqwPUQppO",
+                    "name": "Quote Accepted"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selsxlAYAAYlzgBFH",
+                                "name": "Installation",
+                                "color": "yellowBright"
+                            },
+                            {
+                                "id": "selYdKHkozdDrjNOB",
+                                "name": "Hardware",
+                                "color": "blueBright"
+                            },
+                            {
+                                "id": "selgRe5dPINLh1qmK",
+                                "name": "Software",
+                                "color": "cyanLight1"
+                            },
+                            {
+                                "id": "selKO2Am2W8nZIPun",
+                                "name": "Delivery",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel59gNj92hGTdGS5",
+                                "name": "Maintenance",
+                                "color": "redBright"
+                            },
+                            {
+                                "id": "selDXjvQNCb8Q57hI",
+                                "name": "Display",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selBlYnL5uXhST7mM",
+                                "name": "Player Box",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selrKpInam2LGKmUV",
+                                "name": "Other Services",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldhxdTMFzA3QkJtK",
+                    "name": "Quote Type (HS)"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selQp9senRHPBuhmh",
+                                "name": "Digital Signage",
+                                "color": "yellowBright"
+                            },
+                            {
+                                "id": "selia8VBaqP3GcYG5",
+                                "name": "Music Streaming",
+                                "color": "blueBright"
+                            }
+                        ]
+                    },
+                    "id": "fld6AcJKLlDq46bHa",
+                    "name": "Quote Service (HS)"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldj65vKIwHN5UAge",
+                    "name": "Allocated Jobs"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldUtNSomqr7oI16x",
+                    "name": "Buyer Company"
+                },
+                {
+                    "type": "url",
+                    "id": "fldzZfOmNzLnHA8Zj",
+                    "name": "PDF Download URL"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldblMlhIrqFKylko",
+                    "name": "Quote Owner ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldWy9ClAM2jyTt66",
+                    "name": "Customer Name"
+                },
+                {
+                    "type": "createdTime",
+                    "options": {
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldEmId6gL8RnKrQg",
+                    "name": "Created"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldkyA8ajXAF4F5Yf",
+                    "name": "Archived"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldiWJBUKAtY7buU4",
+                    "name": "Expired"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldH9hyegkLXiqmmG",
+                    "name": "HS Record ID"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwsYWxVwwyOcXJe7",
+                    "name": "Sync to Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw7a0X3aHunxY6jR",
+                    "name": "Grid view",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw2lOeAsB1AWvuGf",
+                    "name": "Chris",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblvb3PYTSa2fRa6T",
+            "name": "HS - Deals",
+            "primaryFieldId": "fld7b76eVB0xkWGrm",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fld81HMZTk5mo6FjH} & \" - \" & {fldq4zt1KpfCQLwaQ}",
+                        "referencedFieldIds": [
+                            "fld81HMZTk5mo6FjH",
+                            "fldq4zt1KpfCQLwaQ"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld7b76eVB0xkWGrm",
+                    "name": "ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld81HMZTk5mo6FjH",
+                    "name": "HS Deal ID",
+                    "description": "HubSpot Deal ID - upsert key for sync script"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldq4zt1KpfCQLwaQ",
+                    "name": "Deal Name",
+                    "description": "Deal name from HubSpot"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldpiQk4x0FGnSvBq",
+                    "name": "Amount",
+                    "description": "Deal amount"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldVzBO99QtQOJ2MS",
+                    "name": "Pipeline",
+                    "description": "HubSpot pipeline"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldIMm80WaL1geyRj",
+                    "name": "Stage",
+                    "description": "Deal stage"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld5dkOPjXKxKKgU2",
+                    "name": "Currency",
+                    "description": "Deal currency code"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldy6kd2UEwW6eRIq",
+                    "name": "Close Date",
+                    "description": "Expected close date"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldKQDIewQ4loRkw2",
+                    "name": "Created Date",
+                    "description": "Deal created date"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldVRQ31elhyQwUNC",
+                    "name": "Owner ID",
+                    "description": "HubSpot owner ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldPZ9V59mAvJ3IPf",
+                    "name": "Owner Name",
+                    "description": "Resolved owner name"
+                },
+                {
+                    "type": "url",
+                    "id": "fldwzdcxHcy0rkZsJ",
+                    "name": "HS URL",
+                    "description": "Link to deal in HubSpot"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldOBjmYQyQnPHP8i",
+                    "name": "HS - Quotes"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "local",
+                                    "format": "l"
+                                },
+                                "timeFormat": {
+                                    "name": "12hour",
+                                    "format": "h:mma"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldDf3H0fZI75R76e",
+                    "name": "Last modified time"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldR1mI3h2UTNkmfl",
+                    "name": "Value",
+                    "description": "Sync metadata value (ISO timestamp)"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwo03uWgrTdJ2dsi",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblhiRXqTSX9QCqyO",
+            "name": "HS - Contacts",
+            "primaryFieldId": "fld4sy7X0zMIPghlr",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fld4sy7X0zMIPghlr",
+                    "name": "Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldOgFxsgIOG9cWXT",
+                    "name": "HS Contact ID",
+                    "description": "HubSpot Contact ID - upsert key for sync script"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldhNCvGONQDydDqs",
+                    "name": "First Name",
+                    "description": "Contact first name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldatVxeUIn7DTWZg",
+                    "name": "Last Name",
+                    "description": "Contact last name"
+                },
+                {
+                    "type": "email",
+                    "id": "fldxLlJIrz7H9c3YH",
+                    "name": "Email",
+                    "description": "Contact email address"
+                },
+                {
+                    "type": "phoneNumber",
+                    "id": "fldiR0tYCyEjfJNAe",
+                    "name": "Phone",
+                    "description": "Contact phone number"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldxdIwdphTO76r0z",
+                    "name": "Company",
+                    "description": "Contact company name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldhtnHYROZK3uILL",
+                    "name": "Job Title",
+                    "description": "Contact job title"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldo51ZOlGCuKTa2Q",
+                    "name": "Created Date",
+                    "description": "Contact created date"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldgdIXow16WYxYsy",
+                    "name": "Owner ID",
+                    "description": "HubSpot owner ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld3T7hVlec4RUPyU",
+                    "name": "Owner Name",
+                    "description": "Resolved owner name"
+                },
+                {
+                    "type": "url",
+                    "id": "fldkv86uDc3Lsbr42",
+                    "name": "HS URL",
+                    "description": "Link to contact in HubSpot"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwV4sty4gnbcf7MW",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblzGCr7RKJCGNGBM",
+            "name": "Sync Meta (HubSpot)",
+            "primaryFieldId": "fldWH3kkhvgl2R7am",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldWH3kkhvgl2R7am",
+                    "name": "Key"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldgLF6nyMakh1Flh",
+                    "name": "Value"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwjI9UeQQ8eQaFNT",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblpZg6JsXtzkb0li",
+            "name": "Quote - Line Items",
+            "primaryFieldId": "fldZUdYu1IJsd6lmE",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldZUdYu1IJsd6lmE",
+                    "name": "Item Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldxYbHorZOBfkZEI",
+                    "name": "HS - Quotes"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldOYbjpPz5nHgLSs",
+                    "name": "SKU"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "LEFT({fldOYbjpPz5nHgLSs}, 8)",
+                        "referencedFieldIds": [
+                            "fldOYbjpPz5nHgLSs"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldlEmdgvIpt8w3nq",
+                    "name": "SKU - Normalised",
+                    "description": "Returns the first 8 characters from the SKU field."
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldl1usz9VyznbIaA",
+                    "name": "Quantity"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fld8VcMIvQBcRHnJN",
+                    "name": "Unit Price"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldg6PgbAQ5ecS8qe",
+                    "name": "Term Total"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldTqVsbd2TZbQnDz",
+                    "name": "Billing Start Date"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fldGpdQaSdPNYAxtD",
+                    "name": "Discount Value"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fld7HqZeV9Bkh2Lft",
+                    "name": "Total Discount"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fldu5kvuUYISPE2Z0",
+                    "name": "Tax"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "flduk5ywAkyOvBHf9",
+                    "name": "COGS"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fldt1twsdMHM6cLOV",
+                    "name": "Margin"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fldaPWqOXT4fG5UMy",
+                    "name": "Net Amount"
+                },
+                {
+                    "type": "percent",
+                    "options": {
+                        "precision": 2
+                    },
+                    "id": "fldDgVRzMdVn5xhOC",
+                    "name": "Tax Rate"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldozy7Uo0k1EEoEe",
+                    "name": "Recurring Billing Terms"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel3adyMc5Aq9hHDa",
+                                "name": "Software",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldCCdXCuyE6ia9fz",
+                    "name": "Product Category"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldXSkOUPvrciQPVc",
+                    "name": "Duration - FoC"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldo9OdIfyVfPuHn3",
+                    "name": "Duration"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld2F15aOlVUENPW1",
+                    "name": "Number of payments"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fldzlIu0RiUGbVrCQ",
+                    "name": "Net Price"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF(\n  {fldXuzUdLfa5BVWxs} = \"monthly\",\n    VALUE({fld2F15aOlVUENPW1}),\n    IF(\n      {fldXuzUdLfa5BVWxs} = \"annually\",\n        VALUE({fld2F15aOlVUENPW1}) * 12,\n        BLANK()\n    )\n)",
+                        "referencedFieldIds": [
+                            "fldXuzUdLfa5BVWxs",
+                            "fld2F15aOlVUENPW1"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldocl2BlLDnZ2uo7",
+                    "name": "Subscription - Duration - Normalised",
+                    "description": "Returns the total duration in months based on billing frequency and number of payments."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "SWITCH(\n  {fldXuzUdLfa5BVWxs},\n  \"annually\", \"Annually\",\n  \"monthly\", \"Monthly\",\n  BLANK()\n)",
+                        "referencedFieldIds": [
+                            "fldXuzUdLfa5BVWxs"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldpUmFpBKZoLjmve",
+                    "name": "Billing Frequency - Normalised",
+                    "description": "Returns 'Annually' if billing terms are 'annually', 'Monthly' if 'monthly', otherwise blank."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldXuzUdLfa5BVWxs",
+                    "name": "Billing Frequency"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwvdj3BmPb6F2GxV",
+                    "name": "Sync to Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwzhl4OmvT2Ri0zI",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblbGkzCmn5IGDype",
+            "name": "Quotes",
+            "primaryFieldId": "fldHN2gHcjZYsRCq6",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldHN2gHcjZYsRCq6",
+                    "name": "ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldlBZjHg6itHlzWx",
+                    "name": "Quote"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld6nSjkLPHbpzajp",
+                    "name": "BOM"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selRSIWDu3Nsyajma",
+                                "name": "Installation",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selgqAAn50Ss4t8uj",
+                                "name": "Service",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldq1yPFvSYwqcEuM",
+                    "name": "Type"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldRZAfEEIEeFiBi2",
+                    "name": "Deal name"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwYIGzoF2o2eHhN2",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbldD6iYBnufCyTaf",
+            "name": "Documentation - Base - Structure",
+            "description": "Live registry of all cross-base sync relationships. Source of truth for the system graph. Last rebuilt 2026-03-25.",
+            "primaryFieldId": "fld1kxpWoM6kbLetC",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fld1kxpWoM6kbLetC",
+                    "name": "Base"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldFbu5GJj5PNNE8C",
+                    "name": "Table - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldqlY2T4ceYT4vQZ",
+                    "name": "Table - ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld0kLwWyRJmMVs1R",
+                    "name": "Table - Description"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldFdPxph7d0lDC5i",
+                    "name": "Table - Description - MD"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldd1aSO4pC3T2iLT",
+                    "name": "Source - Table - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldGR2L6CFg1bzAaB",
+                    "name": "Source - Base - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldUbNRMon4vMjlzr",
+                    "name": "Destination - Base - ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flda086rrQ0oFcWCj",
+                    "name": "Source - View"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldKxziAM7OPnpcSR",
+                    "name": "Source - Base - ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9weIU5RMQLk15b",
+                    "name": "Source - Table - ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldt2G9PbP5kt7fkQ",
+                    "name": "Source - View ID"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel3YsvYuiF3Cjj0X",
+                                "name": "Inbound",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selZAfQV6oDRHjKQg",
+                                "name": "Bidirectional",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldn9xxpIUNYHKRY3",
+                    "name": "Direction"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldou4XQUt1jXzy8W",
+                    "name": "Notes"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "RECORD_ID()",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldvvsZshugr641v2",
+                    "name": "Record ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0Z3P1PDAGMVTxr",
+                    "name": "Owner"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwOki674Lwd5su3n",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblHG3NOPuDoLUm9H",
+            "name": "Documentation - Fields",
+            "primaryFieldId": "fld8Jalm7sM9CzOI1",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fld8Jalm7sM9CzOI1",
+                    "name": "Field - ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldmCVT6JNGVmcZNE",
+                    "name": "Base - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldH0BWHwe2pFlRxz",
+                    "name": "Base - ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldYYzF3NWJmvDfS3",
+                    "name": "Table - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldqrtkBOYQi5sPmR",
+                    "name": "Table - ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldQDoZy94dDYxkYN",
+                    "name": "Field - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldI3TwZ8knKfzThX",
+                    "name": "Field - Type"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldmniDKaG0kghUY7",
+                    "name": "Field - Formula"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldzWibiddfDudcIQ",
+                    "name": "Field - Options"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldxTab5xR1Vxoxaj",
+                    "name": "Field - Options - Raw JSON"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldaIE3iteqJLHW4E",
+                    "name": "Field - Source - Field ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldObtUzanSVbqkRv",
+                    "name": "Field - Source - Table ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldYNzCdMTu8LnCkF",
+                    "name": "Field - Link Field ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldVTabhrLACqtZN3",
+                    "name": "Field - Linked table ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldOab5I1LCmmk7pk",
+                    "name": "Notes"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fld82nHNxoTAwMTvl",
+                    "name": "Checked"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldnZQX5A1vnwGsK3",
+                    "name": "Field - Description"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldN5cySmCpnkraqx",
+                    "name": "Field - Description - Proposed"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldxMKUAccSi7dXXo",
+                    "name": "Field - Name - Proposed"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selMZEgZr8WfHmcF5",
+                                "name": "DATA",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel5gYtslkQCHrvFZ",
+                                "name": "LINK",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "sel74ZhfnsD4YIXrP",
+                                "name": "DERIVED",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selJU7eOwGNkzvdQm",
+                                "name": "CONTROL",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selLmuyVHLrefVbKX",
+                                "name": "CHECK",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selQIn2wybCnvgarr",
+                                "name": "OUTPUT",
+                                "color": "orangeLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldeZjaIUVgqInmRW",
+                    "name": "Field - Layer"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldNKuTSYTfJsFxi9",
+                    "name": "Field - Domain"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selITK5DqAuj0pcKC",
+                                "name": "SUM",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "seloXfZuYNYKm08W3",
+                                "name": "COUNT",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "sel0pN7YkDoKImZoZ",
+                                "name": "COUNTALL",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selH3aFlI26VK30In",
+                                "name": "MAX",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selPxoQJ4KwBMvyNZ",
+                                "name": "MIN",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selCyYIcAHCF1vR8X",
+                                "name": "AVG",
+                                "color": "orangeLight2"
+                            },
+                            {
+                                "id": "selLujnEuI8y30Tqr",
+                                "name": "ARRAYJOIN",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "seljpH8Jo8qMsWJ1B",
+                                "name": "CUSTOM",
+                                "color": "pinkLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld3j6JAWtgO5ip33",
+                    "name": "Field - Aggregation Type"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "thumbsUp",
+                        "color": "greenBright"
+                    },
+                    "id": "fldfYQM3CkqGs1qAy",
+                    "name": "Field - Is Derived"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "thumbsUp",
+                        "color": "greenBright"
+                    },
+                    "id": "fldh52iFDZTKrb4gR",
+                    "name": "Field - Is Editable"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "thumbsUp",
+                        "color": "greenBright"
+                    },
+                    "id": "fld9kSgFhNQJ04yoX",
+                    "name": "Field - Is Trigger"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld3pBsGywiJdSx8T",
+                    "name": "Field - Trigger Target"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld07llIpP0PY58uV",
+                    "name": "Field - Trigger Description"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "thumbsUp",
+                        "color": "greenBright"
+                    },
+                    "id": "fldvh7bTqagAXZPqr",
+                    "name": "Field - Is Validation"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld1g2Mq6gT1fzxuE",
+                    "name": "Field - Validation Logic"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldEL8FdVt2pJbiBF",
+                    "name": "Field - System"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selAxQe7yxhuTpoPU",
+                                "name": "ACTIVE",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selfwFpuv44ZfENUo",
+                                "name": "DEPRECATED",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldStnoD8PBf7o8Rb",
+                    "name": "Field - Status"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seldc3ZcHjj2cjLso",
+                                "name": "HIGH",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel2OysIHl7H1wFN7",
+                                "name": "MEDIUM",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selDaT7JXTYEqEmf3",
+                                "name": "LOW",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldj4bHc4y8GmNrkO",
+                    "name": "Field - Confidence"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "thumbsUp",
+                        "color": "greenBright"
+                    },
+                    "id": "fldt38flw9Wa5n3cX",
+                    "name": "Field - Single record link preferred"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldfYOFVYyWDf7nYW",
+                    "name": "Owner"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viw5xseLXKYJxlCl1",
+                    "name": "All fields",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwiVjzAX3fYrpoOK",
+                    "name": "Locations",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwx1QCKQTZqGvfW8",
+                    "name": "Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw1p1iWBDxUeihLm",
+                    "name": "Inventory",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw0y6242J0yDzPkc",
+                    "name": "Data",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwxRhLBUVsHSdEhj",
+                    "name": "Monitoring",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwvANWL6FCvFWcs6",
+                    "name": "Tickets",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblqUMQCesQgeeaIp",
+            "name": "Documentation - Automations",
+            "description": "Track automations for documentation processes, ensuring workflow clarity and automation insights.",
+            "primaryFieldId": "fldxbu8J4vUI0AqIu",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldxbu8J4vUI0AqIu",
+                    "name": "Automation - Name"
+                },
+                {
+                    "type": "url",
+                    "id": "fld4dx1sbO3SN8FIF",
+                    "name": "Automation - URL"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld1uG5qvKAs8FE0s",
+                    "name": "Base - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld5LnTIPMjK8F4Sl",
+                    "name": "Base - ID"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selGgeajliLGcc4p7",
+                                "name": "Button Clicked"
+                            },
+                            {
+                                "id": "selbEJHGOyZqaUZFC",
+                                "name": "Other"
+                            },
+                            {
+                                "id": "selztociVfnjZiERC",
+                                "name": "Record Created"
+                            },
+                            {
+                                "id": "selUWtBOWRcANB4pF",
+                                "name": "Record Deleted"
+                            },
+                            {
+                                "id": "sel2tjGWo9GHTZwpf",
+                                "name": "Record matches condition"
+                            },
+                            {
+                                "id": "selITYF7yRgyIX4yT",
+                                "name": "Record Updated"
+                            },
+                            {
+                                "id": "selZVeVJLUOi8XNao",
+                                "name": "Scheduled"
+                            },
+                            {
+                                "id": "selS7BFq9CqcNaZqB",
+                                "name": "Webhook"
+                            }
+                        ]
+                    },
+                    "id": "fldjs3F3Cg6UO9SLP",
+                    "name": "Trigger - Type"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldXYutvvKMYP2VuS",
+                    "name": "Description - Raw"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldmoNVZuuV83z3Lz",
+                    "name": "Description"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldWiuarJUd30hWKB",
+                    "name": "Description - MD"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldmAQeZ5NxoANSic",
+                    "name": "Reads From"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldSYGibqOJK3O4Oy",
+                    "name": "Writes To"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldWTgnFYwCBOtdub",
+                    "name": "Creates Records In"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldJ9oCE3GaVXHT3L",
+                    "name": "Deletes Records In"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldPd6ozwLV1L0JrR",
+                    "name": "External Systems"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldXW52AJkFPW2wR8",
+                    "name": "Side Effects"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldyU44ITEp7AUSjt",
+                    "name": "Idempotent"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selGqE2PwkyIaNFvT",
+                                "name": "None",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selNAdXIgjgJzKdbj",
+                                "name": "Low",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selMImtMlSlWFYRI5",
+                                "name": "Medium",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selG4oh2Pdisx3Uhm",
+                                "name": "High",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selSrcUMk2GIJFYvW",
+                                "name": "Critical",
+                                "color": "yellowLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldzav965csREYq4M",
+                    "name": "Business Impact"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selEsmaM2my97Qd00",
+                                "name": "None",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selAv7A6pyzUb3QrJ",
+                                "name": "Low",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "sel0LvJY1RWbzVzqK",
+                                "name": "Medium",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selvnBNut53pfHnk4",
+                                "name": "High",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld6Hf7BP1ykHfmxo",
+                    "name": "Race Condition Risk"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sellnywABmMiiRXF2",
+                                "name": "Draft",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel5FXZm1LsdczRP6",
+                                "name": "Active",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selAriuQDHAb8PGnB",
+                                "name": "Paused",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selPgmb5JrWC7lp4F",
+                                "name": "Deprecated",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selAhT2mvhBH52gNl",
+                                "name": "Error",
+                                "color": "yellowLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldjoWC0P2ZrliyJV",
+                    "name": "Status"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblINNYKKKgFdFvlL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "flddJQfF5GwlpiypM"
+                    },
+                    "id": "fldQ9ghcN4t88EtbX",
+                    "name": "Documentation - Workflows"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldS1PEy8PbCCkuP6",
+                    "name": "Owner"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwfsjsVq26eNdhOd",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblINNYKKKgFdFvlL",
+            "name": "Documentation - Workflows",
+            "description": "Registry of documented operational workflows across the Giant Pumpkin Airtable system. Each record describes one end-to-end business process, with a full markdown description, scope mapping, and links to related automations and tables.",
+            "primaryFieldId": "fldcOyXBhp42zvHd3",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldcOyXBhp42zvHd3",
+                    "name": "Workflow - Name",
+                    "description": "Human-readable name of the workflow (e.g., Quote-to-Operations: HubSpot to Jobs)."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0GfX1BkZt0wVEh",
+                    "name": "Workflow - Slug",
+                    "description": "Machine-readable identifier used for skill routing and query matching (e.g., quote-to-operations-hubspot). Lowercase, hyphenated."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selk4RpMnP4Y1fcAJ",
+                                "name": "Data",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selKWTQVvHgPRGK9Z",
+                                "name": "Jobs",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selMu1JUzVJO2zXpZ",
+                                "name": "Inventory",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seldyK5rp0SYlbRGR",
+                                "name": "Locations",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selr9JhwKY0ElN7gG",
+                                "name": "Monitoring",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selt0NJlxIEaZGwG2",
+                                "name": "Tickets",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldtbA2rKFytnw03T",
+                    "name": "Scope - Bases",
+                    "description": "Which bases are involved in this workflow."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldJtl8iJsK17sNOV",
+                    "name": "Scope - Tables",
+                    "description": "List of tables touched by this workflow, formatted as Base > Table per line."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldWmpYMWef4xd35W",
+                    "name": "Description - MD",
+                    "description": "Full workflow documentation in markdown. Contains phases, data flow, tables involved, validation rules, and exception paths."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selcriTJsYt55JJyF",
+                                "name": "Draft",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel2apTJjrSZxuWPU",
+                                "name": "Active",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selH0wYLKdFMjY7fN",
+                                "name": "Needs Review",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selMXE1ILUYtlTmUQ",
+                                "name": "Deprecated",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "flduigcyaKspdgZOJ",
+                    "name": "Status",
+                    "description": "Lifecycle status of the workflow documentation."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seljU47LUVGSl5X22",
+                                "name": "High",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selzB90hrEsm62OSj",
+                                "name": "Medium",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selBeEuWsOyj3Osjb",
+                                "name": "Low",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldhRcnIUO0cldyer",
+                    "name": "Priority",
+                    "description": "Documentation priority. High = core revenue/operations, Medium = operational support, Low = reporting/analytics."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldJ9J2ii49DVv2aY",
+                    "name": "Owner",
+                    "description": "Person responsible for maintaining this workflow documentation."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selN7C0sP2Or9V4T0",
+                                "name": "HubSpot"
+                            },
+                            {
+                                "id": "sel6mg9sgwhB0fdyD",
+                                "name": "Freshdesk"
+                            },
+                            {
+                                "id": "selqUsdVlf3tH2Mus",
+                                "name": "TargetR"
+                            },
+                            {
+                                "id": "sel6L52JSvzlHCJWu",
+                                "name": "Nexmosphere"
+                            },
+                            {
+                                "id": "sel95aPieZUNrTzvV",
+                                "name": "Fathom"
+                            },
+                            {
+                                "id": "sel8rVd1g2C0HK5hU",
+                                "name": "DocsAutomator"
+                            },
+                            {
+                                "id": "selUgzA1Z3IJt2xpQ",
+                                "name": "Pagem"
+                            },
+                            {
+                                "id": "selALrprlyZLyoOb5",
+                                "name": "Fillout"
+                            }
+                        ]
+                    },
+                    "id": "fld5V2Y51lhLRjrK7",
+                    "name": "External Systems",
+                    "description": "Non-Airtable systems involved in this workflow."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld30mw5AFrSyAKnr",
+                    "name": "Interfaces",
+                    "description": "Named Airtable Interface views used in this workflow, with their purpose."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldxyE3TRfzJjPoPT",
+                    "name": "Exception Paths",
+                    "description": "Documented failure modes and what happens when each step in the workflow fails."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldyw1x2QoW97Jlly",
+                    "name": "Gaps - Known",
+                    "description": "Known gaps, risks, or improvement opportunities identified during documentation."
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 1
+                    },
+                    "id": "fldyR135bTegGpiPi",
+                    "name": "Version",
+                    "description": "Version number of this workflow document. Increment on material changes."
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldbjjvZz1JtElriJ",
+                    "name": "Last Reviewed",
+                    "description": "Date this workflow documentation was last reviewed for accuracy."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld550XEcu1abGnFH",
+                    "name": "Notes",
+                    "description": "Freeform notes, change log, or context about this workflow."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblqUMQCesQgeeaIp",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldQ9ghcN4t88EtbX"
+                    },
+                    "id": "flddJQfF5GwlpiypM",
+                    "name": "Related Automations",
+                    "description": "Link to Documentation - Automations records that are part of this workflow."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "RECORD_ID()",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldBYgua7VnWOqnbb",
+                    "name": "Record ID"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwUwDn9RFyb6KaP4",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbldOLA5Jet12VNM1",
+            "name": "Documentation - Integrations",
+            "description": "Registry of active integrations to external systems. Tracks metadata, architecture, data flow, and operational health for LLM-queryable system documentation.",
+            "primaryFieldId": "fldCUSY0OW9V3qcb7",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldCUSY0OW9V3qcb7",
+                    "name": "Integration Name"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld6Xy5OrhXKoFNK8",
+                    "name": "Purpose"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldJMjXlpw1XAzjVF",
+                    "name": "Source System"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldFLyinHevHPAcTX",
+                    "name": "Destination System"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldleGhjdpAg1Flha",
+                    "name": "Primary Base"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldo0W4pEQhRPJwWF",
+                    "name": "Tables Involved"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldp0G6TOnTCweSLY",
+                    "name": "Automations"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldfzlurmS1cYIPDW",
+                    "name": "Owner"
+                },
+                {
+                    "type": "richText",
+                    "id": "fld8NVwH0Wolvedm3",
+                    "name": "Description",
+                    "description": "High-level narrative description of the integration. For complex integrations, structured markdown details go in Description - MD."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld0mFYlzyRpppYSu",
+                    "name": "Reads From"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldbxXtcTIkZ0EHEE",
+                    "name": "Writes To"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldCkqspzidCIYvyP",
+                    "name": "Sync Logic"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldbypwWNYpipyG9I",
+                    "name": "Failure Modes"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldAKqOKLrMbyyIsH",
+                    "name": "Dependencies"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "local",
+                            "format": "l"
+                        }
+                    },
+                    "id": "fldoK1sRCat3O2MVH",
+                    "name": "Last Verified"
+                },
+                {
+                    "type": "url",
+                    "id": "fldV8sUQ9b28xSlbK",
+                    "name": "External Documentation Link"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldyTKQIPyLNck9KT",
+                    "name": "Description - MD",
+                    "description": "Structured markdown documentation for complex integration details: templates, sub-flows, configuration, artifact locations, and operational specifics that don't fit into flat fields."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwGWrQ8hxD9Kw54N",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblEvxNYRMA2xfSky",
+            "name": "Invoices",
+            "primaryFieldId": "fld80ENdecDiZC8lV",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fld80ENdecDiZC8lV",
+                    "name": "Invoice Number",
+                    "description": "Xero InvoiceNumber (human-readable, e.g. INV-0027)"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld1kSXorIZBHJv0F",
+                    "name": "Xero Invoice ID",
+                    "description": "Xero InvoiceID - upsert key for sync script"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldh0DlFJvXX2Joba",
+                    "name": "Contact",
+                    "description": "Xero Contact.Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldKqhD3xcQKkkZEV",
+                    "name": "Reference",
+                    "description": "Xero Reference (free text; may contain quote number)"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selxXS0cemg4PMHY2",
+                                "name": "DRAFT",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selzsJPWPbGUcCHIw",
+                                "name": "SUBMITTED",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selwfQmjUiAw7ThNW",
+                                "name": "AUTHORISED",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selVmgIDYHxQo1lEK",
+                                "name": "PAID",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selNjRFg1ta6q5Gf2",
+                                "name": "VOIDED",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "sel3imNz5fyfsStyz",
+                                "name": "DELETED",
+                                "color": "orangeLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldeCAvRc6vOuVF4i",
+                    "name": "Xero Status",
+                    "description": "Xero Status (DRAFT, SUBMITTED, AUTHORISED, PAID, VOIDED, DELETED)"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldemgJ8C7Fc69MsC",
+                    "name": "Date",
+                    "description": "Xero DateString"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "iso",
+                            "format": "YYYY-MM-DD"
+                        }
+                    },
+                    "id": "fldJLoz665cwLXzE1",
+                    "name": "Due Date",
+                    "description": "Xero DueDateString"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 2
+                    },
+                    "id": "fld5IZ29qGUgyf3kG",
+                    "name": "Total",
+                    "description": "Xero Total"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 2
+                    },
+                    "id": "fldmHJGaKIwnKZUfx",
+                    "name": "Amount Paid",
+                    "description": "Xero AmountPaid"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 2
+                    },
+                    "id": "flddUNaMrbkNcxT8m",
+                    "name": "Amount Due",
+                    "description": "Xero AmountDue"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld15ta4wBoXENwXo",
+                    "name": "Currency",
+                    "description": "Xero CurrencyCode"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwxjL7cSK8Rj0p1G",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        }
+    ]
+}

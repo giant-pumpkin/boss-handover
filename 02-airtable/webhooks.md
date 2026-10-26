@@ -1,24 +1,20 @@
 # Airtable webhooks
 
-Airtable webhooks **expire after 7 days unless refreshed**. If the refresh lapses, the Supabase mirror silently stops updating. This is the single most fragile thing in the stack.
+**Status 2026-10-26: none.** All four bases have zero webhooks. The two that existed belonged to the abandoned Airtable → Supabase sync and were deleted on 2026-10-26, after their n8n workflows had been removed the same day. See [03-data-pipelines/deprecated/airtable-to-supabase-sync](../03-data-pipelines/deprecated/airtable-to-supabase-sync/).
 
-| Webhook ID | Base | Watches | Notification URL (consumer) | Refreshed by | Status |
-| --- | --- | --- | --- | --- | --- |
-| <!-- ach… --> | Inventory | Subscriptions table changes | droplet → airtable-to-supabase-sync | <!-- n8n workflow / cron --> | active |
-| | Tickets | Tickets table changes | droplet → airtable-to-supabase-sync | | active |
+For the record (raw JSON as it was before deletion is in each base folder as `webhooks.json`):
 
-## Refresh
+| Webhook ID | Base | Watched | Posted to |
+| --- | --- | --- | --- |
+| `achTRaF6zyL0VZOjf` | Inventory `appRor1ipbYAb4K7z` | Subscriptions `tblyNA73D9jldeEir` | `n8n.giant-pumpkin.com/webhook/airtable-inventory` |
+| `achhqSolaET3Br1hH` | Tickets `apprGGdynxDTZMZmO` | whole base | `n8n.giant-pumpkin.com/webhook/airtable-tickets` |
 
-```bash
-curl -X POST "https://api.airtable.com/v0/bases/<baseId>/webhooks/<webhookId>/refresh" -H "Authorization: Bearer $AT_PAT"
-```
-
-<!-- TODO: which workflow/cron does this today, and how you would notice if it stopped -->
-
-## Listing what exists
+## Checking
 
 ```bash
 curl -s "https://api.airtable.com/v0/bases/<baseId>/webhooks" -H "Authorization: Bearer $AT_PAT"
 ```
 
-Related: [03-data-pipelines/airtable-to-supabase-sync](../03-data-pipelines/airtable-to-supabase-sync/), runbook [09-open-items/runbooks/supabase-mirror-stale.md](../09-open-items/runbooks/supabase-mirror-stale.md).
+## If a webhook is ever needed again
+
+Airtable webhooks expire 7 days after creation or last refresh (`POST …/webhooks/<id>/refresh`). Whatever consumes one must also refresh it, and someone must be alerted when `expirationTime` gets close or `lastNotificationResult.success` goes false. That fragility is why the Supabase sync was dropped.

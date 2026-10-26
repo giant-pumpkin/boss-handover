@@ -28,7 +28,7 @@ Folders are numbered in reading order. Every folder has a `README.md` that is it
 
 ## Ground rules for this repo
 
-- **No secrets, ever.** Not in docs, not in exported workflow JSON, not in scripts. Variable *names* and *where the value lives* only. See [01-infrastructure/watermelon-droplet/secrets-and-env.md](01-infrastructure/watermelon-droplet/secrets-and-env.md).
+- **No secrets, ever.** Not in docs, not in exported workflow JSON, not in scripts. Variable *names* and *where the value lives* only. See [01-infrastructure/digital-ocean-droplet/secrets-and-env.md](01-infrastructure/digital-ocean-droplet/secrets-and-env.md).
 - **Code lives next to its docs.** Scripts are copied here from the droplet and from `~/coding` so the repo survives both.
 - **IDs are written out in full.** Airtable base/table/field/automation IDs (`app…`, `tbl…`, `fld…`, `wfl…`) are not secrets and are the only unambiguous way to name things.
 - **Dates are absolute** (`2026-10-02`), never "last week".
@@ -38,16 +38,17 @@ Folders are numbered in reading order. Every folder has a `README.md` that is it
 | Local folder (my MacBook) | Copied to |
 | --- | --- |
 | `~/coding/hubspot-airtable-sync` | `03-data-pipelines/hubspot-to-airtable/` |
-| `~/coding/at-supabase-reconciliation` | `03-data-pipelines/airtable-to-supabase-sync/` |
+| `~/coding/at-supabase-reconciliation` (abandoned) | `03-data-pipelines/deprecated/airtable-to-supabase-sync/` |
 | `~/coding/airtable-to-sheets`, `~/coding/jobs-to-sheets` | `03-data-pipelines/airtable-to-sheets/` |
 | `~/coding/freshdesk-backfill`, `~/coding/freshdesk-location-picker` | `03-data-pipelines/freshdesk-to-airtable/` |
 | `~/coding/xero-demo` | `03-data-pipelines/xero-to-airtable/` |
 | `~/coding/subscription-reconciliation`, `~/coding/parse-subscriptions` | `03-data-pipelines/subscription-report/` |
 | `~/coding/email-scraper` | `03-data-pipelines/email-intelligence/` |
-| `~/coding/cms-scraper`, `~/coding/dp-scraper`, `~/coding/ixm-aqua-api`, `~/coding/aqua-api-probe` | `03-data-pipelines/cms-player-exports/` |
+| `~/coding/ixm-aqua-api`, `~/coding/aqua-api-probe` | `03-data-pipelines/cms-player-exports/` |
+| `~/coding/cms-scraper`, `~/coding/dp-scraper` (abandoned) | `03-data-pipelines/deprecated/` |
 | `~/coding/support-dash` | `04-dashboards/support-dashboard/` |
 | `~/coding/airtable-interface-improvements` | `02-airtable/interface-extensions/` |
 | `~/coding/connectiq-inventory-demo` | `06-connectiq/operations-prototype/` (docs only; code stays in its own repo) |
 | `~/coding/massive-quote-project`, `~/coding/hubspot-line-item-parser`, `~/coding/workable-api` | `08-audits-and-analyses/` |
 
-<!-- TODO: copy the scripts in. Suggested: for each row, `cp -r ~/coding/<src>/*.py <dest>/` and exclude venv/, .env, *.xlsx data dumps. -->
+Copied 2026-10-26 with venvs, `.env`, data dumps (`.xlsx`, `.csv`, `.db`, PDFs) and notebook outputs excluded. Three hard-coded credentials were replaced with environment lookups (`AT_PAT`, `HS_API_KEY`, `FRESHDESK_API_KEY`); those keys still need rotating, see [HANDOFF-CHECKLIST.md](HANDOFF-CHECKLIST.md). Each folder's `SOURCE-README.md`, where present, is the original project README.

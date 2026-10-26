@@ -1,0 +1,5 @@
+.env
+/venv
+test.ipynb
+context.md
+cron.log

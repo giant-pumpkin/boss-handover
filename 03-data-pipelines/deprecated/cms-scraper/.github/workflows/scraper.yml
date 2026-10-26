@@ -1,0 +1,36 @@
+name: Run Signage Scraper
+
+on:
+  # schedule:
+  #   - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:          # allow manual trigger
+
+jobs:
+  cms-scraper:
+    runs-on: [self-hosted, cms-runner]
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        pip install python-dotenv
+        pip install playwright
+        pip install gspread gspread-dataframe pandas
+        playwright install chromium
+        pip install pyairtable
+
+    - name: Run scraper
+      env:
+        SP_EMAIL: ${{ secrets.SP_EMAIL }}
+        SP_PASSWORD: ${{ secrets.SP_PASSWORD }}
+        GSHEET_ID: ${{ secrets.GSHEET_ID }}
+        GOOGLE_CREDS_JSON: ${{ secrets.GOOGLE_CREDS_JSON }}
+        AT_TOKEN: ${{ secrets.AT_TOKEN }}
+      run: python scraper.py

@@ -18,4 +18,3 @@
 2. Install Docker + compose plugin, nginx, certbot, python3 + venv.
 3. Clone this repo; copy `03-data-pipelines/**/*.py` into `/root/sync_scripts/`.
 4. Restore n8n: import every JSON in [../n8n/workflows/](../n8n/workflows/), re-enter credentials by hand (exports never contain them).
-5. Re-register Airtable webhooks (they are tied to the notification URL). See [02-airtable/webhooks.md](../../02-airtable/webhooks.md).

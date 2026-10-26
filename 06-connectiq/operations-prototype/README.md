@@ -20,4 +20,14 @@ No auth/RLS, no movement reversal, phantom product rows in Stock Overview, seria
 
 Prototype `job_`, `crm_`, `mock_cl_` → `ops_`, `com_`/`plan_`, `cl_`. Its cross-domain RPCs (e.g. `link_job_serial` writing inv + ops) are **forbidden** in production and become events. Carry pool identity, the chronology trigger and atomic-write lessons into the `inv_` object model as decision records.
 
-Files to copy here: `airtable-job-lifecycle.md`, `next_steps.md`, `progress_report.md`, `connectiq-design-system.md`. <!-- TODO -->
+## Files
+
+| File | What |
+| --- | --- |
+| [connectiq-inventory-prototype.md](connectiq-inventory-prototype.md) | prototype overview |
+| [next_steps.md](next_steps.md) | the planning doc from Claude web, section by section |
+| [progress_report.md](progress_report.md) | session-by-session build log, the return direction |
+| [stock-view-spec.md](stock-view-spec.md) | Stock Overview spec |
+| [connectiq-design-system.md](connectiq-design-system.md) | design system the prototype follows |
+
+The Airtable as-is lifecycle lives with the Jobs base: [02-airtable/bases/jobs-appdo1WwONYvmYMWg/job-lifecycle.md](../../02-airtable/bases/jobs-appdo1WwONYvmYMWg/job-lifecycle.md).

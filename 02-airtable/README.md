@@ -19,7 +19,7 @@ Cross-base links are **synced tables**, not real links. Synced tables cannot be 
 
 ## Cross-cutting docs
 
-- [webhooks.md](webhooks.md) — every Airtable webhook, its consumer, and the **weekly refresh** duty
+- [webhooks.md](webhooks.md) — none exist as of 2026-10-26; what was there and how to check
 - [formulas.md](formulas.md) — the non-obvious formulas (customer ID dedupe, `ticket_open_mins`, subscription start-date MAX)
 - [known-issues.md](known-issues.md)
 - [interface-extensions/](interface-extensions/) — the custom `.tsx` interface pages and the SDK-vs-REST rules
@@ -30,4 +30,4 @@ Cross-base links are **synced tables**, not real links. Synced tables cannot be 
 curl -s "https://api.airtable.com/v0/meta/bases/<baseId>/tables" -H "Authorization: Bearer $AT_PAT" | python3 -m json.tool > schema.json
 ```
 
-Commit the JSON next to each base's README as `schema.json`.
+Done 2026-10-26: each base folder has `schema.json` and `webhooks.json`. Re-export after schema changes.

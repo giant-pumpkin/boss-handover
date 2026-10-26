@@ -1,6 +1,6 @@
 # Airtable interface extensions
 
-Custom interface pages written as single `.tsx` files with `@airtable/blocks/interface/ui`. Source repo: `~/coding/airtable-interface-improvements` — **copy the `.tsx` files here** (strip hard-coded PATs first: replace with `'YOUR_PAT_HERE'`). <!-- TODO -->
+Custom interface pages written as single `.tsx` files with `@airtable/blocks/interface/ui`. Copied from `~/coding/airtable-interface-improvements` on 2026-10-26; every `AIRTABLE_PAT` is the placeholder `YOUR_PAT_HERE`. `SOURCE-README.md` is the original project README and `skills/airtable-extension-guide.md` the full SDK-vs-REST guide.
 
 | File | Base | Page | Does |
 | --- | --- | --- | --- |

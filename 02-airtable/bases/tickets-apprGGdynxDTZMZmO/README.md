@@ -4,7 +4,11 @@ Mirror of Freshdesk tickets plus the Locations table used for site picking.
 
 | Table | ID | Populated by |
 | --- | --- | --- |
-| Tickets | <!-- TODO --> | Freshdesk automation → webhook `wfluuR1cEWU3jmbW7` "Ingest - Freshdesk - Create ticket" |
+| Tickets | `tbl7Y9QHzO1TyWZDl` (123 fields) | Freshdesk automation → webhook `wfluuR1cEWU3jmbW7` "Ingest - Freshdesk - Create ticket". Whole base watched by webhook `achhqSolaET3Br1hH` → n8n |
+| SLA | `tblSxD2sxiCGtUnBb` | SLA targets per customer |
+| OOS items | `tbl7imdzfTzQLIICs` | out-of-service tracking |
+| Compensation | `tbl8mdLvZrXTaU8lK` | |
+| Agents | `tblKaHbVK8L9U1LT1` | |
 | Locations | `tbljrW84qbQIoYUBX` | hand-maintained; read by the Freshdesk sidebar app |
 
 ## Ingest automation (`wfluuR1cEWU3jmbW7`)
@@ -22,4 +26,6 @@ Mirror of Freshdesk tickets plus the Locations table used for site picking.
 
 `ticket_open_mins`, SLA and OOS fields — see [../../formulas.md](../../formulas.md).
 
-<!-- TODO: schema.json, automations.md -->
+- `schema.json`, `webhooks.json` — exported 2026-10-26
+
+<!-- TODO: automations.md -->

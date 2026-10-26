@@ -1,0 +1,6 @@
+pyairtable
+pandas
+gspread
+gspread-dataframe
+python-dotenv
+openpyxl

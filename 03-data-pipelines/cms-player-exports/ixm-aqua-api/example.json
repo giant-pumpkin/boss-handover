@@ -1,0 +1,66 @@
+{
+    "name": "Advice @ UThai Thani",
+    "code": "dzF8-ubd6EGuJxyNriY7nA",
+    "id": "dzF8-ubd6EGuJxyNriY7nA",
+    "location": {
+      "name": "Advice @ UThai Thani ",
+      "code": "bl-y-wt9EUGt_IQKM21SwA",
+      "id": "bl-y-wt9EUGt_IQKM21SwA"
+    },
+    "timeZoneId": "Asia/Bangkok",
+    "playerApplication": "WebOS",
+    "tags": [
+      {
+        "type": "Player",
+        "id": "Apple",
+        "name": "Apple"
+      }
+    ],
+    "identification": {
+      "alias": "Advice @ UThai Thani",
+      "playerUniqueId": "74-90-BC-68-5A-8C",
+      "isAdministratingPlayer": true,
+      "isAllowAutoIdentification": false
+    },
+    "status": {
+      "statusFromPlayer": "OK",
+      "statusFromPlayerModifiedDateTime": "2026-01-28T20:51:01",
+      "lastCommunicationDateTime": "2026-05-15T02:02:42",
+      "userDefinedStatus": "None",
+      "statusCalculated": "OK",
+      "forgivingStatus": "None",
+      "mlStatus": "None",
+      "isEmptyPlaylist": false,
+      "isError": false,
+      "isNotStarted": false
+    },
+    "information": {
+      "macAddress": "74-90-BC-68-5A-8C",
+      "computerSerialNumber": "403INKHGF925",
+      "osVersion": "webOS 6.0",
+      "ipAddress": "192.168.42.17",
+      "ipMask": "255.255.248.0",
+      "dnsServer": "8.8.8.8",
+      "gateway": "192.168.40.1",
+      "lastCommunicationDateTime": "2026-05-15T02:02:42",
+      "lastCommunicationDateTimeLocal": "2026-05-15T09:02:09",
+      "insertedDateTime": "2025-11-17T06:28:02",
+      "computerManufacturer": "LG",
+      "computerName": "N/A",
+      "computerNameOS": "webOS 6.0",
+      "biosDate": "N/A",
+      "biosVersion": "5.0 (Web0S, Linux/SmartTV) AppleWebKit/537.36 (KHTML, like G",
+      "cpuModel": "arm",
+      "hardDriveModel": "03.75.20",
+      "webBrowserVersion": "79.0.3945.79",
+      "screenOneSerialNumber": "403INKHGF925",
+      "screenOneFirmware": "03.75.20",
+      "screenOneModel": "43UH7N-EP",
+      "screenModels": [
+        "43UH7N-EP"
+      ],
+      "timeZoneName": "SE Asia Standard Time",
+      "networkConnectionType": "Wireless",
+      "playerVersion": "2.14J"
+    }
+}

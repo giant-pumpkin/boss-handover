@@ -32,7 +32,7 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 | Airtable PAT (`AT_PAT`, and the ones hard-coded in `.tsx` extensions) | interface extensions, droplet scripts, xero sync, Freshdesk app | ☐ |
 | HubSpot private app token | `hubspot-to-airtable` | ☐ |
 | Freshdesk API key (hard-coded in the ticket-ingest Airtable automation) | Airtable automation `wfluuR1cEWU3jmbW7` script | ☐ |
-| Supabase service-role key (data-pipeline) | airtable-to-supabase sync | ☐ |
+| Supabase service-role key (data-pipeline) | abandoned airtable-to-supabase sync (delete the n8n credential) | ☐ |
 | Google service-account JSON | `*-to-sheets.py` | ☐ |
 | `XERO_CLIENT_ID` / `XERO_CLIENT_SECRET` | `xero-to-airtable` | ☐ |
 | CMS / IXM Aqua `gpapi` credentials (`~/coding/cms-scraper/.env`) | cms scrapers, aqua probe | ☐ |
@@ -42,11 +42,10 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 
 | Duty | Frequency | Doc |
 | --- | --- | --- |
-| Refresh Airtable webhooks before they expire | weekly | [02-airtable/webhooks.md](02-airtable/webhooks.md) |
 | Tick `sync` on finished jobs so serials reach Inventory | daily-ish | [07-business-logic/subscription-lifecycle.md](07-business-logic/subscription-lifecycle.md) |
 | Create next year's MA cycles and packages | yearly, by Nov | [07-business-logic/maintenance-packages.md](07-business-logic/maintenance-packages.md) |
 | Monthly subscription report | monthly | [03-data-pipelines/subscription-report](03-data-pipelines/subscription-report/) |
-| Check droplet disk / snapshot | monthly | [01-infrastructure/watermelon-droplet](01-infrastructure/watermelon-droplet/) |
+| Check droplet disk / snapshot | monthly | [01-infrastructure/digital-ocean-droplet](01-infrastructure/digital-ocean-droplet/) |
 
 ## Knowledge transfer sessions
 

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #f8f8f7; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+    a { color: #2563eb; } a:hover { color: #1d4ed8; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</helmet>
+
+<div style="height:100vh; display:flex; flex-direction:column; overflow:hidden;">
+
+  <!-- ===== TOP BAR ===== -->
+  <div style="background:#fff; border-bottom:1px solid #e8e8e6; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <h1 style="font-size:15px; font-weight:700; color:#1a1a1a; margin:0; letter-spacing:-0.02em;">Quote Staging</h1>
+      <span style="font-size:11px; font-weight:500; color:#8c8c8a; background:#f3f3f1; padding:3px 10px; border-radius:10px;">{{ totalCount }} quotes</span>
+    </div>
+    <div style="position:relative; width:220px;">
+      <svg style="position:absolute; left:9px; top:50%; transform:translateY(-50%); color:#a3a3a0;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search quotes..." value="{{ searchQuery }}" onChange="{{ onSearchChange }}" style="width:100%; box-sizing:border-box; padding:6px 10px 6px 28px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; background:#fafaf9; outline:none; color:#1a1a1a;" />
+    </div>
+  </div>
+
+  <!-- ===== STAGE TABS ===== -->
+  <div style="background:#fff; border-bottom:1px solid #e8e8e6; padding:0 28px; display:flex; gap:0; flex-shrink:0;">
+    <sc-for list="{{ stageTabs }}" as="tab">
+      <button onClick="{{ tab.onClick }}" style="padding:11px 18px; font-size:12px; font-weight:600; font-family:inherit; color:{{ tab.textColor }}; background:none; border:none; border-bottom:2px solid {{ tab.borderColor }}; cursor:pointer; display:flex; align-items:center; gap:7px; transition:all 0.15s;" style-hover="color:#1a1a1a">
+        <span style="width:7px; height:7px; border-radius:4px; background:{{ tab.dotColor }};"></span>
+        {{ tab.label }}
+        <span style="font-size:10px; font-weight:600; padding:1px 7px; border-radius:8px; background:{{ tab.countBg }}; color:{{ tab.countColor }};">{{ tab.count }}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div style="flex:1; overflow:hidden; display:flex;">
+
+    <!-- Quote list -->
+    <div style="width:{{ listWidth }}; flex-shrink:0; overflow-y:auto; padding:20px 0 20px 28px; transition:width 0.2s;">
+      <sc-if value="{{ filteredQuotes.length }}">
+        <div style="display:flex; flex-direction:column; gap:6px; padding-right:20px;">
+          <sc-for list="{{ filteredQuotes }}" as="q">
+            <div onClick="{{ q.onSelect }}" style="padding:14px 16px; background:{{ q.cardBg }}; border:1px solid {{ q.cardBorder }}; border-radius:10px; cursor:pointer; transition:all 0.15s; position:relative;" style-hover="border-color:#d0d0ce; box-shadow:0 1px 4px rgba(0,0,0,0.04)">
+              <!-- Top row: quote number + stage dot -->
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:5px;">
+                <span style="font-size:11px; font-family:'IBM Plex Mono',monospace; font-weight:600; color:#5c5c5a;">{{ q.quoteNumber }}</span>
+                <sc-if value="{{ q.showProgress }}">
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <div style="width:48px; height:4px; background:#e8e8e6; border-radius:2px; overflow:hidden;">
+                      <div style="height:100%; background:#10b981; border-radius:2px; width:{{ q.progressWidth }};"></div>
+                    </div>
+                    <span style="font-size:9px; font-family:'IBM Plex Mono',monospace; color:#a3a3a0;">{{ q.progressLabel }}</span>
+                  </div>
+                </sc-if>
+              </div>
+              <!-- Deal name -->
+              <div style="font-size:13px; font-weight:600; color:#1a1a1a; margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:-0.01em;">{{ q.dealName }}</div>
+              <!-- Company + meta -->
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <span style="font-size:11px; color:#8c8c8a;">{{ q.company }}</span>
+                <sc-if value="{{ q.currency }}">
+                  <span style="font-size:10px; color:#a3a3a0;">·</span>
+                  <span style="font-size:10px; font-family:'IBM Plex Mono',monospace; color:#a3a3a0;">{{ q.currency }}</span>
+                </sc-if>
+              </div>
+              <!-- Type tags -->
+              <div style="display:flex; gap:4px; margin-top:8px; flex-wrap:wrap;">
+                <sc-for list="{{ q.types }}" as="t">
+                  <span style="font-size:9px; font-weight:500; padding:2px 7px; border-radius:4px; background:{{ q.tagBg }}; color:{{ q.tagColor }};">{{ t }}</span>
+                </sc-for>
+              </div>
+              <!-- Selection indicator -->
+              <sc-if value="{{ q.isSelected }}">
+                <div style="position:absolute; left:0; top:10px; bottom:10px; width:3px; border-radius:0 2px 2px 0; background:{{ q.accentColor }};"></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noQuotes }}">
+        <div style="padding:40px 20px; text-align:center;">
+          <p style="font-size:13px; color:#a3a3a0;">No quotes in this stage.</p>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- ===== DETAIL PANEL ===== -->
+    <sc-if value="{{ selected }}">
+      <div style="flex:1; border-left:1px solid #e8e8e6; background:#fff; display:flex; flex-direction:column; overflow:hidden; animation:slideIn 0.2s ease;">
+
+        <!-- Detail header -->
+        <div style="padding:20px 28px; border-bottom:1px solid #f0f0ee; flex-shrink:0;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+            <div style="min-width:0; flex:1;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px;">
+                <span style="font-size:10px; font-family:'IBM Plex Mono',monospace; color:#8c8c8a;">{{ selected.quoteNumber }}</span>
+                <span style="font-size:10px; font-weight:600; padding:2px 9px; border-radius:10px; background:{{ selected.stageBg }}; color:{{ selected.stageColor }};">{{ selected.stageLabel }}</span>
+              </div>
+              <h2 style="font-size:16px; font-weight:700; color:#1a1a1a; margin:0; letter-spacing:-0.02em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ selected.dealName }}</h2>
+              <p style="font-size:12px; color:#8c8c8a; margin:2px 0 0;">{{ selected.company }}{{ selected.currencyLabel }}</p>
+            </div>
+            <div style="display:flex; gap:8px; flex-shrink:0;">
+              <a href="{{ selected.publicUrl }}" target="_blank" style="display:inline-flex; align-items:center; gap:5px; padding:6px 12px; font-size:11px; font-weight:500; font-family:inherit; color:#5c5c5a; background:#fff; border:1px solid #e8e8e6; border-radius:6px; text-decoration:none; white-space:nowrap;" style-hover="background:#f8f8f7">
+                Open quote
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+              <button onClick="{{ onDeselect }}" style="width:30px; height:30px; display:flex; align-items:center; justify-content:center; background:none; border:1px solid #e8e8e6; border-radius:6px; cursor:pointer; color:#8c8c8a;" style-hover="background:#f8f8f7">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+          <!-- Type chips -->
+          <div style="display:flex; align-items:center; gap:5px; margin-top:10px; flex-wrap:wrap;">
+            <sc-for list="{{ selected.types }}" as="t">
+              <span style="font-size:10px; font-weight:500; padding:3px 8px; border-radius:5px; background:#f3f3f1; color:#5c5c5a;">{{ t }}</span>
+            </sc-for>
+            <sc-if value="{{ selected.showProgress }}">
+              <div style="display:flex; align-items:center; gap:8px; margin-left:auto;">
+                <div style="width:80px; height:4px; background:#e8e8e6; border-radius:2px; overflow:hidden;">
+                  <div style="height:100%; background:#10b981; border-radius:2px; width:{{ selected.progressWidth }};"></div>
+                </div>
+                <span style="font-size:10px; font-family:'IBM Plex Mono',monospace; color:#a3a3a0;">{{ selected.progressLabel }}</span>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- Detail body -->
+        <div style="flex:1; overflow-y:auto; padding:24px 28px;">
+
+          <!-- ═══ NEEDS CUSTOMER ═══ -->
+          <sc-if value="{{ selected.isNeedsCustomer }}">
+            <div style="animation:fadeIn 0.2s ease;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                <h3 style="font-size:14px; font-weight:600; color:#1a1a1a; margin:0;">Map Customer</h3>
+              </div>
+              <p style="font-size:12px; color:#8c8c8a; margin:0 0 14px;">
+                HubSpot company: <strong style="color:#1a1a1a;">{{ selected.company }}</strong>
+              </p>
+              <div style="position:relative;">
+                <svg style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#a3a3a0;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" placeholder="Search Airtable customers..." style="width:100%; box-sizing:border-box; padding:9px 12px 9px 30px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; background:#fafaf9; outline:none; color:#1a1a1a;" />
+              </div>
+              <div style="margin-top:4px; border:1px solid #e8e8e6; border-radius:7px; overflow:hidden;">
+                <sc-for list="{{ customerSuggestions }}" as="c">
+                  <div style="padding:9px 12px; font-size:12px; color:#1a1a1a; cursor:pointer; border-bottom:1px solid #f3f3f1; transition:background 0.1s;" style-hover="background:#fafaf9">{{ c }}</div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ═══ NEEDS ALLOCATION ═══ -->
+          <sc-if value="{{ selected.isNeedsAllocation }}">
+            <div style="animation:fadeIn 0.2s ease;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                <h3 style="font-size:14px; font-weight:600; color:#1a1a1a; margin:0;">How many jobs?</h3>
+              </div>
+              <p style="font-size:12px; color:#8c8c8a; margin:0 0 14px;">Read the quote and decide how many jobs (locations) this needs.</p>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <sc-for list="{{ allocationButtons }}" as="n">
+                  <button style="width:40px; height:40px; border-radius:8px; border:1px solid #e8e8e6; background:#fff; font-size:14px; font-weight:600; font-family:inherit; color:#1a1a1a; cursor:pointer; transition:all 0.15s;" style-hover="background:#f5f3ff; border-color:#7c3aed; color:#7c3aed">{{ n.label }}</button>
+                </sc-for>
+                <div style="width:1px; height:20px; background:#e8e8e6; margin:0 2px;"></div>
+                <input type="number" min="1" placeholder="..." style="width:56px; padding:9px 8px; font-size:13px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; background:#fff; outline:none; color:#1a1a1a; text-align:center;" />
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ═══ READY ═══ -->
+          <sc-if value="{{ selected.isReady }}">
+            <div style="animation:fadeIn 0.2s ease;">
+
+              <!-- Wizard stepper -->
+              <sc-if value="{{ selected.wizardStep }}">
+                <div style="display:flex; align-items:center; gap:0; margin-bottom:22px;">
+                  <sc-for list="{{ wizardSteps }}" as="ws">
+                    <div style="display:flex; align-items:center;">
+                      <div style="width:26px; height:26px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:600; background:{{ ws.bg }}; color:{{ ws.color }}; flex-shrink:0;">{{ ws.label }}</div>
+                      <sc-if value="{{ ws.showLine }}">
+                        <div style="width:32px; height:2px; background:{{ ws.lineColor }};"></div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                  <div style="margin-left:14px;">
+                    <span style="font-size:13px; font-weight:600; color:#1a1a1a;">{{ selected.wizardTitle }}</span>
+                    <span style="font-size:11px; color:#8c8c8a; margin-left:8px;">Job {{ selected.currentJobNum }} of {{ selected.allocated }}</span>
+                  </div>
+                </div>
+              </sc-if>
+
+              <!-- Overview -->
+              <sc-if value="{{ selected.showOverview }}">
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                    <h3 style="font-size:14px; font-weight:600; color:#1a1a1a; margin:0;">{{ selected.jobsRemaining }} job{{ selected.jobsRemainingPlural }} remaining</h3>
+                    <button style="font-size:11px; color:#8c8c8a; background:none; border:none; cursor:pointer; text-decoration:underline; font-family:inherit;" style-hover="color:#1a1a1a">Edit allocation ({{ selected.allocated }})</button>
+                  </div>
+                  <sc-if value="{{ selected.existingJobs.length }}">
+                    <div style="margin-bottom:14px;">
+                      <p style="font-size:11px; color:#8c8c8a; margin:0 0 6px;">Created so far:</p>
+                      <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <sc-for list="{{ selected.existingJobs }}" as="j">
+                          <span style="font-size:10px; font-family:'IBM Plex Mono',monospace; font-weight:500; padding:5px 10px; background:#ecfdf5; color:#059669; border-radius:6px;">{{ j }}</span>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                  <button onClick="{{ onStartWizard }}" style="width:100%; padding:11px; background:#1a1a1a; color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;" style-hover="opacity:0.9">
+                    Create job {{ selected.currentJobNum }} of {{ selected.allocated }}
+                  </button>
+                </div>
+              </sc-if>
+
+              <!-- Step 1: Location -->
+              <sc-if value="{{ selected.showStep1 }}">
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex; gap:8px; margin-bottom:14px;">
+                    <button onClick="{{ onLocationExisting }}" style="flex:1; padding:8px; font-size:12px; font-weight:500; font-family:inherit; border-radius:7px; cursor:pointer; border:1px solid {{ locExistingBorder }}; background:{{ locExistingBg }}; color:{{ locExistingColor }}; transition:all 0.15s;">Search existing</button>
+                    <button onClick="{{ onLocationNew }}" style="flex:1; padding:8px; font-size:12px; font-weight:500; font-family:inherit; border-radius:7px; cursor:pointer; border:1px solid {{ locNewBorder }}; background:{{ locNewBg }}; color:{{ locNewColor }}; transition:all 0.15s;">Create new</button>
+                  </div>
+                  <sc-if value="{{ showExistingLocation }}">
+                    <div style="position:relative;">
+                      <svg style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#a3a3a0;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                      <input type="text" placeholder="Search locations..." style="width:100%; box-sizing:border-box; padding:9px 12px 9px 30px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                    </div>
+                    <div style="margin-top:4px; border:1px solid #e8e8e6; border-radius:7px; overflow:hidden;">
+                      <sc-for list="{{ locationSuggestions }}" as="loc">
+                        <div style="padding:9px 12px; font-size:12px; color:#1a1a1a; cursor:pointer; border-bottom:1px solid #f3f3f1;" style-hover="background:#fafaf9">{{ loc }}</div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ showNewLocation }}">
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                      <div>
+                        <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Location name <span style="color:#ef4444;">*</span></label>
+                        <input type="text" placeholder="e.g. Boost Juice - Siam Paragon" style="width:100%; box-sizing:border-box; padding:8px 12px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                      </div>
+                      <div>
+                        <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Customer</label>
+                        <input type="text" placeholder="Search customers..." style="width:100%; box-sizing:border-box; padding:8px 12px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                      </div>
+                      <div>
+                        <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Address</label>
+                        <textarea placeholder="Address..." rows="2" style="width:100%; box-sizing:border-box; padding:8px 12px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a; resize:none;"></textarea>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="display:flex; gap:8px;">
+                  <button onClick="{{ onWizardBack }}" style="flex:1; padding:10px; background:#fff; color:#5c5c5a; border:1px solid #e8e8e6; border-radius:8px; font-size:12px; font-weight:500; font-family:inherit; cursor:pointer;" style-hover="background:#fafaf9">← Back</button>
+                  <button onClick="{{ onWizardNext }}" style="flex:1; padding:10px; background:#1a1a1a; color:#fff; border:none; border-radius:8px; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer;" style-hover="opacity:0.9">Continue to BOM →</button>
+                </div>
+              </sc-if>
+
+              <!-- Step 2: BOM -->
+              <sc-if value="{{ selected.showStep2 }}">
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex; gap:8px; margin-bottom:12px;">
+                    <div style="flex:1; position:relative;">
+                      <svg style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#a3a3a0;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                      <input type="text" placeholder="Search resource..." style="width:100%; box-sizing:border-box; padding:8px 12px 8px 30px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                    </div>
+                    <input type="number" value="1" min="1" style="width:50px; padding:8px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; text-align:center; outline:none; color:#1a1a1a;" />
+                    <button style="width:34px; height:34px; display:flex; align-items:center; justify-content:center; background:#1a1a1a; color:#fff; border:none; border-radius:7px; cursor:pointer; flex-shrink:0;" style-hover="opacity:0.9">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                  </div>
+                  <div style="border:1px solid #e8e8e6; border-radius:8px; overflow:hidden;">
+                    <div style="display:grid; grid-template-columns:1fr 56px 32px; background:#fafaf9; padding:7px 12px; gap:8px;">
+                      <span style="font-size:10px; font-weight:600; color:#8c8c8a; text-transform:uppercase; letter-spacing:0.04em;">Resource</span>
+                      <span style="font-size:10px; font-weight:600; color:#8c8c8a; text-transform:uppercase; letter-spacing:0.04em; text-align:center;">Qty</span>
+                      <span></span>
+                    </div>
+                    <sc-for list="{{ bomItems }}" as="item">
+                      <div style="display:grid; grid-template-columns:1fr 56px 32px; padding:8px 12px; gap:8px; border-top:1px solid #f3f3f1; align-items:center;">
+                        <span style="font-size:12px; color:#1a1a1a;">{{ item.name }}</span>
+                        <span style="font-size:12px; color:#1a1a1a; text-align:center; font-family:'IBM Plex Mono',monospace;">{{ item.qty }}</span>
+                        <button style="width:22px; height:22px; display:flex; align-items:center; justify-content:center; background:none; border:none; color:#d4d4d2; cursor:pointer; border-radius:4px;" style-hover="color:#ef4444; background:#fef2f2">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                  <button onClick="{{ onWizardBack }}" style="flex:1; padding:10px; background:#fff; color:#5c5c5a; border:1px solid #e8e8e6; border-radius:8px; font-size:12px; font-weight:500; font-family:inherit; cursor:pointer;" style-hover="background:#fafaf9">← Back</button>
+                  <button onClick="{{ onWizardNext }}" style="flex:1; padding:10px; background:#1a1a1a; color:#fff; border:none; border-radius:8px; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer;" style-hover="opacity:0.9">Continue to Details →</button>
+                </div>
+              </sc-if>
+
+              <!-- Step 3: Job Details -->
+              <sc-if value="{{ selected.showStep3 }}">
+                <div style="margin-bottom:16px;">
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Service <span style="color:#ef4444;">*</span></label>
+                      <select style="width:100%; padding:8px 10px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; background:#fff; color:#1a1a1a; outline:none;">
+                        <option value="Digital signage" selected>Digital signage</option>
+                        <option value="Music streaming">Music streaming</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Partner <span style="color:#ef4444;">*</span></label>
+                      <input type="text" placeholder="Search partners..." style="width:100%; box-sizing:border-box; padding:8px 12px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Job Type <span style="color:#ef4444;">*</span></label>
+                      <select style="width:100%; padding:8px 10px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; background:#fff; color:#1a1a1a; outline:none;">
+                        <option value="">Select...</option>
+                        <option>Installation</option><option>Delivery</option><option>Rework</option><option>Survey</option><option>Un-installation</option><option>Ma - Audit</option><option>Ma - Preventive</option><option>Ma - Reactive</option><option>Collect</option><option>Account setup</option><option>Pre-sale</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Status <span style="color:#ef4444;">*</span></label>
+                      <select style="width:100%; padding:8px 10px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; background:#fff; color:#1a1a1a; outline:none;">
+                        <option value="">Select...</option>
+                        <option>Unscheduled</option><option>Tentative</option><option>Scheduled</option><option>Installed</option><option>Done</option><option>Incomplete</option><option>Cancelled</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Date Scheduled <span style="color:#ef4444;">*</span></label>
+                      <input type="date" style="width:100%; box-sizing:border-box; padding:8px 10px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:500; color:#5c5c5a; margin-bottom:4px;">Assigned to <span style="color:#ef4444;">*</span></label>
+                      <input type="text" placeholder="Search team members..." style="width:100%; box-sizing:border-box; padding:8px 12px; font-size:12px; font-family:inherit; border:1px solid #e8e8e6; border-radius:7px; outline:none; color:#1a1a1a;" />
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                  <button onClick="{{ onWizardBack }}" style="flex:1; padding:10px; background:#fff; color:#5c5c5a; border:1px solid #e8e8e6; border-radius:8px; font-size:12px; font-weight:500; font-family:inherit; cursor:pointer;" style-hover="background:#fafaf9">← Back</button>
+                  <button style="flex:1; padding:10px; background:#1a1a1a; color:#fff; border:none; border-radius:8px; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer;" style-hover="opacity:0.9">Create Job {{ selected.currentJobNum }}</button>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- ═══ DONE ═══ -->
+          <sc-if value="{{ selected.isDone }}">
+            <div style="text-align:center; animation:fadeIn 0.2s ease; padding:24px 0;">
+              <div style="width:48px; height:48px; background:#ecfdf5; border-radius:24px; display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h3 style="font-size:15px; font-weight:600; color:#1a1a1a; margin:0 0 4px;">All {{ selected.allocated }} jobs created</h3>
+              <p style="font-size:12px; color:#8c8c8a; margin:0 0 14px;">This quote is fully staged.</p>
+              <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+                <sc-for list="{{ selected.existingJobs }}" as="j">
+                  <span style="font-size:10px; font-family:'IBM Plex Mono',monospace; font-weight:500; padding:5px 10px; background:#ecfdf5; color:#059669; border-radius:6px;">{{ j }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- Empty state when no selection -->
+    <sc-if value="{{ showEmptyPanel }}">
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; background:#fff; border-left:1px solid #e8e8e6;">
+        <div style="text-align:center;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4d4d2" stroke-width="1.5" style="margin:0 auto 10px;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          <p style="font-size:12px; color:#a3a3a0;">Select a quote to get started</p>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: &quot;100%&quot; }
+}">
+
+class Component extends DCLogic {
+  state = {
+    selectedId: null,
+    activeStage: 'needs_customer',
+    searchQuery: '',
+    wizardStep: 0,
+    locationMode: 'existing',
+  };
+
+  quotes = [
+    { id:'nc1', quoteNumber:'20260704-120252927', company:'KFC - CRG', dealName:'[12099] Big C South Pattaya - CRG Uninstall', types:['Hardware','Installation','Maintenance','Software'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'needs_customer', allocated:0, opened:0, existingJobs:[] },
+    { id:'nc2', quoteNumber:'20260701-094908796', company:'Zus Coffee (Titanium)', dealName:'Village Hub Lasalle - Zus Coffee', types:['Delivery','Hardware'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'needs_customer', allocated:0, opened:0, existingJobs:[] },
+    { id:'nc3', quoteNumber:'20260701-091457218', company:'Zus Coffee (Titanium)', dealName:'Cosmo Bazaar - Zus Coffee', types:['Delivery','Hardware'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'needs_customer', allocated:0, opened:0, existingJobs:[] },
+    { id:'nc4', quoteNumber:'20260630-070940741', company:'Boost Juice TH', dealName:'Central Northville - Boost Juice TH Standee Replace', types:['Hardware','Installation'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'needs_customer', allocated:0, opened:0, existingJobs:[] },
+    { id:'nc5', quoteNumber:'20260626-065346436', company:'See Fah Group', dealName:'See Fah Group - Krua Luang Restaurant', types:['Hardware','Software'], service:'Music Streaming', currency:'THB', publicUrl:'#', stage:'needs_customer', allocated:0, opened:0, existingJobs:[] },
+    { id:'nc6', quoteNumber:'20260618-033812633', company:'Boost Juice TH', dealName:'Boost Siam Premium Outlets - Repair Screen', types:['Installation'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'needs_customer', allocated:0, opened:0, existingJobs:[] },
+    { id:'na1', quoteNumber:'20260608-072330675', company:'Digimap', dealName:'Digimap - Ayala Mall Centrio', types:['Delivery','Hardware','Installation','Software'], service:'Digital Signage', currency:'USD', publicUrl:'#', stage:'needs_allocation', allocated:0, opened:0, existingJobs:[] },
+    { id:'na2', quoteNumber:'20260608-085549688', company:'Boost MY', dealName:'Boost Wisma JAG Malaysia', types:['Hardware','Software'], service:'Digital Signage', currency:'USD', publicUrl:'#', stage:'needs_allocation', allocated:0, opened:0, existingJobs:[] },
+    { id:'na3', quoteNumber:'20260604-083605351', company:'Zus Coffee (Titanium)', dealName:'The Platinum POP - Zus Coffee', types:['Delivery','Hardware'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'needs_allocation', allocated:0, opened:0, existingJobs:[] },
+    { id:'r1', quoteNumber:'20260604-081053710', company:'Zus Coffee (Titanium)', dealName:'SHELL Ladprao44 - Zus Coffee', types:['Delivery','Hardware'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'ready', allocated:2, opened:1, existingJobs:['JOB-00006350'] },
+    { id:'r2', quoteNumber:'20260527-043114824', company:'Zus Coffee (Titanium)', dealName:"Lotus's Srinagarindra - Zus Coffee", types:['Delivery','Hardware'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'ready', allocated:3, opened:1, existingJobs:['JOB-00006289'] },
+    { id:'r3', quoteNumber:'20260617-034106129', company:'Boost Juice TH', dealName:'Siam Premium - Boost Juice TH Replace', types:['Hardware','Installation'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'ready', allocated:2, opened:0, existingJobs:[] },
+    { id:'d1', quoteNumber:'20260612-063443355', company:'Laguna Property', dealName:'Laguna Property Deal', types:['Hardware','Software'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'done', allocated:1, opened:1, existingJobs:['JOB-00006198'] },
+    { id:'d2', quoteNumber:'20260527-074435590', company:'Khao-Sō-i', dealName:'Khao-Sō-i New Store at Central Pinklao', types:['Hardware','Software'], service:'Digital Signage', currency:'THB', publicUrl:'#', stage:'done', allocated:2, opened:2, existingJobs:['JOB-00006112','JOB-00006113'] },
+    { id:'d3', quoteNumber:'20260604-022104342', company:'C.P.S. COFFEE (Jaspal)', dealName:'C.P.S. COFFEE - June 2026', types:['Software'], service:'Music Streaming', currency:'THB', publicUrl:'#', stage:'done', allocated:1, opened:1, existingJobs:['JOB-00006280'] },
+  ];
+
+  bomSampleItems = [
+    { name:'Samsung QM55C - 55" Display', qty:2 },
+    { name:'GP Media Player v3', qty:2 },
+    { name:'Wall Mount Bracket (55")', qty:2 },
+    { name:'HDMI Cable 3m', qty:2 },
+    { name:'Power Cable Extension 5m', qty:2 },
+  ];
+
+  renderVals() {
+    const { selectedId, activeStage, searchQuery, wizardStep, locationMode } = this.state;
+    const q = searchQuery.toLowerCase();
+
+    const stageConfigs = {
+      needs_customer: { label:'Needs Customer', dot:'#ea580c', countBg:'#fff7ed', countColor:'#ea580c', tagBg:'#fff7ed', tagColor:'#c2410c', accent:'#ea580c', bg:'#fff7ed' },
+      needs_allocation: { label:'Needs Allocation', dot:'#7c3aed', countBg:'#f5f3ff', countColor:'#7c3aed', tagBg:'#f5f3ff', tagColor:'#6d28d9', accent:'#7c3aed', bg:'#f5f3ff' },
+      ready: { label:'Ready', dot:'#059669', countBg:'#ecfdf5', countColor:'#059669', tagBg:'#ecfdf5', tagColor:'#047857', accent:'#059669', bg:'#ecfdf5' },
+      done: { label:'Done', dot:'#9ca3af', countBg:'#f3f4f6', countColor:'#6b7280', tagBg:'#f3f4f6', tagColor:'#6b7280', accent:'#9ca3af', bg:'#f3f4f6' },
+    };
+
+    const stages = ['needs_customer','needs_allocation','ready','done'];
+    const counts = {};
+    stages.forEach(s => { counts[s] = this.quotes.filter(x => x.stage === s).length; });
+
+    const stageTabs = stages.map(s => {
+      const cfg = stageConfigs[s];
+      const isActive = s === activeStage;
+      return {
+        label: cfg.label,
+        count: counts[s],
+        dotColor: cfg.dot,
+        textColor: isActive ? '#1a1a1a' : '#8c8c8a',
+        borderColor: isActive ? cfg.dot : 'transparent',
+        countBg: isActive ? cfg.countBg : '#f3f3f1',
+        countColor: isActive ? cfg.countColor : '#8c8c8a',
+        onClick: () => this.setState({ activeStage: s, selectedId: null, wizardStep: 0 }),
+      };
+    });
+
+    let filtered = this.quotes.filter(x => x.stage === activeStage);
+    if (q) {
+      filtered = filtered.filter(x =>
+        x.quoteNumber.toLowerCase().includes(q) ||
+        x.company.toLowerCase().includes(q) ||
+        x.dealName.toLowerCase().includes(q)
+      );
+    }
+
+    const cfg = stageConfigs[activeStage];
+    const filteredQuotes = filtered.map(item => ({
+      ...item,
+      isSelected: item.id === selectedId,
+      cardBg: item.id === selectedId ? cfg.bg : '#fff',
+      cardBorder: item.id === selectedId ? cfg.accent : '#e8e8e6',
+      accentColor: cfg.accent,
+      tagBg: cfg.tagBg,
+      tagColor: cfg.tagColor,
+      showProgress: item.allocated > 0,
+      progressWidth: item.allocated > 0 ? `${Math.min(100,(item.opened/item.allocated)*100)}%` : '0%',
+      progressLabel: `${item.opened}/${item.allocated}`,
+      onSelect: () => this.setState({ selectedId: item.id, wizardStep: 0, locationMode:'existing' }),
+    }));
+
+    const sel = selectedId ? this.quotes.find(x => x.id === selectedId) : null;
+    const sm = sel ? stageConfigs[sel.stage] : null;
+    const jobsRemaining = sel ? Math.max(0, sel.allocated - sel.opened) : 0;
+    const currentJobNum = sel ? sel.opened + 1 : 1;
+    const showWiz = sel && sel.stage === 'ready';
+
+    const wsData = [1,2,3].map((n,i) => ({
+      label: wizardStep > 0 && n < wizardStep ? '✓' : String(n),
+      bg: wizardStep > 0 && n < wizardStep ? '#10b981' : n === wizardStep ? '#2563eb' : '#e8e8e6',
+      color: n <= wizardStep && wizardStep > 0 ? '#fff' : '#8c8c8a',
+      showLine: i < 2,
+      lineColor: wizardStep > 0 && n < wizardStep ? '#10b981' : '#e8e8e6',
+    }));
+
+    const wizTitles = {1:'Location', 2:'Bill of Materials', 3:'Job Details'};
+    const isExisting = locationMode === 'existing';
+
+    return {
+      totalCount: this.quotes.length,
+      searchQuery,
+      onSearchChange: (e) => this.setState({ searchQuery: e.target.value }),
+      stageTabs,
+      filteredQuotes,
+      noQuotes: filteredQuotes.length === 0,
+      listWidth: sel ? '380px' : '100%',
+      showEmptyPanel: false,
+
+      selected: sel ? {
+        ...sel,
+        stageBg: sm.bg,
+        stageColor: sm.accent,
+        stageLabel: sm.label,
+        currencyLabel: sel.currency ? ` · ${sel.currency}` : '',
+        showProgress: sel.allocated > 0,
+        progressWidth: sel.allocated > 0 ? `${Math.min(100,(sel.opened/sel.allocated)*100)}%` : '0%',
+        progressLabel: `${sel.opened}/${sel.allocated} jobs`,
+        isNeedsCustomer: sel.stage === 'needs_customer',
+        isNeedsAllocation: sel.stage === 'needs_allocation',
+        isReady: sel.stage === 'ready',
+        isDone: sel.stage === 'done',
+        wizardStep: showWiz && wizardStep > 0 ? wizardStep : 0,
+        wizardTitle: wizTitles[wizardStep] || '',
+        showOverview: showWiz && wizardStep === 0,
+        showStep1: showWiz && wizardStep === 1,
+        showStep2: showWiz && wizardStep === 2,
+        showStep3: showWiz && wizardStep === 3,
+        jobsRemaining,
+        jobsRemainingPlural: jobsRemaining !== 1 ? 's' : '',
+        currentJobNum,
+      } : null,
+
+      onDeselect: () => this.setState({ selectedId: null, wizardStep: 0 }),
+
+      customerSuggestions: [
+        'KFC - CRG (Central Restaurants Group)',
+        'Titanium Synergy (Zus Coffee)',
+        'Boost Juice Thailand',
+        'See Fah Group',
+        'Digimap Philippines',
+      ],
+
+      allocationButtons: [1,2,3,4,5].map(n => ({ label: String(n) })),
+
+      onStartWizard: () => this.setState({ wizardStep: 1 }),
+      wizardSteps: wsData,
+
+      showExistingLocation: isExisting,
+      showNewLocation: !isExisting,
+      locExistingBorder: isExisting ? '#2563eb' : '#e8e8e6',
+      locExistingBg: isExisting ? '#eff6ff' : '#fff',
+      locExistingColor: isExisting ? '#2563eb' : '#8c8c8a',
+      locNewBorder: !isExisting ? '#2563eb' : '#e8e8e6',
+      locNewBg: !isExisting ? '#eff6ff' : '#fff',
+      locNewColor: !isExisting ? '#2563eb' : '#8c8c8a',
+      onLocationExisting: () => this.setState({ locationMode:'existing' }),
+      onLocationNew: () => this.setState({ locationMode:'new' }),
+
+      locationSuggestions: [
+        'Boost Juice - Siam Paragon',
+        'Boost Juice - Central World',
+        'Boost Juice - Terminal 21',
+        'KFC - Big C South Pattaya [12099]',
+        'KFC - Central Northville [12461]',
+      ],
+
+      bomItems: wizardStep === 2 ? this.bomSampleItems : [],
+
+      onWizardBack: () => this.setState(s => ({ wizardStep: Math.max(0, s.wizardStep - 1) })),
+      onWizardNext: () => this.setState(s => ({ wizardStep: Math.min(3, s.wizardStep + 1) })),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

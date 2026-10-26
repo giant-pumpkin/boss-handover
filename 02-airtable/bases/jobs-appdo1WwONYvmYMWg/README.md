@@ -7,14 +7,19 @@ Work orders, BOMs, and the whole maintenance (MA) structure.
 | Table | ID | Notes |
 | --- | --- | --- |
 | Jobs | `tblwHj9cO37wp1fVx` | Serial numbers typed into `fldIeKaFA33hZdtBG`; `sync` checkbox `fldhTpGWsywbFFSU7` |
-| BOM / BOM Resources | <!-- TODO --> | created by the job-creation extension |
+| BOM | `tblMoXmjtWVO8Wyz7` | created by the job-creation extension |
+| BOM resources | `tblAHbCtXG4w9tzSF` | one per BOM line |
+| Tasks | `tblh1SjKm6XTlBY8q` | |
+| Quotes (Airtable-native) | `tbldE1r6MKSgebujM` | |
+| HS - Quotes (copy) | `tblRSXCmjroNPaO5j` | the Quotes-to-Job extension writes here |
+| FS - Partners / FS - Workers | `tblkK66QqEkfAKb2S` / `tblR0LJqaeb44207J` | field-service partners and their workers |
 | Subscription contracts | `tbl8uHwls1HZbjYun` | linked from BOM resource via `fldbBPPVyJBWuLNgM`; 12 fields, see [interface-extensions](../../interface-extensions/) |
 | Customers (new) | `tblBjI9HEpZz8lFmY` | replaced `tblhzcjYQk0NJCv9v`; Locations still link to the old one |
 | Ma - Packages | `tblolQwuQPsrlk49C` | `MPA-` ids; `Reference` `fldFPjTIigtr45DhE` |
 | Ma - Items | `tblLHrvLMfFtwFy03` | `MPI-` ids; one visit template |
 | Ma - Cycles | `tblWRW1I8yCMdvdgq` | `MAC-YYYY - N`; hand-created a year ahead |
 | Ma - Jobs | `tblyPl0fsMSDW2uGQ` | PM checklist, 1:1 with a PM job |
-| Job locations | <!-- tbl --> | `Ma - Package - Add new` triggers job creation |
+| Job locations | `tbl5Nj3zs3nxKPdEv` | `Ma - Package - Add new` triggers job creation |
 
 ## Automations in the lifecycle
 
@@ -24,8 +29,10 @@ Work orders, BOMs, and the whole maintenance (MA) structure.
 | `wflzER5l1wFgSGB1a` | store added to `Ma - Package - Add new` → one Unscheduled job per item for that store |
 | `wflOPEPm3UesQF7bU` | PM job goes Tentative/Scheduled → creates Ma - Jobs record |
 
-Full detail: `~/coding/connectiq-inventory-demo/airtable-job-lifecycle.md` (15-Oct-2026) — **copy it here as `job-lifecycle.md`**. <!-- TODO -->
+Full detail: [job-lifecycle.md](job-lifecycle.md) (as-is write-up, 15-Oct-2026, with every automation and the four sync branches). Read it before touching any automation.
 
 Maintenance rules: [07-business-logic/maintenance-packages.md](../../../07-business-logic/maintenance-packages.md).
 
-<!-- TODO: schema.json, automations.md, interfaces.md (job creation wizard, bulk creator, jobs dashboard) -->
+- `schema.json` — exported 2026-10-26 (26 tables, Jobs alone has 200 fields)
+
+<!-- TODO: automations.md, interfaces.md (job creation wizard, bulk creator, jobs dashboard) -->
