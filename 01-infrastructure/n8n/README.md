@@ -1,11 +1,11 @@
 # n8n
 
-| | |
-| --- | --- |
-| URL | <!-- TODO --> |
+|         |                            |
+| ------- | -------------------------- |
+| URL     | n8n.giant-pumpkin.com      |
 | Runs on | watermelon droplet, Docker |
-| Auth | n8n owner account <!-- TODO: whose email --> |
-| Version | <!-- TODO --> |
+| Auth    | n8n owner account          |
+| Version |                            |
 
 ## How workflows are organised
 
@@ -20,5 +20,5 @@
 Names only. Re-create by hand after a restore.
 
 | Credential name | Type | Used by |
-| --- | --- | --- |
-| | | |
+| --------------- | ---- | ------- |
+|                 |      |         |
