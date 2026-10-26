@@ -7,8 +7,8 @@ Replaced an Airtable automation script that hit the 50-fetch limit.
 | | |
 | --- | --- |
 | Entry point | `main.py` (from `~/coding/hubspot-airtable-sync`) |
-| Schedule | every 15 min <!-- confirm cron line --> |
-| Runs on | <!-- droplet / n8n --> |
+| Schedule | `8,23,38,53 * * * *` Bangkok time, by n8n workflow `BDRzM0LzjYKpuHYq` (SSH node) |
+| Runs on | droplet `/root/sync_scripts/hubspot-to-airtable-sync/`, `venv/bin/python3 main.py` |
 | Env | HubSpot private-app token, `AT_PAT` |
 
 ## Flow
@@ -32,7 +32,7 @@ HubSpot GET quotes (+deal/contact/line_item assoc)
 
 ## Failure modes
 
-<!-- TODO: what a failed run looks like, where logs go -->
+A non-zero exit posts to Slack from n8n; stdout is in the n8n execution log (30 days). `cron.log` in the folder is stale since 2026-08-07. <!-- TODO: where main.py reads its HubSpot token (not from ~/.secrets) -->
 
 ## Re-run by hand
 

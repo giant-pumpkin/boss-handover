@@ -1,6 +1,6 @@
 # cms-player-exports
 
-API probes and exports for the signage CMS platforms. The older `cms-scraper` and `dp-scraper` are abandoned (unreliable) and live in [../deprecated/](../deprecated/).
+API probes and exports for the signage CMS platforms. The scheduled `cms-scraper` and `dp-scraper` are live pipelines of their own: [../cms-scraper/](../cms-scraper/), [../dp-scraper/](../dp-scraper/).
 
 | Source folder | Does |
 | --- | --- |

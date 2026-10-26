@@ -13,7 +13,7 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Customer ID convention** | <!-- TODO: how customer IDs are formed and deduped; see 07-business-logic/customer-id-convention.md --> |
 | **Cycle (MAC-YYYY - N)** | Maintenance cycle = a 4-month calendar slot. N=1 Jan–Apr, 2 May–Aug, 3 Sep–Dec. Records carry no dates. |
 | **Deposit gate** | Rule that supplier POs for a job should not be approved until the customer's deposit is paid. Implemented as an approval step in ApprovalMax, not an integration. |
-| **DS005 / DS014** | <!-- TODO: define these report/export codes --> |
+| **DS002 / DS005 / DS014 / DS016** | My numbering for the n8n "data sync" workflows that exported Airtable to Google Sheets: DS002 jobs, DS005 contracts and subscriptions, DS014 tickets and OOS items, DS016 HS quotes. All archived; replaced by the `*-to-sheets.py` scripts. |
 | **FoC** | Free-of-charge months at the start of a subscription (1–7). |
 | **Handover** | Sales → deployment handoff of an accepted quote. Happens on the Quotes-to-Job interface page. |
 | **HS** | HubSpot. `HS - Quotes` is the Airtable mirror table. |
@@ -32,4 +32,4 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Sky** | Sky Chew, colleague building the ConnectIQ CRM side (Phase 1). |
 | **sync tick** | The `sync` checkbox on a job (`fldhTpGWsywbFFSU7`) that sends serial numbers to the Inventory base. The main human gate in the lifecycle. |
 | **V1 / V2** | Maintenance contract generation. V1 (2024) = 3 PM visits; V2 and everything from 2025 = 1 PM + 2 RM. |
-| **Watermelon** | The DigitalOcean droplet hosting n8n and the sync scripts. |
+| **Watermelon** | The DigitalOcean droplet (`Watermelon-ubuntu-sgp1`, 168.144.43.182) hosting n8n, the sync scripts and the ConnectIQ docs site. |

@@ -1,0 +1,233 @@
+{
+ "updatedAt": "2026-09-08T07:28:46.508Z",
+ "createdAt": "2026-08-07T05:37:27.512Z",
+ "id": "F8zOykA7keVegumT",
+ "name": "Run tickets-to-sheets.py",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 15
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -432,
+    0
+   ],
+   "id": "3c5fa62e-a249-407f-bfc4-0201cf9952d4",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "source ~/.secrets && venv/bin/python3 tickets-to-sheets.py",
+    "cwd": "/root/sync_scripts/airtable-to-sheets"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    -240,
+    0
+   ],
+   "id": "d5c0c4db-5771-4e38-968b-8d00b4e05dc1",
+   "name": "Execute a command",
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "s8n5dpBjTpyjmMSS",
+     "name": "Pitchayut's Droplet Private Key"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "errorMessage": "An error has occured."
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    192,
+    0
+   ],
+   "id": "142f3191-7f78-4a15-9fe0-aa989b84f3e7",
+   "name": "Throw an error"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "94e255e4-2b0b-4440-9ea1-0bf5b3030a0b",
+       "leftValue": "={{ $json.code }}",
+       "rightValue": 0,
+       "operator": {
+        "type": "number",
+        "operation": "notEquals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    -32,
+    0
+   ],
+   "id": "6cfb4857-5c2f-4dd5-ac91-5a88d48da0e7",
+   "name": "if script throws error"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -432,
+    240
+   ],
+   "id": "734fe30e-90f2-451c-a941-c58b2ef5073e",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "select": "user",
+    "user": {
+     "__rl": true,
+     "value": "U0957UR5LUF",
+     "mode": "list",
+     "cachedResultName": "pitchayut"
+    },
+    "text": "=🔴 *{{ $json.workflow.name }}* failed\n\n*Node:* {{ $json.execution.error.lastNodeExecuted }}\n*Error:* {{ $json.execution.error.message }}\n*When:* {{ $now.setZone('Asia/Bangkok').toFormat('dd LLL HH:mm') }} ICT\n\n<{{ $json.execution.url }}|Open execution {{ $json.execution.id }}>",
+    "otherOptions": {}
+   },
+   "type": "n8n-nodes-base.slack",
+   "typeVersion": 2.5,
+   "position": [
+    -256,
+    240
+   ],
+   "id": "a4f1efae-bcbb-4dd5-9f68-3e9a5deddd45",
+   "name": "Send a message",
+   "webhookId": "3c2081b5-d91d-4a1b-966a-2faefd537f09",
+   "credentials": {
+    "slackApi": {
+     "id": "smg3mOPI3Q9gMXgX",
+     "name": "n8n integration Auth"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Execute a command",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a command": {
+   "main": [
+    [
+     {
+      "node": "if script throws error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "if script throws error": {
+   "main": [
+    [
+     {
+      "node": "Throw an error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "0f36f87b-6faa-4b0e-b98e-f471764e8ad6",
+ "activeVersionId": "0f36f87b-6faa-4b0e-b98e-f471764e8ad6",
+ "versionCounter": 17,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.049Z",
+   "createdAt": "2026-08-31T10:43:58.049Z",
+   "role": "workflow:owner",
+   "workflowId": "F8zOykA7keVegumT",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": "Version 0f36f87b",
+  "description": ""
+ }
+}

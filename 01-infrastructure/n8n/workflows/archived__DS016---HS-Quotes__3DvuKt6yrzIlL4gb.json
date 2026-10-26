@@ -1,0 +1,50 @@
+{
+ "updatedAt": "2026-09-08T07:28:16.000Z",
+ "createdAt": "2026-09-08T07:28:10.903Z",
+ "id": "3DvuKt6yrzIlL4gb",
+ "name": "DS016 - HS Quotes",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [],
+ "connections": {},
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": null,
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "36a555a7-9dc7-4cd5-b751-706629ef25a8",
+ "activeVersionId": null,
+ "versionCounter": 1,
+ "triggerCount": 0,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-09-08T07:28:10.912Z",
+   "createdAt": "2026-09-08T07:28:10.912Z",
+   "role": "workflow:owner",
+   "workflowId": "3DvuKt6yrzIlL4gb",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

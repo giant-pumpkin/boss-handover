@@ -1,0 +1,50 @@
+{
+ "updatedAt": "2026-08-07T03:12:36.000Z",
+ "createdAt": "2026-08-05T09:34:27.308Z",
+ "id": "LI5gbHIOHGRROa9F",
+ "name": "Run hubspot-to-airtable-sync",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [],
+ "connections": {},
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": null,
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "109a2aa0-355d-41c9-b785-370450b10d7c",
+ "activeVersionId": null,
+ "versionCounter": 1,
+ "triggerCount": 0,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.064Z",
+   "createdAt": "2026-08-31T10:43:58.064Z",
+   "role": "workflow:owner",
+   "workflowId": "LI5gbHIOHGRROa9F",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

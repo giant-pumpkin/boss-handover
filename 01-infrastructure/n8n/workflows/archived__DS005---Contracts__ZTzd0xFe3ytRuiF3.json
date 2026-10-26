@@ -1,0 +1,1224 @@
+{
+ "updatedAt": "2026-09-08T07:29:06.000Z",
+ "createdAt": "2026-08-05T10:17:11.601Z",
+ "id": "ZTzd0xFe3ytRuiF3",
+ "name": "DS005 - Contracts",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "jsCode": "const idToName = {};\n\nfor (const item of $('Merge1').all()) {\n  const r = item.json.fields ?? item.json;\n  const recId = item.json.id;\n  const name = r.ID ?? r.Name ?? r.Brand ?? r['Brand owner'] ?? recId;\n  idToName[recId] = String(name);\n}\n\nconst mainItems = $('Fetch Contracts').all();\nfor (const item of mainItems) {\n  const r = item.json.fields ?? item.json;\n  idToName[item.json.id] = String(r.ID ?? r.Name ?? item.json.id);\n}\n\nconst isRecId = (v) => typeof v === 'string' && /^rec[A-Za-z0-9]{14,17}$/.test(v);\n\nreturn mainItems.map(item => {\n  const raw = item.json.fields ?? item.json;\n  const row = {};\n\n  for (const [key, val] of Object.entries(raw)) {\n    if (val == null) {\n      row[key] = '';\n    } else if (Array.isArray(val)) {\n      if (val.length === 0) {\n        row[key] = '';\n      } else if (isRecId(val[0])) {\n        row[key] = val.map(v => idToName[v] ?? v).join(', ');\n      } else if (typeof val[0] === 'object') {\n        row[key] = val.filter(v => v != null).map(v => v.url ?? v.name ?? v.email ?? JSON.stringify(v)).join(', ');\n      } else {\n        row[key] = val.join(', ');\n      }\n    } else if (typeof val === 'object') {\n      row[key] = val.name ?? val.id ?? val.error ?? JSON.stringify(val);\n    } else {\n      row[key] = val;\n    }\n  }\n\n  row['airtable_record_id'] = item.json.id;\n  return { json: row };\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    208,
+    96
+   ],
+   "id": "ee20d412-9326-47e8-874d-4f9b477f9f63",
+   "name": "Code in JavaScript"
+  },
+  {
+   "parameters": {
+    "numberInputs": 6
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    16,
+    32
+   ],
+   "id": "6118d441-f4cd-4c49-8f5f-13001c33e504",
+   "name": "Merge1"
+  },
+  {
+   "parameters": {
+    "operation": "clear",
+    "documentId": {
+     "__rl": true,
+     "value": "1KwpxDl7R66oH_aiKD9rjXJiWuQwImXzK68cFGHSbXLY",
+     "mode": "list",
+     "cachedResultName": "DS005 - Airtable - Contracts and Subscriptions ",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KwpxDl7R66oH_aiKD9rjXJiWuQwImXzK68cFGHSbXLY/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 2042690422,
+     "mode": "list",
+     "cachedResultName": "Contracts",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KwpxDl7R66oH_aiKD9rjXJiWuQwImXzK68cFGHSbXLY/edit#gid=2042690422"
+    }
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    448,
+    16
+   ],
+   "id": "fff2f224-1542-4158-bbb8-dc6c127ee19b",
+   "name": "Clear sheet",
+   "executeOnce": true,
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "value": "1KwpxDl7R66oH_aiKD9rjXJiWuQwImXzK68cFGHSbXLY",
+     "mode": "list",
+     "cachedResultName": "DS005 - Airtable - Contracts and Subscriptions ",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KwpxDl7R66oH_aiKD9rjXJiWuQwImXzK68cFGHSbXLY/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 2042690422,
+     "mode": "list",
+     "cachedResultName": "Contracts",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KwpxDl7R66oH_aiKD9rjXJiWuQwImXzK68cFGHSbXLY/edit#gid=2042690422"
+    },
+    "columns": {
+     "mappingMode": "autoMapInputData",
+     "value": {},
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "ID",
+       "displayName": "ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Name",
+       "displayName": "Name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Brand",
+       "displayName": "Brand",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Brand owner",
+       "displayName": "Brand owner",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Customer",
+       "displayName": "Customer",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Service",
+       "displayName": "Service",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscription type",
+       "displayName": "Subscription type",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Duration (M)",
+       "displayName": "Duration (M)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Duration - FoC (M)",
+       "displayName": "Duration - FoC (M)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Units - Start",
+       "displayName": "Units - Start",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Units - Current",
+       "displayName": "Units - Current",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Start date",
+       "displayName": "Start date",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "End date",
+       "displayName": "End date",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Bill type",
+       "displayName": "Bill type",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Payment method",
+       "displayName": "Payment method",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Invoice frequency",
+       "displayName": "Invoice frequency",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "PPU/month",
+       "displayName": "PPU/month",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "PPU - THB",
+       "displayName": "PPU - THB",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Currency",
+       "displayName": "Currency",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Revenue - Monthly - THB",
+       "displayName": "Revenue - Monthly - THB",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Revenue - Monthly",
+       "displayName": "Revenue - Monthly",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Documents",
+       "displayName": "Documents",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Sales",
+       "displayName": "Sales",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Autonumber",
+       "displayName": "Autonumber",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Status",
+       "displayName": "Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Notes",
+       "displayName": "Notes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Inventory",
+       "displayName": "Inventory",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions",
+       "displayName": "Subscriptions",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Status - DS",
+       "displayName": "Status - DS",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Count",
+       "displayName": "Subscriptions - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Expired - Count",
+       "displayName": "Subscriptions - Expired - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Active - Count",
+       "displayName": "Subscriptions - Active - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Terminated - Count",
+       "displayName": "Subscriptions - Terminated - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Match",
+       "displayName": "Match",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Delta",
+       "displayName": "Delta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Edit contract - Link",
+       "displayName": "Edit contract - Link",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Expiring in (W)",
+       "displayName": "Expiring in (W)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Country",
+       "displayName": "Country",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Created By",
+       "displayName": "Created By",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Created",
+       "displayName": "Created",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Last Modified By",
+       "displayName": "Last Modified By",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Last Modified",
+       "displayName": "Last Modified",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Auto renewable",
+       "displayName": "Auto renewable",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Terminated",
+       "displayName": "Terminated",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Active - New - Count",
+       "displayName": "Subscriptions - Active - New - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Linked contracts",
+       "displayName": "Linked contracts",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Scheduled - Count",
+       "displayName": "Subscriptions - Scheduled - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Subscriptions - Brand",
+       "displayName": "Subscriptions - Brand",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Check - Brand",
+       "displayName": "Check - Brand",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Contract ID",
+       "displayName": "Contract ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Record ID",
+       "displayName": "Record ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "PPL/month",
+       "displayName": "PPL/month",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Reference",
+       "displayName": "Reference",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "End month",
+       "displayName": "End month",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Customer - String",
+       "displayName": "Customer - String",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Country - String",
+       "displayName": "Country - String",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Customer - String (Short)",
+       "displayName": "Customer - String (Short)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Locations - Count",
+       "displayName": "Locations - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    448,
+    208
+   ],
+   "id": "55dea869-bd41-474b-8419-79433373daed",
+   "name": "Append row in sheet",
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblzCLUEgLNXzjD18",
+     "mode": "list",
+     "cachedResultName": "Countries",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblzCLUEgLNXzjD18"
+    },
+    "options": {
+     "fields": [
+      "Name"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -256,
+    352
+   ],
+   "id": "e9f70d9c-61b6-4f55-a0dd-bf430efb586f",
+   "name": "Fetch Countries",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    288
+   ],
+   "id": "c8d6563f-cd67-466d-83a1-d48a7a697b03",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "sendTo": "pitchayut@giant-pumpkin.com",
+    "subject": "=n8n Error -  {{ $json.workflow.name }}",
+    "message": "=There was an error in your n8n automation.<br><br> <b>Workflow:</b> {{ $json.workflow.name }}<br> <b>Error:</b> {{ $json.execution.error.message }}<br> <b>Stack:</b> {{ $json.execution.error.stack }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.2,
+   "position": [
+    -608,
+    288
+   ],
+   "id": "ab9b02a9-be9b-4f58-8276-249bfa157bd8",
+   "name": "Send a message",
+   "webhookId": "9215bf43-68ae-4957-b260-e2fa444dc038",
+   "credentials": {
+    "gmailOAuth2": {
+     "id": "32l42xsRa8sPlTGm",
+     "name": "Gmail account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "10,25,40,55 * * * *"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -816,
+    112
+   ],
+   "id": "9a786c1a-e7e4-4b01-9d13-6c88210660d2",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblhn4CJZbi57C8WP",
+     "mode": "list",
+     "cachedResultName": "Subscription contracts",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblhn4CJZbi57C8WP"
+    },
+    "options": {
+     "fields": [
+      "ID",
+      "Name",
+      "Brand",
+      "Brand owner",
+      "Customer",
+      "Service",
+      "Subscription type",
+      "Duration (M)",
+      "Duration - FoC (M)",
+      "Units - Start",
+      "Units - Current",
+      "Start date",
+      "End date",
+      "Bill type",
+      "Payment method",
+      "Invoice frequency",
+      "PPU/month",
+      "Currency",
+      "Revenue - Monthly",
+      "Documents",
+      "Sales",
+      "Autonumber",
+      "Status",
+      "Notes",
+      "Inventory",
+      "Status - DS",
+      "Subscriptions - Count",
+      "Subscriptions - Expired - Count",
+      "Subscriptions - Active - Count",
+      "Subscriptions - Terminated - Count",
+      "Match",
+      "Delta",
+      "Edit contract - Link",
+      "Expiring in (W)",
+      "Country",
+      "Created By",
+      "Created",
+      "Last Modified By",
+      "Last Modified",
+      "Auto renewable",
+      "Terminated",
+      "Subscriptions - Active - New - Count",
+      "Linked contracts",
+      "Subscriptions - Brand",
+      "Subscriptions - Scheduled - Count",
+      "Check - Brand",
+      "Contract ID",
+      "Record ID",
+      "PPL/month",
+      "Reference",
+      "End month",
+      "Customer - String",
+      "Country - String",
+      "Customer - String (Short)",
+      "Locations - Count"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -608,
+    112
+   ],
+   "id": "e550658b-a395-4636-a8aa-eda72e0e4f85",
+   "name": "Fetch Contracts",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblp7sqsv25DVYs7T",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblp7sqsv25DVYs7T"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -256,
+    -288
+   ],
+   "id": "b63190c4-84a5-43e2-a09d-34ddef74e8f7",
+   "name": "Fetch Inventory",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblxGzxvDjhH7NX1N",
+     "mode": "list",
+     "cachedResultName": "Customers",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblxGzxvDjhH7NX1N"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -256,
+    -144
+   ],
+   "id": "f55ab90b-19c2-4e9f-8bad-8b2f35fb929c",
+   "name": "Fetch Customers",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblzULqbssoVRTeG6",
+     "mode": "list",
+     "cachedResultName": "Brands",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblzULqbssoVRTeG6"
+    },
+    "options": {
+     "fields": [
+      "Brand"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -256,
+    32
+   ],
+   "id": "22f0992a-04e3-47a3-b15e-336cded86c18",
+   "name": "Fetch Brand",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblNot7erUUbArpLG",
+     "mode": "list",
+     "cachedResultName": "Brand owners",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblNot7erUUbArpLG"
+    },
+    "options": {
+     "fields": [
+      "Brand owner"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -256,
+    176
+   ],
+   "id": "3ce753a0-bed2-459c-a077-3f3e0ba0cb4e",
+   "name": "Fetch Brand owner",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appRor1ipbYAb4K7z",
+     "mode": "list",
+     "cachedResultName": "Inventory",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblKuzC0cNODVv9Zm",
+     "mode": "list",
+     "cachedResultName": "Subscription types",
+     "cachedResultUrl": "https://airtable.com/appRor1ipbYAb4K7z/tblKuzC0cNODVv9Zm"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -256,
+    512
+   ],
+   "id": "9963406b-5347-4f02-8a90-92042ba0178d",
+   "name": "Fetch Subscription Types",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Merge1": {
+   "main": [
+    [
+     {
+      "node": "Code in JavaScript",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code in JavaScript": {
+   "main": [
+    [
+     {
+      "node": "Clear sheet",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Append row in sheet",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Clear sheet": {
+   "main": [
+    []
+   ]
+  },
+  "Fetch Countries": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 4
+     }
+    ]
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Fetch Contracts",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Contracts": {
+   "main": [
+    [
+     {
+      "node": "Fetch Brand owner",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Customers",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Brand",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Inventory",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Countries",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Subscription Types",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Inventory": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Customers": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Fetch Brand": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  },
+  "Fetch Brand owner": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 3
+     }
+    ]
+   ]
+  },
+  "Fetch Subscription Types": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 5
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "089eaa66-bb86-4676-8d18-bb0991597d7f",
+ "activeVersionId": null,
+ "versionCounter": 131,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.135Z",
+   "createdAt": "2026-08-31T10:43:58.135Z",
+   "role": "workflow:owner",
+   "workflowId": "ZTzd0xFe3ytRuiF3",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

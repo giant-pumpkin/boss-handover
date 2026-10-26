@@ -1,0 +1,233 @@
+{
+ "updatedAt": "2026-08-31T12:48:47.031Z",
+ "createdAt": "2026-08-07T03:34:53.295Z",
+ "id": "nUpnbCswyRIc8FR8",
+ "name": "Run dp_scraper",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "5,20,35,50 * * * *"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -432,
+    -80
+   ],
+   "id": "0ba959e5-7e64-4848-912c-2967a4d652d2",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "venv/bin/python3 dp_scraper.py",
+    "cwd": "/root/sync_scripts/dp-scraper"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    -208,
+    -80
+   ],
+   "id": "9b17a8b3-2f53-437b-8a5c-638264eda248",
+   "name": "Execute a command",
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "s8n5dpBjTpyjmMSS",
+     "name": "Pitchayut's Droplet Private Key"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "errorMessage": "An error has occured."
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    256,
+    -80
+   ],
+   "id": "f928ec28-ae1a-4836-a511-3316c2f90d80",
+   "name": "Throw an error"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "94e255e4-2b0b-4440-9ea1-0bf5b3030a0b",
+       "leftValue": "={{ $json.code }}",
+       "rightValue": 0,
+       "operator": {
+        "type": "number",
+        "operation": "notEquals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    16,
+    -80
+   ],
+   "id": "d072b489-2330-4205-be62-c56a31eafa45",
+   "name": "if script throws error"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -432,
+    128
+   ],
+   "id": "71b5c99e-ad67-4090-beb7-7d2728c1847e",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "select": "user",
+    "user": {
+     "__rl": true,
+     "value": "U0957UR5LUF",
+     "mode": "list",
+     "cachedResultName": "pitchayut"
+    },
+    "text": "=🔴 *{{ $json.workflow.name }}* failed\n\n*Node:* {{ $json.execution.error.lastNodeExecuted }}\n*Error:* {{ $json.execution.error.message }}\n*When:* {{ $now.setZone('Asia/Bangkok').toFormat('dd LLL HH:mm') }} ICT\n\n<{{ $json.execution.url }}|Open execution {{ $json.execution.id }}>",
+    "otherOptions": {}
+   },
+   "type": "n8n-nodes-base.slack",
+   "typeVersion": 2.5,
+   "position": [
+    -208,
+    128
+   ],
+   "id": "5f53e3f0-2c8c-47d3-b1e0-570a7d8323bc",
+   "name": "Send a message",
+   "webhookId": "3c2081b5-d91d-4a1b-966a-2faefd537f09",
+   "credentials": {
+    "slackApi": {
+     "id": "smg3mOPI3Q9gMXgX",
+     "name": "n8n integration Auth"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Execute a command",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a command": {
+   "main": [
+    [
+     {
+      "node": "if script throws error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "if script throws error": {
+   "main": [
+    [
+     {
+      "node": "Throw an error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "a7b2b71d-f5d0-40b9-b9b2-1f107d7a9f95",
+ "activeVersionId": "a7b2b71d-f5d0-40b9-b9b2-1f107d7a9f95",
+ "versionCounter": 11,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.144Z",
+   "createdAt": "2026-08-31T10:43:58.144Z",
+   "role": "workflow:owner",
+   "workflowId": "nUpnbCswyRIc8FR8",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": "Version 18c81937",
+  "description": ""
+ }
+}

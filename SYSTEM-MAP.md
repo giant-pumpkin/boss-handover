@@ -65,7 +65,7 @@ flowchart LR
     JOB --> OPS
     XERO -- "xero-to-airtable (not yet live)" --> QUO
     XERO <--> AM
-    CMS -. "abandoned scrapers" .-> QUO
+    CMS -- "cms / dp scrapers (15 min)" --> QUO
     N8N -.-> CRON
     SB2 -. "Phase 2 will replace Airtable" .-> JOB
 

@@ -1,0 +1,114 @@
+{
+ "updatedAt": "2026-10-01T07:34:42.000Z",
+ "createdAt": "2026-09-25T16:46:58.144Z",
+ "id": "sYbtcxlsxLOb79RT",
+ "name": "My workflow 4",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.4,
+   "position": [
+    0,
+    0
+   ],
+   "id": "9ab2e24d-9cc5-4bb2-82f3-e13b367370c7",
+   "name": "When chat message received",
+   "webhookId": "0cc20c86-b71c-4b4f-bc51-3b18b5278be1"
+  },
+  {
+   "parameters": {
+    "batching": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.chainLlm",
+   "typeVersion": 1.9,
+   "position": [
+    208,
+    0
+   ],
+   "id": "8000e5da-211b-4491-868a-14caba2f5de0",
+   "name": "Basic LLM Chain"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatAlibabaCloud",
+   "typeVersion": 1,
+   "position": [
+    416,
+    0
+   ],
+   "id": "85d4e134-3a48-4508-ab2d-133b2b37c8e7",
+   "name": "Qwen Cloud Chat Model"
+  }
+ ],
+ "connections": {
+  "Qwen Cloud Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Basic LLM Chain",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "When chat message received": {
+   "main": [
+    [
+     {
+      "node": "Basic LLM Chain",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": null,
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "7957f69a-8a5b-4efc-9960-79c8cf60a8cb",
+ "activeVersionId": null,
+ "versionCounter": 1,
+ "triggerCount": 0,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-09-25T16:46:58.151Z",
+   "createdAt": "2026-09-25T16:46:58.151Z",
+   "role": "workflow:owner",
+   "workflowId": "sYbtcxlsxLOb79RT",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

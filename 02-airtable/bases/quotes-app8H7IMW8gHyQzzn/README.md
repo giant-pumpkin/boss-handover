@@ -25,7 +25,7 @@ Mirror of HubSpot quotes, the landing table for Xero invoices, reporting copies,
 | Sync Meta (HubSpot) | `tblzGCr7RKJCGNGBM` | used by the **still-deployed** in-Airtable `Sync HS Quotes` automation (`wflmPH9mROs9nyH4M`, every 15 min). See [automations.md](automations.md) |
 | Quote - Line Items | `tblpZg6JsXtzkb0li` | |
 | Subscriptions, Subscriptions - Date range | `tbloG2fLQls9ESIrY`, `tblfA08VVwMAme3V3` | reporting copies |
-| Signage Scraper, Device Portal Scraper | `tblC3p1fkNrxk4tMO`, `tblgyESkug0TcBVHK` | landing tables of the abandoned scrapers ([deprecated](../../../03-data-pipelines/deprecated/)) |
+| Signage Scraper, Device Portal Scraper | `tblC3p1fkNrxk4tMO`, `tblgyESkug0TcBVHK` | landing tables of [cms-scraper](../../../03-data-pipelines/cms-scraper/) and [dp-scraper](../../../03-data-pipelines/dp-scraper/) |
 | Documentation - Base - Structure / Fields / Automations / Workflows / Integrations | `tbldD6iYBnufCyTaf`, `tblHG3NOPuDoLUm9H`, `tblqUMQCesQgeeaIp`, `tblINNYKKKgFdFvlL`, `tbldOLA5Jet12VNM1` | exported to [../../documentation-registry/](../../documentation-registry/) |
 | Employees, Terminated Employees | `tblzRNXv6tFfHDs0K`, `tblzUch1Ra0jrgqbH` | from the Workable pull |
 

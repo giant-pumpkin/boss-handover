@@ -1,0 +1,1020 @@
+{
+ "updatedAt": "2026-08-06T09:18:28.000Z",
+ "createdAt": "2026-08-04T03:37:09.502Z",
+ "id": "TL3qCEyJYjiPJgBZ",
+ "name": "DS014 - Airtable - Incidents / OOS items",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 15
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -208,
+    0
+   ],
+   "id": "e601a801-554b-4ff6-a9f8-a36e57fa1a62",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "value": "1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo",
+     "mode": "list",
+     "cachedResultName": "DS014 - Airtable - Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 1118308177,
+     "mode": "list",
+     "cachedResultName": "n8n",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit#gid=1118308177"
+    },
+    "columns": {
+     "mappingMode": "autoMapInputData",
+     "value": {},
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "createdTime",
+       "displayName": "createdTime",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Closed",
+       "displayName": "Closed",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Brand owner - Filter",
+       "displayName": "Brand owner - Filter",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Priority",
+       "displayName": "Ticket - Priority",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created",
+       "displayName": "Created",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Brand owner",
+       "displayName": "Brand owner",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Alert - Open tickets",
+       "displayName": "Alert - Open tickets",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS Items - Count",
+       "displayName": "OOS Items - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Dayparts",
+       "displayName": "Dayparts",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Record ID",
+       "displayName": "Record ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "URL - Ticket - AT",
+       "displayName": "URL - Ticket - AT",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "KFC - OoS form - URL",
+       "displayName": "KFC - OoS form - URL",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Open (days)",
+       "displayName": "Open (days)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS Items %",
+       "displayName": "OOS Items %",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Year",
+       "displayName": "Created - Year",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "SLA",
+       "displayName": "SLA",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Alert - OOS",
+       "displayName": "Alert - OOS",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Subject",
+       "displayName": "Ticket - Subject",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Service line",
+       "displayName": "Ticket - Service line",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Day",
+       "displayName": "Created - Day",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Contact name",
+       "displayName": "Contact name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Last Modified - Status - Resolved",
+       "displayName": "Last Modified - Status - Resolved",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Issue related to",
+       "displayName": "Ticket - Issue related to",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Opening hours",
+       "displayName": "Opening hours",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Description - AI",
+       "displayName": "Ticket - Description - AI",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "URL - Ticket - FD",
+       "displayName": "URL - Ticket - FD",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Source",
+       "displayName": "Ticket - Source",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS - Request type",
+       "displayName": "OOS - Request type",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Location code",
+       "displayName": "Location code",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created By",
+       "displayName": "Created By",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Service",
+       "displayName": "Ticket - Service",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Phone number",
+       "displayName": "Phone number",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Arrangement",
+       "displayName": "Arrangement",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Province",
+       "displayName": "Province",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Service line - Normalised",
+       "displayName": "Service line - Normalised",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Content hours",
+       "displayName": "Content hours",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Hour",
+       "displayName": "Created - Hour",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "FD - Contact reference",
+       "displayName": "FD - Contact reference",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Locations - Count",
+       "displayName": "Locations - Count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "ID",
+       "displayName": "ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Type",
+       "displayName": "Ticket - Type",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "SLA - Duration (m)",
+       "displayName": "SLA - Duration (m)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Enquiry",
+       "displayName": "Ticket - Enquiry",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Request log",
+       "displayName": "Request log",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Project",
+       "displayName": "Ticket - Project",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Autonumber",
+       "displayName": "Autonumber",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS",
+       "displayName": "OOS",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Status",
+       "displayName": "Ticket - Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Agent",
+       "displayName": "Agent",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket ID",
+       "displayName": "Ticket ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Region",
+       "displayName": "Region",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Compensation - Boolean",
+       "displayName": "Compensation - Boolean",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Open (min.)",
+       "displayName": "Open (min.)",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Normalised",
+       "displayName": "Created - Normalised",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Minutes",
+       "displayName": "Created - Minutes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Week/year",
+       "displayName": "Created - Week/year",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Last Modified",
+       "displayName": "Last Modified",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - Month",
+       "displayName": "Created - Month",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "FD - Public ticket URL",
+       "displayName": "FD - Public ticket URL",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Last Modified By",
+       "displayName": "Last Modified By",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Location",
+       "displayName": "Location",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Root cause",
+       "displayName": "Ticket - Root cause",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Within SLA",
+       "displayName": "Within SLA",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": " OOS Items - Count - Done",
+       "displayName": " OOS Items - Count - Done",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Trigger",
+       "displayName": "Trigger",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Resource Type at Location",
+       "displayName": "Resource Type at Location",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS items",
+       "displayName": "OOS items",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS items - Summary",
+       "displayName": "OOS items - Summary",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Contact numbers",
+       "displayName": "Contact numbers",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created - After hours",
+       "displayName": "Created - After hours",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    592,
+    96
+   ],
+   "id": "0e392780-9cc6-4fe9-8937-14ebbef27a6b",
+   "name": "Append row in sheet",
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const allRecords = [];\n$input.all().forEach(item => {\n  const records = item.json.records || [];\n  records.forEach(r => {\n    allRecords.push(r.fields);\n  });\n});\nreturn allRecords;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    384,
+    0
+   ],
+   "id": "cf790c81-c0e0-43ef-8713-7ca670fc3a86",
+   "name": "Code in JavaScript"
+  },
+  {
+   "parameters": {
+    "operation": "clear",
+    "documentId": {
+     "__rl": true,
+     "value": "1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo",
+     "mode": "list",
+     "cachedResultName": "DS014 - Airtable - Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 1118308177,
+     "mode": "list",
+     "cachedResultName": "n8n",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit#gid=1118308177"
+    }
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    592,
+    -96
+   ],
+   "id": "e2c6f446-ed55-4fa4-9e54-a05774a0fcc1",
+   "name": "Clear sheet",
+   "executeOnce": true,
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "url": "https://api.airtable.com/v0/meta/bases/apprGGdynxDTZMZmO/tables",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "airtableTokenApi",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.4,
+   "position": [
+    0,
+    0
+   ],
+   "id": "1587e722-cb09-46a5-9c17-4fba9c69720f",
+   "name": "HTTP Request",
+   "notesInFlow": false,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sendTo": "pitchayut@giant-pumpkin.com",
+    "subject": "=n8n Error -  {{ $json.workflow.name }}",
+    "message": "=There was an error in your n8n automation.<br><br>\n<b>Workflow:</b> {{ $json.workflow.name }}<br>\n<b>Error:</b> {{ $json.execution.error.message }}<br>\n<b>Stack:</b> {{ $json.execution.error.stack }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.2,
+   "position": [
+    -16,
+    336
+   ],
+   "id": "d77f70e9-61a5-4da8-9fa3-9b013ba20629",
+   "name": "Send a message",
+   "webhookId": "07ccadd1-c6c1-4819-9f19-a52d762b3020",
+   "credentials": {
+    "gmailOAuth2": {
+     "id": "32l42xsRa8sPlTGm",
+     "name": "Gmail account"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -208,
+    336
+   ],
+   "id": "7a49045c-273f-40ef-908c-0fcc014a6eb9",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "jsCode": "const MAIN_TABLE = \"OOS items\"; // ← change if your main table differs\n\n// Your input is [ { tables: [...] } ]\nconst tables = $input.first().json.tables;\nconst main = tables.find(t => t.name === MAIN_TABLE);\nif (!main) throw new Error(`Table \"${MAIN_TABLE}\" not found in schema`);\n\nconst linkedFields = [];\n\nfor (const f of main.fields) {\n  // Case 1: direct linked record field\n  if (f.type === \"multipleRecordLinks\" && f.options?.linkedTableId) {\n    linkedFields.push({\n      fieldName: f.name,\n      linkedTableId: f.options.linkedTableId,\n    });\n  }\n\n  // Case 2: lookup field whose result is itself a record link (returns rec IDs)\n  if (\n    f.type === \"multipleLookupValues\" &&\n    f.options?.isValid &&\n    f.options?.result?.type === \"multipleRecordLinks\"\n  ) {\n    // Resolve which table the underlying link points to:\n    // follow recordLinkFieldId → that link field's target table → the looked-up field's target\n    // Simplest reliable approach: mark it for resolution against ALL fetched tables,\n    // since record IDs are globally unique.\n    linkedFields.push({\n      fieldName: f.name,\n      linkedTableId: null, // resolved via the global ID map\n    });\n  }\n}\n\n// Unique table IDs we actually need to fetch\nconst tablesToFetch = [\n  ...new Set(linkedFields.map(f => f.linkedTableId).filter(Boolean)),\n];\n\n// For your schema this yields: tblBkzDATbdxYdoZo (Menu items), tbl7Y9QHzO1TyWZDl (Tickets)\n// Location/Parent lookups resolve via Locations + Tickets — so add Locations too:\n// Location lookup ultimately points at tbljrW84qbQIoYUBX (Locations)\nif (linkedFields.some(f => f.fieldName === \"Location\")) {\n  if (!tablesToFetch.includes(\"tbljrW84qbQIoYUBX\")) {\n    tablesToFetch.push(\"tbljrW84qbQIoYUBX\");\n  }\n}\n\n// Also stash each table's primaryFieldId so Node 5 can resolve names correctly\nconst primaryFieldByTable = {};\nfor (const t of tables) {\n  const pf = t.fields.find(f => f.id === t.primaryFieldId);\n  primaryFieldByTable[t.id] = pf ? pf.name : \"ID\";\n}\n\nreturn tablesToFetch.map(tableId => ({\n  json: {\n    tableId,\n    primaryFieldName: primaryFieldByTable[tableId],\n    linkedFields: linkedFields.map(f => f.fieldName),\n  },\n}));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    208,
+    0
+   ],
+   "id": "2e090fc9-8c06-455b-b2ee-16d364f4300d",
+   "name": "Code in JavaScript1"
+  }
+ ],
+ "connections": {
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code in JavaScript": {
+   "main": [
+    [
+     {
+      "node": "Append row in sheet",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Clear sheet",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Clear sheet": {
+   "main": [
+    []
+   ]
+  },
+  "HTTP Request": {
+   "main": [
+    [
+     {
+      "node": "Code in JavaScript1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code in JavaScript1": {
+   "main": [
+    [
+     {
+      "node": "Code in JavaScript",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "1a949dd4-4d17-43ae-ac6b-7297ecc59bd4",
+ "activeVersionId": null,
+ "versionCounter": 366,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.103Z",
+   "createdAt": "2026-08-31T10:43:58.103Z",
+   "role": "workflow:owner",
+   "workflowId": "TL3qCEyJYjiPJgBZ",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

@@ -36,7 +36,9 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 | Google service-account JSON | `*-to-sheets.py` | ☐ |
 | `XERO_CLIENT_ID` / `XERO_CLIENT_SECRET` | `xero-to-airtable` | ☐ |
 | CMS / IXM Aqua `gpapi` credentials (`~/coding/cms-scraper/.env`) | cms scrapers, aqua probe | ☐ |
-| Droplet SSH keys | add successor's key, remove mine | ☐ |
+| Droplet SSH keys (`droplet-new` in root's authorized_keys, plus the private half stored in n8n) | add successor's key, regenerate the n8n→droplet pair, remove mine | ☐ |
+| `N8N_ENCRYPTION_KEY` (in `/root/n8n/docker-compose.yml`) | put in the vault; needed to read any restored n8n DB | ☐ |
+| n8n Slack token "n8n integration Auth" | error alerts from the six workflows | ☐ |
 
 ## Recurring duties that need a new owner
 

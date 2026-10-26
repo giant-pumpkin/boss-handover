@@ -1,0 +1,168 @@
+{
+ "updatedAt": "2026-08-31T12:48:29.000Z",
+ "createdAt": "2026-08-28T08:19:44.533Z",
+ "id": "G0scOm8uj1ItWmLs",
+ "name": "My workflow 2",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    0,
+    0
+   ],
+   "id": "7686cb73-535b-415f-a30e-102c900bea42",
+   "name": "When clicking ‘Execute workflow’"
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "appdo1WwONYvmYMWg",
+     "mode": "list",
+     "cachedResultName": "Jobs",
+     "cachedResultUrl": "https://airtable.com/appdo1WwONYvmYMWg"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblwHj9cO37wp1fVx",
+     "mode": "list",
+     "cachedResultName": "Jobs",
+     "cachedResultUrl": "https://airtable.com/appdo1WwONYvmYMWg/tblwHj9cO37wp1fVx"
+    },
+    "returnAll": false,
+    "limit": 1,
+    "options": {
+     "downloadFields": [
+      "Document - Job report"
+     ],
+     "fields": [
+      "Location (String)",
+      "ID",
+      "Customer (String)",
+      "Job type",
+      "Document - Job report"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    208,
+    0
+   ],
+   "id": "257dbc95-5ca4-420e-b6af-23c03cdbbdc6",
+   "name": "Search records",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "inputDataFieldName": "Document - Job report_0",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive",
+     "cachedResultName": "My Drive",
+     "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "1d9VZR2lBpAq62I4E0B14KbfDrJywRBP7",
+     "mode": "list",
+     "cachedResultName": "n8n_docs_test",
+     "cachedResultUrl": "https://drive.google.com/drive/folders/1d9VZR2lBpAq62I4E0B14KbfDrJywRBP7"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    416,
+    0
+   ],
+   "id": "83ae41bd-e81f-4947-bc2f-abee1a91fc86",
+   "name": "Upload file",
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "iQNHmsUQsXHReO5J",
+     "name": "n8n google cloud"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "When clicking ‘Execute workflow’": {
+   "main": [
+    [
+     {
+      "node": "Search records",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Search records": {
+   "main": [
+    [
+     {
+      "node": "Upload file",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "0de67a9d-7493-4188-800e-0f394622059f",
+ "activeVersionId": null,
+ "versionCounter": 52,
+ "triggerCount": 0,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.057Z",
+   "createdAt": "2026-08-31T10:43:58.057Z",
+   "role": "workflow:owner",
+   "workflowId": "G0scOm8uj1ItWmLs",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

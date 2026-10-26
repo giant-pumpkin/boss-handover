@@ -1,0 +1,198 @@
+{
+ "updatedAt": "2026-10-26T05:12:15.000Z",
+ "createdAt": "2026-08-26T07:08:13.901Z",
+ "id": "pDObvoHHZPFj43dc",
+ "name": "Refresh Airtable Webhook",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "hours",
+       "hoursInterval": 6
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -336,
+    0
+   ],
+   "id": "df53dcdc-8faa-4bed-b7ad-cd5f5e6ba6b9",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "8723ff61-121d-4818-9457-0d82ad4e9317",
+       "name": "inventory.subscriptions_webhook_id",
+       "value": "achTRaF6zyL0VZOjf",
+       "type": "string"
+      },
+      {
+       "id": "71d46bd2-7c03-4169-b084-16db78b877e3",
+       "name": "tickets.tickets_webhook_id",
+       "value": "achhqSolaET3Br1hH",
+       "type": "string"
+      },
+      {
+       "id": "aacfaecd-80a8-4296-b15e-0d43f7f296d0",
+       "name": "inventory_base_id",
+       "value": "appRor1ipbYAb4K7z",
+       "type": "string"
+      },
+      {
+       "id": "90a9de0c-6faf-45a9-a63e-68d6ff81a944",
+       "name": "tickets_base_id",
+       "value": "apprGGdynxDTZMZmO",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.5,
+   "position": [
+    -96,
+    0
+   ],
+   "id": "1b9d7cc7-9518-42e4-84cc-11f868d5d0f8",
+   "name": "Base ID, Webhook IDs"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://api.airtable.com/v0/bases/{{ $json.tickets_base_id }}/webhooks/{{ $json.tickets.tickets_webhook_id }}/refresh",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "airtableTokenApi",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.4,
+   "position": [
+    240,
+    96
+   ],
+   "id": "e37271d4-7f4a-4693-a77a-81a028051cc3",
+   "name": "Refresh Tickets Webhook",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://api.airtable.com/v0/bases/{{ $json.inventory_base_id }}/webhooks/{{ $json.inventory.subscriptions_webhook_id }}/refresh",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "airtableTokenApi",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.4,
+   "position": [
+    240,
+    -80
+   ],
+   "id": "a80980fa-8844-430f-9c04-be7789778661",
+   "name": "Refresh Inventory Webhook",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Base ID, Webhook IDs",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Base ID, Webhook IDs": {
+   "main": [
+    [
+     {
+      "node": "Refresh Tickets Webhook",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Refresh Inventory Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false,
+  "timeSavedMode": "fixed",
+  "saveDataSuccessExecution": "all",
+  "callerPolicy": "workflowsFromSameOwner"
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    12
+   ],
+   "recurrenceRuleSignatures": [
+    "hours:6"
+   ]
+  }
+ },
+ "meta": null,
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "5f847982-2134-417f-b0ba-7337711d609f",
+ "activeVersionId": null,
+ "versionCounter": 80,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.151Z",
+   "createdAt": "2026-08-31T10:43:58.151Z",
+   "role": "workflow:owner",
+   "workflowId": "pDObvoHHZPFj43dc",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

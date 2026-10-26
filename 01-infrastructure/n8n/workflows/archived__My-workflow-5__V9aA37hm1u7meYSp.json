@@ -1,0 +1,301 @@
+{
+ "updatedAt": "2026-10-26T05:11:37.000Z",
+ "createdAt": "2026-09-30T05:10:49.647Z",
+ "id": "V9aA37hm1u7meYSp",
+ "name": "My workflow 5",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    0,
+    0
+   ],
+   "id": "12b536d0-a859-49db-b9a8-09d6ae967046",
+   "name": "When clicking ‘Execute workflow’"
+  },
+  {
+   "parameters": {
+    "operation": "getAll",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.xero",
+   "typeVersion": 1,
+   "position": [
+    208,
+    0
+   ],
+   "id": "8eee9e4b-9717-4967-8d32-544dcf2de38f",
+   "name": "Get many invoices"
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "base": {
+     "__rl": true,
+     "value": "app8H7IMW8gHyQzzn",
+     "mode": "list",
+     "cachedResultName": "Data",
+     "cachedResultUrl": "https://airtable.com/app8H7IMW8gHyQzzn"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblEvxNYRMA2xfSky",
+     "mode": "list",
+     "cachedResultName": "Invoices",
+     "cachedResultUrl": "https://airtable.com/app8H7IMW8gHyQzzn/tblEvxNYRMA2xfSky"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {},
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "readOnly": true,
+       "removed": false
+      },
+      {
+       "id": "Invoice Number",
+       "displayName": "Invoice Number",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "string",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Xero Invoice ID",
+       "displayName": "Xero Invoice ID",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "string",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Contact",
+       "displayName": "Contact",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "string",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Reference",
+       "displayName": "Reference",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "string",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Xero Status",
+       "displayName": "Xero Status",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "options",
+       "options": [
+        {
+         "name": "DRAFT",
+         "value": "DRAFT"
+        },
+        {
+         "name": "SUBMITTED",
+         "value": "SUBMITTED"
+        },
+        {
+         "name": "AUTHORISED",
+         "value": "AUTHORISED"
+        },
+        {
+         "name": "PAID",
+         "value": "PAID"
+        },
+        {
+         "name": "VOIDED",
+         "value": "VOIDED"
+        },
+        {
+         "name": "DELETED",
+         "value": "DELETED"
+        }
+       ],
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Date",
+       "displayName": "Date",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "dateTime",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Due Date",
+       "displayName": "Due Date",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "dateTime",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Total",
+       "displayName": "Total",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "number",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Amount Paid",
+       "displayName": "Amount Paid",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "number",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Amount Due",
+       "displayName": "Amount Due",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "number",
+       "readOnly": false,
+       "removed": false
+      },
+      {
+       "id": "Currency",
+       "displayName": "Currency",
+       "required": false,
+       "defaultMatch": false,
+       "canBeUsedToMatch": true,
+       "display": true,
+       "type": "string",
+       "readOnly": false,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    416,
+    0
+   ],
+   "id": "a6a31874-d668-43ee-8a86-451b86d4f1e3",
+   "name": "Create or update a record",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Digital Team)"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "When clicking ‘Execute workflow’": {
+   "main": [
+    [
+     {
+      "node": "Get many invoices",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Get many invoices": {
+   "main": [
+    [
+     {
+      "node": "Create or update a record",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": null,
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "b491c2e8-3c19-4b61-9c1b-bd9012e93bc1",
+ "activeVersionId": null,
+ "versionCounter": 6,
+ "triggerCount": 0,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-09-30T05:10:49.654Z",
+   "createdAt": "2026-09-30T05:10:49.654Z",
+   "role": "workflow:owner",
+   "workflowId": "V9aA37hm1u7meYSp",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

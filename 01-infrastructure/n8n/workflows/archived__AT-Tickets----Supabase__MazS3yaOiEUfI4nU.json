@@ -1,0 +1,432 @@
+{
+ "updatedAt": "2026-10-26T05:12:12.000Z",
+ "createdAt": "2026-08-26T08:44:57.204Z",
+ "id": "MazS3yaOiEUfI4nU",
+ "name": "AT Tickets --> Supabase",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "operation": "getAll",
+    "tableId": "sync_cursors",
+    "returnAll": true,
+    "filters": {
+     "conditions": [
+      {
+       "keyName": "webhook_id",
+       "condition": "eq",
+       "keyValue": "achhqSolaET3Br1hH"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.supabase",
+   "typeVersion": 1,
+   "position": [
+    208,
+    0
+   ],
+   "id": "bb934a26-fb20-4930-8b37-a4549c4aeae9",
+   "name": "Get cursor",
+   "credentials": {
+    "supabaseApi": {
+     "id": "qktRU3RadWegJ0hz",
+     "name": "Airtable -> Supabase Project"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const BASE_ID    = 'apprGGdynxDTZMZmO';\nconst WEBHOOK_ID = 'achhqSolaET3Br1hH';\nconst TABLE_ID   = 'tbl7Y9QHzO1TyWZDl';\nconst PAT        = '<AIRTABLE_PAT_REDACTED>';\n\nconst COL = {\n  fldbhAtinaHacVbSb: 'ticket_id',\n  fldsXKax4t2vZ6wNr: 'created_datetime',\n  fldlcF1da85degGaW: 'agent',\n  fldrKSwjCZ6r9LNfy: 'time_open',\n  fldK5bHMFjVaoWimQ: 'resolved_datetime',\n  fldlVplDGGSpSKpyh: 'status',\n  fldxucQuRlzmvkeHK: 'location',\n  fldzPZvAVIViYzXbs: 'within_sla',\n  fldCpoWB4mfQBzHL1: 'sla',\n  fldd5QeiehXSk0JjK: 'ticket_type',\n  fldkvF88PU0fcR0uU: 'oos',\n};\n\nfunction flatten(v) {\n  if (v == null) return null;\n  if (typeof v !== 'object') return v;\n  if (!Array.isArray(v) && v.name !== undefined) return v.name;\n  if (v.valuesByLinkedRecordId) {\n    const out = [];\n    for (const id of v.linkedRecordIds || []) {\n      for (const item of v.valuesByLinkedRecordId[id] || []) {\n        if (item != null) out.push(typeof item === 'object' ? item.name : item);\n      }\n    }\n    return out.join(', ') || null;\n  }\n  if (Array.isArray(v)) {\n    return v.filter(x => x != null)\n            .map(x => typeof x === 'object' ? x.name : x)\n            .join(', ') || null;\n  }\n  return null;\n}\n\nconst MONTHS = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};\nconst BKK_MIN = 420;   // Asia/Bangkok is UTC+7 year-round, no DST\n\nfunction toIso(v) {\n  if (typeof v !== 'string' || !v.trim()) return null;\n\n  // ISO with an offset (webhook payloads) -> shift to Bangkok wall time\n  if (/^\\d{4}-\\d{2}-\\d{2}T/.test(v) && /(Z|[+-]\\d{2}:?\\d{2})$/.test(v)) {\n    const d = new Date(v);\n    if (isNaN(d)) return null;\n    return new Date(d.getTime() + BKK_MIN * 60000).toISOString().slice(0, 19);\n  }\n  if (/^\\d{4}-\\d{2}-\\d{2}/.test(v)) return v;   // ISO, no offset: already local\n\n  const m = v.trim().match(\n    /^(\\d{1,2})[\\/\\-]([A-Za-z]{3,}|\\d{1,2})[\\/\\-](\\d{4})(?:[ ,]+(\\d{1,2}):(\\d{2}))?/\n  );\n  if (!m) return null;\n  const [, d, mo, y, hh = '0', mi = '0'] = m;\n  const mm = /^\\d+$/.test(mo) ? +mo : MONTHS[mo.slice(0,3).toLowerCase()];\n  if (!mm) return null;\n  const p = n => String(n).padStart(2, '0');\n  return `${y}-${p(mm)}-${p(d)}T${p(hh)}:${mi}:00`;\n}\n\nfunction coerce(col, v) {\n  switch (col) {\n    case 'created_datetime':\n    case 'resolved_datetime':\n      return toIso(v);\n    case 'time_open':\n      return v == null || v === '' ? null : Math.round(Number(v));\n    case 'within_sla':\n      return v === 'Yes' ? true : v === 'No' ? false : null;\n    case 'oos':\n      return v === true || v === 'checked' ? 'checked' : null;\n    default:\n      return v;\n  }\n}\n\nlet cursor = $input.first().json.cursor;\nconst rows = new Map();   // record_id → row, so later payloads overwrite earlier\nconst dead = new Set();\n\nwhile (true) {\n  const res = await this.helpers.httpRequest({\n    url: `https://api.airtable.com/v0/bases/${BASE_ID}/webhooks/${WEBHOOK_ID}/payloads`,\n    qs: { cursor },\n    headers: { Authorization: `Bearer ${PAT}` },\n  });\n  for (const p of res.payloads) {\n    const t = p.changedTablesById?.[TABLE_ID];\n    if (!t) continue;\n    for (const [rid, rec] of Object.entries({\n      ...t.createdRecordsById,\n      ...t.changedRecordsById,\n    })) {\n      const cells = {\n        ...rec.unchanged?.cellValuesByFieldId,\n        ...rec.current?.cellValuesByFieldId,\n        ...rec.cellValuesByFieldId,\n      };\n      const row = { record_id: rid };\n      for (const [fid, col] of Object.entries(COL)) {\n        row[col] = coerce(col, flatten(cells[fid]));\n      }\n      rows.set(rid, row);\n      dead.delete(rid);\n    }\n    for (const rid of t.destroyedRecordIds || []) {\n      dead.add(rid);\n      rows.delete(rid);\n    }\n  }\n  cursor = res.cursor;\n  if (!res.mightHaveMore) break;\n}\n\nconst out = [\n  ...[...rows.values()].map(r => ({ json: { op: 'upsert', ...r } })),\n  ...[...dead].map(id => ({ json: { op: 'delete', record_id: id } })),\n];\n// always emit at least one item so the cursor node still runs\nout.push({ json: { op: 'cursor', cursor } });\nreturn out;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    416,
+    0
+   ],
+   "id": "10e086ca-d708-436f-9829-b9696af9354a",
+   "name": "Drain Payload"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.op }}",
+          "rightValue": "upsert",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "dd4c38e5-d4a1-435e-8d1c-cd24837be73a"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "0"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "id": "5611db30-af38-4f63-9be7-5b2c7ae52cbb",
+          "leftValue": "={{ $json.op }}",
+          "rightValue": "delete",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "1"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "id": "451d0759-ec46-4b15-ab22-7edd7360abc3",
+          "leftValue": "={{ $json.op }}",
+          "rightValue": "cursor",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "2"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.4,
+   "position": [
+    624,
+    -16
+   ],
+   "id": "476fa7a9-e592-46fd-874c-219cf14bbb8a",
+   "name": "Switch"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "tableId": "sync_cursors",
+    "matchType": "allFilters",
+    "filters": {
+     "conditions": [
+      {
+       "keyName": "webhook_id",
+       "condition": "eq",
+       "keyValue": "achhqSolaET3Br1hH"
+      }
+     ]
+    },
+    "fieldsUi": {
+     "fieldValues": [
+      {
+       "fieldId": "webhook_id",
+       "fieldValue": "achhqSolaET3Br1hH"
+      },
+      {
+       "fieldId": "cursor",
+       "fieldValue": "={{ $json.cursor }}"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.supabase",
+   "typeVersion": 1,
+   "position": [
+    832,
+    176
+   ],
+   "id": "f02b7613-5a00-4908-9449-4c9d5776b2fb",
+   "name": "Update Cursor",
+   "credentials": {
+    "supabaseApi": {
+     "id": "qktRU3RadWegJ0hz",
+     "name": "Airtable -> Supabase Project"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://odpdnucjvgingrrwaaiv.supabase.co/rest/v1/tickets.tickets?on_conflict=record_id",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "supabaseApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Prefer",
+       "value": "resolution=merge-duplicates,return=minimal"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ record_id: $json.record_id, ticket_id: $json.ticket_id, created_datetime: $json.created_datetime, agent: $json.agent, time_open: $json.time_open, resolved_datetime: $json.resolved_datetime, status: $json.status, location: $json.location, within_sla: $json.within_sla, sla: $json.sla, ticket_type: $json.ticket_type, oos: $json.oos }) }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.4,
+   "position": [
+    832,
+    -160
+   ],
+   "id": "84f55ad1-afd1-4aba-aaa0-d381b615e013",
+   "name": "HTTP Request",
+   "credentials": {
+    "supabaseApi": {
+     "id": "qktRU3RadWegJ0hz",
+     "name": "Airtable -> Supabase Project"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    0,
+    208
+   ],
+   "id": "3bb8c8e9-f0a9-455b-97c3-259f1f087e9d",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "select": "user",
+    "user": {
+     "__rl": true,
+     "value": "U0957UR5LUF",
+     "mode": "list",
+     "cachedResultName": "pitchayut"
+    },
+    "text": "=🔴 *{{ $json.workflow.name }}* failed\n\n*Node:* {{ $json.execution.error.lastNodeExecuted }}\n*Error:* {{ $json.execution.error.message }}\n*When:* {{ $now.setZone('Asia/Bangkok').toFormat('dd LLL HH:mm') }} ICT\n\n<{{ $json.execution.url }}|Open execution {{ $json.execution.id }}>",
+    "otherOptions": {}
+   },
+   "type": "n8n-nodes-base.slack",
+   "typeVersion": 2.5,
+   "position": [
+    208,
+    208
+   ],
+   "id": "3af5c87d-3f58-44b7-a274-c3cfcba768eb",
+   "name": "Send a message",
+   "webhookId": "f165d381-bca3-4445-848e-3392c1ce9d81",
+   "credentials": {
+    "slackApi": {
+     "id": "smg3mOPI3Q9gMXgX",
+     "name": "n8n integration Auth"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "airtable-tickets",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    0,
+    0
+   ],
+   "id": "c85918f5-6ec6-4853-bca9-f97319cc3732",
+   "name": "Receive change Webhook",
+   "webhookId": "09941064-6384-49e0-a8fc-ad856ef9bff5"
+  },
+  {
+   "parameters": {
+    "content": "This Airtable webhook receives changes (CRUD) from Tickets table, Tickets base \n\n(Webhook ID: achhqSolaET3Br1hH)",
+    "height": 128,
+    "width": 352
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    0,
+    -224
+   ],
+   "typeVersion": 1,
+   "id": "70fcc695-94b1-4fc4-9054-c931b286639a",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "operation": "delete",
+    "tableId": "inventory.subscriptions",
+    "matchType": "allFilters",
+    "filters": {
+     "conditions": [
+      {
+       "keyName": "record_id",
+       "condition": "eq",
+       "keyValue": "={{ $json.record_id }}"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.supabase",
+   "typeVersion": 1,
+   "position": [
+    832,
+    0
+   ],
+   "id": "c1ce8151-3228-4ccc-b44f-5ab67a575308",
+   "name": "Delete ticket record",
+   "credentials": {
+    "supabaseApi": {
+     "id": "qktRU3RadWegJ0hz",
+     "name": "Airtable -> Supabase Project"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Get cursor": {
+   "main": [
+    [
+     {
+      "node": "Drain Payload",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Drain Payload": {
+   "main": [
+    [
+     {
+      "node": "Switch",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Delete ticket record",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Update Cursor",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Receive change Webhook": {
+   "main": [
+    [
+     {
+      "node": "Get cursor",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "b4d838d3-22fa-476b-b29e-37c3f41debd0",
+ "activeVersionId": null,
+ "versionCounter": 29,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.072Z",
+   "createdAt": "2026-08-31T10:43:58.072Z",
+   "role": "workflow:owner",
+   "workflowId": "MazS3yaOiEUfI4nU",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

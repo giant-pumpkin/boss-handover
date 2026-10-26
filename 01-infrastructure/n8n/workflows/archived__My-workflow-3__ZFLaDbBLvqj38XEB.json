@@ -1,0 +1,52 @@
+{
+ "updatedAt": "2026-10-01T07:34:37.000Z",
+ "createdAt": "2026-09-01T05:45:48.192Z",
+ "id": "ZFLaDbBLvqj38XEB",
+ "name": "My workflow 3",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [],
+ "connections": {},
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "9fa08458-8181-4222-9911-fd14b7523c45",
+ "activeVersionId": null,
+ "versionCounter": 2,
+ "triggerCount": 0,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-09-01T05:45:48.196Z",
+   "createdAt": "2026-09-01T05:45:48.196Z",
+   "role": "workflow:owner",
+   "workflowId": "ZFLaDbBLvqj38XEB",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

@@ -1,0 +1,498 @@
+{
+ "updatedAt": "2026-09-08T07:29:05.000Z",
+ "createdAt": "2026-08-06T09:06:18.722Z",
+ "id": "pLgKTGmpIS08BbGo",
+ "name": "DS014 - OOS Items",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "jsCode": "const idToName = {};\n\nfor (const item of $('Merge1').all()) {\n  const r = item.json.fields ?? item.json;\n  const recId = item.json.id;\n  const name = r.ID ?? r.Name ?? r.Brand ?? r['Brand owner'] ?? recId;\n  idToName[recId] = String(name);\n}\n\nconst mainItems = $('Fetch OOS items').all();\nfor (const item of mainItems) {\n  const r = item.json.fields ?? item.json;\n  idToName[item.json.id] = String(r.ID ?? r.Name ?? item.json.id);\n}\n\nconst isRecId = (v) => typeof v === 'string' && /^rec[A-Za-z0-9]{14,17}$/.test(v);\n\nreturn mainItems.map(item => {\n  const raw = item.json.fields ?? item.json;\n  const row = {};\n\n  for (const [key, val] of Object.entries(raw)) {\n    if (val == null) {\n      row[key] = '';\n    } else if (Array.isArray(val)) {\n      if (val.length === 0) {\n        row[key] = '';\n      } else if (isRecId(val[0])) {\n        row[key] = val.map(v => idToName[v] ?? v).join(', ');\n      } else if (typeof val[0] === 'object') {\n        row[key] = val.filter(v => v != null).map(v => v.specialValue ?? v.url ?? v.name ?? v.email ?? JSON.stringify(v)).join(', ');\n      } else {\n        row[key] = val.join(', ');\n      }\n    } else if (typeof val === 'object') {\n      row[key] = val.name ?? val.id ?? val.error ?? JSON.stringify(val);\n    } else {\n      row[key] = val;\n    }\n  }\n\n  row['airtable_record_id'] = item.json.id;\n  return { json: row };\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    224,
+    48
+   ],
+   "id": "a570547e-4393-4c06-aee6-a8af3a3db472",
+   "name": "Code in JavaScript"
+  },
+  {
+   "parameters": {
+    "numberInputs": 3
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    16,
+    32
+   ],
+   "id": "39956b82-0709-4fe8-8095-2d86fbf6abfd",
+   "name": "Merge1"
+  },
+  {
+   "parameters": {
+    "operation": "clear",
+    "documentId": {
+     "__rl": true,
+     "value": "1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo",
+     "mode": "list",
+     "cachedResultName": "DS014 - Airtable - Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 1891130474,
+     "mode": "list",
+     "cachedResultName": "OOS items",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit#gid=1891130474"
+    }
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    448,
+    -32
+   ],
+   "id": "5a483189-9426-45b3-b771-22c4d8229728",
+   "name": "Clear sheet",
+   "executeOnce": true,
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "value": "1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo",
+     "mode": "list",
+     "cachedResultName": "DS014 - Airtable - Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 1891130474,
+     "mode": "list",
+     "cachedResultName": "OOS items",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit#gid=1891130474"
+    },
+    "columns": {
+     "mappingMode": "autoMapInputData",
+     "value": null,
+     "matchingColumns": [],
+     "schema": [],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    448,
+    160
+   ],
+   "id": "17ca2716-1f24-40aa-a3c9-2a6d573610d6",
+   "name": "Append row in sheet",
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -800,
+    784
+   ],
+   "id": "17b6156b-1d90-47c5-99b0-69c482fe8f77",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "sendTo": "pitchayut@giant-pumpkin.com",
+    "subject": "=n8n Error -  {{ $json.workflow.name }}",
+    "message": "=There was an error in your n8n automation.<br><br> <b>Workflow:</b> {{ $json.workflow.name }}<br> <b>Error:</b> {{ $json.execution.error.message }}<br> <b>Stack:</b> {{ $json.execution.error.stack }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.2,
+   "position": [
+    -592,
+    784
+   ],
+   "id": "8c4a84f4-e434-498a-ad60-8edd85c172e2",
+   "name": "Send a message",
+   "webhookId": "e57a738f-f602-4f16-a9d8-f4da8af1e877",
+   "credentials": {
+    "gmailOAuth2": {
+     "id": "32l42xsRa8sPlTGm",
+     "name": "Gmail account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "10,25,40,55 * * * *"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -816,
+    48
+   ],
+   "id": "639254d9-9eb4-47cd-8b52-737a6f33245b",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "url": "https://api.airtable.com/v0/meta/bases/apprGGdynxDTZMZmO/tables",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "airtableTokenApi",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.4,
+   "position": [
+    -1472,
+    592
+   ],
+   "id": "dcb2be22-5535-42d8-8f08-f07420c7b66e",
+   "name": "HTTP Request",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbl7imdzfTzQLIICs",
+     "mode": "list",
+     "cachedResultName": "OOS items",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbl7imdzfTzQLIICs"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -608,
+    48
+   ],
+   "id": "bff96534-0a26-4ec2-b729-2a8ddc5d53fa",
+   "name": "Fetch OOS items",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblBkzDATbdxYdoZo",
+     "mode": "list",
+     "cachedResultName": "Menu items",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tblBkzDATbdxYdoZo"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -272,
+    -128
+   ],
+   "id": "ee0d2673-0e41-41af-a346-814174ea3c70",
+   "name": "Fetch Menu Item",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbl7Y9QHzO1TyWZDl",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbl7Y9QHzO1TyWZDl"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -272,
+    48
+   ],
+   "id": "f2a7e847-6205-416c-b33d-6a4a1b1eac1c",
+   "name": "Fetch Ticket",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbljrW84qbQIoYUBX",
+     "mode": "list",
+     "cachedResultName": "Locations",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbljrW84qbQIoYUBX"
+    },
+    "options": {
+     "fields": []
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -272,
+    208
+   ],
+   "id": "a004dc7c-8f8f-4915-a2cb-3f7f98b1a873",
+   "name": "Fetch Location",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Merge1": {
+   "main": [
+    [
+     {
+      "node": "Code in JavaScript",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code in JavaScript": {
+   "main": [
+    [
+     {
+      "node": "Clear sheet",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Append row in sheet",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Clear sheet": {
+   "main": [
+    []
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Fetch OOS items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch OOS items": {
+   "main": [
+    [
+     {
+      "node": "Fetch Menu Item",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Location",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Ticket",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Menu Item": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Ticket": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Fetch Location": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "2e8b0e01-e1ab-4d64-92de-fbf20f1353a2",
+ "activeVersionId": null,
+ "versionCounter": 39,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.159Z",
+   "createdAt": "2026-08-31T10:43:58.159Z",
+   "role": "workflow:owner",
+   "workflowId": "pLgKTGmpIS08BbGo",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

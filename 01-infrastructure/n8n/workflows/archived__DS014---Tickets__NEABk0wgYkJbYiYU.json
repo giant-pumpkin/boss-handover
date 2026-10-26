@@ -1,0 +1,889 @@
+{
+ "updatedAt": "2026-09-08T07:29:03.000Z",
+ "createdAt": "2026-08-06T09:18:39.417Z",
+ "id": "NEABk0wgYkJbYiYU",
+ "name": "DS014 - Tickets",
+ "description": null,
+ "active": false,
+ "isArchived": true,
+ "nodes": [
+  {
+   "parameters": {
+    "jsCode": "const idToName = {};\n\nfor (const item of $('Merge1').all()) {\n  const r = item.json.fields ?? item.json;\n  const recId = item.json.id;\n  const name = r.ID ?? r.Name ?? r.Brand ?? r['Brand owner'] ?? recId;\n  idToName[recId] = String(name);\n}\n\nconst mainItems = $('Fetch Tickets').all();\nfor (const item of mainItems) {\n  const r = item.json.fields ?? item.json;\n  idToName[item.json.id] = String(r.ID ?? r.Name ?? item.json.id);\n}\n\nconst isRecId = (v) => typeof v === 'string' && /^rec[A-Za-z0-9]{14,17}$/.test(v);\n\nreturn mainItems.map(item => {\n  const raw = item.json.fields ?? item.json;\n  const row = {};\n\n  for (const [key, val] of Object.entries(raw)) {\n    if (val == null) {\n      row[key] = '';\n    } else if (Array.isArray(val)) {\n      if (val.length === 0) {\n        row[key] = '';\n      } else if (isRecId(val[0])) {\n        row[key] = val.map(v => idToName[v] ?? v).join(', ');\n      } else if (typeof val[0] === 'object') {\n        row[key] = val.filter(v => v != null).map(v => v.specialValue ?? v.url ?? v.name ?? v.email ?? JSON.stringify(v)).join(', ');\n      } else {\n        row[key] = val.join(', ');\n      }\n    } else if (typeof val === 'object') {\n      row[key] = val.name ?? val.id ?? val.error ?? JSON.stringify(val);\n    } else {\n      row[key] = val;\n    }\n  }\n\n  row['airtable_record_id'] = item.json.id;\n  return { json: row };\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    224,
+    80
+   ],
+   "id": "1fefc528-11a4-408b-a30e-036e879d4800",
+   "name": "Code in JavaScript"
+  },
+  {
+   "parameters": {
+    "numberInputs": 5
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    16,
+    32
+   ],
+   "id": "09432215-a79b-4792-a038-cd5ee36b9406",
+   "name": "Merge1"
+  },
+  {
+   "parameters": {
+    "operation": "clear",
+    "documentId": {
+     "__rl": true,
+     "value": "1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo",
+     "mode": "list",
+     "cachedResultName": "DS014 - Airtable - Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "gid=0",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit#gid=0"
+    }
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    448,
+    0
+   ],
+   "id": "06cf7af2-3f92-47cd-9e4d-7d422d9923aa",
+   "name": "Clear sheet",
+   "executeOnce": true,
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "value": "1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo",
+     "mode": "list",
+     "cachedResultName": "DS014 - Airtable - Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "gid=0",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo/edit#gid=0"
+    },
+    "columns": {
+     "mappingMode": "autoMapInputData",
+     "value": {},
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "Last Modified",
+       "displayName": "Last Modified",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Status",
+       "displayName": "Ticket - Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "ID",
+       "displayName": "ID",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "SLA",
+       "displayName": "SLA",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Request type",
+       "displayName": "Request type",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Location",
+       "displayName": "Location",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Status",
+       "displayName": "Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created",
+       "displayName": "Created",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Summary",
+       "displayName": "Summary",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Province",
+       "displayName": "Province",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Brand owner - Filter",
+       "displayName": "Brand owner - Filter",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Region",
+       "displayName": "Region",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created  - Day",
+       "displayName": "Created  - Day",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Start date",
+       "displayName": "Start date",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket - Created - Normalised",
+       "displayName": "Ticket - Created - Normalised",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Request - Created",
+       "displayName": "Request - Created",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Menu item",
+       "displayName": "Menu item",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Ticket",
+       "displayName": "Ticket",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Brand owner",
+       "displayName": "Brand owner",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Dayparts",
+       "displayName": "Dayparts",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Created  - Hour",
+       "displayName": "Created  - Hour",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Assignee",
+       "displayName": "Assignee",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Last Modified - Request",
+       "displayName": "Last Modified - Request",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "airtable_record_id",
+       "displayName": "airtable_record_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "TEMP - Menu item",
+       "displayName": "TEMP - Menu item",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "End date",
+       "displayName": "End date",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "OOS Screen",
+       "displayName": "OOS Screen",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Notes",
+       "displayName": "Notes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.7,
+   "position": [
+    448,
+    192
+   ],
+   "id": "5a11e258-0bff-49ba-ad77-1d656181ef3f",
+   "name": "Append row in sheet",
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "IoEPfzLpBQjGTMex",
+     "name": "Google Sheets account"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -1488,
+    832
+   ],
+   "id": "1ce92c8c-8b90-46e0-af40-2603aaacfc89",
+   "name": "Error Trigger"
+  },
+  {
+   "parameters": {
+    "sendTo": "pitchayut@giant-pumpkin.com",
+    "subject": "=n8n Error -  {{ $json.workflow.name }}",
+    "message": "=There was an error in your n8n automation.<br><br> <b>Workflow:</b> {{ $json.workflow.name }}<br> <b>Error:</b> {{ $json.execution.error.message }}<br> <b>Stack:</b> {{ $json.execution.error.stack }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.2,
+   "position": [
+    -1280,
+    832
+   ],
+   "id": "3e475b1d-706e-455e-9d55-3dabb22b64fd",
+   "name": "Send a message",
+   "webhookId": "0d21a3ee-1a2c-477d-aabd-51545fb28364",
+   "credentials": {
+    "gmailOAuth2": {
+     "id": "32l42xsRa8sPlTGm",
+     "name": "Gmail account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 15
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -816,
+    80
+   ],
+   "id": "38535b14-9da5-41ea-979b-f033761b7581",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "url": "https://api.airtable.com/v0/meta/bases/apprGGdynxDTZMZmO/tables",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "airtableTokenApi",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.4,
+   "position": [
+    -1472,
+    592
+   ],
+   "id": "81459690-294b-49cb-b6b9-af92694fb56d",
+   "name": "HTTP Request",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblSxD2sxiCGtUnBb",
+     "mode": "list",
+     "cachedResultName": "SLA",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tblSxD2sxiCGtUnBb"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -288,
+    -240
+   ],
+   "id": "9b793012-ae39-4d82-95b6-e023e403f61d",
+   "name": "Fetch Menu Item",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbljrW84qbQIoYUBX",
+     "mode": "list",
+     "cachedResultName": "Locations",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbljrW84qbQIoYUBX"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -288,
+    80
+   ],
+   "id": "72613337-0999-45d1-8414-92892a6eae96",
+   "name": "Fetch Location",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbl7Y9QHzO1TyWZDl",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbl7Y9QHzO1TyWZDl"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -608,
+    80
+   ],
+   "id": "570d63bd-b8db-411b-a777-15457ae6e634",
+   "name": "Fetch Tickets",
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbl7imdzfTzQLIICs",
+     "mode": "list",
+     "cachedResultName": "OOS items",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbl7imdzfTzQLIICs"
+    },
+    "options": {
+     "fields": []
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -288,
+    -80
+   ],
+   "id": "bc667c02-0259-4bfa-b8cc-13bce69a365a",
+   "name": "Fetch OOS items",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tblKL04W1YLy6q3SP",
+     "mode": "list",
+     "cachedResultName": "Customers",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tblKL04W1YLy6q3SP"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -288,
+    256
+   ],
+   "id": "e5c005d2-4a3f-4db0-91fb-4af1662e4b3c",
+   "name": "Fetch Customers",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "search",
+    "base": {
+     "__rl": true,
+     "value": "apprGGdynxDTZMZmO",
+     "mode": "list",
+     "cachedResultName": "Tickets",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO"
+    },
+    "table": {
+     "__rl": true,
+     "value": "tbl8mdLvZrXTaU8lK",
+     "mode": "list",
+     "cachedResultName": "Compensation",
+     "cachedResultUrl": "https://airtable.com/apprGGdynxDTZMZmO/tbl8mdLvZrXTaU8lK"
+    },
+    "options": {
+     "fields": [
+      "ID"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.airtable",
+   "typeVersion": 2.2,
+   "position": [
+    -288,
+    432
+   ],
+   "id": "d3475984-fea2-47b2-8089-c2b2dc9fd12e",
+   "name": "Fetch Compensation",
+   "executeOnce": true,
+   "credentials": {
+    "airtableTokenApi": {
+     "id": "Ud6yNWn7u5ULO1yn",
+     "name": "Airtable PAT (Pitchayut)"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Merge1": {
+   "main": [
+    [
+     {
+      "node": "Code in JavaScript",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code in JavaScript": {
+   "main": [
+    [
+     {
+      "node": "Clear sheet",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Append row in sheet",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Clear sheet": {
+   "main": [
+    []
+   ]
+  },
+  "Error Trigger": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Fetch Tickets",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Menu Item": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch Location": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  },
+  "Fetch Tickets": {
+   "main": [
+    [
+     {
+      "node": "Fetch Menu Item",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Location",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch OOS items",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Customers",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Fetch Compensation",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch OOS items": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Fetch Customers": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 3
+     }
+    ]
+   ]
+  },
+  "Fetch Compensation": {
+   "main": [
+    [
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 4
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "nodeGroups": [],
+ "pinData": {},
+ "versionId": "d2b65edb-f357-4c5f-a65f-8e5aadca6e4f",
+ "activeVersionId": null,
+ "versionCounter": 36,
+ "triggerCount": 1,
+ "sourceWorkflowId": null,
+ "tags": [],
+ "shared": [
+  {
+   "updatedAt": "2026-08-31T10:43:58.081Z",
+   "createdAt": "2026-08-31T10:43:58.081Z",
+   "role": "workflow:owner",
+   "workflowId": "NEABk0wgYkJbYiYU",
+   "projectId": "Elt5P4tsUXZomfdI",
+   "project": {
+    "updatedAt": "2026-08-31T11:58:23.747Z",
+    "createdAt": "2026-08-31T10:43:11.022Z",
+    "id": "Elt5P4tsUXZomfdI",
+    "name": "Giant Pumpkin <digital@giant-pumpkin.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "59f52269-feac-4c24-aa83-ab17cfec7f6d"
+   }
+  }
+ ],
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

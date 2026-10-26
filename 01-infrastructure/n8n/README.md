@@ -1,24 +1,32 @@
 # n8n
 
-|         |                            |
-| ------- | -------------------------- |
-| URL     | n8n.giant-pumpkin.com      |
-| Runs on | watermelon droplet, Docker |
-| Auth    | n8n owner account          |
-| Version |                            |
+| | |
+| --- | --- |
+| URL | https://n8n.giant-pumpkin.com (also reachable on `http://168.144.43.182:5678`, see open items) |
+| Version | 2.32.7, image `n8nio/n8n` untagged |
+| Runs on | Watermelon droplet, Docker Compose, SQLite storage |
+| Owner account | <!-- TODO: email --> |
+| Timezone | Asia/Bangkok (`GENERIC_TIMEZONE`), so all schedules below are Bangkok time |
+| Execution history | kept 30 days, max 2,000 runs |
 
-## How workflows are organised
+## What it is for today
 
-<!-- TODO: naming convention, tags, folders -->
+n8n is **the scheduler for the Python scripts on the droplet**. Each active workflow is the same five-node shape: Schedule → SSH node (runs a script as root on the same box) → If exit code ≠ 0 → Slack message; plus an Error Trigger that also posts to Slack. Nothing else is active.
 
-- [workflow-catalog.md](workflow-catalog.md) — every workflow: trigger, what it does, dependencies, active or not
-- [workflows/](workflows/) — exported JSON, one file per workflow, named `<workflow-name>.json`. Re-export after any change (Workflow menu → Download).
-- [gotchas.md](gotchas.md) — things that cost me hours
+## Files
+
+- [workflow-catalog.md](workflow-catalog.md) — all 27 workflows: 6 active, 21 archived, with schedules and commands
+- [workflows/](workflows/) — JSON export of every workflow, 2026-10-26, named `<state>__<name>__<id>.json`. Two archived ones had an Airtable PAT inside an HTTP node; it is replaced by `<AIRTABLE_PAT_REDACTED>`.
+- [gotchas.md](gotchas.md)
 
 ## Credentials stored in n8n
 
-Names only. Re-create by hand after a restore.
+Eight; names and IDs in [../digital-ocean-droplet/secrets-and-env.md](../digital-ocean-droplet/secrets-and-env.md). Only the SSH key and the Slack token are used by active workflows.
 
-| Credential name | Type | Used by |
-| --------------- | ---- | ------- |
-|                 |      |         |
+## Re-export
+
+```bash
+docker exec n8n-n8n-1 n8n export:workflow --all --pretty > /root/n8n-export/all-$(date +%F).json
+```
+
+The first line of that output is a log message, not JSON; strip it before parsing.

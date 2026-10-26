@@ -9,7 +9,7 @@ Six bases. Base IDs are in folder names so nothing is ambiguous. The in-Airtable
 | Jobs | `appdo1WwONYvmYMWg` | Jobs, BOMs, maintenance packages/items/cycles | [bases/jobs-appdo1WwONYvmYMWg/](bases/jobs-appdo1WwONYvmYMWg/) |
 | Tickets | `apprGGdynxDTZMZmO` | Freshdesk ticket mirror, SLA, compensation | [bases/tickets-apprGGdynxDTZMZmO/](bases/tickets-apprGGdynxDTZMZmO/) |
 | Locations | `appmFizJaAn7yKKVu` | **Master data**: customers, brands, sites; synced out to every other base | [bases/locations-appmFizJaAn7yKKVu/](bases/locations-appmFizJaAn7yKKVu/) |
-| Monitoring | `appQT3lKdh9bdw1zo` | Device-health view fed by the abandoned CMS scraper | [bases/monitoring-appQT3lKdh9bdw1zo/](bases/monitoring-appQT3lKdh9bdw1zo/) |
+| Monitoring | `appQT3lKdh9bdw1zo` | Device-health view fed by the CMS scraper every 15 min | [bases/monitoring-appQT3lKdh9bdw1zo/](bases/monitoring-appQT3lKdh9bdw1zo/) |
 
 Cross-base links are **synced tables**, not real links. Synced tables cannot be written through the REST API from inside an interface extension (the sandbox blocks it); use the SDK there.
 
