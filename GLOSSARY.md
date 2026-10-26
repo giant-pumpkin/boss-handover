@@ -28,7 +28,6 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Pool allocation** | Inventory units are allocated to a client "pool" before deployment; a unit deployed to a client must be unallocated or in that client's pool. |
 | **Quad** | Quarter-like cohort of a store's first install (Year + Quad). Drives which MA cycle a package starts in. |
 | **Resources** | The products table in the Inventory base (`tbl3eqL9QVNgZfNgZ`). Synced to HubSpot as products. The name is historical. |
-| **Serial truncation rule** | <!-- TODO: from subscription records audit --> |
 | **Sky** | Sky Chew, colleague building the ConnectIQ CRM side (Phase 1). |
 | **sync tick** | The `sync` checkbox on a job (`fldhTpGWsywbFFSU7`) that sends serial numbers to the Inventory base. The main human gate in the lifecycle. |
 | **V1 / V2** | Maintenance contract generation. V1 (2024) = 3 PM visits; V2 and everything from 2025 = 1 PM + 2 RM. |

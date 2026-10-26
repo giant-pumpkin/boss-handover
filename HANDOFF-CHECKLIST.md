@@ -6,20 +6,21 @@ Work through this before the last day. Tick as done, with a date. "Owner after" 
 
 | Service | My role today | Owner after | Done |
 | --- | --- | --- | --- |
-| Airtable workspace | <!-- TODO: admin/creator --> | | ☐ |
+| Airtable workspace `wspIPo8kyzUAuEbrw` | Creator; owners are Chris, Seb, Sky (and Yves, departed) | | ☐ |
 | DigitalOcean (droplet, snapshots, billing) | | | ☐ |
 | n8n instance login | | | ☐ |
 | Supabase org — data-pipeline project (`odpdnucjvgingrrwaaiv`) | | | ☐ |
 | Supabase org — ConnectIQ project | member | Sky | ☐ |
 | GitHub `giant-pumpkin` org | | | ☐ |
-| HubSpot private app / API key used by the quote sync | | | ☐ |
-| Freshdesk admin + API key | | | ☐ |
+| HubSpot (portal 244131765) | Super Admin, one of two with Seb | | ☐ |
+| HubSpot private app `API - Quote line items` token | | | ☐ |
+| Freshdesk | agent-level; admins are Mark, Seb, Sky | | ☐ |
 | Google Workspace service account(s) for Sheets | | | ☐ |
 | Looker Studio report ownership | | | ☐ |
 | Xero app "Airtable Integration" (Sky's app) | | | ☐ |
 | ApprovalMax | viewer | | ☐ |
 | DocsAutomator | | | ☐ |
-| Fillout | | | ☐ |
+| Fillout / Zite | member of Yves's organization; forms' Airtable connections | | ☐ |
 | CMS Asia / IXM Aqua `gpapi` user | | | ☐ |
 | Vercel (ConnectIQ docs/app) | | Sky | ☐ |
 

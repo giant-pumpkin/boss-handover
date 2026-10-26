@@ -5,7 +5,7 @@
 | Resources (products) | `com_` products / pricebooks | Phase 1 M4 (Sky) | services with no hardware (e.g. Delta content curation) must fit |
 | HS - Quotes | `com_` quotes | Phase 1 M5 | |
 | Subscriptions | `sub_` | Phase 1 M6 | DR-10 |
-| Inventory units | `inv_` | S1 | 1,003 orphan devices and serial truncation issues to clean first (see [08-audits-and-analyses](../08-audits-and-analyses/)) |
+| Inventory units | `inv_` | S1 | 1,003 orphan devices and serial truncation issues to clean first |
 | Jobs, BOM | `ops_`, `plan_` | S2, S3 | |
 | MA packages / items / cycles | `ops_` maintenance | S2 | entitlement model in [07-business-logic/maintenance-packages.md](../07-business-logic/maintenance-packages.md) |
 | Tickets | `sup_` | S4 | Freshdesk stays as the front end? |

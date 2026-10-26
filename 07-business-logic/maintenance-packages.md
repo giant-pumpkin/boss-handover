@@ -33,4 +33,4 @@ MPA-0030 (RD, 114 stores) 113 PMs never scheduled, expired 2026-08-31 · MPA-003
 3. Ask Support whether a reinstall starts a new MA year (Big C Suksawat 12088, Central Chiangmai 2 12229).
 4. QSA and RD not audited the way CRG was.
 
-Audit scripts and findings: [08-audits-and-analyses/maintenance-packages-audit](../08-audits-and-analyses/maintenance-packages-audit/).
+

@@ -23,7 +23,7 @@ Folders are numbered in reading order. Every folder has a `README.md` that is it
 | [05-third-party-services](05-third-party-services/) | One page per SaaS: purpose, where it is wired in, admin, cost | Renewals, access requests, vendor support |
 | [06-connectiq](06-connectiq/) | The ConnectIQ platform: my operations domain, prototype, decisions | Working with Sky on Phase 2 |
 | [07-business-logic](07-business-logic/) | Domain rules that outlive any tool (billing start, MA entitlement, procurement) | Before changing any automation or report |
-| [08-audits-and-analyses](08-audits-and-analyses/) | One-off investigations and their findings | Someone asks "didn't Boss already look at this?" |
+| [08-audits-and-analyses](08-audits-and-analyses/) | Scripts from one-off investigations, reference only | Rarely |
 | [09-open-items](09-open-items/) | Unfinished work, known risks, runbooks | Day one of the handover |
 
 ## Ground rules for this repo

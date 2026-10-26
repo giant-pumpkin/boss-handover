@@ -1,5 +1,7 @@
 # google-workspace
 
+> Not in my scope. Left blank for whoever owns it. <!-- owner: TODO -->
+
 | | |
 | --- | --- |
 | What we use it for | |

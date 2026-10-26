@@ -18,7 +18,6 @@ The repo's `CONNECTIQ_MANAGEMENT_HANDOVER.md` and `PROJECT_KNOWLEDGE.md` are aut
 
 - [operations-prototype/](operations-prototype/) — the inventory/jobs prototype (`~/coding/connectiq-inventory-demo`, Supabase `odpdnucjvgingrrwaaiv`): a **spec, not the product**
 - [data-model.md](data-model.md) — the object / unit / placement model and prefix conventions
-- [decisions/](decisions/) — ADR-style one-pagers for choices made in the prototype that must carry into `inv_`
 - [migration-plan.md](migration-plan.md) — Airtable → ConnectIQ, domain by domain, with the gating decisions
 - [open-decisions.md](open-decisions.md) — DR-10, DR-11, DR-12, DR-35, DR-36, DR-41 with who decides and the evidence needed
 

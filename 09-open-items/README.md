@@ -25,11 +25,13 @@ Honest list of what is unfinished and what can bite. Ordered by risk.
 | Drop the Supabase data-pipeline mirror tables left by the sync | webhooks and n8n deleted 2026-10-26 | drop `public."inventory.subscriptions"` (10,579 rows), `public."tickets.tickets"` (20,918), `public."jobs.jobs"` (0) and `public.sync_cursors` in `odpdnucjvgingrrwaaiv` |
 | Two HubSpot quote syncs are running at once: Airtable automation `wflmPH9mROs9nyH4M` (every 15 min) and the Python `hubspot-to-airtable` | both deployed | pick one, turn the other off | [02-airtable/bases/quotes-app8H7IMW8gHyQzzn/automations.md](../02-airtable/bases/quotes-app8H7IMW8gHyQzzn/automations.md) |
 | Delete empty automations `Automation 1` / `Automation 2` in the Tickets base | | | |
+| HubSpot private app `API - Quote line items` logs ~9,400 4XX errors a week and uses API versions retiring in 2027 | ongoing | find the failing call (likely the double sync); plan the migration or let ConnectIQ M8 retire it | [05-third-party-services/hubspot.md](../05-third-party-services/hubspot.md) |
+| Fillout/Zite organization is owned by Yves's account (left) | | transfer ownership or recreate under a company login | [05-third-party-services/fillout.md](../05-third-party-services/fillout.md) |
+| Airtable: Yves still a workspace Owner; three snapshot bases (Inventory - Rollback, Jobs July 7 and July 10) can be deleted | | | [05-third-party-services/airtable.md](../05-third-party-services/airtable.md) |
 | Remove leftovers on the droplet: `n8n-caddy-1` container, `docker-compose.yml.save`, Supabase n8n credential `qktRU3RadWegJ0hz` | | | [01-infrastructure/digital-ocean-droplet](../01-infrastructure/digital-ocean-droplet/) |
 | Xero → Airtable on the real org | blocked on access approval | get a Standard user to click Allow; parse quote number | [03](../03-data-pipelines/xero-to-airtable/) |
 | Freshdesk location-picker sidebar app | in development | finish, publish privately, update ingest webhook | [03](../03-data-pipelines/freshdesk-to-airtable/) |
 | MA packages: 6 stores to add, Baan Silom cleanup, reinstall question | paused 2026-10-02 | see list | [07](../07-business-logic/maintenance-packages.md) |
-| QSA and RD maintenance audit | not started | repeat the CRG method | [08](../08-audits-and-analyses/maintenance-packages-audit/) |
 | Email intelligence pipeline | designed only | decide store, build | [03](../03-data-pipelines/email-intelligence/) |
 | Deposit gate approval step in ApprovalMax | <!-- implemented? --> | | [05](../05-third-party-services/approvalmax.md) |
 | ConnectIQ Phase 2: DR-12, DR-41 evidence, `inv_` object model, event list | decisions pending | | [06](../06-connectiq/open-decisions.md) |
