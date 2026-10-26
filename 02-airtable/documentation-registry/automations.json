@@ -1,0 +1,776 @@
+[
+ {
+  "id": "rec1PUgbfWT1W9fzz",
+  "createdTime": "2026-04-01T04:46:49.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflzER5l1wFgSGB1a",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Create MA jobs - Jobs"
+  }
+ },
+ {
+  "id": "rec3yJMpc9iN4Jquy",
+  "createdTime": "2026-04-01T05:04:31.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfl4KzuOzqq8paJip",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Send Slack - Task is Done"
+  }
+ },
+ {
+  "id": "rec5SySuO3QkW6y95",
+  "createdTime": "2026-04-01T06:44:13.000Z",
+  "fields": {
+   "Base - Name": "Monitoring",
+   "Automation - URL": "https://airtable.com/appQT3lKdh9bdw1zo/wflIyWtNIN9eLabPx",
+   "Automation - Name": "Link inventory"
+  }
+ },
+ {
+  "id": "recB2Um48K8aRrBZu",
+  "createdTime": "2026-03-31T12:07:27.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfl1YUiIjdVT3b66E",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Medium",
+   "External Systems": "Airtable webhook endpoint (hooks.airtable.com)",
+   "Writes To": "Inventory (Status, installation date, location, subscription contract link)",
+   "Description - MD": "# Ingest SNs - Installation\n\nTRIGGER:\n  ENTITY: Webhook\n  EVENT: Create\n  SOURCE:\n    URL = \"https://hooks.airtable.com/workflows/v1/genericWebhook/appRor1ipbYAb4K7z/wfl1YUiIjdVT3b66E/wtr8U2pX8am4WbV1M\"\n\nACTION 1:\n  TYPE: SCRIPT\n  OUTPUT: SYS.Script.SnNormalised\n  LOGIC:\n    - Split CTX.Webhook.Body.SNs by \",\"\n    - Trim whitespace\n    - If length == 15, trim to first 14 characters\n    - Output array SYS.Script.SnNormalised\n\nACTION 2:\n  TYPE: ITERATE\n  OVER: SYS.Script.SnNormalised\n  DO:\n\n    QUERY:\n      ENTITY: Inventory\n      WHERE:\n        DATA.Inventory.ID CONTAINS SYS.Iteration.Value\n      OUTPUT: SYS.Query.SET.InventoryMatch\n\n    ACTION:\n      TYPE: ITERATE\n      OVER: SYS.Query.SET.InventoryMatch\n      DO:\n        TYPE: UPDATE\n        ENTITY: Inventory\n        TARGET: SYS.Iteration.ID\n        SET:\n          STATE.Inventory.Status = \"Installed\"\n          DATA.Inventory.Installation date = CTX.Webhook.Body.fields.Date - Actual\n          REF.Inventory.Location - Stock = EMPTY\n          REF.Inventory.Location - Installation = CTX.Webhook.Body.fields.Location\n          REF.Inventory.Subscription contract - Add new = CTX.Webhook.Body.fields.Subscription - Contract\n\nSIDE EFFECT:\n  Updating `Subscription contract - Add new` triggers automation:\n    \"Create subscription record\"",
+   "Side Effects": "Updating Subscription contract - Add new triggers downstream automation: Create subscription record",
+   "Status": "Active",
+   "Trigger - Type": "Webhook",
+   "Reads From": "Inventory",
+   "Description": "Webhook-triggered. Normalizes a comma-separated SN list, matches each SN against Inventory records, updates matched records to Installed status with delivery date, location, and subscription contract staging link.",
+   "Automation - Name": "Ingest SNs - Installation",
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "recCUlrtmkFtM4EF9",
+  "createdTime": "2026-04-01T07:14:47.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Housekeeping - Abandoned calls"
+  }
+ },
+ {
+  "id": "recCyRMZKmBhKY346",
+  "createdTime": "2026-04-01T07:16:26.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Mail - Helpdesk on \"Close\" - QSA"
+  }
+ },
+ {
+  "id": "recEgVoTYJ5Z54PmF",
+  "createdTime": "2026-04-01T05:04:34.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflkueIIHNWvDNz3h",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "FS - Ma - PM - Close job"
+  }
+ },
+ {
+  "id": "recEjkrT6CIWJPQjQ",
+  "createdTime": "2026-04-01T04:47:10.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfld0DPxrxcnpqiCm",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Interface - Button - Create job report PDF"
+  }
+ },
+ {
+  "id": "recEnCw90J1iMBDCO",
+  "createdTime": "2026-04-01T06:51:09.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Write log - Tick box"
+  }
+ },
+ {
+  "id": "recFMNDLvmbxo8wLj",
+  "createdTime": "2026-04-01T05:09:10.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflzaGcmtVUMsTDyv",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Quotes - Set customer on BOM line items"
+  }
+ },
+ {
+  "id": "recFRq7ge8Jc9zK5j",
+  "createdTime": "2026-03-31T10:33:50.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflBANYMhf5P5djxI",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "High",
+   "Deletes Records In": "TargetR - Status (full table wipe on every run before recreating)",
+   "External Systems": "TargetR API (stacks.targetr.net)",
+   "Creates Records In": "TargetR - Status",
+   "Description - MD": "# Ingest - TargetR - Logs\n\nTRIGGER:\n  ENTITY: TargetR - Status\n  EVENT: Scheduled\n  SCHEDULE: Every 30 minutes\n\nQUERY 1:\n  ENTITY: External.TargetR.Screens\n  WHERE:\n    ENDPOINT == \"https://stacks.targetr.net/rest-api/v1/screens\"\n  OUTPUT: SYS.Query.SET.Screens\n\nQUERY 2:\n  ENTITY: Inventory\n  WHERE:\n    DATA.Inventory.MAC address EXISTS\n    OR DATA.Inventory.TargetR - MAC address EXISTS\n  OUTPUT: SYS.Query.SET.InventoryCandidates\n\nQUERY 3:\n  ENTITY: TargetR - Status\n  WHERE:\n    TRUE\n  OUTPUT: SYS.Query.SET.ExistingStatusRecords\n\nACTION 1:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.ExistingStatusRecords\n  DO:\n    TYPE: DELETE\n    TARGET: SYS.Iteration.ID\n\nACTION 2:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.Screens\n  DO:\n    RESOLVE:\n      MATCH Inventory\n      ON:\n        DATA.Inventory.MAC address == SYS.Iteration.Screen.id\n        OR DATA.Inventory.TargetR - MAC address == SYS.Iteration.Screen.id\n\n    ACTION:\n      TYPE: CREATE\n      ENTITY: TargetR - Status\n      WHEN: MATCH EXISTS\n      SET:\n        REF.TargetR - Status.MAC address = MATCH.ID\n        DATA.TargetR - Status.label = SYS.Iteration.Screen.label\n        DATA.TargetR - Status.lastPlayerCommsMillis = SYS.Iteration.Screen.data.lastPlayerCommsMillis\n        DATA.TargetR - Status.localAddress = SYS.Iteration.Screen.data.localAddress\n        DATA.TargetR - Status.wifiSsid = SYS.Iteration.Screen.data.wifiSsid",
+   "Side Effects": "Full table wipe of TargetR - Status before each recreation cycle",
+   "Status": "Active",
+   "Trigger - Type": "Scheduled",
+   "Reads From": "TargetR API (external), Inventory, TargetR - Status",
+   "Description": "Scheduled every 30 minutes. Fetches all screens from TargetR API, wipes the TargetR - Status table, then recreates records for any screen whose MAC address matches an Inventory record.",
+   "Automation - Name": "Ingest - TargetR - Logs",
+   "Idempotent": true,
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "recGobWn76cexa5Db",
+  "createdTime": "2026-04-01T05:52:19.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflraoNuk70HIQcj7",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Inventory availability -  Installed SNs added to Job (button trigger)"
+  }
+ },
+ {
+  "id": "recIY57ITRMRsgBK1",
+  "createdTime": "2026-03-31T10:33:21.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflqcrzaquEbhjRHR",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "None",
+   "External Systems": "Airtable webhook endpoint (hooks.airtable.com)",
+   "Creates Records In": "TargetR - PoP",
+   "Description - MD": "# Ingest - TargetR - PoP\n\nTRIGGER:\n  ENTITY: Webhook\n  EVENT: Create\n  SOURCE:\n    URL = \"https://hooks.airtable.com/workflows/v1/genericWebhook/appRor1ipbYAb4K7z/wflqcrzaquEbhjRHR/wtrm4ewgrDpl80Qjp\"\n\nACTION 1:\n  TYPE: CREATE\n  ENTITY: TargetR - PoP\n  SET:\n    DATA.TargetR - PoP.customItemId = CTX.Webhook.Body.customItemId\n    REF.TargetR - PoP.screenId = CTX.Webhook.Body.screenId\n    DATA.TargetR - PoP.ItemId = CTX.Webhook.Body.itemId",
+   "Status": "Active",
+   "Trigger - Type": "Webhook",
+   "Reads From": "Webhook payload (external)",
+   "Description": "Webhook-triggered. Creates a single TargetR - PoP record from the webhook payload fields (customItemId, screenId, itemId).",
+   "Automation - Name": "Ingest - TargetR - PoP",
+   "Business Impact": "Low"
+  }
+ },
+ {
+  "id": "recJu2BF4L6skkAVb",
+  "createdTime": "2026-03-31T08:40:23.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfle3GAXhlQwL4LLX",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Low",
+   "Creates Records In": "Inventory",
+   "Description - MD": "# Scan - Create inventory\n\nTRIGGER:\n  ENTITY: Scan - Input\n  EVENT: Manual\n  ID: CTX.Trigger.ID\n  SOURCE:\n    UI.Interface = \"Admin / Scan\"\n    UI.Button = \"Create inventory\"\n\nQUERY 1:\n  ENTITY: Scan - Line items\n  WHERE:\n    REF.Scan - Line items.Scan - Input == CTX.Trigger.ID\n    REF.Scan - Line items.Inventory == BLANK()\n  OUTPUT: SYS.Query.SET.ScanLineItemsWithoutInventory\n\nACTION 1:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.ScanLineItemsWithoutInventory\n  DO:\n    TYPE: CREATE\n    ENTITY: Inventory\n    SET:\n      REF.Inventory.Resource = REF.Scan - Line items.Resource\n      DATA.Inventory.SN = REF.Scan - Line items.Scan\n      STATE.Inventory.Status = REF.Scan - Line items.Status.Name\n      REF.Inventory.Location - Installation = REF.Scan - Line items.Location - Installation\n      DATA.Inventory.Installation - Area = REF.Scan - Line items.Installation - Area\n      REF.Inventory.Location - Stock = REF.Scan - Line items.Location - Stock\n      DATA.Inventory.Internal = REF.Scan - Line items.Internal\n      DATA.Inventory.Spare = REF.Scan - Line items.Spare\n      DATA.Inventory.Subscription exempt = REF.Scan - Line items.Subscription exempt\n      REF.Inventory.Scan - Line item = SYS.Iteration.ID\n      DATA.Inventory.Location - Stock - Zone = REF.Scan - Line items.Location - Stock - Zone",
+   "Status": "Active",
+   "Trigger - Type": "Button Clicked",
+   "Reads From": "Scan - Line items",
+   "Description": "Button-triggered from Admin/Scan interface. Iterates Scan - Line items linked to the triggering Scan - Input that have no Inventory record yet, and creates a new Inventory record for each.",
+   "Automation - Name": "Scan - Create inventory",
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "recJzEyH9TynPbori",
+  "createdTime": "2026-04-01T04:44:49.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfluNitKVrYWiqjpc",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "DEV - Create contract from software Master BOM items"
+  }
+ },
+ {
+  "id": "recLnvWsGy1C335M0",
+  "createdTime": "2026-03-31T12:19:56.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflKuBDk5Z6MYZzHq",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Low",
+   "External Systems": "Airtable webhook endpoint (hooks.airtable.com)",
+   "Writes To": "Inventory (Status reset to Available, installation date and location references cleared)",
+   "Description - MD": "# Ingest SNs - Collect\n\nTRIGGER:\n  ENTITY: Webhook\n  EVENT: Create\n  SOURCE:\n    URL = \"https://hooks.airtable.com/workflows/v1/genericWebhook/appRor1ipbYAb4K7z/wflKuBDk5Z6MYZzHq/wtrRqJKzUWxXRZoCy\"\n\nACTION 1:\n  TYPE: SCRIPT\n  OUTPUT: SYS.Script.SnNormalised\n  LOGIC:\n    - Split CTX.Webhook.Body.SNs by \",\"\n    - Trim whitespace\n    - If length == 15, trim to first 14 characters\n    - Output array SYS.Script.SnNormalised\n\nACTION 2:\n  TYPE: ITERATE\n  OVER: SYS.Script.SnNormalised\n  DO:\n\n    QUERY:\n      ENTITY: Inventory\n      WHERE:\n        DATA.Inventory.ID CONTAINS SYS.Iteration.Value\n      OUTPUT: SYS.Query.SET.InventoryMatch\n\n    ACTION:\n      TYPE: ITERATE\n      OVER: SYS.Query.SET.InventoryMatch\n      DO:\n        TYPE: UPDATE\n        ENTITY: Inventory\n        TARGET: SYS.Iteration.ID\n        SET:\n          STATE.Inventory.Status = \"Available\"\n          DATA.Inventory.Installation date = EMPTY\n          REF.Inventory.Location - Stock = EMPTY\n          REF.Inventory.Location - Installation = EMPTY",
+   "Side Effects": "Destructively clears installation data on all matched inventory records",
+   "Status": "Active",
+   "Trigger - Type": "Webhook",
+   "Reads From": "Inventory",
+   "Description": "Webhook-triggered. Normalizes SN list, matches each SN against Inventory, resets matched records to Available status and clears installation date and location references.",
+   "Automation - Name": "Ingest SNs - Collect",
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "recNXHTjleE3P42pu",
+  "createdTime": "2026-04-01T04:37:45.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflVotEzFzdYxmUnP",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Description - MD": "# DEV - Create Master BOM and line items from HS\n\nTRIGGER:\n  ENTITY: Quotes\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  WHERE:\n    STATE.exec_quote_stage == \"Ready for BOM\"\n\nACTION 1:\n  TYPE: CREATE\n  ENTITY: BOM\n  TARGET: SYS.Create.ID.BOM\n  SET:\n    REF.Quote = CTX.Trigger.ID\n    DATA.Service = REF.Quotes.Service\n    REF.Customer = REF.Quotes.Customer\n    STATE.BOMType = \"Quote\"\n    META.Source = \"HubSpot\"\n    STATE.Status = \"Active\"\n\nACTION 2:\n  TYPE: UPDATE\n  ENTITY: Quotes\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.Stage = \"Enrich\"\n    STATE.sys_bom_created = TRUE\n\nQUERY 1:\n  ENTITY: HS - Quotes - LI\n  WHERE:\n    REF.HS - Quotes == REF.Quotes.HS - Quotes.ID\n    AND STATE.sys_bom_line_created == FALSE\n  OUTPUT: SYS.Query.SET.HSQuoteLineItems\n\nACTION 3:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.HSQuoteLineItems\n  DO:\n    QUERY:\n      ENTITY: Resources\n      WHERE:\n        DATA.SKU == SYS.Iteration.SKU - Normalised\n      OUTPUT: SYS.Query.SET.Resources\n\n    ACTION:\n      TYPE: CREATE\n      ENTITY: BOM resources\n      TARGET: SYS.Create.ID.BOMResource\n      SET:\n        STATE.Status = \"In progress\"\n        REF.Resources = SYS.Query.SET.Resources.ID\n        DATA.ResourceQuantity = SYS.Iteration.Quantity\n        DATA.HubSpotBillingStartDate = SYS.Iteration.Billing Start Date\n        DATA.HubSpotSubscriptionDuration = SYS.Iteration.Subscription - Duration - Normalised\n        REF.BOM = SYS.Create.ID.BOM\n        REF.Customer = REF.Quotes.Customer\n        DATA.Service = REF.Quotes.Service\n        REF.Quote = CTX.Trigger.ID\n        DATA.UnitPrice = SYS.Iteration.Unit Price\n        DATA.HubSpotBillingFrequency = SYS.Iteration.Billing Frequency - Normalised\n\n    ACTION:\n      TYPE: UPDATE\n      ENTITY: HS - Quotes - LI\n      TARGET: SYS.Iteration.ID\n      SET:\n        STATE.sys_bom_line_created = TRUE",
+   "Trigger - Type": "Record matches condition",
+   "Description": "Fires when a Quote reaches Ready for BOM stage. Creates a Master BOM record linked to the quote, advances quote stage to Enrich, then iterates HubSpot quote line items to create BOM resource records matched by SKU.",
+   "Automation - Name": "DEV - Create Master BOM and line items from HS"
+  }
+ },
+ {
+  "id": "recObi7ylp5t9ROJO",
+  "createdTime": "2026-04-01T05:04:20.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflHc5DTQ4dUSYVjd",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Interface - Button - Create Delivery Note (Manual Signature, Titanium )"
+  }
+ },
+ {
+  "id": "recQQDMAzUiesuxWN",
+  "createdTime": "2026-03-31T05:16:38.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflvPZRWROKluat8K",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "None",
+   "Writes To": "Inventory (resets Log flag)",
+   "Creates Records In": "Inventory log",
+   "Description - MD": "# Write inventory log\n\nTRIGGER:\n  ENTITY: Inventory.Inventory\n  EVENT: Update\n  ID: CTX.Trigger.ID\n  FIELDS:\n    - STATE.STATUS.Primary\n    - CONTROL.FLAG.Log\n    - DERIVED.STATUS.SUBSCRIPTION.Primary\n\nACTIONS:\n\nACTION 1:\n  TYPE: CREATE\n  ENTITY: Inventory.Inventory log\n  TARGET: NEW\n  SET:\n    DATA.REF.ID.Primary = CTX.Trigger.FIELD.ID\n    REF.LOCATION.INSTALLATION = CTX.Trigger.FIELD.Location - Installation\n    STATE.STATUS.Primary = CTX.Trigger.FIELD.Status\n    REF.LOCATION.STOCK = CTX.Trigger.FIELD.Location - Stock\n    DATA.REF.LOCATION_CODE.Primary = CTX.Trigger.FIELD.Location code.Value\n    REF.LOCATION.TRANSIT_STOCK = CTX.Trigger.FIELD.In transit to - Stock location\n    REF.ENTITY.INVENTORY = CTX.Trigger.ID\n    REF.LOCATION.TRANSIT_INSTALLATION = CTX.Trigger.FIELD.In transit to - Installation location\n    DATA.DATE.INSTALLATION = CTX.Trigger.FIELD.Installation date\n    REF.SUBSCRIPTION.TYPE = CTX.Trigger.FIELD.Subscription - Type.Value.Name\n    REF.SUBSCRIPTION.CONTRACT = CTX.Trigger.FIELD.Subscription contract\n    DATA.TEXT.INSTALLATION_AREA = CTX.Trigger.FIELD.Installation area\n\nACTION 2:\n  TYPE: UPDATE\n  ENTITY: Inventory.Inventory\n  TARGET: CTX.Trigger.ID\n  SET:\n    CONTROL.FLAG.Log = FALSE",
+   "Side Effects": "Log flag reset on trigger record after each write",
+   "Status": "Active",
+   "Trigger - Type": "Record Updated",
+   "Reads From": "Inventory",
+   "Description": "Fires on Inventory record update (Status, Log flag, or Subscription status fields). Creates an audit log snapshot in Inventory log, then resets the Log flag on the triggering record.",
+   "Automation - Name": "Write inventory log",
+   "Business Impact": "None"
+  }
+ },
+ {
+  "id": "recS4Ipm7Q1pg9Gcf",
+  "createdTime": "2026-03-27T11:34:55.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflYGuFLBfm51SeOE",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Low",
+   "Writes To": "Subscription Contract, Subscription",
+   "Description - MD": "# Terminate subscriptions from contract\n\nTRIGGER:\n  ENTITY: Subscription Contract\n  EVENT: Manual\n  ID: CTX.Trigger.ID\n\n## Query\nQUERY:\n  ENTITY: Subscription\n  WHERE:\n    REF.Subscription.Contract == CTX.Trigger.ID\n  OUTPUT: SYS.Query.SET.Subscriptions\n\n## Actions\nACTION 1:\n  TYPE: UPDATE\n  ENTITY: Subscription Contract\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.Terminated = TRUE\n\nACTION 2:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.Subscriptions\n  DO:\n    TYPE: UPDATE\n    ENTITY: Subscription\n    TARGET: SYS.Iteration.ID\n    SET:\n      STATE.Terminated = TRUE",
+   "Side Effects": "Bulk state change — all linked subscriptions terminated in one button press",
+   "Status": "Active",
+   "Trigger - Type": "Button Clicked",
+   "Reads From": "Subscription (linked from contract)",
+   "Description": "Button-triggered on a Subscription Contract. Marks the contract as Terminated, then iterates all linked Subscription records and marks each as Terminated.",
+   "Automation - Name": "Terminate subscriptions from contract",
+   "Idempotent": true,
+   "Business Impact": "Low"
+  }
+ },
+ {
+  "id": "recSAoo4rdBOyVpG7",
+  "createdTime": "2026-03-31T04:38:54.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflPRxinTn96Lqcjv",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "None",
+   "External Systems": "Airtable webhook endpoint (hooks.airtable.com)",
+   "Writes To": "Subscription contracts (conditional SKU-based update)",
+   "Creates Records In": "Subscription contracts (Inventory base)",
+   "Description - MD": "# DEV - Ingest contracts\n\nTRIGGER:\n  ENTITY: Inventory.Subscription contracts\n  EVENT: Webhook\n  ID: CTX.Trigger.ID\n  SOURCE: https://hooks.airtable.com/workflows/v1/genericWebhook/appRor1ipbYAb4K7z/wflPRxinTn96Lqcjv/wtriT56UmraoFgbaQ\n\nACTIONS:\n\nACTION 1:\n  TYPE: CREATE\n  ENTITY: Inventory.Subscription contracts\n  TARGET: NEW\n  SET:\n    DATA.REF.CUSTOMER.Primary = CTX.Trigger.body.fields.Customer\n    DATA.REF.SERVICE.Primary = CTX.Trigger.body.fields.Service\n    DATA.REF.SUBSCRIPTION_TYPE.Primary = CTX.Trigger.body.subscriptionType\n    DATA.REF.BOM_RESOURCE.RecordID = CTX.Trigger.body.fields.Record ID\n    DATA.VALUE.CURRENCY.Primary = CTX.Trigger.body.fields.Quote - Currency\n    DATA.VALUE.INVOICE_FREQUENCY.Primary = CTX.Trigger.body.fields.Hubspot - Billing frequency\n    DATA.VALUE.PRICE_MONTH.Primary = CTX.Trigger.body.fields.Unity price\n  OUTPUT:\n    SYS.Action.CREATE.RecordID = Airtable record ID of ACTION 1\n\nACTION 2:\n  TYPE: UPDATE\n  ENTITY: Inventory.Subscription contracts\n  TARGET: SYS.Action.CREATE.RecordID\n  WHEN:\n    CTX.Trigger.body.fields.SKU == \"SKU-0135\"\n  SET:\n    DATA.VALUE.PRICING_BASIS.Primary = \"Per unit\"\n\nACTION 3:\n  TYPE: UPDATE\n  ENTITY: Inventory.Subscription contracts\n  TARGET: SYS.Action.CREATE.RecordID\n  WHEN:\n    CTX.Trigger.body.fields.SKU == \"SKU-0177\"\n  SET:\n    DATA.VALUE.PRICING_BASIS.Primary = \"Per location\"",
+   "Side Effects": "Pricing basis silently set based on SKU with no validation or notification",
+   "Status": "Draft",
+   "Trigger - Type": "Webhook",
+   "Reads From": "Webhook payload (external)",
+   "Description": "Webhook-triggered (Draft). Creates a Subscription contract record from webhook payload, then conditionally sets pricing basis to Per unit or Per location based on SKU value.",
+   "Automation - Name": "Dev - Ingest contracts",
+   "Business Impact": "Low"
+  }
+ },
+ {
+  "id": "recSezihkE6cJa21b",
+  "createdTime": "2026-04-01T07:15:30.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Assign ticket compensation - From trigger"
+  }
+ },
+ {
+  "id": "recTK2ZsSZo9akS4O",
+  "createdTime": "2026-04-01T04:45:20.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflaU1S3GUrJHUfRD",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "DEV - Link contract to corresponding Master BOM item"
+  }
+ },
+ {
+  "id": "recToxN4Ad2CWOwu3",
+  "createdTime": "2026-04-01T05:52:16.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflSSIGp06h7fTI94",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Create delivery note from image"
+  }
+ },
+ {
+  "id": "recU6MJQfqoOaZkla",
+  "createdTime": "2026-04-01T05:52:18.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfl2jYQflf610Wpms",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Inventory availability - Installed SNs added to Job"
+  }
+ },
+ {
+  "id": "recUG8ERKdz3MTpS3",
+  "createdTime": "2026-04-01T04:47:09.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfl1h5RlE4FbGPMWj",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "GP - Jobs - Installation - Tasks"
+  }
+ },
+ {
+  "id": "recUacwihlBomkRdB",
+  "createdTime": "2026-04-01T06:48:00.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Ingest - Freshdesk - Create ticket"
+  }
+ },
+ {
+  "id": "recYSG3wSZktRw2hL",
+  "createdTime": "2026-03-31T05:55:20.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflzWWNSCGdhtHrbv",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "High",
+   "External Systems": "Slack (notification on missing contract start date)",
+   "Writes To": "Inventory (moves and clears Subscription contract - Add new staging link)",
+   "Creates Records In": "Subscriptions (on success path)",
+   "Description - MD": "# Create subscription\n\nTRIGGER:\n  ENTITY: Inventory\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  CONDITION:\n    REF.Inventory.Subscription contract - Add new IS NOT EMPTY\n\nQUERY 1:\n  ENTITY: Subscription contracts\n  WHERE:\n    REF.Subscription contracts.Inventory - Subscription contract - Add new CONTAINS CTX.Trigger.ID\n  OUTPUT: SYS.Query.SET.ExistingContracts\n\nQUERY 2:\n  ENTITY: Subscriptions\n  WHERE:\n    REF.Subscriptions.Subscription contract == REF.CTX.Trigger.Subscription contract - Add new\n    AND DATA.Subscriptions.ID CONTAINS CTX.Trigger.ID\n  OUTPUT: SYS.Query.SET.ExistingSubscriptions\n\nACTION GROUP 1:\n  IF:\n    SYS.Query.SET.ExistingContracts.ListOfStartDate IS EMPTY\n  THEN:\n    TYPE: NOTIFY\n    CHANNEL: Slack\n\nACTION GROUP 2:\n  ELSE IF:\n    SYS.Query.SET.ExistingContracts.ListOfStartDate IS NOT EMPTY\n    AND DATA.CTX.Trigger.Player == \"Yes\"\n    AND COUNT(SYS.Query.SET.ExistingSubscriptions) == 0\n    AND REF.CTX.Trigger.Subscription contract - Add new IS NOT EMPTY\n    AND STATE.CTX.Trigger.Spare == FALSE\n  THEN:\n\n    ACTION 2.1:\n      TYPE: CREATE\n      ENTITY: Subscriptions\n      SET:\n        REF.Subscriptions.Inventory = CTX.Trigger.ID\n        DATA.Subscriptions.Start date = SYS.Query.SET.ExistingContracts.ListOfStartDate\n        REF.Subscriptions.Subscription contract = REF.CTX.Trigger.Subscription contract - Add new\n\n    ACTION 2.2:\n      TYPE: UPDATE\n      ENTITY: Inventory\n      TARGET: CTX.Trigger.ID\n      SET:\n        REF.Inventory.Subscription contract = REF.CTX.Trigger.Subscription contract - Add new + REF.CTX.Trigger.Subscription contract\n        REF.Inventory.Subscription contract - Add new = EMPTY\n\nACTION GROUP 3:\n  ELSE:\n    TYPE: UPDATE\n    ENTITY: Inventory\n    TARGET: CTX.Trigger.ID\n    SET:\n      REF.Inventory.Subscription contract - Add new = EMPTY\n---\nCritical mechanics\n- `Subscription contract - Add new` acts as a temporary staging link, not as durable state.\n- Subscription creation is restricted to non-spare inventory explicitly marked as player inventory.\n- Existing subscription detection prevents duplicate subscription creation for the same inventory/contract pairing, but the current implementation relies on ID-pattern logic rather than pure relational matching.\n- The staging link is cleared in both success and failure branches, making the process self-resetting but also destructive for troubleshooting.\n",
+   "Side Effects": "Staging link Subscription contract - Add new is destructively cleared in all branches, including failure",
+   "Status": "Active",
+   "Trigger - Type": "Record matches condition",
+   "Reads From": "Inventory, Subscription contracts, Subscriptions",
+   "Description": "Fires when Inventory record's Subscription contract - Add new staging field is populated. Validates contract has a start date, checks inventory is a non-spare player device with no existing subscription, creates the Subscription record, moves the contract link to the permanent field, and clears the staging link in all branches.",
+   "Automation - Name": "Create subscription",
+   "Business Impact": "High"
+  }
+ },
+ {
+  "id": "recYhlRxzV0kFsQxG",
+  "createdTime": "2026-04-01T04:45:54.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflwUYiFyi9982B9Z",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "DEV - Link Job BOM item to Master BOM item"
+  }
+ },
+ {
+  "id": "recZ2sKPTmWNyZP7o",
+  "createdTime": "2026-04-01T07:16:55.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Mail - Helpdesk on \"Close\" - RD"
+  }
+ },
+ {
+  "id": "reca6FxGKVHTBXJjv",
+  "createdTime": "2026-04-01T04:47:01.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflOPEPm3UesQF7bU",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Create MA jobs - Ma Jobs"
+  }
+ },
+ {
+  "id": "recaZco66IHLBDwqI",
+  "createdTime": "2026-04-01T06:51:13.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Write log / Send  Slack - Status change"
+  }
+ },
+ {
+  "id": "recahzNzZsRpfKsVu",
+  "createdTime": "2026-04-01T04:46:09.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflnPHfyND6q0b4Ij",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Write schedule log"
+  }
+ },
+ {
+  "id": "recbJoa2wPGPvWrn5",
+  "createdTime": "2026-03-31T11:02:51.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflcJirUna4nds4WY",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Medium",
+   "Writes To": "Subscription contracts (trigger flag, linked contract ref), Inventory (sets staging link on active records)",
+   "Creates Records In": "Subscription contracts",
+   "Description - MD": "# Copy subscription contract\n\nTRIGGER:\n  ENTITY: Subscription contracts\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  SOURCE:\n    UI.Interface = \"Contract detail pane\"\n    UI.Action = \"Button sets Trigger - Renew contract = TRUE\"\n  CONDITION:\n    STATE.Subscription contracts.Trigger - Renew contract == TRUE\n\nACTION 1:\n  TYPE: SCRIPT\n  ENTITY: Subscription contracts\n  TARGET: CTX.Trigger.ID\n  OUTPUT: SYS.Script.newDate\n  LOGIC:\n    - Read End date from triggering record\n    - Add 1 day\n    - Format as YYYY-MM-DD\n    - Output SYS.Script.newDate\n\nACTION 2:\n  TYPE: CREATE\n  ENTITY: Subscription contracts\n  OUTPUT: SYS.Create.ID.NewContract\n  SET:\n    REF.Subscription contracts.Customer = REF.CTX.Trigger.Customer\n    DATA.Subscription contracts.Service = DATA.CTX.Trigger.Service\n    REF.Subscription contracts.Subscription type = REF.CTX.Trigger.Subscription type\n    DATA.Subscription contracts.Bill type = DATA.CTX.Trigger.Bill type\n    DATA.Subscription contracts.Payment method = DATA.CTX.Trigger.Payment method\n    DATA.Subscription contracts.Invoice frequency = DATA.CTX.Trigger.Invoice frequency\n    DATA.Subscription contracts.PPU/month = DATA.CTX.Trigger.PPU/month\n    DATA.Subscription contracts.PPL/month = DATA.CTX.Trigger.PPL/month\n    DATA.Subscription contracts.Currency = DATA.CTX.Trigger.Currency\n    DATA.Subscription contracts.Start date = SYS.Script.newDate\n    REF.Subscription contracts.Linked contracts = CTX.Trigger.ID\n    REF.Subscription contracts.Sales = REF.CTX.Trigger.Sales\n\nACTION 3:\n  TYPE: UPDATE\n  ENTITY: Subscription contracts\n  TARGET: CTX.Trigger.ID\n  SET:\n    REF.Subscription contracts.Linked contracts = SYS.Create.ID.NewContract\n    STATE.Subscription contracts.Trigger - Renew contract = FALSE\n\nQUERY 1:\n  ENTITY: Inventory\n  WHERE:\n    REF.Inventory.Subscription contract CONTAINS CTX.Trigger.ID\n    AND STATE.Inventory.Subscription - Status != \"Terminated\"\n  OUTPUT: SYS.Query.SET.ActiveInventoryOnOldContract\n\nACTION 4:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.ActiveInventoryOnOldContract\n  DO:\n    TYPE: UPDATE\n    ENTITY: Inventory\n    TARGET: SYS.Iteration.ID\n    SET:\n      REF.Inventory.Subscription contract - Add new = SYS.Create.ID.NewContract\n\nSIDE EFFECT:\n  ACTION 4 triggers automation:\n    \"Create subscription record\"\n\nCritical mechanics\n- Renewal is initiated only by explicit trigger flag on the source contract.\n- Successor contract start date is derived as source End date + 1 day.\n- Only non-terminated inventory linked to the source contract is rolled forward.\n- Inventory reassignment does not directly create subscriptions; it triggers downstream automation through `Subscription contract - Add new`.\n- Renewal completeness depends on every commercially relevant field being copied during contract creation.\n",
+   "Side Effects": "Triggers Create subscription record on all non-terminated inventory via staging link write; re-trigger creates a duplicate successor contract",
+   "Status": "Active",
+   "Trigger - Type": "Record matches condition",
+   "Reads From": "Subscription contracts, Inventory",
+   "Description": "Fires when Trigger - Renew contract flag is set on a Subscription Contract. Calculates successor start date (end date + 1 day), creates a new contract copying all commercial fields, links both contracts bidirectionally, then stages the new contract on all non-terminated inventory linked to the original (triggering downstream subscription creation).",
+   "Automation - Name": "Copy subscription contract",
+   "Business Impact": "High"
+  }
+ },
+ {
+  "id": "recbkje1vn6QtFHsU",
+  "createdTime": "2026-04-01T04:45:28.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfl5OR5tv0oPPJAym",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "DEV - Create Job/Job BOM from Quote"
+  }
+ },
+ {
+  "id": "reccj4S4jXBjRtIgj",
+  "createdTime": "2026-04-01T07:15:24.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Assign ticket compensation"
+  }
+ },
+ {
+  "id": "recclI3YU9TDloS9d",
+  "createdTime": "2026-03-31T08:46:03.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfll80Dv1Xvb1pS07",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Low",
+   "Deletes Records In": "Scan - Line items (all records, unscoped)",
+   "Description - MD": "# Scan - Clear scanned list\nTRIGGER:\n  ENTITY: Scan - Input\n  EVENT: Manual\n  ID: CTX.Trigger.ID\n  SOURCE:\n    UI.Interface = \"Admin / Scan\"\n    UI.Button = \"Clear list\"\n\nQUERY 1:\n  ENTITY: Scan - Line items\n  WHERE:\n    TRUE\n  OUTPUT: SYS.Query.SET.AllScanLineItems\n# Scan - Clear scanned list\nACTION 1:\n  TYPE: ITERATE\n  OVER: SYS.Query.SET.AllScanLineItems\n  DO:\n    TYPE: DELETE\n    TARGET: SYS.Iteration.ID",
+   "Side Effects": "Global delete not scoped to triggering Scan - Input record",
+   "Status": "Active",
+   "Trigger - Type": "Button Clicked",
+   "Reads From": "Scan - Line items",
+   "Description": "Button-triggered from Admin/Scan interface. Queries ALL Scan - Line items records (unscoped) and deletes every one.",
+   "Automation - Name": "Scan - Clear scanned list",
+   "Idempotent": true,
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "reccwS1ywztsi0n37",
+  "createdTime": "2026-04-01T04:26:12.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflH8RMNifoYw6zgA",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Description - MD": "# DEV - Job reports - Auto-generate\n\nTRIGGER:\n  ENTITY: Jobs\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  WHERE:\n    STATE.FIELD.Status == \"Done\"\n    AND STATE.FIELD.ImagesInstallation EXISTS\n    AND STATE.FIELD.CloseJobSN EXISTS\n    AND STATE.FIELD.JobType IN [\"Installation\", \"Rework\"]\n\nACTION 1:\n  TYPE: UPDATE\n  ENTITY: External.Slack\n  TARGET: REF.Jobs.AssignedTo.Email\n  SET:\n    META.Message = \"Job report is now available\"\n\nACTION 2:\n  TYPE: CONDITIONAL\n  ENTITY: Jobs\n  TARGET: CTX.Trigger.ID\n  WHEN:\n    REF.Jobs.Brand CONTAINS \"KFC\"\n  DO:\n    TYPE: CREATE\n    ENTITY: External.DocsAutomator.DocumentRequest\n    TARGET: CTX.Trigger.ID\n    SET:\n      META.Endpoint = \"https://api.docsautomator.co/api/createDocument\"\n      META.Method = \"POST\"\n      META.Headers.content-type = \"application/json\"\n      META.Headers.x-api-key = \"<redacted>\"\n      REF.External.RecordID = CTX.Trigger.ID\n      REF.External.DocumentTemplateID = \"65c5b088ddb669b63333ffc5\"\n      META.Async = TRUE\n      META.TemplateName = \"GP/TEM-004 - Job report - Installation\"",
+   "Trigger - Type": "Record matches condition",
+   "Description": "Fires when a Job reaches Done status with installation images, SN, and job type of Installation or Rework. Sends a Slack notification to the assigned user, then conditionally calls DocsAutomator API to generate a PDF job report (KFC brand only).",
+   "Automation - Name": "DEV - Job reports - Auto-generate"
+  }
+ },
+ {
+  "id": "recdOQbKZHX3b55iE",
+  "createdTime": "2026-04-01T05:09:00.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflP7jVHqgTJhbymI",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "FS - Installation - Best Buy - Close job"
+  }
+ },
+ {
+  "id": "recdudBp4uW9WJ0nY",
+  "createdTime": "2026-04-01T05:09:08.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflVIitLoi2cS5ffJ",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "FS - Installation - KFC - Close job"
+  }
+ },
+ {
+  "id": "recfD2bw1gelqsLus",
+  "createdTime": "2026-03-31T11:11:07.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflMoRQSGmOtqaRwc",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "None",
+   "Writes To": "Inventory (sets Uniqlo - Location changed flag)",
+   "Description - MD": "# Uniqlo - Location changed\n\nTRIGGER:\n  ENTITY: Inventory\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  SOURCE:\n    VIEW = \"Uniqly - Location changed\"\n  CONDITION:\n    DATA.Inventory.Location - Installation CHANGED\n\nACTION 1:\n  TYPE: UPDATE\n  ENTITY: Inventory\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.Inventory.Uniqlo - Location changed = TRUE\n\nCritical mechanics\n- Trigger scope is restricted by view membership plus change of `Location - Installation`.\n- The automation does not compare old versus new installation location values.\n- The resulting flag is write-only in this flow and must be reset elsewhere if reversible behavior is required.",
+   "Side Effects": "Flag has no reset mechanism in this automation",
+   "Status": "Active",
+   "Trigger - Type": "Record Updated",
+   "Reads From": "Inventory (view-filtered)",
+   "Description": "Fires on Inventory record update within the Uniqly - Location changed view when Location - Installation changes. Sets a flag Uniqlo - Location changed = TRUE on the record. Flag has no reset in this automation.",
+   "Automation - Name": "Uniqlo - Location changed",
+   "Business Impact": "None"
+  }
+ },
+ {
+  "id": "recfeWDnY8XZ7rqGw",
+  "createdTime": "2026-04-01T04:47:10.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfl7TBX9yH1KV5QtD",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Interface - Button - Create WO PDF"
+  }
+ },
+ {
+  "id": "recff82Tm8iyXyQPV",
+  "createdTime": "2026-04-01T05:03:23.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflKrZ6ig0r96M4NV",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Interface - Button - Generate Esign Delivery note"
+  }
+ },
+ {
+  "id": "recgCag1wZoTBECEQ",
+  "createdTime": "2026-03-31T12:15:46.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfl3MhVWITaKix6QN",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Medium",
+   "External Systems": "Airtable webhook endpoint (hooks.airtable.com)",
+   "Writes To": "Inventory (Status, installation date, location, subscription contract link)",
+   "Description - MD": "# Ingest SNs - Delivery\n\nTRIGGER:\n  ENTITY: Webhook\n  EVENT: Create\n  SOURCE:\n    URL = \"https://hooks.airtable.com/workflows/v1/genericWebhook/appRor1ipbYAb4K7z/wfl3MhVWITaKix6QN/wtraIp2bxQBVbxVLV\"\n\nACTION 1:\n  TYPE: SCRIPT\n  OUTPUT: SYS.Script.SnNormalised\n  LOGIC:\n    - Split CTX.Webhook.Body.SNs by \",\"\n    - Trim whitespace\n    - If length == 15, trim to first 14 characters\n    - Output array SYS.Script.SnNormalised\n\nACTION 2:\n  TYPE: ITERATE\n  OVER: SYS.Script.SnNormalised\n  DO:\n\n    QUERY:\n      ENTITY: Inventory\n      WHERE:\n        DATA.Inventory.ID CONTAINS SYS.Iteration.Value\n      OUTPUT: SYS.Query.SET.InventoryMatch\n\n    ACTION:\n      TYPE: ITERATE\n      OVER: SYS.Query.SET.InventoryMatch\n      DO:\n        TYPE: UPDATE\n        ENTITY: Inventory\n        TARGET: SYS.Iteration.ID\n        SET:\n          STATE.Inventory.Status = \"Delivered\"\n          DATA.Inventory.Installation date = CTX.Webhook.Body.fields.Date - Actual\n          REF.Inventory.Location - Stock = EMPTY\n          REF.Inventory.Location - Installation = CTX.Webhook.Body.fields.Location\n          REF.Inventory.Subscription contract - Add new = CTX.Webhook.Body.fields.Subscription - Contract\n\nSIDE EFFECT:\n  Updating `Subscription contract - Add new` triggers automation:\n    \"Create subscription record\"",
+   "Side Effects": "Updating Subscription contract - Add new triggers downstream automation: Create subscription record",
+   "Status": "Active",
+   "Trigger - Type": "Webhook",
+   "Reads From": "Inventory",
+   "Description": "Webhook-triggered. Same SN normalization and matching logic as Ingest SNs - Installation, but sets status to Delivered instead of Installed.",
+   "Automation - Name": "Ingest SNs - Delivery",
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "recgCnUx2g6yH6Hii",
+  "createdTime": "2026-04-01T05:04:32.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflxtEuUdQo3TSI4p",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "House keeping - Clear unlinked logs"
+  }
+ },
+ {
+  "id": "rechQebHZqINfkHXy",
+  "createdTime": "2026-04-01T07:17:00.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Mail - Helpdesk on \"Close\" - CRG"
+  }
+ },
+ {
+  "id": "rechiLoZOux7K6Vkt",
+  "createdTime": "2026-04-01T07:14:53.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Assign SLA"
+  }
+ },
+ {
+  "id": "reciOVJOpL50WnnIs",
+  "createdTime": "2026-03-31T12:10:07.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfli2h0Tnt6I56dSM",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Medium",
+   "External Systems": "Airtable webhook endpoint (hooks.airtable.com)",
+   "Writes To": "Inventory (Status = Incomplete, installation date, location, subscription contract link)",
+   "Description - MD": "# Ingest SNs - Installation - Incident\n\nTRIGGER:\n  ENTITY: Webhook\n  EVENT: Create\n  SOURCE:\n    URL = \"https://hooks.airtable.com/workflows/v1/genericWebhook/appRor1ipbYAb4K7z/wfli2h0Tnt6I56dSM/wtrpYp78cqxTY62NU\"\n\nACTION 1:\n  TYPE: SCRIPT\n  OUTPUT: SYS.Script.SnNormalised\n  LOGIC:\n    - Split CTX.Webhook.Body.SNs by \",\"\n    - Trim whitespace\n    - If length == 15, trim to first 14 characters\n    - Output array SYS.Script.SnNormalised\n\nACTION 2:\n  TYPE: ITERATE\n  OVER: SYS.Script.SnNormalised\n  DO:\n\n    QUERY:\n      ENTITY: Inventory\n      WHERE:\n        DATA.Inventory.ID CONTAINS SYS.Iteration.Value\n      OUTPUT: SYS.Query.SET.InventoryMatch\n\n    ACTION:\n      TYPE: ITERATE\n      OVER: SYS.Query.SET.InventoryMatch\n      DO:\n        TYPE: UPDATE\n        ENTITY: Inventory\n        TARGET: SYS.Iteration.ID\n        SET:\n          STATE.Inventory.Status = \"Incomplete\"\n          DATA.Inventory.Installation date = CTX.Webhook.Body.fields.Date - Actual\n          REF.Inventory.Location - Stock = EMPTY\n          REF.Inventory.Location - Installation = CTX.Webhook.Body.fields.Location\n          REF.Inventory.Subscription contract - Add new = CTX.Webhook.Body.fields.Subscription - Contract\n\nSIDE EFFECT:\n  Updating `Subscription contract - Add new` triggers automation:\n    \"Create subscription record\"",
+   "Side Effects": "Updating Subscription contract - Add new triggers downstream automation: Create subscription record",
+   "Status": "Active",
+   "Trigger - Type": "Webhook",
+   "Reads From": "Inventory",
+   "Description": "Webhook-triggered. Same SN normalization and matching logic as Ingest SNs - Installation, but sets status to Incomplete instead of Installed.",
+   "Automation - Name": "Ingest SNs - Installation - Incident",
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "reciWHyxCOkhHpizZ",
+  "createdTime": "2026-04-01T06:45:44.000Z",
+  "fields": {
+   "Base - Name": "Data",
+   "Automation - URL": "https://airtable.com/app8H7IMW8gHyQzzn/wflwsn9jgLz9jQonk",
+   "Base - ID": "app8H7IMW8gHyQzzn",
+   "Description - MD": "# DEV - Hydrate HS Quotes\n\nTRIGGER:\n  ENTITY: HS - Quotes\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  WHERE:\n    STATE.Trigger == TRUE\n\nACTION 1:\n  TYPE: SCRIPT\n  ENTITY: HS - Quotes\n  TARGET: CTX.Trigger.ID\n  INPUT:\n    META.Quote.ID = REF.HS - Quotes.Quote ID\n    META.Record.ID = CTX.Trigger.ID\n    META.Secret.Token = SYS.Secret.HS - Quote - Hydrate\n  DO:\n    STEP 1: DELETE all Quote - Line Items WHERE REF.Quote - Line Items.HS - Quotes == CTX.Trigger.ID\n    STEP 2: FETCH Quote from HubSpot using META.Quote.ID\n    STEP 3: RESOLVE associated Deal, Contact, Company, and Line Item IDs from fetched Quote\n    STEP 4: IF Deal exists, FETCH Deal and derive:\n      - META.Deal.Name\n      - META.Deal.Service\n      - fallback Contact ID\n      - fallback Company ID\n    STEP 5: IF Contact exists, FETCH Contact and derive:\n      - META.Contact.Name\n      - META.Contact.Email\n    STEP 6: IF Company exists, FETCH Company and derive:\n      - META.Company.Name\n      - META.Company.Address\n      - META.Company.City\n      - META.Company.Zip\n      - META.Company.Country\n    STEP 7: IF Quote Owner exists, FETCH Owner and derive:\n      - META.Owner.Name\n      - META.Owner.Email\n    STEP 8: UPDATE HS - Quotes TARGET CTX.Trigger.ID SET:\n      STATE.Status = META.Quote.hs_status\n      DATA.Currency = META.Quote.hs_currency\n      DATA.PublicQuoteURL = META.Quote.hs_quote_link\n      DATA.DealName = META.Deal.Name\n      DATA.Service = META.Deal.Service\n      DATA.CustomerName = META.Contact.Name\n      DATA.CustomerEmail = META.Contact.Email\n      DATA.CompanyName = META.Company.Name\n      DATA.BillingStreet = META.Company.Address\n      DATA.BillingCity = META.Company.City\n      DATA.BillingZipCode = META.Company.Zip\n      DATA.BillingCountry = META.Company.Country\n      DATA.ContractStartDate = META.Quote.hs_contract_effective_start_date\n      DATA.TemplateType = META.Quote.hs_template_type\n      DATA.QuoteNumber = META.Quote.hs_quote_number\n      DATA.QuoteTitle = META.Quote.hs_title\n      DATA.TermsAndConditions = META.Quote.hs_terms\n      REF.QuoteOwner.ID = META.Quote.hubspot_owner_id\n      DATA.QuoteOwnerName = META.Owner.Name\n      DATA.QuoteOwnerEmail = META.Owner.Email\n    STEP 9: ITERATE over associated Line Items\n      FOR EACH SYS.Iteration.LineItemID:\n        FETCH HubSpot Line Item\n        IF properties exist:\n          CREATE Quote - Line Items SET:\n            DATA.ItemName = META.LineItem.name\n            DATA.SKU = META.LineItem.hs_sku\n            DATA.Quantity = NUM(META.LineItem.quantity)\n            DATA.UnitPrice = NUM(META.LineItem.price)\n            DATA.TermTotal = NUM(META.LineItem.amount)\n            REF.HS - Quotes = CTX.Trigger.ID\n            DATA.Tax = NUM(META.LineItem.tax)\n            DATA.DurationFoC = META.LineItem.foc_duration\n            DATA.Duration = META.LineItem.duration\n            DATA.BillingStartDate = META.LineItem.hs_recurring_billing_start_date\n            DATA.BillingFrequency = META.LineItem.recurringbillingfrequency\n            DATA.RecurringBillingTerms = META.LineItem.hs_recurring_billing_terms\n            DATA.NumberOfPayments = META.LineItem.hs_recurring_billing_number_of_payments\n\nACTION 2:\n  TYPE: UPDATE\n  ENTITY: HS - Quotes\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.sys_line_items_created = TRUE",
+   "Trigger - Type": "Record matches condition",
+   "Description": "Fires when Trigger flag is set on an HS - Quotes record. Script fetches full quote data from HubSpot API (deal, contact, company, owner, line items), deletes existing Quote - Line Items, updates the HS - Quotes record with all fetched fields, and recreates line item records.",
+   "Automation - Name": "DEV - Hydrate HS Quotes"
+  }
+ },
+ {
+  "id": "reciY1yRxE2f6aHL8",
+  "createdTime": "2026-04-01T06:50:51.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Set timestamp on \"Resolve\""
+  }
+ },
+ {
+  "id": "recixDbLa0dbLBcuQ",
+  "createdTime": "2026-04-01T06:46:37.000Z",
+  "fields": {
+   "Base - Name": "Data",
+   "Automation - URL": "https://airtable.com/app8H7IMW8gHyQzzn/wflqUjw8vikw9cTtU",
+   "Base - ID": "app8H7IMW8gHyQzzn",
+   "Automation - Name": "Subscriptions - Assign time segment"
+  }
+ },
+ {
+  "id": "recjPTauZfgOAcW8i",
+  "createdTime": "2026-04-01T05:09:09.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflO3zgLqJdbxi3Xf",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Send mail - Ma schedule"
+  }
+ },
+ {
+  "id": "recmzeQRsNMxRStqJ",
+  "createdTime": "2026-03-31T07:41:12.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfli5kGUSebdGyZIN",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "Low",
+   "Writes To": "Scan - Input (clears Scan field)",
+   "Creates Records In": "Scan - Line items",
+   "Description - MD": "# Scan - Process input\n\nTRIGGER:\n  ENTITY: Scan - Input\n  EVENT: Manual\n  ID: CTX.Trigger.ID\n  SOURCE:\n    - UI.Interface: Scan - Input\n      UI.Button: Process scans\n    - UI.Interface: Admin/Scan\n      UI.Button: Process\n\nACTION 1:\n  TYPE: SCRIPT\n  ENTITY: Scan - Input\n  TARGET: CTX.Trigger.ID\n  INPUT:\n    CTX.Trigger.Field.Scan\n  OUTPUT:\n    SYS.Script.SET.SnNormalised\n  LOGIC:\n    - Read input value from field: Scan\n    - Convert value to string\n    - Trim leading and trailing whitespace\n    - Split by line breaks\n    - Trim each line item\n    - Remove empty items\n    - Return normalized list as SYS.Script.SET.SnNormalised\n\nACTION 2:\n  TYPE: UPDATE\n  ENTITY: Scan - Input\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.Scan = EMPTY\n\nACTION 3:\n  TYPE: ITERATE\n  OVER: SYS.Script.SET.SnNormalised\n  DO:\n\n    QUERY 1:\n      ENTITY: Inventory\n      WHERE:\n        STATE.SN == SYS.Iteration.Value\n        OR STATE.MACAddress == SYS.Iteration.Value\n        OR STATE.InternalID == SYS.Iteration.Value\n      OUTPUT: SYS.Query.SET.InventoryMatch\n\n    ACTION 3.1:\n      TYPE: CREATE\n      ENTITY: Scan - Line items\n      SET:\n        STATE.ScannedBy = CTX.Trigger.User.Email\n        STATE.Type = \"Action\"\n        REF.ScanInput = CTX.Trigger.ID\n        REF.Inventory = SYS.Query.SET.InventoryMatch\n        STATE.Scan = SYS.Iteration.Value\n\n----\n\nExecution scope\n- One manual trigger processes one Scan - Input record.\n- The script converts the Scan field into a runtime set of non-empty line items.\n- The Scan field is cleared immediately after extraction.\n- Each extracted value is processed independently.\n- Each value is matched against Inventory using three identifiers:\n  - SN\n  - MAC address\n  - ID - Internal\n- One Scan - Line items record is created per processed value.\n\n---\n\nDeterministic effect\n- Input scan batch is consumed from Scan - Input.\n- Source input is reset to empty after extraction.\n- Processing output is persisted as atomic scan log rows in Scan - Line items.\n- Inventory linkage depends entirely on query match result for the current iteration value.",
+   "Side Effects": "Scan field destructively cleared immediately after script extraction — input is not recoverable post-trigger",
+   "Status": "Active",
+   "Trigger - Type": "Button Clicked",
+   "Reads From": "Scan - Input, Inventory",
+   "Description": "Button-triggered. Reads the Scan field from a Scan - Input record, normalizes and splits into individual values, clears the Scan field, then for each value queries Inventory by SN/MAC/Internal ID and creates a Scan - Line items record.",
+   "Automation - Name": "Scan - Process input",
+   "Business Impact": "Medium"
+  }
+ },
+ {
+  "id": "recoqMMf7dAvog3CQ",
+  "createdTime": "2026-04-01T06:46:48.000Z",
+  "fields": {
+   "Base - Name": "Data",
+   "Automation - URL": "https://airtable.com/app8H7IMW8gHyQzzn/wflUXV7YjUelVSGPk",
+   "Base - ID": "app8H7IMW8gHyQzzn",
+   "Automation - Name": "GET Request for Employees List from Workable"
+  }
+ },
+ {
+  "id": "recpDuKnjEBwIsg9Z",
+  "createdTime": "2026-04-01T02:59:40.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wfl5N8tRuC2awLldK",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Description - MD": "# DEV - Create Quote from HS\n\nTRIGGER:\n  ENTITY: HS - Quotes\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  WHERE:\n    STATE.FIELD.TriggerCreateQuote == TRUE\n    AND STATE.FIELD.SysQuoteRequestSent == FALSE\n    AND REF.HSQuotes.Quotes NOT EXISTS\n\nACTION 1:\n  TYPE: CREATE\n  ENTITY: Quotes\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.FIELD.Quote = REF.HSQuotes.QuoteNumber\n    STATE.FIELD.Stage = \"Created\"\n    STATE.FIELD.Status = \"In progress\"\n    STATE.FIELD.DealName = REF.HSQuotes.DealName\n    STATE.FIELD.Currency = REF.HSQuotes.Currency\n    STATE.FIELD.LocationScopeQuantity = REF.HSQuotes.Locations\n    STATE.FIELD.CustomerFromHubSpot = REF.HSQuotes.CompanyName\n    REF.HSQuotes = CTX.Trigger.ID\n    STATE.FIELD.Source = \"HubSpot\"\n    STATE.FIELD.QuoteTitle = REF.HSQuotes.QuoteTitle\n    STATE.FIELD.Service = REF.HSQuotes.ServiceNormalised\n    STATE.FIELD.Notes = \"Yves: Test\"\n    STATE.FIELD.QuoteOwnerEmail = REF.HSQuotes.QuoteOwnerEmail\n    STATE.FIELD.QuoteOwnerName = REF.HSQuotes.QuoteOwnerName\n    STATE.FIELD.HSPublicURL = REF.HSQuotes.PublicQuoteURL\n\nACTION 2:\n  TYPE: UPDATE\n  ENTITY: HS - Quotes\n  TARGET: CTX.Trigger.ID\n  SET:\n    STATE.FIELD.SysQuoteRequestSent = TRUE",
+   "Trigger - Type": "Record matches condition",
+   "Description": "Fires when TriggerCreateQuote is TRUE, SysQuoteRequestSent is FALSE, and no Quote is linked. Creates a Quote record populated from the HS - Quotes fields, then marks SysQuoteRequestSent = TRUE to prevent re-triggering.",
+   "Automation - Name": "DEV - Create Quote from HS"
+  }
+ },
+ {
+  "id": "recrNc9DC8tdCcwjo",
+  "createdTime": "2026-04-01T04:46:18.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflsW0LoP8zU6XBzv",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Send job SN to Inventory"
+  }
+ },
+ {
+  "id": "recrntDWW4qAtYlHt",
+  "createdTime": "2026-03-31T11:15:58.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wflA9CZSW50Roff9D",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "None",
+   "Writes To": "Subscriptions (termination timestamp)",
+   "Description - MD": "# Set timestamp on \"Terminated\"\n\nTRIGGER:\n  ENTITY: Subscriptions\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  CONDITION:\n    STATE.Subscriptions.Status == \"Terminated\"\n\nACTION 1:\n  TYPE: UPDATE\n  ENTITY: Subscriptions\n  TARGET: CTX.Trigger.ID\n  SET:\n    DATA.Subscriptions.Last modified - Status - Terminated = SYS.Timestamp.Now\n\n",
+   "Status": "Active",
+   "Trigger - Type": "Record matches condition",
+   "Reads From": "Subscriptions (trigger record)",
+   "Description": "Fires when a Subscription record's status changes to Terminated. Writes the current timestamp to the Last modified - Status - Terminated field.",
+   "Automation - Name": "Set timestamp on \"Terminate\"",
+   "Idempotent": true,
+   "Business Impact": "None"
+  }
+ },
+ {
+  "id": "recrsCtGpAHE0Ef8F",
+  "createdTime": "2026-04-01T07:15:35.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Notify - Pagem - Mail"
+  }
+ },
+ {
+  "id": "rectSHdWFU0uq0zdf",
+  "createdTime": "2026-04-01T06:50:27.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Ingest - Freshdesk - Update ticket"
+  }
+ },
+ {
+  "id": "rectiwYltH2zxF1go",
+  "createdTime": "2026-04-01T07:15:56.000Z",
+  "fields": {
+   "Base - Name": "Tickets",
+   "Automation - Name": "Ingest - Freshdesk - Delete ticket"
+  }
+ },
+ {
+  "id": "recwZ7h26RBR3YM2U",
+  "createdTime": "2026-03-31T05:55:00.000Z",
+  "fields": {
+   "Base - Name": "Inventory",
+   "Automation - URL": "https://airtable.com/appRor1ipbYAb4K7z/wfluFWFSs9KEKNtmR",
+   "Base - ID": "appRor1ipbYAb4K7z",
+   "Race Condition Risk": "None",
+   "External Systems": "Slack",
+   "Writes To": "Import inventory (sets IMPORTED or DUPLICATE flag, resets trigger flag)",
+   "Creates Records In": "Inventory (on no-match path)",
+   "Description - MD": "# Inventory import\n\nTRIGGER:\n  ENTITY: Inventory.Import inventory\n  EVENT: Change\n  ID: CTX.Trigger.ID\n  CONDITION:\n    CONTROL.FLAG.ImportInventory == TRUE\n\nQUERY:\n  ENTITY: Inventory.Inventory\n  WHERE:\n    DERIVED.REF.SN_NORMALISED == CTX.Trigger.FIELD.SN - Normalised\n  OUTPUT: SYS.Query.SET.InventoryMatches\n\nACTIONS:\n\nACTION 1:\n  TYPE: CONDITIONAL\n  WHEN:\n    SYS.Query.SET.InventoryMatches.LENGTH == 0\n  DO:\n\n    ACTION 1.1:\n      TYPE: CREATE\n      ENTITY: Inventory.Inventory\n      TARGET: NEW\n      SET:\n        DATA.REF.SN.Primary = CTX.Trigger.FIELD.SN\n        REF.RESOURCE.Primary = CTX.Trigger.FIELD.Device Model\n        REF.LOCATION.INSTALLATION = CTX.Trigger.FIELD.Location - Installation\n        DATA.TEXT.INSTALLATION_AREA = CTX.Trigger.FIELD.Installation area\n        REF.IMPORT.Primary = CTX.Trigger.ID\n        STATE.STATUS.Primary = CTX.Trigger.FIELD.Status\n        META.USER.IMPORTED_BY = CTX.Trigger.FIELD.Created By.RecordID\n        CONTROL.FLAG.Log = TRUE\n        REF.BRAND.PREASSIGNED = CTX.Trigger.FIELD.Brand - Pre-assigned\n\n    ACTION 1.2:\n      TYPE: UPDATE\n      ENTITY: Inventory.Import inventory\n      TARGET: CTX.Trigger.ID\n      SET:\n        STATE.FLAG.IMPORTED = TRUE\n        CONTROL.FLAG.ImportInventory = FALSE\n\nACTION 2:\n  TYPE: CONDITIONAL\n  WHEN:\n    SYS.Query.SET.InventoryMatches.LENGTH > 0\n  DO:\n\n    ACTION 2.1:\n      TYPE: UPDATE\n      ENTITY: Inventory.Import inventory\n      TARGET: CTX.Trigger.ID\n      SET:\n        STATE.FLAG.DUPLICATE = TRUE\n\n    ACTION 2.2:\n      TYPE: NOTIFY\n      ENTITY: Slack.User\n      TARGET: CTX.Trigger.FIELD.User who took action.Email\n      SET:\n        META.MESSAGE = \"SN  is already available in Inventory and has not been imported.\"",
+   "Side Effects": "Slack DM to triggering user on duplicate detection",
+   "Status": "Active",
+   "Trigger - Type": "Record matches condition",
+   "Reads From": "Import inventory, Inventory (dedup query)",
+   "Description": "Fires when ImportInventory flag is set on an Import inventory record. Checks for duplicate SN in Inventory. If no match: creates Inventory record and marks import as IMPORTED. If duplicate found: marks as DUPLICATE and sends Slack DM to the triggering user.",
+   "Automation - Name": "Import inventory",
+   "Idempotent": true,
+   "Business Impact": "None"
+  }
+ },
+ {
+  "id": "recyLu5MCOwbQ1RJI",
+  "createdTime": "2026-04-01T05:04:30.000Z",
+  "fields": {
+   "Base - Name": "Jobs",
+   "Automation - URL": "https://airtable.com/appdo1WwONYvmYMWg/wflrxk2H2RcD1mDWe",
+   "Base - ID": "appdo1WwONYvmYMWg",
+   "Automation - Name": "Send Slack - Fulfilled quotes"
+  }
+ }
+]

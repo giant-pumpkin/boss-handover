@@ -7,6 +7,7 @@ Giant Pumpkin's internal platform. **Phase 1** (Sky Chew) replaces HubSpot with 
 | Production | https://connectiq.giant-pumpkin.com |
 | Staging | https://connectiq-git-staging-giant-pumpkin.vercel.app |
 | Docs site | https://connectiq-docs.giant-pumpkin.com (strategy, architecture, model, Phase 1, Phase 2) |
+| ConnectIQ Supabase project | `zkqbmzffoimylkvyqypl` (Sky's; the prototype's `mock_cl_*` tables are sandbox copies of its `cl_*`) |
 | Repos | `giant-pumpkin/connectiq-system` (app: Bun, React 19, TanStack, Supabase Pro, Vercel, Resend), `giant-pumpkin/connectiq-docs` |
 | Builder | Claude Code since 2026-09-10 (replaced Lovable) |
 | Status 2026-10-09 | M1 Foundation, M2 Customer records, M3 Sales pipeline live; M4 Products & pricing in progress; M5–M8 to come. Nothing of Phase 2 in production. |

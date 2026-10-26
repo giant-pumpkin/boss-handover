@@ -1,0 +1,1435 @@
+[
+ {
+  "id": "rec0XWM40tjjcUFhG",
+  "createdTime": "2026-03-25T10:14:22.000Z",
+  "fields": {
+   "Table - Description": "Stores the synced line-item detail of accepted HubSpot quotes so each quoted SKU, quantity, billing parameter, and financial metric can be consumed downstream in Jobs for quote normalization, BOM creation, subscription interpretation, and operational planning.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblpZg6JsXtzkb0li",
+   "Table - Name": "Quote - Line Items",
+   "Source - Base - Name": "Data",
+   "Source - Base - ID": "app8H7IMW8gHyQzzn",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Quote - Line Items",
+   "Direction": "Inbound",
+   "Table - ID": "tbleeXRLEcGTrnwaE",
+   "Source - View ID": "viwvdj3BmPb6F2GxV",
+   "Record ID": "rec0XWM40tjjcUFhG"
+  }
+ },
+ {
+  "id": "rec1GdaKOc2Oe1hJv",
+  "createdTime": "2026-03-25T10:14:00.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblhn4CJZbi57C8WP",
+   "Table - Name": "Subscription contracts",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Sync to Monitoring",
+   "Source - Table - Name": "Subscription contracts",
+   "Direction": "Inbound",
+   "Table - ID": "tblMnBOv8zi5UuVey",
+   "Source - View ID": "viwBHpyTJboiImQf4",
+   "Record ID": "rec1GdaKOc2Oe1hJv"
+  }
+ },
+ {
+  "id": "rec1k7kXCyi2Yn57q",
+  "createdTime": "2026-03-26T03:25:51.000Z",
+  "fields": {
+   "Table - Description": "Bill of Materials table defining the resource scope for quotes and jobs. Each BOM record links a Quote to its constituent BOM resources (line items), and connects to the Jobs that execute that scope. Aggregates inventory counts, job breakdowns by type, subscription context, and resource quantities. Acts as the bridge between commercial quoting and operational execution planning.",
+   "Base": "Jobs",
+   "Table - Name": "BOM",
+   "Table - ID": "tblMoXmjtWVO8Wyz7",
+   "Record ID": "rec1k7kXCyi2Yn57q"
+  }
+ },
+ {
+  "id": "rec1vS8yzJ8igB6GH",
+  "createdTime": "2026-03-26T03:22:20.000Z",
+  "fields": {
+   "Base": "Data",
+   "Table - Name": "Quote - Line Items",
+   "Table - ID": "tblpZg6JsXtzkb0li",
+   "Record ID": "rec1vS8yzJ8igB6GH"
+  }
+ },
+ {
+  "id": "rec2BsuCtJ47THPWD",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Table - Description": "Represent customer entities for ticket and SLA association. Synced from Locations base to provide stable customer reference data within Tickets base. Native fields support SLA assignment, ticket linking, and reverse location relationships.",
+   "Base": "Tickets",
+   "Source - Table - ID": "tblu9pLBFjxYX9RwL",
+   "Table - Name": "Customers",
+   "Table - Description - MD": "# Customers\n\n## Purpose\nRepresent customer entities for ticket and SLA association. Synced from Locations base to provide stable customer reference data within Tickets base.\n\n## Key data\nSync from Locations base: ID, Brand, Brand owner, Legal name, contact details (finance and service desk), country, service types, status. Native fields: SLA links, Ticket links, Location links.\n\n## Relationship\nOne Customer → many SLA records\nOne Customer → many Tickets\nOne Customer → many Locations (reverse sync)\n\n## Scale\n20-30 active customer records covering major brand owners (KFC, CRG, RD, QSA). Synced dataset size matches Locations base customer count.\n\n## Lifecycle\n- Synced automatically from Locations base when new customer record created\n- Updates propagate from source to sync target\n- SLA records created post-sync for new customers\n- Tickets linked as incidents occur\n- Status field managed in source base\n\n## Role in system\nReference layer (Synced table). Customers provide normalized customer identity for ticket categorization and SLA lookup. Sync architecture ensures customer data consistency between Tickets and Locations operational contexts.\n",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "apprGGdynxDTZMZmO",
+   "Source - View": "Sync to Tickets",
+   "Source - Table - Name": "Customers",
+   "Direction": "Inbound",
+   "Table - ID": "tblKL04W1YLy6q3SP",
+   "Source - View ID": "viwIGplSriguR8pbI",
+   "Record ID": "rec2BsuCtJ47THPWD"
+  }
+ },
+ {
+  "id": "rec2FgthioBJI1QBN",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tbllTcNIfg7TkJMUO",
+   "Table - Name": "Brands",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Sync to Monitoring",
+   "Source - Table - Name": "Brands",
+   "Direction": "Inbound",
+   "Table - ID": "tbl0pAi4fZA0XhnGM",
+   "Source - View ID": "viwyVWElvMxT0AQKP",
+   "Record ID": "rec2FgthioBJI1QBN"
+  }
+ },
+ {
+  "id": "rec2XRZihzAGlWhu4",
+  "createdTime": "2026-04-01T12:22:53.000Z",
+  "fields": {
+   "Table - Description": "Automation registry documenting all workflow automations across bases. Captures trigger type, reads/writes, side effects, idempotency status, business impact, and links to related workflows.",
+   "Base": "Data",
+   "Table - Name": "Documentation - Automations",
+   "Table - ID": "tblqUMQCesQgeeaIp",
+   "Record ID": "rec2XRZihzAGlWhu4"
+  }
+ },
+ {
+  "id": "rec32CPouNrDt57LO",
+  "createdTime": "2026-03-26T03:40:02.000Z",
+  "fields": {
+   "Table - Description": "Represent the reference catalog of QSR menu items tracked for out-of-stock monitoring. Provides controlled vocabulary for OOS item decomposition with bilingual naming (Thai/English) and active/inactive status management.",
+   "Base": "Tickets",
+   "Table - Name": "Menu items",
+   "Table - Description - MD": "# Menu items\n\n## Purpose\nRepresent the reference catalog of QSR menu items tracked for out-of-stock monitoring. Serves as a controlled vocabulary for OOS item decomposition.\n\n## Key data\nBilingual name pair (Thai/English), status (Active/Inactive), count of linked OOS items. ID formula derives from English name field.\n\n## Relationship\nOne Menu item → many OOS items\n\n## Scale\n30-50 active menu items for KFC Thailand operations. Catalog grows slowly as new promotional items or permanent menu additions are introduced.\n\n## Lifecycle\n- Created manually when new menu item introduced to operational tracking\n- English and Thai names populated\n- Status set to Active\n- Linked to OOS items as out-of-stock incidents occur\n- Status changed to Inactive when item permanently discontinued\n\n## Role in system\nReference layer (Lookup table). Menu items provide normalized naming and enable consistent aggregation of out-of-stock incidents across locations and time periods.\n",
+   "Table - ID": "tblBkzDATbdxYdoZo",
+   "Record ID": "rec32CPouNrDt57LO"
+  }
+ },
+ {
+  "id": "rec3FTUjabsMXNVpk",
+  "createdTime": "2026-03-26T03:27:53.000Z",
+  "fields": {
+   "Table - Description": "Stores a historical audit trail of scheduling changes made to Jobs records, capturing schedule snapshots and timestamps so rescheduling history, timing shifts, and planning volatility can be traced over time.",
+   "Base": "Jobs",
+   "Table - Name": "Jobs - Schedule log",
+   "Table - ID": "tblNa1qGfpvOaNn9m",
+   "Record ID": "rec3FTUjabsMXNVpk"
+  }
+ },
+ {
+  "id": "rec3RjE7uKXSnRbzq",
+  "createdTime": "2026-03-26T03:40:13.000Z",
+  "fields": {
+   "Table - Description": "Represent weekly calendar periods for compensation override scoping. Each record defines a specific week number + year pair with start/end dates, enabling precise temporal scoping of time-bound compensation rules.",
+   "Base": "Tickets",
+   "Table - Name": "Weeks",
+   "Table - Description - MD": "# Weeks\n\n## Purpose\nRepresent weekly calendar periods for compensation override scoping. Each record defines a specific week number + year pair with start/end dates.\n\n## Key data\nWeek number (integer), year (single-select), start/end date pair, status (Todo/In progress/Done), duration (days), calculated week numbers from dates, link to Compensation records.\n\n## Relationship\nOne Week → many Compensation records (Override type only)\n\n## Scale\n52 records per year, with subset linked to active compensation overrides. Typically 10-20 weeks per year have compensation override rules attached.\n\n## Lifecycle\n- Created in batch at year rollover\n- Week number and year populated\n- Start/end dates set based on Monday-start week calendar\n- Status progresses as week moves from future → current → past\n- Compensation links added when override rules created for specific calendar periods\n\n## Role in system\nReference layer (Temporal lookup). Weeks provide the calendar framework for time-bound compensation override rules, enabling precise temporal scoping of special compensation periods.\n",
+   "Table - ID": "tbl5v4LXUdI1nAxwg",
+   "Record ID": "rec3RjE7uKXSnRbzq"
+  }
+ },
+ {
+  "id": "rec4bzhDyPaQ7Vi9D",
+  "createdTime": "2026-03-26T03:25:50.000Z",
+  "fields": {
+   "Table - Description": "Converts hydrated commercial quote input into operationally usable scope inside the Jobs base by normalizing customer, location, and execution context so quotes can drive BOM creation, job generation, and execution readiness.",
+   "Base": "Jobs",
+   "Table - Name": "Quotes",
+   "Table - ID": "tbldE1r6MKSgebujM",
+   "Record ID": "rec4bzhDyPaQ7Vi9D"
+  }
+ },
+ {
+  "id": "rec4n9wIhuylwUY9U",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Table - Description": "Master data table for customers and brands. Serves as a linking layer between locations, subscriptions, and commercial data.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblu9pLBFjxYX9RwL",
+   "Table - Name": "Customers",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Customers",
+   "Direction": "Inbound",
+   "Table - ID": "tblhzcjYQk0NJCv9v",
+   "Source - View ID": "viw8CFn8GBgkizBr7",
+   "Record ID": "rec4n9wIhuylwUY9U"
+  }
+ },
+ {
+  "id": "rec7MzhctkAurOjRn",
+  "createdTime": "2026-03-26T03:25:52.000Z",
+  "fields": {
+   "Table - Description": "Line-item detail table for BOMs. Each record represents a specific resource at a defined quantity within a BOM, linking the resource catalog to commercial and operational contexts. Manages subscription contract associations, inventory tracking (earmarked, installed, available), quote PDF generation fields, and planning-level job-to-BOM resource mappings. Acts as the granular execution layer between what was quoted and what gets deployed.",
+   "Base": "Jobs",
+   "Table - Name": "BOM Resources",
+   "Table - ID": "tblAHbCtXG4w9tzSF",
+   "Record ID": "rec7MzhctkAurOjRn"
+  }
+ },
+ {
+  "id": "rec9VD3dDaRuw1yd5",
+  "createdTime": "2026-03-26T03:31:05.000Z",
+  "fields": {
+   "Table - Description": "Core master entity representing a commercial customer. Customer ID is a composite of Country (ISO3), Brand, Brand Owner, and optionally Storefront (e.g. THA - KFC - CRG). Central reference entity used across all operational bases.",
+   "Base": "Locations",
+   "Table - Name": "Customers",
+   "Table - ID": "tblu9pLBFjxYX9RwL",
+   "Record ID": "rec9VD3dDaRuw1yd5"
+  }
+ },
+ {
+  "id": "recA7m5Ijk73urhA9",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblp7sqsv25DVYs7T",
+   "Table - Name": "Inventory",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Sync to Monitoring",
+   "Source - Table - Name": "Inventory",
+   "Direction": "Inbound",
+   "Table - ID": "tblUzyBNnI3JU4z5M",
+   "Source - View ID": "viwk9Y5ClirmpGGFy",
+   "Record ID": "recA7m5Ijk73urhA9"
+  }
+ },
+ {
+  "id": "recAFsnFmQOSxPVBS",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Table - Description": "Synced execution context table used by inventory for installation, job assignment, and state mutation. Tracks job type, status, scheduled/actual dates, partner, and linked inventory items.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tblwHj9cO37wp1fVx",
+   "Table - Name": "Jobs",
+   "Table - Description - MD": "\\## Purpose\n\nOrchestrate deployment execution. Jobs drive the installation workflow, mutate inventory state, and trigger subscription creation.\n\n\\## Key data\n\nEach record contains: Location, BOM (bill of materials), Status (Scheduled/In progress/Completed), Date scheduled/actual, Partner, Inventory pre-assignments, Subscription contract reference. Jobs are the primary execution units.\n\n\\## Relationship\n\nOne Job -> one Location (target). One Job -> many Inventory items (reserved/assigned). One Job -> one Quote (source). One Job -> one Subscription contract (created result).\n\n\\## Scale\n\nHundreds to thousands of jobs per year depending on deployment velocity.\n\n\\## Lifecycle\n\n\\- Created: From quote approval\n\\- Scheduled: Assigned execution date\n\\- In progress: Active deployment\n\\- Completed: All inventory installed, subscriptions created\n\\- Cancelled: Not executed\n\n\\## Role in system\n\n(Core orchestrator). Jobs are the primary state mutation engine. Upon completion, Jobs create inventory links, assign locations, and trigger subscription contract creation. Without Jobs, nothing moves in the system.\n\n\\## Data consolidation scope\n\nNot applicable. Jobs are native to this base; synced to Locations and Tickets bases for reporting.\n\n\\## Data flow model\n\nQuotes -> Jobs (execution staging). Jobs -> Inventory (location assignment, status mutation). Jobs -> Subscription contracts (upon completion). Jobs -> Tickets (issue escalation).\n\n\\## System role\n\nCore. Jobs are non-negotiable. All deployments flow through them.\n",
+   "Source - Base - Name": "Jobs",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Jobs",
+   "Direction": "Bidirectional",
+   "Table - ID": "tbly4d48VQIfgJaBH",
+   "Source - View ID": "viwfPtfIAhfswgyE5",
+   "Record ID": "recAFsnFmQOSxPVBS"
+  }
+ },
+ {
+  "id": "recASmiVAlBehsskg",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Commercial container defining contract duration, start/end logic, renewal behavior, pricing, and contract-level assignment. Parent record linking customers, inventory, and subscriptions.",
+   "Base": "Inventory",
+   "Table - Name": "Subscription contracts",
+   "Table - Description - MD": "\\## Purpose\n\nCommercial container for recurring service obligations. Subscription contracts define the terms, duration, and financial structure of all subscriptions attached to it.\n\n\\## Key data\n\nEach record contains: Customer, Service, Subscription type, Duration (months), Start date, End date (formula), Status, Inventory count (units under contract), PPU/month (pricing), Currency, Auto-renewal flag. Contracts are the canonical source of subscription state.\n\n\\## Relationship\n\nOne Subscription contract -> many Subscriptions (1:1 per unit initially, but can consolidate). One Subscription contract -> many Inventory items (installed units). One Subscription contract -> one Customer.\n\n\\## Scale\n\nTypically hundreds of contracts. Each contract may govern 1 to 100+ subscriptions depending on installation scope.\n\n\\## Lifecycle\n\n\\- Created: Upon first installation or manual creation\n\\- Active: Subscriptions exist, within term\n\\- Expiring: Approaching end date, renewal process may trigger\n\\- Expired: End date passed, subscriptions terminated\n\\- Renewed: New contract created via auto-renewal, old one archived\n\\- Terminated: Manually ended before expiration\n\n\\## Role in system\n\n(Commercial/billing layer). Subscription contracts are the source of truth for service terms. Drives monthly recurring revenue (MRR) calculations and renewal workflows.\n\n\\## Data consolidation scope\n\nNot applicable. Subscription contracts are native to this base; synced copies exist in Tickets base for reporting.\n\n\\## Data flow model\n\nJobs -> Subscription contracts (created upon installation). Subscriptions <- Subscription contracts (created for each unit). Billing/revenue <- Subscription contracts (MRR rollup).\n\n\\## System role\n\nCore. Subscription contracts are the primary billing and term reference. No operational flow bypasses them.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblhn4CJZbi57C8WP",
+   "Record ID": "recASmiVAlBehsskg"
+  }
+ },
+ {
+  "id": "recAdspHWK9oigjgx",
+  "createdTime": "2026-03-25T10:14:00.000Z",
+  "fields": {
+   "Table - Description": "Central subscription dataset aggregating contract, inventory, and lifecycle data. Used for revenue tracking, churn analysis, and operational reporting.",
+   "Base": "Data",
+   "Source - Table - ID": "tblyNA73D9jldeEir",
+   "Table - Name": "Subscriptions",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "app8H7IMW8gHyQzzn",
+   "Source - View": "Sync to Data",
+   "Source - Table - Name": "Subscriptions",
+   "Direction": "Inbound",
+   "Table - ID": "tbloG2fLQls9ESIrY",
+   "Source - View ID": "viwTY62ZG9AufLufK",
+   "Record ID": "recAdspHWK9oigjgx"
+  }
+ },
+ {
+  "id": "recAiLGJSkW1Jsy4p",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Stock movement table for consumable resources, distinct from serialized inventory lifecycle. Tracks inbound/outbound quantities by resource, stock location, country, and project with signed quantity logic.",
+   "Base": "Inventory",
+   "Table - Name": "Consumable Movements",
+   "Table - Description - MD": "\\## Purpose\n\nLog consumption and movement of non-serialized consumable items. Consumable Movements provides an audit trail of quantity changes without individual unit tracking, complementing Inventory's serialized asset model.\n\n\\## Key data\n\nEach movement record contains: Resource (consumable SKU), Quantity (signed amount), Movement type (in/out/adjustment), Stock location (origin/destination), Country, and optional reference (job, project). Signed quantities enable net consumption calculation. No end-state derivation; movements are pure event logs.\n\n\\## Relationship\n\nOne Resource (consumable) → many Movements. One Stock location → many Movements (for consumption tracking per warehouse). One Consumable Movements → one Job (optional, for job-specific consumption). One Country → many Movements (for geographic consumption reporting).\n\n\\## Scale\n\nGrows with consumable SKU count and job frequency. Typical scale: 500,2000+ movements per month for 10,20 active consumables across multiple locations.\n\n\\## Lifecycle\n\n\\- Created: At point of consumption, stock receipt, or inventory adjustment\n\\- Active: Immutable after creation (append-only log semantics)\n\\- Archived: Never; movements remain permanently for audit trail\n\n\\## Role in system\n\n(Audit and consumption layer). Consumables bypass the Inventory lifecycle model; Movements provide the only record of their quantity state. Enables per-location and per-job consumable cost attribution, stock reorder triggers, and historical consumption analysis.\n\n\\## Data consolidation scope\n\nNot applicable. Consumable Movements are native to the Inventory base; no cross-base syncing occurs.\n\n\\## Data flow model\n\nResources (is\\_consumable flag) → Jobs → Consumable Movements (created on consumption). Stock locations feed origin/destination for movements. No reverse lookups; movements drive stock queries and cost reporting.\n\n\\## System role\n\nRecorder. Consumable Movements do not trigger downstream automations but enable analytics, reorder logic, and cost allocation. Used in revenue recognition (COGS per job) and inventory valuation reporting.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tbl96hSKIBANAMqfa",
+   "Record ID": "recAiLGJSkW1Jsy4p"
+  }
+ },
+ {
+  "id": "recB9NjYzISumXEug",
+  "createdTime": "2026-03-26T03:31:09.000Z",
+  "fields": {
+   "Table - Description": "Lookup table classifying location types. Links to Locations table.",
+   "Base": "Locations",
+   "Table - Name": "Location types",
+   "Table - ID": "tbl8xmUZdqPdLSvrN",
+   "Record ID": "recB9NjYzISumXEug"
+  }
+ },
+ {
+  "id": "recBxIJqNBhbDtO47",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Table - Description": "Commercial source records feeding planning, BOM logic, and execution context. Links to jobs, tracks location and inventory counts, and carries deal-level metadata from the sales process.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tbldE1r6MKSgebujM",
+   "Table - Name": "Quotes",
+   "Table - Description - MD": "\\## Purpose\n\nDefine scope and budget for deployments. Quotes are the commercial input layer capturing scope, quantities, and subscription terms before execution.\n\n\\## Key data\n\nEach record contains: Customer, Service, Locations (count), Jobs (count), BOM (bill of materials), Inventory count, Subscription contract terms (start date). Quotes freeze deployment plans.\n\n\\## Relationship\n\nOne Quote -> one Customer. One Quote -> many Jobs (execution). One Quote -> many Inventory items (eventually). One Quote -> one or many Locations.\n\n\\## Scale\n\nTypically dozens to hundreds of quotes per year depending on sales velocity.\n\n\\## Lifecycle\n\n\\- Created: Sales proposal\n\\- Accepted: Customer approval\n\\- In execution: Jobs running\n\\- Completed: All jobs done, subscriptions active\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Commercial input). Quotes define deployment scope and drive job creation. They are the bridge between sales and execution.\n\n\\## Data consolidation scope\n\nNot applicable. Quotes are native to this base; synced to Jobs base for execution tracking.\n\n\\## Data flow model\n\nCustomers -> Quotes (commercial source). Quotes -> Jobs (execution driver). Quotes -> Inventory (scope definition). BOM in Quotes -> SKU allocation.\n\n\\## System role\n\nCore. Quotes are non-negotiable for commercial deployments.\n",
+   "Source - Base - Name": "Jobs",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Quotes",
+   "Direction": "Inbound",
+   "Table - ID": "tblqn6Sj7Ync4tPQZ",
+   "Source - View ID": "viwMIGSo7HfOx4wDR",
+   "Record ID": "recBxIJqNBhbDtO47"
+  }
+ },
+ {
+  "id": "recDBX05XIPtpM0WP",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Owner-level commercial reference table. Used by customers and contracts to identify the legal or commercial entity above the brand layer.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tblomN4KFzhzTeZyB",
+   "Table - Name": "Brand owners",
+   "Table - Description - MD": "\\## Purpose\n\nRepresent corporate entities that own brands. Brand owners are the ownership abstraction above brands themselves.\n\n\\## Key data\n\nEach record contains: Brand owner name, Customer links, Subscription contract references. Brand owners are minimal identity records.\n\n\\## Relationship\n\nOne Brand owner <- many Brands. One Brand owner <- many Customers. One Brand owner <- many Subscription contracts (reference).\n\n\\## Scale\n\nTypically 5-50 brand owners depending on portfolio diversity.\n\n\\## Lifecycle\n\n\\- Active: Operating\n\\- Inactive: No longer active\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Ownership taxonomy). Brand owners provide ownership segmentation above brands for commercial relationship management.\n\n\\## Data consolidation scope\n\nNot applicable. Brand owners are native to this base; no syncing.\n\n\\## Data flow model\n\nBrand owners <- Brands (ownership hierarchy). Customers <- Brand owners (relationship). Subscription contracts <- Brand owners (billing segmentation).\n\n\\## System role\n\nEnabler. Brand owners provide ownership taxonomy but are not core to operations.\n",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Brand owners",
+   "Direction": "Inbound",
+   "Table - ID": "tblNot7erUUbArpLG",
+   "Source - View ID": "viwLBRZZ89fdGA6Qe",
+   "Record ID": "recDBX05XIPtpM0WP"
+  }
+ },
+ {
+  "id": "recE52KCiMiPDpkaN",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Event and history layer for inventory changes. Captures state snapshots including location, status, arrangement, and subscription context at the point of each logged action. Triggered via checkbox on the Inventory table.",
+   "Base": "Inventory",
+   "Table - Name": "Inventory log",
+   "Table - Description - MD": "\\## Purpose\n\nEvent/history log for inventory state transitions. Inventory log provides an audit trail of changes without full event sourcing.\n\n\\## Key data\n\nEach record contains: Inventory (reference), Status (previous state), Location (previous and current), Installation date, Subscription type, Subscription contract (at time of change), Created timestamp. Log is append-only.\n\n\\## Relationship\n\nOne Inventory -> many Inventory log entries. One Inventory log <- one Inventory record (reference).\n\n\\## Scale\n\nGrows with inventory mutation frequency. Typically hundreds to thousands of entries per month.\n\n\\## Lifecycle\n\n\\- Created: On state change trigger\n\\- Retained: Permanent, never deleted (audit trail)\n\n\\## Role in system\n\n(Auditability). Inventory log provides historical traceability of inventory state changes. Currently under-modeled compared to full event sourcing but provides basic audit trail.\n\n\\## Data consolidation scope\n\nNot applicable. Inventory log is native to this base; no syncing.\n\n\\## Data flow model\n\nInventory (state change) -> Inventory log (append). Log queries enable historical analysis and debugging.\n\n\\## System role\n\nSupporting. Inventory log enables auditability and debugging but is not core to operational flow.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblZdnCl0LIyKSr1B",
+   "Record ID": "recE52KCiMiPDpkaN"
+  }
+ },
+ {
+  "id": "recGoVvVQXvNVnEsA",
+  "createdTime": "2026-04-01T12:22:53.000Z",
+  "fields": {
+   "Table - Description": "Live registry of all cross-base sync relationships. Source of truth for system graph topology. One record per table per base, with sync direction, source/destination mapping, and table-level descriptions.",
+   "Base": "Data",
+   "Table - Name": "Documentation - Base - Structure",
+   "Table - ID": "tbldD6iYBnufCyTaf",
+   "Record ID": "recGoVvVQXvNVnEsA"
+  }
+ },
+ {
+  "id": "recHGhCuRlyY1C311",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Bidirectional sync from Inventory base. Surfaces installed asset data within the Locations base for operational consolidation.",
+   "Base": "Locations",
+   "Source - Table - ID": "tblp7sqsv25DVYs7T",
+   "Table - Name": "Inventory",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appmFizJaAn7yKKVu",
+   "Source - View": "Sync to Locations",
+   "Source - Table - Name": "Inventory",
+   "Direction": "Bidirectional",
+   "Table - ID": "tbl4iIahvNOg0bhJq",
+   "Source - View ID": "viw6DAumvOhUBkIDh",
+   "Record ID": "recHGhCuRlyY1C311"
+  }
+ },
+ {
+  "id": "recHWsy3DE47iGh5j",
+  "createdTime": "2026-03-26T03:31:07.000Z",
+  "fields": {
+   "Table - Description": "Master list of countries with ISO3 codes. Code is used as a standardized prefix in customer identifiers.",
+   "Base": "Locations",
+   "Table - Name": "Countries",
+   "Table - ID": "tblcveZqTa63GVMNm",
+   "Record ID": "recHWsy3DE47iGh5j"
+  }
+ },
+ {
+  "id": "recJCxoorTwUqPYH2",
+  "createdTime": "2026-03-25T10:14:00.000Z",
+  "fields": {
+   "Table - Description": "Central subscription dataset aggregating contract, inventory, and lifecycle data. Used for revenue tracking, churn analysis, and operational reporting.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblKuzC0cNODVv9Zm",
+   "Table - Name": "Subscription types",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Subscription types",
+   "Direction": "Inbound",
+   "Table - ID": "tblVD2FwbJEZNYjVv",
+   "Source - View ID": "viwTtnyOTvhzgFJAj",
+   "Record ID": "recJCxoorTwUqPYH2"
+  }
+ },
+ {
+  "id": "recJawWHJUsLBglrU",
+  "createdTime": "2026-03-25T10:14:22.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblC3p1fkNrxk4tMO",
+   "Table - Name": "Signage Scraper",
+   "Source - Base - Name": "Data",
+   "Source - Base - ID": "app8H7IMW8gHyQzzn",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Signage - Sync to Monitor",
+   "Source - Table - Name": "Signage Scraper",
+   "Direction": "Inbound",
+   "Notes": "Scraper feeds signage CMS status into Monitoring",
+   "Table - ID": "tblNYWtOVRYGzZnj7",
+   "Source - View ID": "viwQTE5JEBRkTBXEq",
+   "Record ID": "recJawWHJUsLBglrU"
+  }
+ },
+ {
+  "id": "recK0hMZKcrXzwpe7",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Master record for each physical asset. Tracks serial number, lifecycle status, install/stock location, subscription links, monitoring links, ticket associations, and job context. Core operational table.",
+   "Base": "Inventory",
+   "Table - Name": "Inventory",
+   "Table - Description - MD": "\\## Purpose\n\nCentral physical asset registry. Inventory is the unit-level record of deployment across the system, representing actual hardware and virtual assets in the field.\n\n\\## Key data\n\nEach record contains: Resource (SKU link), Serial number, Status (lifecycle state), Location (installation and stock), Subscription contract references, and installation date. Inventory units are the primary anchors for subscriptions, tickets, and jobs.\n\n\\## Relationship\n\nOne Resource -> many Inventory. One Inventory -> one Location (installation). One Inventory -> many Subscriptions. One Inventory -> many Tickets. One Inventory -> many Jobs (implied via subscription contract).\n\n\\## Scale\n\nTypically hundreds to thousands of units depending on deployment footprint. Each unit carries full lifecycle state.\n\n\\## Lifecycle\n\n\\- Created: Imported or added manually\n\\- Available: In stock, ready for deployment\n\\- In transit: Physically in motion to installation\n\\- Installed: At final location, actively deployed\n\\- Subscribed: Has active subscription contract\n\\- Spare: Flagged as backup unit on-site\n\\- Defect: Marked for repair/replacement\n\\- Archived: End-of-life, no longer tracked\n\n\\## Role in system\n\n(Core operational unit). Inventory is the system's primary fact table. Every operational flow (Jobs, Subscriptions, Tickets) converges on inventory. Serves as the anchor for subscription billing, compliance reporting, and asset management.\n\n\\## Data consolidation scope\n\nNot applicable. Inventory is native to this base; no cross-base consolidation.\n\n\\## Data flow model\n\nResources -> Inventory (creation). Jobs -> Inventory (status mutation). Inventory -> Subscriptions (upon installation). Inventory -> Tickets (issue tracking). Subscriptions use Inventory as foreign key for all lookups.\n\n\\## System role\n\nCore. Cannot be replaced; everything downstream depends on accurate inventory state.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblp7sqsv25DVYs7T",
+   "Record ID": "recK0hMZKcrXzwpe7"
+  }
+ },
+ {
+  "id": "recKzOHmQ10A5yHCc",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Table - Description": "Provides the synced master dataset of customer locations used in Jobs, including site identity, geographic, contact, and operational context, and serves as the core reference layer for planning and execution activities.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblaMnDYwMhf8fk7d",
+   "Table - Name": "Locations",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Locations",
+   "Direction": "Bidirectional",
+   "Table - ID": "tbl5Nj3zs3nxKPdEv",
+   "Source - View ID": "viwpmPNifqyvAOVWF",
+   "Record ID": "recKzOHmQ10A5yHCc"
+  }
+ },
+ {
+  "id": "recLFrf2QJZjDLU8F",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Instantiated recurring service records linked to inventory items, subscription contracts, locations, and status lifecycle. Tracks active, expired, terminated, and auto-renewed states.",
+   "Base": "Inventory",
+   "Table - Name": "Subscriptions",
+   "Table - Description - MD": "\\## Purpose\n\nActive recurring revenue records. Each subscription is a time-dependent license linked to a specific inventory unit and subscription type.\n\n\\## Key data\n\nEach record contains: Inventory (unit), Subscription contract, Subscription type, Start date, End date (formula), Days left (formula), Status (Active/Expired/Terminated), Auto-renewed flag. Subscriptions are immutable after creation unless manually terminated.\n\n\\## Relationship\n\nOne Subscription -> one Inventory. One Subscription -> one Subscription contract. One Subscription -> one Subscription type. Many Subscriptions <- one Subscription contract.\n\n\\## Scale\n\nScales with inventory deployment. Typically 100-10,000+ active subscriptions across the system at any time.\n\n\\## Lifecycle\n\n\\- Created: Upon installation (Job completion)\n\\- Active: Within term and not terminated\n\\- Expiring: Days left decreasing, <= 30 days\n\\- Expired: End date passed, no longer billable\n\\- Renewed: Auto-renewed, new subscription created\n\\- Terminated: Manually cancelled before expiration\n\n\\## Role in system\n\n(Revenue tracking). Subscriptions are the unit-level billing records. Each subscription = one active license billable to the contract. Drives SaaS revenue recognition and reporting.\n\n\\## Data consolidation scope\n\nNot applicable. Subscriptions are native to this base; synced to Tickets base for revenue/analytics.\n\n\\## Data flow model\n\nJobs -> Subscriptions (created on installation). Subscriptions <- Subscription contracts (parent reference). Days left updated nightly (formula). Auto-renewal -> new Subscription creation.\n\n\\## System role\n\nCore. Subscriptions are the unit-level billing atoms. Revenue reporting rolls up from here.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblyNA73D9jldeEir",
+   "Record ID": "recLFrf2QJZjDLU8F"
+  }
+ },
+ {
+  "id": "recLpzWfx9GQqBfNI",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Attribute definitions used for structuring product and resource specifications. Groups and classifies spec dimensions (e.g. display size, resolution). Linked to the Specs table.",
+   "Base": "Inventory",
+   "Table - Name": "Attributes",
+   "Table - Description - MD": "\\## Purpose\n\nExtend resource properties dynamically with custom metadata. Attributes act as a flexible schema layer that defines specifications and properties applicable across resources without hardcoding fields into Resources or Inventory.\n\n\\## Key data\n\nAttributes contain: Name (human label), Symbol (code reference), Group (category grouping), Status, Notes, and links to Specs. Each attribute record represents a single property type (e.g. 'Display size', 'Connection type', 'Brightness'). Specs records pair attribute definitions with concrete values.\n\n\\## Relationship\n\nOne Attribute -> many Specs (Specs references back to Attribute). One Attribute -> many Resources (indirectly, through Specs). No direct inventory link; attributes inform resource classification and spec documentation.\n\n\\## Scale\n\nTypically 30,50 attribute definitions covering hardware specs, display properties, connectivity options, and environmental ratings. Grows as product portfolio expands or new spec dimensions are documented.\n\n\\## Lifecycle\n\n\\- Created: When a new specification dimension is identified (manual or inferred from Resources)\n\\- Active: Referenced by one or more Specs records\n\\- Archived: Flagged inactive when no longer used, Specs records remain intact (historical reference)\n\n\\## Role in system\n\n(Reference layer for technical metadata). Attributes normalize spec documentation and prevent duplication of spec property names across Resources. Enables spec sheets and quote generation to pull formatted values consistently. Acts as a vocabulary layer between raw product data (Resources) and downstream consumers (Quotes, Specs, Documentation).\n\n\\## Data consolidation scope\n\nNot applicable. Attributes are native to this base; no cross-base consolidation occurs.\n\n\\## Data flow model\n\nResources -> Specs -> Attributes (reverse lookup). Documentation process: identify new spec dimension -> create Attribute -> link Specs to it. Quote generation: pull Specs grouped by Attribute, format values for PDF.\n\n\\## System role\n\nEnabler. Attributes do not drive operational workflows but anchor technical documentation integrity. Used heavily in quote PDF generation and spec sheet construction.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblUUZEsKbUgQ2URA",
+   "Record ID": "recLpzWfx9GQqBfNI"
+  }
+ },
+ {
+  "id": "recML0GZq44BBxW7n",
+  "createdTime": "2026-03-26T03:23:37.000Z",
+  "fields": {
+   "Table - Description": "HR dataset tracking employee lifecycle, including hiring, termination, and organizational attributes. Used for headcount and operational reporting.",
+   "Base": "Data",
+   "Table - Name": "Terminated Employees",
+   "Table - ID": "tblzUch1Ra0jrgqbH",
+   "Record ID": "recML0GZq44BBxW7n"
+  }
+ },
+ {
+  "id": "recN5M5HyeoMssBVU",
+  "createdTime": "2026-03-26T03:31:12.000Z",
+  "fields": {
+   "Table - Description": "Specific store concepts or formats under a brand. Optional component in defining a customer.",
+   "Base": "Locations",
+   "Table - Name": "Stores",
+   "Table - ID": "tblcnY2DjETb7ixwI",
+   "Record ID": "recN5M5HyeoMssBVU"
+  }
+ },
+ {
+  "id": "recNCMz2AxG8JfNp7",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Data table within the system. Requires further classification based on usage and relationships.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblcveZqTa63GVMNm",
+   "Table - Name": "Countries",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Countries",
+   "Direction": "Inbound",
+   "Table - ID": "tblPY2wcrdWOvYnkd",
+   "Source - View ID": "viwbxPWxLLexbdtPH",
+   "Record ID": "recNCMz2AxG8JfNp7"
+  }
+ },
+ {
+  "id": "recNNT5A7PuF6Mniu",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Represents the synced set of warehouse or stockholding locations from which inventory is sourced, and is used in Jobs to support BOM planning, resource allocation, and inventory sourcing decisions.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblYuICPpfVdM7KRd",
+   "Table - Name": "Stock locations",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Stock locations",
+   "Direction": "Inbound",
+   "Table - ID": "tblI14XGWho2lhvVC",
+   "Source - View ID": "viwYItg3r2EYUjcpk",
+   "Record ID": "recNNT5A7PuF6Mniu"
+  }
+ },
+ {
+  "id": "recOB9eS8BM5HD9pC",
+  "createdTime": "2026-03-26T03:31:10.000Z",
+  "fields": {
+   "Table - Description": "Display configurations at a location. Stores installation area, orientation, and number of displays. Multiple arrangements can exist per location.",
+   "Base": "Locations",
+   "Table - Name": "Arrangements",
+   "Table - ID": "tbl3iaef3xXCKE5UT",
+   "Record ID": "recOB9eS8BM5HD9pC"
+  }
+ },
+ {
+  "id": "recOZTyrs0C9slHqx",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Geographic reference data. Links to stock locations, locations, customers, and consumable movements. Used for geographic filtering and country-level reporting across the base.",
+   "Base": "Inventory",
+   "Table - Name": "Countries",
+   "Table - Description - MD": "\\## Purpose\n\nGeographic and jurisdictional reference layer. Countries define regional boundaries for inventory, customers, and reporting.\n\n\\## Key data\n\nEach record contains: Name, Country code, Regions, Subdivisions, Brand assignments. Countries are the top-level geographic classifier.\n\n\\## Relationship\n\nOne Country -> many Locations. One Country -> many Stock locations. One Country -> many Consumable Movements. One Country <- Customer assignment.\n\n\\## Scale\n\nTypically 5-50 countries depending on operating footprint.\n\n\\## Lifecycle\n\n\\- Active: Operating in territory\n\\- Inactive: No longer operational\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Reference/taxonomy). Countries provide geographic segmentation for cost allocation, regional compliance, and reporting. Used for currency selection and reorder scoping.\n\n\\## Data consolidation scope\n\nNot applicable. Countries are native to this base; no syncing.\n\n\\## Data flow model\n\nLocations -> Countries (geographic assignment). Stock locations -> Countries. Consumable Movements -> Countries (consumption attribution).\n\n\\## System role\n\nEnabler. Provides geographic taxonomy but does not execute operations.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblzCLUEgLNXzjD18",
+   "Record ID": "recOZTyrs0C9slHqx"
+  }
+ },
+ {
+  "id": "recQ9WVB7miq8M640",
+  "createdTime": "2026-03-26T03:40:11.000Z",
+  "fields": {
+   "Table - Description": "Define compensation rate rules that determine when and how much compensation applies to tickets based on creation time, daypart, and day-of-week criteria. Rules operate in Default or Override mode, with Override type supporting week-specific applicability for seasonal or promotional periods.",
+   "Base": "Tickets",
+   "Table - Name": "Compensation",
+   "Table - Description - MD": "# Compensation\n\n## Purpose\nDefine compensation rate rules that determine when and how much compensation applies to tickets based on creation time, daypart, and day-of-week criteria.\n\n## Key data\nName, type (Default/Override), daypart classification, days of week (multi-select), time window (From/To hours), amount (THB currency), status, year filter, link to Weeks for Override type, ticket count.\n\n## Relationship\nOne Compensation → many Tickets (single-record preferred link)\nOne Compensation → many Weeks (for Override type)\n\n## Scale\n5-10 active compensation rules covering standard daypart categories plus seasonal/promotional overrides. Override rules typically created 2-4 times per year for special periods.\n\n## Lifecycle\n- Default rules created during initial compensation system setup\n- Override rules created for special periods (holidays, promotions, high-traffic events)\n- Time window and daypart defined\n- Days of week configured\n- Amount set based on operational cost/contract\n- Weeks linked for Override type to define specific calendar applicability\n- Tickets automatically linked when creation timestamp falls within rule criteria\n\n## Role in system\nReference layer (Configuration table). Compensation records provide the rule engine for automated compensation eligibility determination. Tickets query this table based on their creation timestamp to identify applicable compensation rate.\n",
+   "Table - ID": "tbl8mdLvZrXTaU8lK",
+   "Record ID": "recQ9WVB7miq8M640"
+  }
+ },
+ {
+  "id": "recR8BlR2UdujdYFx",
+  "createdTime": "2026-04-01T11:54:57.000Z",
+  "fields": {
+   "Table - Description": "Registry of documented operational workflows across the Giant Pumpkin Airtable system. Each record describes one end-to-end business process, with scope mapping, markdown documentation, exception paths, known gaps, and links to related automations and tables.",
+   "Base": "Data",
+   "Table - Name": "Documentation - Workflows",
+   "Table - ID": "tblINNYKKKgFdFvlL",
+   "Record ID": "recR8BlR2UdujdYFx"
+  }
+ },
+ {
+  "id": "recRCXf93QMsEx4Em",
+  "createdTime": "2026-04-01T12:22:53.000Z",
+  "fields": {
+   "Table - Description": "Registry of field-level metadata across all six bases. One record per field per base, capturing field name, type, description, link targets, lookup/rollup dependencies, and trigger/validation logic.",
+   "Base": "Data",
+   "Table - Name": "Documentation - Fields",
+   "Table - ID": "tblHG3NOPuDoLUm9H",
+   "Record ID": "recRCXf93QMsEx4Em"
+  }
+ },
+ {
+  "id": "recRGGXQEi8ZIKNNG",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Delivery documentation table linking inventory items to delivery address, recipient, and generated delivery note attachments. Used for outbound shipment tracking and documentation.",
+   "Base": "Inventory",
+   "Table - Name": "Delivery notes",
+   "Table - Description - MD": "\\## Purpose\n\nDocument physical asset handoff between shipper and receiver. Delivery notes provide proof of shipment and receipt for logistics compliance.\n\n\\## Key data\n\nEach record contains: Inventory items, Delivery address, Recipient name, Delivery date, Shipment images, Signature. Delivery notes are logistics artifacts.\n\n\\## Relationship\n\nOne Delivery note -> many Inventory items. One Delivery note <- one Job (implicit).\n\n\\## Scale\n\nGrows with shipment frequency. Typically dozens to hundreds per month.\n\n\\## Lifecycle\n\n\\- Created: Prior to shipment\n\\- Executed: Signed by recipient\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Logistics compliance). Delivery notes provide proof of delivery for compliance and dispute resolution. Used in installation workflows.\n\n\\## Data consolidation scope\n\nNot applicable. Delivery notes are native to this base; used for compliance documentation.\n\n\\## Data flow model\n\nJobs -> Delivery notes (shipment documentation). Inventory -> Delivery notes (item list). Images/signatures -> delivery proof.\n\n\\## System role\n\nSupporting. Delivery notes enhance logistics compliance but are not core to operational state.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblzn0AD1zje8ZmEA",
+   "Record ID": "recRGGXQEi8ZIKNNG"
+  }
+ },
+ {
+  "id": "recRMtLW1INGJvqeR",
+  "createdTime": "2026-03-26T03:31:11.000Z",
+  "fields": {
+   "Table - Description": "Entities owning or operating a brand in a specific market (e.g. franchisees like CRG). Combined with brand and country to define a customer.",
+   "Base": "Locations",
+   "Table - Name": "Brand owners",
+   "Table - ID": "tblomN4KFzhzTeZyB",
+   "Record ID": "recRMtLW1INGJvqeR"
+  }
+ },
+ {
+  "id": "recS31q9W3QQul6Xw",
+  "createdTime": "2026-03-26T03:40:00.000Z",
+  "fields": {
+   "Table - Description": "Decompose service requests into structured incident records tracked from creation to resolution. Serves as central intake and lifecycle tracking for customer-reported issues, operational failures, and service requests across digital signage and music streaming service lines. Links to SLA, Compensation, OOS items, Jobs, Locations, Customers, and audit log.",
+   "Base": "Tickets",
+   "Table - Name": "Tickets",
+   "Table - Description - MD": "# Tickets\n\n## Purpose\nDecompose service requests into structured incident records tracked from creation to resolution. The table serves as the central intake and lifecycle tracking mechanism for customer-reported issues, operational failures, and service requests across both digital signage and music streaming service lines.\n\n## Key data\nCreated timestamp (with override capability for import), normalized subject and description fields, categorization by type/priority/source/enquiry, agent assignment (internal and external), status progression tracking, SLA assignment with duration monitoring, outbound links to location/customer/job/compensation records, OOS item decomposition for menu availability tracking, and audit metadata (created by, last modified, resolution timestamp).\n\n## Relationship\nOne Location → many Tickets\nOne Customer → many Tickets  \nOne SLA → many Tickets\nOne Compensation → many Tickets (single-record preferred)\nOne Ticket → many OOS items\nOne Ticket → many Jobs\nOne Ticket → many Ticket log entries\nOne Ticket → one Parent (self-link for sub-tickets)\n\n## Scale\nSeveral hundred tickets per month across service lines. Active tickets held in Open/Pending states typically number 20-50 concurrently. Resolution rates tracked per brand owner (CRG, RD, QSA) against SLA thresholds. Compensation triggering logic applies to subset of tickets falling into defined time windows and daypart categories.\n\n## Lifecycle\n- Created via form submission, Freshdesk sync, manual entry, or internal escalation\n- Agent assigned automatically or manually based on source/service line/brand owner\n- Status progresses through Open → Pending (awaiting response) → Resolved (issue fixed) → Closed (confirmed complete) or Abandoned/Deleted\n- SLA assigned based on Customer + Service line combination, duration tracked in minutes against threshold\n- Compensation optionally linked if ticket created in defined time/daypart window\n- OOS items decomposed for menu availability tracking when applicable (QSR-specific)\n- Jobs linked for field service dispatch when installation/maintenance work required\n\n## Role in system\nOperational intake layer with bridge functionality. The table acts as the initial point of contact for service requests, then fans out to decomposition tables (OOS items), operational execution (Jobs), and audit/tracking layers (Ticket log, Compensation). It consolidates data from multiple external sources (Freshdesk, Fillout forms, phone/email/chat) and exposes it to internal operational views and reporting interfaces.\n\n## Data consolidation scope\n\n### Inbound sync sources\n- Freshdesk ticket data via automation sync (Ticket ID, Status, Subject, Description, Source)\n- Fillout form submissions for KFC OOS reporting\n- Manual creation via Airtable interface for phone/email/chat intake\n\n### Outbound sync targets\n- Jobs base (via Sync to Jobs view) for field service dispatch\n- Inventory base (via Sync to Inventory view) for asset-related incidents\n- Locations base (via Sync to Locations view) for location-level incident aggregation\n\n## Data flow model\nIntake → Decomposition/Bridge → Resolution. Tickets are created from external systems or forms, decomposed into actionable sub-entities (OOS items for menu tracking, Jobs for field work), linked to reference data (SLA, Compensation, Agent), and tracked through resolution lifecycle with audit trail capture in Ticket log.\n\n## System role\nPrimary operational layer (Bridge table). Tickets sit between intake sources (Freshdesk, forms, manual entry) and execution layers (Jobs for field work, OOS items for menu tracking). The table routes issues to appropriate operational resources while maintaining full audit history and SLA compliance tracking.\n",
+   "Table - ID": "tbl7Y9QHzO1TyWZDl",
+   "Record ID": "recS31q9W3QQul6Xw"
+  }
+ },
+ {
+  "id": "recS8EvryyYjnerri",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Table - Description": "Installed-state destination and consolidation point for inventory, jobs, subscriptions, and operational documents. Tracks customer, country, status, connectivity, and site-specific configuration.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tbl5Nj3zs3nxKPdEv",
+   "Table - Name": "Locations",
+   "Table - Description - MD": "\\## Purpose\n\nFinal consolidation point of all operational data. Locations aggregate inventory, jobs, subscriptions, and tickets for each customer site.\n\n\\## Key data\n\nEach record contains: Name, Customer, Country, Brand owner, Address, Contact, Inventory count (by status), Jobs (status), Subscriptions (active count), Tickets (open count), Images (floor plan, arrangement). Locations are the operational endpoints.\n\n\\## Relationship\n\nOne Location -> many Inventory items. One Location -> many Jobs. One Location -> many Subscriptions (indirect). One Location -> many Tickets.\n\n\\## Scale\n\nTypically tens to thousands of locations depending on footprint.\n\n\\## Lifecycle\n\n\\- Created: Site opened/added\n\\- Active: Operational, receiving updates\n\\- Inactive: No longer active\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Operational endpoint). Locations are the final consolidated view of all operational data for a site. All site-level reporting and field service activities flow through locations.\n\n\\## Data consolidation scope\n\nNot applicable. Locations are native to this base; synced to Jobs and Tickets bases for site-level views.\n\n\\## Data flow model\n\nInventory -> Locations (installation assignment). Jobs -> Locations (deployment targets). Subscriptions -> Locations (license aggregation). Tickets -> Locations (issue tracking).\n\n\\## System role\n\nCore. Locations are the primary operational endpoint for field service and site management.\n",
+   "Source - Base - Name": "Jobs",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Job locations",
+   "Direction": "Inbound",
+   "Table - ID": "tblChlR6D4roiK14y",
+   "Source - View ID": "viwsKiJE1HfPAwVeB",
+   "Record ID": "recS8EvryyYjnerri"
+  }
+ },
+ {
+  "id": "recSa9ibnHAkgTD7P",
+  "createdTime": "2026-03-26T03:25:48.000Z",
+  "fields": {
+   "Table - Description": "Operational table managing job scheduling, execution, and status tracking for installations and maintenance workflows.",
+   "Base": "Jobs",
+   "Table - Name": "Jobs",
+   "Table - ID": "tblwHj9cO37wp1fVx",
+   "Record ID": "recSa9ibnHAkgTD7P"
+  }
+ },
+ {
+  "id": "recSkjXl35tPvVDTr",
+  "createdTime": "2026-03-25T10:14:00.000Z",
+  "fields": {
+   "Table - Description": "Time dimension table providing standardized date keys for linking datasets to reporting periods.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tbltxjiJgbUfajgaJ",
+   "Table - Name": "Date range",
+   "Source - Base - Name": "Data",
+   "Source - Base - ID": "app8H7IMW8gHyQzzn",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Date range",
+   "Direction": "Inbound",
+   "Table - ID": "tblhyM9iJjtpORMjy",
+   "Source - View ID": "viwZZlP2GV6hQo1ic",
+   "Record ID": "recSkjXl35tPvVDTr"
+  }
+ },
+ {
+  "id": "recTZbQNGsarjWlk8",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Raw scan entry or scan session intake table. Captures scan code, action type, and links to resulting Scan - Line items. Acts as the session header for barcode scanning workflows.",
+   "Base": "Inventory",
+   "Table - Name": "Scan - Input",
+   "Table - Description - MD": "\\## Purpose\n\nCapture barcode/serial number scan inputs. Scan - Input is the raw scan ingestion layer that feeds downstream processing.\n\n\\## Key data\n\nEach record contains: Label (human context), Scan code (barcode), Action (scan type), Line items (count), Scan data (raw input text). Scan - Input is raw ingestion.\n\n\\## Relationship\n\nOne Scan - Input -> many Scan - Line items (processed results). One Scan - Input <- scanner (external source).\n\n\\## Scale\n\nVaries with scanning frequency. Typically tens to hundreds of scans per week.\n\n\\## Lifecycle\n\n\\- Created: Scan captured\n\\- Processing: Line items being generated\n\\- Completed: All items processed\n\\- Error: Processing failed\n\\- Archived: Historical\n\n\\## Role in system\n\n(Scan ingestion). Scan - Input provides the raw input layer for barcode processing. Used for inventory receipts, location checks, and asset verification.\n\n\\## Data consolidation scope\n\nNot applicable. Scan - Input is native to this base; no syncing.\n\n\\## Data flow model\n\nScanner -> Scan - Input (raw capture). Scan - Input -> Scan - Line items (parsing and matching). Scan - Line items -> Inventory (update).\n\n\\## System role\n\nOptional. Scanning enhances inventory verification but is not core to baseline operations.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblyTY0ftMostdUl9",
+   "Record ID": "recTZbQNGsarjWlk8"
+  }
+ },
+ {
+  "id": "recTp6iVGbD6QCg4j",
+  "createdTime": "2026-03-25T10:14:00.000Z",
+  "fields": {
+   "Table - Description": "Represent physical venue locations for ticket association and operational context. Synced from Locations base to provide venue reference data within Tickets base. Native fields support ticket linking, job association, and customer relationships.",
+   "Base": "Tickets",
+   "Source - Table - ID": "tblChlR6D4roiK14y",
+   "Table - Name": "Locations",
+   "Table - Description - MD": "# Locations\n\n## Purpose\nRepresent physical venue locations for ticket association and operational context. Synced from Locations base to provide venue reference data within Tickets base.\n\n## Key data\nSync from Locations base: ID, Name, Location code, Address, Brand/Brand owner, Contact details, Opening hours, Province/Region, Installation date, KFC-specific attributes, images. Native fields: Ticket links, Job links, Customer link, ticket count rollups.\n\n## Relationship\nOne Location → many Tickets\nOne Location → many Jobs\nOne Location → one Customer\n\n## Scale\n200-300 location records covering active QSR and retail venues across Thailand and regional markets. Synced dataset size matches source Locations base.\n\n## Lifecycle\n- Synced automatically from Locations base when new location created\n- Updates propagate from source to sync target\n- Tickets linked as location-specific incidents occur\n- Jobs linked for field service work\n- Customer link established via automation or manual assignment\n\n## Role in system\nReference layer (Synced table). Locations provide geographical and operational context for tickets, enabling location-based filtering, regional SLA application, and venue-specific incident history tracking. Sync architecture maintains single source of truth in Locations base while exposing location data to ticket operations.\n",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "apprGGdynxDTZMZmO",
+   "Source - View": "Sync to Tickets",
+   "Source - Table - Name": "Locations (internal)",
+   "Direction": "Inbound",
+   "Table - ID": "tbljrW84qbQIoYUBX",
+   "Source - View ID": "viwPzlR4V9Y7U26XM",
+   "Record ID": "recTp6iVGbD6QCg4j"
+  }
+ },
+ {
+  "id": "recUnra9wtW5X1IYs",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Technical specification records linked to resources via attributes. Stores spec values with associated symbols and categories. Used for quote PDFs and product enrichment.",
+   "Base": "Inventory",
+   "Table - Name": "Specs",
+   "Table - Description - MD": "\\## Purpose\n\nStore technical specifications and attribute values. Specs pair Attributes with concrete values for each resource, creating a flexible spec schema.\n\n\\## Key data\n\nEach record contains: Value (spec value), Attribute (reference), Resources (applicable to), Quote visibility flag, Status. Specs are value pairings.\n\n\\## Relationship\n\nOne Spec <- one or many Attributes (many Specs -> one Attribute). One Spec -> many Resources. One Spec -> one or many Quotes (via Resource).\n\n\\## Scale\n\nGrows with product portfolio. Typically 100-500+ specs depending on hardware variety.\n\n\\## Lifecycle\n\n\\- Created: New spec value defined\n\\- Active: In use, visible in quotes\n\\- Hidden: Not visible to customers\n\\- Archived: Obsolete\n\n\\## Role in system\n\n(Technical documentation). Specs are the operational spec database. Used in quote PDF generation, spec sheet construction, and product documentation.\n\n\\## Data consolidation scope\n\nNot applicable. Specs are native to this base; no syncing.\n\n\\## Data flow model\n\nAttributes -> Specs (value assignment). Resources <- Specs (spec set). Quotes <- Specs (PDF generation). Documentation <- Specs (spec sheets).\n\n\\## System role\n\nEnabler. Specs power documentation and customer-facing spec generation.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblyxnYFYWLxgeT0W",
+   "Record ID": "recUnra9wtW5X1IYs"
+  }
+ },
+ {
+  "id": "recViODTmsILhYPky",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Base": "Data",
+   "Source - Table - ID": "tblaMnDYwMhf8fk7d",
+   "Table - Name": "Locations",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "app8H7IMW8gHyQzzn",
+   "Source - View": "Sync to Data",
+   "Source - Table - Name": "Locations",
+   "Direction": "Inbound",
+   "Table - ID": "tblqL7FwSviDdnXC3",
+   "Source - View ID": "viw3rRtX01CWdmapz",
+   "Record ID": "recViODTmsILhYPky"
+  }
+ },
+ {
+  "id": "recWRBgApW0mdl2YK",
+  "createdTime": "2026-03-26T03:40:10.000Z",
+  "fields": {
+   "Table - Description": "Define resolution time thresholds for ticket categories based on Customer and Service line combinations. Each record establishes a duration target (in minutes) against which ticket performance is measured, with automatic SLA compliance percentage calculation from linked ticket resolution timestamps.",
+   "Base": "Tickets",
+   "Table - Name": "SLA",
+   "Table - Description - MD": "# SLA\n\n## Purpose\nDefine resolution time thresholds for ticket categories based on Customer and Service line combinations. Each SLA record establishes a duration target (in minutes) against which ticket performance is measured.\n\n## Key data\nLink to Customer, service line identifier (1/2/3 or short code), OOS flag (boolean), duration target (hours and minutes), derived brand/brand owner from customer link, ticket count rollups (total, resolved, resolved within SLA), calculated SLA compliance percentage.\n\n## Relationship\nOne Customer → many SLA records (one per service line)\nOne SLA → many Tickets\n\n## Scale\n10-15 active SLA records covering major customers across service lines. Each brand owner typically has 2-3 service line tiers (First/Second/Third line) with distinct duration targets.\n\n## Lifecycle\n- Created when new customer onboarded or service line added\n- Duration target set based on contractual agreement\n- OOS flag set for out-of-stock specific SLA variants\n- Tickets linked automatically based on Customer + Service line match\n- SLA compliance metrics derived from linked ticket resolution timestamps\n- Status changed to Expired when contract terminates\n\n## Role in system\nReference layer (Configuration table). SLA records drive ticket duration monitoring, compensation eligibility, and service performance reporting. The table translates contractual service level agreements into operational duration thresholds.\n",
+   "Table - ID": "tblSxD2sxiCGtUnBb",
+   "Record ID": "recWRBgApW0mdl2YK"
+  }
+ },
+ {
+  "id": "recWYIchlvzttXDs2",
+  "createdTime": "2026-03-26T03:22:18.000Z",
+  "fields": {
+   "Table - Description": "Raw ingestion table capturing external system data for monitoring and reconciliation. Acts as a staging layer before normalization.",
+   "Base": "Data",
+   "Table - Name": "Device Portal Scraper",
+   "Table - ID": "tblgyESkug0TcBVHK",
+   "Record ID": "recWYIchlvzttXDs2"
+  }
+ },
+ {
+  "id": "recWbVwEO8NYFEvky",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Inventory dataset tracking physical assets and their status across lifecycle stages, including installation and subscription linkage.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblp7sqsv25DVYs7T",
+   "Table - Name": "Inventory",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Inventory",
+   "Direction": "Bidirectional",
+   "Table - ID": "tblIYO0rNMG36bUmL",
+   "Source - View ID": "viwdjVFIXwzMu5Oky",
+   "Record ID": "recWbVwEO8NYFEvky"
+  }
+ },
+ {
+  "id": "recX6COFYstPrADoP",
+  "createdTime": "2026-03-26T03:27:11.000Z",
+  "fields": {
+   "Table - Description": "Stores external field service worker records linked to installation partners, including identity, compliance, and permit data, and serves as the assignable workforce layer for operational execution.",
+   "Base": "Jobs",
+   "Table - Name": "FS - Workers",
+   "Table - ID": "tblR0LJqaeb44207J",
+   "Record ID": "recX6COFYstPrADoP"
+  }
+ },
+ {
+  "id": "recXjvDThJzaMCPoQ",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Contains the synced master catalog of products and services used in Jobs for quote interpretation, BOM construction, and operational planning, including SKU identity, classification, and inventory context.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tbl3eqL9QVNgZfNgZ",
+   "Table - Name": "Resources",
+   "Table - Description - MD": "\\## Purpose\n\nMaster SKU and product catalog. Resources define all hardware, software, and consumable items available for deployment.\n\n\\## Key data\n\nResources contain: SKU, product name, brand, category, type, images, specs links, and subscription type mappings. Each record represents one unique product model or service offering.\n\n\\## Relationship\n\nOne Resource → many Inventory (physical units). One Resource → many Specs (technical specifications). One Resource → many Subscription types (compatible service offerings). Many Resources → Consumable Movements (for consumable SKUs).\n\n\\## Scale\n\nTypically 20-50 active resource records covering displays, players, accessories, and services. Grows with product portfolio expansion.\n\n\\## Lifecycle\n\n\\- Created: When new SKU is introduced to catalog\n\\- Active: Inventory can be assigned; used in quotes and BOM\n\\- Archived: Marked inactive but existing Inventory and Specs remain linked\n\n\\## Role in system\n\n(Reference layer for product definitions). Acts as normalization point across entire system. Controls inventory classification, subscription mapping, and quote generation. Every physical unit traces back to a Resource.\n\n\\## Data consolidation scope\n\nNot applicable. Resources are native to Inventory base; no cross-base syncing.\n\n\\## Data flow model\n\nResources → Inventory (physical units assigned). Resources → Specs → Quotes (specs pulled for PDF). Resources → Consumable Movements (is\\_consumable flag). Jobs → Inventory → Resources (reverse trace).\n\n\\## System role\n\nEnforcer. Resources gate all downstream operations. Changes to resource definition impact inventory state, quote generation, and subscription logic. Critical for BOM matching.\n",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Resources",
+   "Direction": "Inbound",
+   "Table - ID": "tbl6eFWh1yj7wjiGL",
+   "Source - View ID": "viwtLjsHWcMCWCTiI",
+   "Record ID": "recXjvDThJzaMCPoQ"
+  }
+ },
+ {
+  "id": "recY0F3YZYuqoU8kU",
+  "createdTime": "2026-03-26T03:19:43.000Z",
+  "fields": {
+   "Table - Description": "Time dimension table providing standardized date keys for linking datasets to reporting periods.",
+   "Base": "Data",
+   "Table - Name": "Date range",
+   "Table - ID": "tbltxjiJgbUfajgaJ",
+   "Record ID": "recY0F3YZYuqoU8kU"
+  }
+ },
+ {
+  "id": "recY3OXZx0wWIbwCF",
+  "createdTime": "2026-03-26T03:31:04.000Z",
+  "fields": {
+   "Table - Description": "Central operational endpoint storing all physical installation locations. Consolidates data from Jobs, Inventory, Tickets, and Subscriptions. One customer maps to many locations. Single point of truth for operational history, asset deployment, and support activity.",
+   "Base": "Locations",
+   "Table - Name": "Locations",
+   "Table - ID": "tblaMnDYwMhf8fk7d",
+   "Record ID": "recY3OXZx0wWIbwCF"
+  }
+ },
+ {
+  "id": "recZ4wc0XMShE0xQw",
+  "createdTime": "2026-03-26T03:27:12.000Z",
+  "fields": {
+   "Table - Description": "Maintenance-specific extension table derived from Jobs, created automatically for scheduled maintenance jobs so structured maintenance inspection data, evidence, and report controls can be captured without widening the core Jobs table.",
+   "Base": "Jobs",
+   "Table - Name": "Ma - Jobs",
+   "Table - ID": "tblyPl0fsMSDW2uGQ",
+   "Record ID": "recZ4wc0XMShE0xQw"
+  }
+ },
+ {
+  "id": "recZIKoBXJlVRZo3m",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Normalized scanned records tied to inventory and resource matching. Each line item links a scan session to a specific inventory unit, with resolved status, location, and assignment fields.",
+   "Base": "Inventory",
+   "Table - Name": "Scan - Line items",
+   "Table - Description - MD": "\\## Purpose\n\nNormalize and match scanned items to system records. Scan - Line items parse raw scan input and match against Inventory and Resources.\n\n\\## Key data\n\nEach record contains: Scan (raw input reference), Scanned by (user), Type (barcode/serial/tag), Inventory (matched record), Resource (matched SKU), Location (scan location), Status, Spare flag, Internal flag. Scan - Line items are structured results.\n\n\\## Relationship\n\nOne Scan - Line item <- one Scan - Input. One Scan - Line item -> one Inventory (matched). One Scan - Line item -> one Resource (matched SKU).\n\n\\## Scale\n\nGrows with scanning frequency. Typically hundreds to thousands per month if scanning is active.\n\n\\## Lifecycle\n\n\\- Created: Scan line parsed\n\\- Matched: Inventory/Resource matched\n\\- Unmatched: Could not find record\n\\- Verified: User confirmed match\n\\- Archived: Historical\n\n\\## Role in system\n\n(Scan processing). Scan - Line items provide the structured interface between raw scans and system records. Enable inventory verification and location validation.\n\n\\## Data consolidation scope\n\nNot applicable. Scan - Line items are native to this base; no syncing.\n\n\\## Data flow model\n\nScan - Input -> Scan - Line items (parsing). Scan - Line items -> Inventory (matching and update). Location checks <- Scan - Line items.\n\n\\## System role\n\nOptional. Scanning provides verification but is not core.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblgZUnyuVZwLEk8c",
+   "Record ID": "recZIKoBXJlVRZo3m"
+  }
+ },
+ {
+  "id": "recaV4qC4BJw97OyY",
+  "createdTime": "2026-03-26T03:31:10.000Z",
+  "fields": {
+   "Table - Description": "Master list of brand identities (e.g. KFC, Apple). Used as one component in defining a customer.",
+   "Base": "Locations",
+   "Table - Name": "Brands",
+   "Table - ID": "tbllTcNIfg7TkJMUO",
+   "Record ID": "recaV4qC4BJw97OyY"
+  }
+ },
+ {
+  "id": "recanMwXxRI3UELSA",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Table - Description": "Bidirectional sync from Jobs base. Enables linking locations to jobs for consolidated operational visibility within the Locations base.",
+   "Base": "Locations",
+   "Source - Table - ID": "tblwHj9cO37wp1fVx",
+   "Table - Name": "Jobs",
+   "Source - Base - Name": "Jobs",
+   "Source - Base - ID": "appdo1WwONYvmYMWg",
+   "Destination - Base - ID": "appmFizJaAn7yKKVu",
+   "Source - View": "Sync to Locations",
+   "Source - Table - Name": "Jobs",
+   "Direction": "Bidirectional",
+   "Table - ID": "tbl6c4QsHZx3ZAq3n",
+   "Source - View ID": "viwGcejaxwnCEbOFl",
+   "Record ID": "recanMwXxRI3UELSA"
+  }
+ },
+ {
+  "id": "recbCPJoACTvhFBJF",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Table - Description": "Master data table for customers and brands. Serves as a linking layer between locations, subscriptions, and commercial data.",
+   "Base": "Data",
+   "Source - Table - ID": "tblu9pLBFjxYX9RwL",
+   "Table - Name": "Customers",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "app8H7IMW8gHyQzzn",
+   "Source - View": "Sync to Data",
+   "Source - Table - Name": "Customers",
+   "Direction": "Inbound",
+   "Table - ID": "tblXwqwgUigjEKIHK",
+   "Source - View ID": "viw1vGA1iU9H6E6qL",
+   "Record ID": "recbCPJoACTvhFBJF"
+  }
+ },
+ {
+  "id": "recbF5N7aqqGQ5M4C",
+  "createdTime": "2026-03-26T03:40:01.000Z",
+  "fields": {
+   "Table - Description": "Decompose out-of-stock menu item requests from parent tickets into individually tracked remediation tasks. Each record represents a single menu item unavailability period at a specific location screen, with start/end timestamps and request type classification (Add/Remove/Extend). Status progresses from Todo to Done as items return to availability.",
+   "Base": "Tickets",
+   "Table - Name": "OOS items",
+   "Table - Description - MD": "\\# OOS items\n\n\\## Purpose\nDecompose out-of-stock menu item requests from parent tickets into individually tracked remediation tasks. Each record represents a single menu item unavailability period at a specific location screen, with start/end timestamps and request type classification (Add/Remove/Extend).\n\n\\## Key data\nLink to parent Ticket, link to Menu item reference, start/end datetime pair, request type (Add/Remove/Extend), OOS screen location (FOH/Centerline positions), status (Todo/Done/On hold), assignee, notes field for resolution details, derived fields from parent ticket (brand owner, region, province, daypart, SLA).\n\n\\## Relationship\nOne Ticket → many OOS items\nOne Menu item → many OOS items\n\n\\## Scale\nTypically 1-5 OOS items per out-of-stock ticket. High-volume QSR locations may generate 20-30 OOS item records per week during peak promotional periods or supply chain disruptions.\n\n\\## Lifecycle\n\\- Created automatically when OOS enquiry ticket is submitted via Fillout form\n\\- Menu item link populated from temporary text field via automation matching\n\\- Start date captured from ticket creation timestamp\n\\- Assignee set based on brand owner and region\n\\- Status progresses from Todo → Done when item availability restored\n\\- End date recorded when status changes to Done\n\\- Notes field populated with resolution details or supply chain feedback\n\n\\## Role in system\nDecomposition layer (Detail table). OOS items break down aggregate ticket-level out-of-stock reports into granular, screen-specific, item-specific tracking records. This enables operational teams to monitor individual menu item availability periods and aggregate OOS metrics by item, location, daypart, and brand owner.\n",
+   "Table - ID": "tbl7imdzfTzQLIICs",
+   "Record ID": "recbF5N7aqqGQ5M4C"
+  }
+ },
+ {
+  "id": "recbdofwXJe2zfYtn",
+  "createdTime": "2026-03-26T03:40:07.000Z",
+  "fields": {
+   "Table - Description": "Capture audit trail of ticket status transitions. Each record represents a single status change event with timestamp, user, and status value, providing complete lifecycle reconstruction capability for compliance and process analysis.",
+   "Base": "Tickets",
+   "Table - Name": "Ticket log",
+   "Table - Description - MD": "# Ticket log\n\n## Purpose\nCapture audit trail of ticket status transitions. Each record represents a single status change event on a parent ticket.\n\n## Key data\nID, created timestamp, modified by (collaborator), status value at time of change, link to parent Incident (ticket).\n\n## Relationship\nOne Ticket → many Ticket log entries\n\n## Scale\n3-10 log entries per ticket depending on lifecycle complexity. High-touch tickets with multiple Pending cycles may generate 15-20 log entries.\n\n## Lifecycle\n- Created automatically when ticket status field changes\n- Status value captured from ticket at moment of change\n- Modified by populated with user who triggered status change\n- Created timestamp provides audit timestamp\n- Immutable after creation\n\n## Role in system\nAudit layer (History table). Ticket log provides complete status transition history for compliance, dispute resolution, and process analysis. The table enables reconstruction of ticket lifecycle timeline and identification of process bottlenecks.\n",
+   "Table - ID": "tbleP7GMbY1P3ERFv",
+   "Record ID": "recbdofwXJe2zfYtn"
+  }
+ },
+ {
+  "id": "recdPI0TU76alqY7l",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Table - Description": "Synced from Jobs base to provide visibility into installation, maintenance, and reactive service work triggered by tickets. Native fields track ticket associations and open ticket counts.",
+   "Base": "Tickets",
+   "Source - Table - ID": "tblwHj9cO37wp1fVx",
+   "Table - Name": "Jobs",
+   "Table - Description - MD": "# Jobs\n\n## Purpose\nRepresent field service work orders linked to ticket-reported issues. Synced from Jobs base to provide visibility into installation, maintenance, and reactive service work triggered by tickets.\n\n## Key data\nSync from Jobs base: ID, Job type, Location link, Brand/Brand owner, scheduled/actual dates, status, inventory link. Native fields: Ticket links, ticket status rollup, open ticket count.\n\n## Relationship\nOne Job → many Tickets (reverse link)\nOne Location → many Jobs\n\n## Scale\n50-100 active jobs per month. Subset of jobs linked to tickets (reactive maintenance, rework). Installation and pre-sale jobs typically not ticket-linked.\n\n## Lifecycle\n- Synced automatically from Jobs base when job record created\n- Tickets linked manually or via automation when job addresses ticket-reported issue\n- Status updates propagate from source\n- Completion status tracked via synced Status field\n\n## Role in system\nOperational layer (Synced table). Jobs provide visibility into field service response to ticket-reported issues, enabling tracking of ticket-to-resolution workflow when physical intervention required. Sync architecture avoids data duplication while maintaining ticket-job association.\n",
+   "Source - Base - Name": "Jobs",
+   "Source - Base - ID": "appdo1WwONYvmYMWg",
+   "Destination - Base - ID": "apprGGdynxDTZMZmO",
+   "Source - View": "Sync to Tickets",
+   "Source - Table - Name": "Jobs",
+   "Direction": "Inbound",
+   "Table - ID": "tblalOqkup0XIxdVa",
+   "Source - View ID": "viwUV7116EE7AD1LF",
+   "Record ID": "recdPI0TU76alqY7l"
+  }
+ },
+ {
+  "id": "rece8l9lj872bErm1",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Table - Description": "Brand reference layer used by customers, locations, contracts, and inventory. Links to import inventory and pre-assigned brand records for asset allocation workflows.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tbllTcNIfg7TkJMUO",
+   "Table - Name": "Brands",
+   "Table - Description - MD": "\\## Purpose\n\nRepresent commercial brand identities in the system. Brands are product/service brands that customers deploy and subscribe to.\n\n\\## Key data\n\nEach record contains: Brand name, Brand owner, Countries, Inventory count (deployed), Subscription count. Brands are commercial identities.\n\n\\## Relationship\n\nOne Brand <- one Brand owner. One Brand -> many Inventory items (deployed). One Brand -> many Subscriptions (indirect). One Brand <- many Customers (commercial relationship).\n\n\\## Scale\n\nTypically 5-50 brands depending on portfolio.\n\n\\## Lifecycle\n\n\\- Active: Brand operating\n\\- Inactive: No longer sold\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Commercial identity). Brands represent the commercial product lines deployed in the field. Used for revenue reporting and customer relationship segmentation.\n\n\\## Data consolidation scope\n\nNot applicable. Brands are native to this base; synced to Locations and Tickets bases for reporting.\n\n\\## Data flow model\n\nBrand owners -> Brands (ownership). Inventory <- Brands (deployed). Subscriptions <- Brands (service delivery). Revenue reporting <- Brands (segmentation).\n\n\\## System role\n\nCore. Brands are essential for commercial reporting and relationship management.\n",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Brands",
+   "Direction": "Inbound",
+   "Table - ID": "tblzULqbssoVRTeG6",
+   "Source - View ID": "viwRiQdheYvVG03YL",
+   "Record ID": "rece8l9lj872bErm1"
+  }
+ },
+ {
+  "id": "recf7uu3FCoZLBWKs",
+  "createdTime": "2026-03-25T10:14:00.000Z",
+  "fields": {
+   "Table - Description": "Commercial data ingestion table syncing quote and pricing information from external CRM. Used to derive contracts and subscription structures.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblhX7SNxLUje9Rac",
+   "Table - Name": "HS - Quotes",
+   "Source - Base - Name": "Data",
+   "Source - Base - ID": "app8H7IMW8gHyQzzn",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "HS - Quotes",
+   "Direction": "Inbound",
+   "Table - ID": "tblRSXCmjroNPaO5j",
+   "Source - View ID": "viwsYWxVwwyOcXJe7",
+   "Record ID": "recf7uu3FCoZLBWKs"
+  }
+ },
+ {
+  "id": "recfdWjY3FoFZsX98",
+  "createdTime": "2026-03-26T03:22:19.000Z",
+  "fields": {
+   "Table - Description": "Commercial data ingestion table syncing quote information from HubSpot CRM. ",
+   "Base": "Data",
+   "Table - Name": "HS - Quotes",
+   "Table - ID": "tblhX7SNxLUje9Rac",
+   "Record ID": "recfdWjY3FoFZsX98"
+  }
+ },
+ {
+  "id": "recgam4qfN33r2D3D",
+  "createdTime": "2026-03-26T03:31:08.000Z",
+  "fields": {
+   "Table - Description": "Non-administrative geographic groupings within a country (e.g. Northeast Thailand, South). Enables flexible geographic segmentation beyond formal administrative divisions.",
+   "Base": "Locations",
+   "Table - Name": "Regions",
+   "Table - ID": "tbl36FUpxfS4rEWLd",
+   "Record ID": "recgam4qfN33r2D3D"
+  }
+ },
+ {
+  "id": "recgqrVlbOJq4Y2Dq",
+  "createdTime": "2026-03-26T03:19:41.000Z",
+  "fields": {
+   "Table - Description": "Time-based aggregation layer for subscription analytics, enabling churn, new, and active subscription calculations across periods.",
+   "Base": "Data",
+   "Table - Name": "Subscriptions - Date range",
+   "Table - ID": "tblfA08VVwMAme3V3",
+   "Record ID": "recgqrVlbOJq4Y2Dq"
+  }
+ },
+ {
+  "id": "rech5nZeAMVl0oReN",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblu9pLBFjxYX9RwL",
+   "Table - Name": "Customers",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Sync to Monitoring",
+   "Source - Table - Name": "Customers",
+   "Direction": "Inbound",
+   "Table - ID": "tblXHHHjzhIPEAsAc",
+   "Source - View ID": "viwErBaviFKTyyzOE",
+   "Record ID": "rech5nZeAMVl0oReN"
+  }
+ },
+ {
+  "id": "rechGRIlCvkqLlvYa",
+  "createdTime": "2026-03-26T03:19:43.000Z",
+  "fields": {
+   "Table - Description": "Raw ingestion table capturing external system data for monitoring and reconciliation. Acts as a staging layer before normalization.",
+   "Base": "Data",
+   "Table - Name": "Signage Scraper",
+   "Table - ID": "tblC3p1fkNrxk4tMO",
+   "Record ID": "rechGRIlCvkqLlvYa"
+  }
+ },
+ {
+  "id": "recjX9eW6pv9bjTy9",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Player monitoring and status table for TargetR-connected units. Tracks online/offline status, last contact timestamp, MAC address, local IP, and WiFi SSID. Linked to Inventory via MAC address.",
+   "Base": "Inventory",
+   "Table - Name": "TargetR - Status",
+   "Table - Description - MD": "\\## Purpose\n\nMonitor player health and connectivity status. TargetR - Status tracks real-time or near-real-time status of media players deployed in the field.\n\n\\## Key data\n\nEach record contains: MAC address (player ID), Label, Last online (timestamp), Time offline (minutes), WiFi SSID, Local IP, Status. Status records are near-real-time.\n\n\\## Relationship\n\nOne TargetR - Status <- one Inventory (MAC address link). One TargetR - Status <- one TargetR - PoP (network grouping).\n\n\\## Scale\n\nScales with player count. Typically updated hourly or daily.\n\n\\## Lifecycle\n\n\\- Created: Player provisioned\n\\- Online: Actively communicating\n\\- Offline: No recent heartbeat\n\\- Archived: Player retired\n\n\\## Role in system\n\n(Monitoring layer). TargetR - Status provides visibility into player uptime and connectivity health. Used for SLA compliance and incident detection.\n\n\\## Data consolidation scope\n\nNot applicable. TargetR - Status is native to this base; synced from external TargetR API.\n\n\\## Data flow model\n\nTargetR API -> TargetR - Status (sync). Inventory <- TargetR - Status (health lookup). Tickets -> (created from status anomalies).\n\n\\## System role\n\nSupporting. TargetR - Status enables operational visibility and incident detection.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tbl5VPIqFKPN3PHfK",
+   "Record ID": "recjX9eW6pv9bjTy9"
+  }
+ },
+ {
+  "id": "reckpudU1iAEZbQC2",
+  "createdTime": "2026-03-25T10:14:22.000Z",
+  "fields": {
+   "Table - Description": "Support and incident linkage table connecting inventory items into the operational support flow. Tracks ticket subject, status, priority, SLA compliance, and location context.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tbl7Y9QHzO1TyWZDl",
+   "Table - Name": "Tickets",
+   "Table - Description - MD": "\\## Purpose\n\nTrack operational issues and incidents. Tickets are support/incident records linked to inventory and locations for problem resolution.\n\n\\## Key data\n\nEach record contains: Subject, Priority, Status, Location, Inventory items, Description, Created date, SLA status, URL to external ticket system. Tickets are incident units.\n\n\\## Relationship\n\nOne Ticket -> one Location. One Ticket -> many Inventory items (implicated). One Ticket <- external ticketing system (Freshdesk/AirTable sync).\n\n\\## Scale\n\nTypically tens to hundreds per month depending on incident frequency.\n\n\\## Lifecycle\n\n\\- Created: Issue reported\n\\- Open: In progress\n\\- Pending: Awaiting response\n\\- Resolved: Fixed\n\\- Closed: Archived\n\n\\## Role in system\n\n(Issue tracking). Tickets provide incident tracking and SLA compliance. All operational issues flow through tickets for visibility and escalation.\n\n\\## Data consolidation scope\n\nNot applicable. Tickets are native to this base; synced from external ticketing system via integration.\n\n\\## Data flow model\n\nExtenal ticketing -> Tickets (sync). Locations -> Tickets (site reference). Inventory -> Tickets (implicated items). Tickets -> Jobs (create maintenance job from ticket).\n\n\\## System role\n\nCore. Tickets are essential for operational incident management and SLA tracking.\n",
+   "Source - Base - Name": "Tickets",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Tickets",
+   "Direction": "Inbound",
+   "Table - ID": "tblqkXYEpx9X2wHXJ",
+   "Source - View ID": "viwjA9XS27mS584xe",
+   "Record ID": "reckpudU1iAEZbQC2"
+  }
+ },
+ {
+  "id": "reckz0MLvmYrfbJor",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Warehouse and stock-holding locations used before deployment or for spare stock management. Linked to inventory items and countries. Supports pre-deployment staging and spare stock workflows.",
+   "Base": "Inventory",
+   "Table - Name": "Stock locations",
+   "Table - Description - MD": "\\## Purpose\n\nRepresent physical warehouse and stock holding locations. Stock locations are the origin/destination points for inventory movement and storage before installation.\n\n\\## Key data\n\nEach record contains: Name, Country, Region, Status, Inventory count. Stock locations are referenced for in-transit tracking and consumable movement origin.\n\n\\## Relationship\n\nOne Stock location -> many Inventory items (while in stock). One Stock location -> many Consumable Movements (consumption tracking).\n\n\\## Scale\n\nTypically 5-30 locations depending on distribution network. Each location holds multiple SKUs.\n\n\\## Lifecycle\n\n\\- Active: Operational warehouse, receiving and shipping stock\n\\- Inactive: Closed or dormant, no new stock\n\\- Archived: Historical reference only\n\n\\## Role in system\n\n(Logistics reference). Stock locations anchor inventory movement logistics and consumable consumption attribution. Used for cost allocation and reorder triggering.\n\n\\## Data consolidation scope\n\nNot applicable. Stock locations are native to this base; no syncing.\n\n\\## Data flow model\n\nInventory (before installation) <- Stock location. Consumable Movements reference Stock location for origin/destination. Jobs may reference Stock location for material pickup.\n\n\\## System role\n\nEnabler. Supports logistics workflows but does not directly drive operational state changes.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblYuICPpfVdM7KRd",
+   "Record ID": "reckz0MLvmYrfbJor"
+  }
+ },
+ {
+  "id": "reclNSiy4yep3tQCD",
+  "createdTime": "2026-03-26T03:25:49.000Z",
+  "fields": {
+   "Table - Description": "The Tasks table is the execution decomposition layer beneath Jobs. It breaks a job into smaller assignable work units across defined delivery phases, tracks ownership and progress at both task and subtask level, and feeds completion data back into the parent job so operational follow-through can be monitored in a structured way.",
+   "Base": "Jobs",
+   "Table - Name": "Tasks",
+   "Table - ID": "tblh1SjKm6XTlBY8q",
+   "Record ID": "reclNSiy4yep3tQCD"
+  }
+ },
+ {
+  "id": "recltQ8NcLlW3YPOG",
+  "createdTime": "2026-03-26T03:32:31.000Z",
+  "fields": {
+   "Table - Description": "Staging table for bulk location ingestion. Records are validated and then pushed into the Locations table via automation.",
+   "Base": "Locations",
+   "Table - Name": "Import locations",
+   "Table - ID": "tblzc37sUyhDG502U",
+   "Record ID": "recltQ8NcLlW3YPOG"
+  }
+ },
+ {
+  "id": "recmYYwoQteg3gxnk",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "TargetR proof-of-play or deployment grouping layer. Associates screen IDs to custom item IDs (MAC address) and timestamps. Used for TargetR monitoring event correlation and bracket/slot tracking.",
+   "Base": "Inventory",
+   "Table - Name": "TargetR - PoP",
+   "Table - Description - MD": "\\## Purpose\n\nGroup players by network proximity or deployment grouping. TargetR - PoP represents point-of-presence clusters for player orchestration.\n\n\\## Key data\n\nEach record contains: customItemId, screenId (Inventory link), Label, Created timestamp. TargetR - PoP provides network grouping.\n\n\\## Relationship\n\nOne TargetR - PoP -> many Inventory items (member screens). One TargetR - PoP <- TargetR API (external source).\n\n\\## Scale\n\nVaries by network topology. Typically tens to hundreds of PoP clusters.\n\n\\## Lifecycle\n\n\\- Created: Network cluster defined\n\\- Active: Members online and managed together\n\\- Archived: Network decommissioned\n\n\\## Role in system\n\n(Network topology). TargetR - PoP enables logical grouping of players for collaborative management and orchestration.\n\n\\## Data consolidation scope\n\nNot applicable. TargetR - PoP is native to this base; synced from external TargetR API.\n\n\\## Data flow model\n\nTargetR API -> TargetR - PoP (network sync). TargetR - PoP -> Inventory (member reference). Orchestration <- TargetR - PoP (grouping logic).\n\n\\## System role\n\nOptional. TargetR - PoP enhances player orchestration but is not core.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblXAOl3ZEW1PuJc7",
+   "Record ID": "recmYYwoQteg3gxnk"
+  }
+ },
+ {
+  "id": "recmxQ3IKHcUUgW4M",
+  "createdTime": "2026-03-26T03:40:06.000Z",
+  "fields": {
+   "Table - Description": "Map Freshdesk agent names to Airtable collaborator accounts for ticket assignment synchronization. Bridges external Freshdesk user identity with internal Airtable user identity, enabling agent assignment visibility across both systems.",
+   "Base": "Tickets",
+   "Table - Name": "Agents",
+   "Table - Description - MD": "# Agents\n\n## Purpose\nMap Freshdesk agent names to Airtable collaborator accounts for ticket assignment synchronization. Bridges external Freshdesk user identity with internal Airtable user identity.\n\n## Key data\nName from Freshdesk, mapped Airtable user (collaborator), notes, status (Todo/In progress/Done), time blocks.\n\n## Relationship\nNo direct links (mapping table)\n\n## Scale\n10-20 agent records covering active support team members. Grows slowly as team composition changes.\n\n## Lifecycle\n- Created when new agent added to Freshdesk\n- Freshdesk name populated\n- Airtable user mapped to corresponding collaborator\n- Status set to Done when mapping active\n- Status changed to Todo/In progress when mapping needs update\n\n## Role in system\nReference layer (Mapping table). Agents enable assignment field synchronization between Freshdesk tickets and Airtable ticket records, ensuring agent assignment visibility across both systems.\n",
+   "Table - ID": "tblKaHbVK8L9U1LT1",
+   "Record ID": "recmxQ3IKHcUUgW4M"
+  }
+ },
+ {
+  "id": "recnMadwArddalyjJ",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblaMnDYwMhf8fk7d",
+   "Table - Name": "Locations",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Sync to Monitoring",
+   "Source - Table - Name": "Locations",
+   "Direction": "Inbound",
+   "Table - ID": "tblITuNdlHo7zofcV",
+   "Source - View ID": "viwF10tXLICVqyjhX",
+   "Record ID": "recnMadwArddalyjJ"
+  }
+ },
+ {
+  "id": "recnMgPzpUYyqOIkE",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Table - Description": "Central subscription dataset aggregating contract, inventory, and lifecycle data. Used for revenue tracking, churn analysis, and operational reporting.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tblhn4CJZbi57C8WP",
+   "Table - Name": "Subscription contracts",
+   "Source - Base - Name": "Inventory",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Subscription contracts",
+   "Direction": "Inbound",
+   "Table - ID": "tbl8uHwls1HZbjYun",
+   "Source - View ID": "viwZ9ShYOeTrOzmrr",
+   "Record ID": "recnMgPzpUYyqOIkE"
+  }
+ },
+ {
+  "id": "recoP9E9goI5G8nld",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "Staging and import table used to ingest inventory data into the operational model. Handles serial number normalization, duplicate detection, device model matching, and controlled import via checkbox trigger.",
+   "Base": "Inventory",
+   "Table - Name": "Import inventory",
+   "Table - Description - MD": "\\## Purpose\n\nStaging layer for inventory ingestion from external sources. Import inventory holds raw or cleaned data before validation and creation of official Inventory records.\n\n\\## Key data\n\nEach record contains: Serial number, Device model (Resource link), Location (installation and stock), Installation area, Status, Duplicate flag, SEA flag, Brand pre-assignment. Import staging holds staging records.\n\n\\## Relationship\n\nOne Import inventory -> one or many Inventory (created result). One Import inventory <- external source (BOM, RFQ, delivery manifest).\n\n\\## Scale\n\nTemporary staging. Typically hundreds to thousands of records per import batch.\n\n\\## Lifecycle\n\n\\- Created: Data ingested\n\\- Processing: Validation underway\n\\- Imported: Official Inventory created, linked\n\\- Duplicate: Flagged, not imported\n\\- Error: Validation failed, flagged for manual review\n\\- Archived: Batch complete, historical reference\n\n\\## Role in system\n\n(Data ingestion). Import inventory provides a safe staging layer for data import. Prevents invalid data from polluting official Inventory.\n\n\\## Data consolidation scope\n\nNot applicable. Import inventory is native to this base; no syncing.\n\n\\## Data flow model\n\nExternal source -> Import inventory (staging). Import inventory -> Inventory (validation and creation). Errors -> manual review queue.\n\n\\## System role\n\nSupporting. Import inventory enables safe data onboarding but is not core once data is imported.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblD6rNbSiu12OG0o",
+   "Record ID": "recoP9E9goI5G8nld"
+  }
+ },
+ {
+  "id": "recog4oV1NPdLVAg7",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "SKU and resource master defining product types, categories, brands, specs, and service classification. Flags whether an item is consumable or player-related. Referenced by Inventory, Subscriptions, and Quotes.",
+   "Base": "Inventory",
+   "Table - Name": "Resources",
+   "Table - Description - MD": "\\## Purpose\n\nMaster product catalog and SKU registry. Resources define all resource types, classes, and properties available in the system.\n\n\\## Key data\n\nEach record contains: ID (SKU), Brand, Category, Type, Image, Links to Specs, Links to Inventory instances, Subscription type compatibility, BOM identifier. Resources normalize product definitions.\n\n\\## Relationship\n\nOne Resource -> many Inventory units. One Resource -> many Specs (technical definitions). One Resource -> many Subscription types (service eligibility).\n\n\\## Scale\n\nTypically 50-500+ distinct resource definitions covering hardware players, displays, accessories, and services.\n\n\\## Lifecycle\n\n\\- Created: New product model identified\n\\- Active: In use, can be ordered and deployed\n\\- Deprecated: No longer sold but existing units remain tracked\n\\- Archived: Obsolete, historical reference only\n\n\\## Role in system\n\n(Reference/classification layer). Resources do not drive workflows but anchor inventory classification, BOM logic, and subscription mapping. Acts as a normalization layer across the system.\n\n\\## Data consolidation scope\n\nNot applicable. Resources are native to this base; no syncing occurs.\n\n\\## Data flow model\n\nResources <- external (product master data). Resources -> Inventory (SKU assignment). Resources -> Specs (spec set definition). Resources -> Subscription types (service mapping).\n\n\\## System role\n\nEnabler. Provides taxonomic foundation for classification but does not execute operations.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tbl3eqL9QVNgZfNgZ",
+   "Record ID": "recog4oV1NPdLVAg7"
+  }
+ },
+ {
+  "id": "recoqubhX0AzGzWIo",
+  "createdTime": "2026-03-26T03:27:01.000Z",
+  "fields": {
+   "Table - Description": "Stores external field service partner organizations, including contact, geographic, workforce, and job linkage data, and acts as the coordination layer for grouping workers and managing outsourced execution across jobs.",
+   "Base": "Jobs",
+   "Table - Name": "FS - Partners",
+   "Table - ID": "tblkK66QqEkfAKb2S",
+   "Record ID": "recoqubhX0AzGzWIo"
+  }
+ },
+ {
+  "id": "recpprY4BkKrKa8CO",
+  "createdTime": "2026-03-25T10:01:30.000Z",
+  "fields": {
+   "Base": "Data",
+   "Source - Table - ID": "tbldE1r6MKSgebujM",
+   "Table - Name": "Quotes",
+   "Source - Base - Name": "Jobs",
+   "Source - Base - ID": "appdo1WwONYvmYMWg",
+   "Destination - Base - ID": "app8H7IMW8gHyQzzn",
+   "Source - View": "Sync to Data",
+   "Source - Table - Name": "Quotes",
+   "Direction": "Inbound",
+   "Table - ID": "tblbGkzCmn5IGDype",
+   "Source - View ID": "viwi02oWCoEgbmpUK",
+   "Record ID": "recpprY4BkKrKa8CO"
+  }
+ },
+ {
+  "id": "recqpE05vePOj5oJt",
+  "createdTime": "2026-03-25T10:02:02.000Z",
+  "fields": {
+   "Table - Description": "Customer master table linking brand, brand owner, country, and commercial identity. Central reference for subscription contracts, locations, and revenue aggregation.",
+   "Base": "Inventory",
+   "Source - Table - ID": "tblu9pLBFjxYX9RwL",
+   "Table - Name": "Customers",
+   "Table - Description - MD": "\\## Purpose\n\nCustomer identity and relationship layer. Customers define brand ownership and commercial entities that own subscriptions.\n\n\\## Key data\n\nEach record contains: Name, Brand owner, Country, Service eligibility, Contact details, Subscription contract count, Active subscription rollup. Customers are the commercial anchors.\n\n\\## Relationship\n\nOne Customer -> many Locations. One Customer -> many Subscription contracts. One Customer -> many Subscriptions (indirect). One Customer <- Brand assignment.\n\n\\## Scale\n\nTypically 20-500+ customers depending on market coverage.\n\n\\## Lifecycle\n\n\\- Active: Ongoing relationship\n\\- Inactive: No new contracts\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Commercial layer). Customers aggregate subscriptions for billing, reporting, and commercial relationship management. All revenue flows through customer aggregation.\n\n\\## Data consolidation scope\n\nNot applicable. Customers are native to this base; synced to Locations and Tickets bases for reporting.\n\n\\## Data flow model\n\nSubscription contracts -> Customers (owner reference). Locations -> Customers (relationship). Revenue reporting <- Customers (aggregation point).\n\n\\## System role\n\nCore. Customers are essential for commercial operations and revenue recognition.\n",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Destination - Base - ID": "appRor1ipbYAb4K7z",
+   "Source - View": "Sync to Inventory",
+   "Source - Table - Name": "Customers",
+   "Direction": "Inbound",
+   "Table - ID": "tblxGzxvDjhH7NX1N",
+   "Source - View ID": "viwVAwIFCKoJam4qz",
+   "Record ID": "recqpE05vePOj5oJt"
+  }
+ },
+ {
+  "id": "recquMbE5h2AWnFpv",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Grouping mechanism for bundling multiple inventory items into a kit or set relationship. Linked to locations and inventory items. Supports multi-unit deployment tracking.",
+   "Base": "Inventory",
+   "Table - Name": "Sets",
+   "Table - Description - MD": "\\## Purpose\n\nLogical grouping of multiple inventory units into installable kits. Sets bundle components as a single deployable unit while preserving individual unit tracking.\n\n\\## Key data\n\nEach record contains: Name, Location (installation), Inventory (member units), Status (rollup from members). Sets define multi-unit arrangements.\n\n\\## Relationship\n\nOne Set -> many Inventory items. One Set -> one Location. One Inventory -> many Sets (optional, can be member of multiple kits).\n\n\\## Scale\n\nVaries by deployment type. Typically 10-100+ sets depending on multi-unit installation prevalence.\n\n\\## Lifecycle\n\n\\- Created: Upon multi-unit deployment requirement\n\\- Active: Members installed and active\n\\- Partial: Some members missing or spare\n\\- Archived: Set no longer relevant\n\n\\## Role in system\n\n(Logical grouping). Sets do not drive workflows but enable bundled management of related units. Used for floor plan documentation and multi-display orchestration.\n\n\\## Data consolidation scope\n\nNot applicable. Sets are native to this base; no syncing.\n\n\\## Data flow model\n\nSets -> Inventory (bundling reference). Locations -> Sets (optional reference for layout documentation).\n\n\\## System role\n\nOptional. Sets enhance operational clarity but are not critical to core workflows.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblRKsQAUhleUehVS",
+   "Record ID": "recquMbE5h2AWnFpv"
+  }
+ },
+ {
+  "id": "recrzj5myWjQ9XYKW",
+  "createdTime": "2026-03-26T03:27:12.000Z",
+  "fields": {
+   "Table - Description": "Maintenance package template table defining recurring or reactive maintenance scope for linked customers, BOM context, and job locations. Packages act as the parent template layer from which linked maintenance items drive automated maintenance job creation.",
+   "Base": "Jobs",
+   "Table - Name": "Ma - Packages",
+   "Table - ID": "tblolQwuQPsrlk49C",
+   "Record ID": "recrzj5myWjQ9XYKW"
+  }
+ },
+ {
+  "id": "recsQyN7w9DQGC385",
+  "createdTime": "2026-03-27T06:11:00.000Z",
+  "fields": {
+   "Table - Description": "Normalized classification of subscription offerings. Defines duration, service type, auto-renew behavior, and license type. Linked to resources and subscription contracts.",
+   "Base": "Inventory",
+   "Table - Name": "Subscription types",
+   "Table - Description - MD": "\\## Purpose\n\nStandardize subscription behavior and service mappings. Subscription types define service eligibility and default duration for a resource class.\n\n\\## Key data\n\nEach record contains: Service, Duration (months default), Auto-renewal, License type (CMS/player/service), FoC (Free-of-Charge) flag. Subscription types are the vocabulary layer between resources and subscriptions.\n\n\\## Relationship\n\nOne Subscription type -> many Subscriptions. One Subscription type -> many Resources (eligibility). One Subscription type <- Subscription contract (reference).\n\n\\## Scale\n\nTypically 10-50 distinct subscription types covering different service bundles and license models.\n\n\\## Lifecycle\n\n\\- Created: New service bundle defined\n\\- Active: In use, subscriptions can be created\n\\- Deprecated: No longer sold but existing subscriptions remain\n\\- Archived: Historical reference\n\n\\## Role in system\n\n(Configuration/taxonomy). Subscription types normalize service definitions and map resources to service bundles. Do not execute operations but enable consistent classification.\n\n\\## Data consolidation scope\n\nNot applicable. Subscription types are native to this base; no syncing.\n\n\\## Data flow model\n\nSubscription types <- Resource (eligibility mapping). Subscriptions -> Subscription types (service reference). Subscription contracts -> Subscription types (term definition).\n\n\\## System role\n\nEnabler. Subscription types provide service taxonomy but do not drive workflows directly.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblKuzC0cNODVv9Zm",
+   "Record ID": "recsQyN7w9DQGC385"
+  }
+ },
+ {
+  "id": "rectHwBsXan1CdFu1",
+  "createdTime": "2026-03-26T03:19:42.000Z",
+  "fields": {
+   "Table - Description": "HR dataset tracking employee lifecycle, including hiring, termination, and organizational attributes. Used for headcount and operational reporting.",
+   "Base": "Data",
+   "Table - Name": "Employees",
+   "Table - ID": "tblzRNXv6tFfHDs0K",
+   "Record ID": "rectHwBsXan1CdFu1"
+  }
+ },
+ {
+  "id": "recuCnVcUoVNyQ44J",
+  "createdTime": "2026-03-26T03:31:09.000Z",
+  "fields": {
+   "Table - Description": "Formal administrative areas (states, provinces). Hierarchy: Country > Region > Subdivision. Provides structured geographic hierarchy for location classification.",
+   "Base": "Locations",
+   "Table - Name": "Subdivisions",
+   "Table - ID": "tblZRwcVwuj5LbewW",
+   "Record ID": "recuCnVcUoVNyQ44J"
+  }
+ },
+ {
+  "id": "recuUglAkCY7fbPJT",
+  "createdTime": "2026-03-25T10:07:49.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblomN4KFzhzTeZyB",
+   "Table - Name": "Brand owners",
+   "Source - Base - Name": "Locations",
+   "Source - Base - ID": "appmFizJaAn7yKKVu",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Sync to Monitoring",
+   "Source - Table - Name": "Brand owners",
+   "Direction": "Inbound",
+   "Table - ID": "tblUDdMyIG5CJOEPQ",
+   "Source - View ID": "viwvU7F4x5lb1o2up",
+   "Record ID": "recuUglAkCY7fbPJT"
+  }
+ },
+ {
+  "id": "recuVTWBKza34IkLy",
+  "createdTime": "2026-03-25T10:14:22.000Z",
+  "fields": {
+   "Table - Description": "Support ticket dataset syncing external service desk data. Used for issue tracking, SLA monitoring, and operational support workflows.",
+   "Base": "Jobs",
+   "Source - Table - ID": "tbl7Y9QHzO1TyWZDl",
+   "Table - Name": "Tickets",
+   "Source - Base - Name": "Tickets",
+   "Source - Base - ID": "apprGGdynxDTZMZmO",
+   "Destination - Base - ID": "appdo1WwONYvmYMWg",
+   "Source - View": "Sync to Jobs",
+   "Source - Table - Name": "Tickets",
+   "Direction": "Inbound",
+   "Table - ID": "tblL6BV68MtM3ZkdJ",
+   "Source - View ID": "viw65VJh074vT5lkq",
+   "Record ID": "recuVTWBKza34IkLy"
+  }
+ },
+ {
+  "id": "recwAP9YRRNmlmYJ3",
+  "createdTime": "2026-03-26T03:27:13.000Z",
+  "fields": {
+   "Table - Description": "Reference scheduling table that standardizes preventive maintenance cadence into reusable cycle buckets. Linked to Ma - Items to group template-driven preventive maintenance work into predefined execution cycles for planning and operational control.",
+   "Base": "Jobs",
+   "Table - Name": "Ma - Cycles",
+   "Table - ID": "tblWRW1I8yCMdvdgq",
+   "Record ID": "recwAP9YRRNmlmYJ3"
+  }
+ },
+ {
+  "id": "recxHeU8g9glWkJbD",
+  "createdTime": "2026-03-26T03:27:13.000Z",
+  "fields": {
+   "Table - Description": "Atomic maintenance template table linked to Ma - Packages. Each record defines a maintenance obligation by type, validity period, and optional cycle assignment, and serves as the executable rule set used by automation to create maintenance jobs for attached locations.",
+   "Base": "Jobs",
+   "Table - Name": "Ma - Items",
+   "Table - ID": "tblLHrvLMfFtwFy03",
+   "Record ID": "recxHeU8g9glWkJbD"
+  }
+ },
+ {
+  "id": "recxruCTAXmqJqi8M",
+  "createdTime": "2026-03-25T10:14:22.000Z",
+  "fields": {
+   "Base": "Monitoring",
+   "Source - Table - ID": "tblgyESkug0TcBVHK",
+   "Table - Name": "Device Portal Scraper",
+   "Source - Base - Name": "Data",
+   "Source - Base - ID": "app8H7IMW8gHyQzzn",
+   "Destination - Base - ID": "appQT3lKdh9bdw1zo",
+   "Source - View": "Audio - Sync to Monitor",
+   "Source - Table - Name": "Device Portal Scraper",
+   "Direction": "Inbound",
+   "Notes": "Scraper feeds audio device status into Monitoring",
+   "Table - ID": "tblNYWtOVRYGzZnj7",
+   "Source - View ID": "viwQAdXh3mP8JuxAD",
+   "Record ID": "recxruCTAXmqJqi8M"
+  }
+ },
+ {
+  "id": "reczAej8y5XDzZd4c",
+  "createdTime": "2026-03-27T06:11:28.000Z",
+  "fields": {
+   "Table - Description": "License-level records for software entitlement tracking. Aggregates active subscription counts by customer and tracks cost per license. Distinct from subscription contracts; supports license cost modeling and billing verification.",
+   "Base": "Inventory",
+   "Table - Name": "Licences",
+   "Table - Description - MD": "\\## Purpose\n\nSoftware license entitlement tracking separate from subscription abstraction. Licences represent license units and associated costs independent of subscription contract mechanics.\n\n\\## Key data\n\nEach record represents one license type: Service ID, Service (software service type), Active count (active licenses), CPU/month (cost), Cost by customer (KFC, Apple, Others), Status, Assignee (license manager).\n\n\\## Relationship\n\nOne Licence → many Subscriptions (indirect, via Subscription types). One Licence → many Subscription types (license types eligible). Service/software type tracked separately from hardware subscriptions.\n\n\\## Scale\n\nSmall: 5,15 active license types.\n\n\\## Lifecycle\n\n\\- Created: New license offering\n\\- Active: In use (active subscriptions)\n\\- Inactive: End-of-life\n\n\\## Role in system\n\n(Software licensing and cost tracking layer). Licences track software entitlements and associated costs separately from hardware subscriptions, enabling transparent software cost attribution.\n\n\\## Data consolidation scope\n\nNot applicable. Licences are native to Inventory base.\n\n\\## Data flow model\n\nLicenses defined for software services. Subscription types link to licenses. Active subscriptions tracked per license type. Costs calculated and reported per license.\n\n\\## System role\n\nSoftware cost tracking. Licences enable transparent tracking of software licensing costs and active license counts per customer segment.\n",
+   "Source - Base - ID": "appRor1ipbYAb4K7z",
+   "Table - ID": "tblEcCphC0pdfOxGj",
+   "Record ID": "reczAej8y5XDzZd4c"
+  }
+ },
+ {
+  "id": "reczofxCTKIzYJq9k",
+  "createdTime": "2026-03-26T03:32:15.000Z",
+  "fields": {
+   "Table - Description": "Outbound sync from Tickets base. Surfaces live ticket data within the Locations base for support visibility at the location level.",
+   "Base": "Locations",
+   "Source - Table - ID": "tbl7Y9QHzO1TyWZDl",
+   "Table - Name": "Tickets",
+   "Source - Base - Name": "Tickets",
+   "Source - Base - ID": "apprGGdynxDTZMZmO",
+   "Destination - Base - ID": "appmFizJaAn7yKKVu",
+   "Source - View": "Sync to Locations",
+   "Source - Table - Name": "Tickets",
+   "Direction": "Inbound",
+   "Table - ID": "tblwn1jUAokpYOuxd",
+   "Source - View ID": "viwuYTY3qx7MHevQa",
+   "Record ID": "reczofxCTKIzYJq9k"
+  }
+ }
+]

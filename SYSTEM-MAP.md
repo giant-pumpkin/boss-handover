@@ -12,7 +12,9 @@ flowchart LR
         INV[(Inventory base<br/>appRor1ipbYAb4K7z<br/>Resources · Inventory · Subscriptions)]
         QUO[(Quotes base<br/>app8H7IMW8gHyQzzn<br/>HS - Quotes · Invoices)]
         JOB[(Jobs base<br/>appdo1WwONYvmYMWg<br/>Jobs · MA packages · BOM)]
-        TIX[(Tickets base<br/>apprGGdynxDTZMZmO<br/>Tickets · Locations)]
+        TIX[(Tickets base<br/>apprGGdynxDTZMZmO<br/>Tickets · SLA · Compensation)]
+        LOC[(Locations base<br/>appmFizJaAn7yKKVu<br/>Customers · Brands · Sites — master data)]
+        MON[(Monitoring base<br/>appQT3lKdh9bdw1zo<br/>CMS status)]
     end
 
     subgraph Support
@@ -30,8 +32,8 @@ flowchart LR
     end
 
     subgraph Supabase
-        SB1[(data-pipeline<br/>odpdnucjvgingrrwaaiv)]
-        SB2[(ConnectIQ<br/>zkqb…)]
+        SB1[(data-pipeline<br/>odpdnucjvgingrrwaaiv<br/>prototype only)]
+        SB2[(ConnectIQ<br/>zkqbmzffoimylkvyqypl)]
     end
 
     subgraph Reporting
@@ -44,14 +46,18 @@ flowchart LR
         CMS[CMS Asia / IXM Aqua<br/>Signage Player]
     end
 
+    LOC -- "synced tables" --> INV
+    LOC -- "synced tables" --> JOB
+    LOC -- "synced tables" --> QUO
+    LOC -- "synced tables" --> TIX
+    LOC -- "Append Location to Freshdesk" --> FD
+    INV -- "synced tables" --> MON
     INV -- "Resources synced as products" --> HS
-    HS -- "hubspot-to-airtable (15 min)" --> QUO
+    HS -- "hubspot-to-airtable (15 min)<br/>+ Airtable automation Sync HS Quotes (15 min)" --> QUO
     QUO -- "Quotes-to-Job interface<br/>(manual handover)" --> JOB
     JOB -- "sync tick → wflsW0LoP8zU6XBzv" --> INV
     INV -- "wflzWWNSCGdhtHrbv creates subscription" --> INV
     FD -- "Freshdesk automations → webhook" --> TIX
-    INV -- "webhook sync" --> SB1
-    TIX -- "webhook sync" --> SB1
     JOB -- "jobs-to-sheets" --> SH
     TIX -- "tickets-to-sheets" --> SH
     QUO -- "hs-quotes-to-sheets" --> SH
@@ -59,7 +65,7 @@ flowchart LR
     JOB --> OPS
     XERO -- "xero-to-airtable (not yet live)" --> QUO
     XERO <--> AM
-    CMS -- "cms / dp scrapers, Aqua API" --> SB1
+    CMS -. "abandoned scrapers" .-> QUO
     N8N -.-> CRON
     SB2 -. "Phase 2 will replace Airtable" .-> JOB
 
@@ -72,4 +78,4 @@ flowchart LR
 - **Human gates** are the manual steps that nothing automates: creating jobs from the Quotes-to-Job page, typing serial numbers on the job, ticking `sync`. See [07-business-logic/subscription-lifecycle.md](07-business-logic/subscription-lifecycle.md).
 - **Dashed arrows** are planned or not yet in production.
 
-<!-- TODO: confirm the ConnectIQ Supabase project ref (zkqb…) and the droplet hostname; add Metabase if it goes live. -->
+ConnectIQ Supabase ref: `zkqbmzffoimylkvyqypl`. Full table-level sync map: [02-airtable/sync-topology.md](02-airtable/sync-topology.md).

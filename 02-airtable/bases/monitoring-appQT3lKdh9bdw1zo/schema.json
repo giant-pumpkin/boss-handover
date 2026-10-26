@@ -1,0 +1,2026 @@
+{
+    "tables": [
+        {
+            "id": "tblNYWtOVRYGzZnj7",
+            "name": "CMS status",
+            "description": "Status scraped from VA and RS portals",
+            "primaryFieldId": "fldJ4HESAx8UL7OTq",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldJ4HESAx8UL7OTq",
+                    "name": "SerialNumber"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblUzyBNnI3JU4z5M",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldTggo5PS7FocySu",
+                        "viewIdForRecordSelection": "viwVr6QzCHujQjZS7"
+                    },
+                    "id": "fldd0UfbBDZNTmic8",
+                    "name": "Inventory"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "TRIM(\n  IF(\n    LEN(TRIM({fldJ4HESAx8UL7OTq})) = 15,\n    LEFT(TRIM({fldJ4HESAx8UL7OTq}), 14),\n    {fldJ4HESAx8UL7OTq}\n  )\n)",
+                        "referencedFieldIds": [
+                            "fldJ4HESAx8UL7OTq"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldTUezgedXiTUOPX",
+                    "name": "SerialNumber - Normalised",
+                    "description": "Shows the first 14 characters if SerialNumber is 15 characters long, otherwise shows SerialNumber as is."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selF93NXEbhdSlACz",
+                                "name": "Online",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selyQnr8Q3YI6avl3",
+                                "name": "Offline",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selmN9cDFMWpAFx7D",
+                                "name": "Unpaired",
+                                "color": "purpleLight1"
+                            },
+                            {
+                                "id": "selFOuv2t59TAnxUe",
+                                "name": "Missing",
+                                "color": "grayDark1"
+                            },
+                            {
+                                "id": "selZ7Loui3X1rYwYH",
+                                "name": "Unknown",
+                                "color": "grayLight1"
+                            }
+                        ]
+                    },
+                    "id": "fld2xM2zHDJQbBt9l",
+                    "name": "ScreenStatus"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "friendly",
+                            "format": "LL"
+                        },
+                        "timeFormat": {
+                            "name": "12hour",
+                            "format": "h:mma"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fldcyC9L0DCTrZpgt",
+                    "name": "Last updated"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldzmCYWTQ76veOLu",
+                    "name": "ScreenModels"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldl7Ovbdno8mSPxd",
+                    "name": "Location"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldalbqaSbCwDxyqq",
+                    "name": "FirstContactDate"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldsd1zpdAbMskHZI",
+                    "name": "LastContactDate"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldHdqhwStZUXR3ST",
+                    "name": "Software-only?"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldsK4em7Mgf6SQNM",
+                    "name": "Client"
+                },
+                {
+                    "type": "externalSyncSource",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel8qIk2FqjPZ8PWQ",
+                                "name": "Signage - Sync to Monitor",
+                                "color": "greenDark1"
+                            },
+                            {
+                                "id": "selTexXRLuSRcAWqo",
+                                "name": "Audio - Sync to Monitor",
+                                "color": "grayDark1"
+                            }
+                        ]
+                    },
+                    "id": "fldbTEliyEIBu4L0P",
+                    "name": "Sync Source"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwtebaLjWdplgJM7",
+                    "name": "Dev",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwz1zkHWS8ckaggH",
+                    "name": "Unlinked",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblUzyBNnI3JU4z5M",
+            "name": "Inventory",
+            "description": "Sync table from Inventory, only Resources flagged as players",
+            "primaryFieldId": "fld8s16MqifsyJDRi",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fld8s16MqifsyJDRi",
+                    "name": "ID"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblNYWtOVRYGzZnj7",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldd0UfbBDZNTmic8"
+                    },
+                    "id": "fldTggo5PS7FocySu",
+                    "name": "CMS status"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXHHHjzhIPEAsAc",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fldoiAzXcKr4Da48L",
+                    "name": "Customer"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldED9kseoHdVAKkv",
+                    "name": "Location - Installation"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldoscCbnhEXQiAfY",
+                    "name": "Subscription exempt"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "flddiPdsMAK4cyIM7",
+                    "name": "Spare"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seld6ZRmO4dviZGkD",
+                                "name": "Available",
+                                "color": "greenLight1"
+                            },
+                            {
+                                "id": "selypfYKC8bUSNiR4",
+                                "name": "Defect",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selfF5zMYj2dPp3vO",
+                                "name": "Delivered",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selWHkt0UABBfSHEb",
+                                "name": "Demo",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selWrWXiQss4TuJZj",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selkVKGJvwlJ6EoU2",
+                                "name": "In production",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selDcTzjrnaFZj7T4",
+                                "name": "In transit",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selkf3JSmbEzlG5G5",
+                                "name": "Incomplete",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selHoervxurPKzgxT",
+                                "name": "Installed",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selljocEoBq2KQT08",
+                                "name": "Lost",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "seldsOhhyBFmwj1gJ",
+                                "name": "Pending",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selWuqAXg3RRt274z",
+                                "name": "Swapped",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selSl6sCNLorTRPi5",
+                                "name": "Spare",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldb0d16JNKikSo8s",
+                    "name": "Status"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTggo5PS7FocySu",
+                        "fieldIdInLinkedTable": "fld2xM2zHDJQbBt9l",
+                        "result": {
+                            "type": "singleSelect",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "id": "selF93NXEbhdSlACz",
+                                        "name": "Online",
+                                        "color": "greenLight2"
+                                    },
+                                    {
+                                        "id": "selyQnr8Q3YI6avl3",
+                                        "name": "Offline",
+                                        "color": "redLight1"
+                                    },
+                                    {
+                                        "id": "selmN9cDFMWpAFx7D",
+                                        "name": "Unpaired",
+                                        "color": "purpleLight1"
+                                    },
+                                    {
+                                        "id": "selFOuv2t59TAnxUe",
+                                        "name": "Missing",
+                                        "color": "grayDark1"
+                                    },
+                                    {
+                                        "id": "selZ7Loui3X1rYwYH",
+                                        "name": "Unknown",
+                                        "color": "grayLight1"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "id": "flde5UVCy0TzqKj2d",
+                    "name": "Connection - Status"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selFORMULADEFAULT",
+                                "name": "Error",
+                                "color": "redBright"
+                            },
+                            {
+                                "id": "selXtyxaN942pfuON",
+                                "name": "Terminated",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sel9wwHoqsYflZxXO",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel7dPNutFacYxZ43",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selXsi2cKInnvcLI1",
+                                "name": "Scheduled",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldhZ8TPQ5y4SSWSl",
+                    "name": "Subscription - Status"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldLftfHn9lfQlgFK",
+                    "name": "Resource"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld1wakI1JlPWtzDh",
+                    "name": "SN"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flddQ0D7cVioVWUCr",
+                    "name": "Location code"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldELHWl1DPLmzhTH",
+                    "name": "Subscriptions"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldNjQLW29t4E39Oy",
+                    "name": "Subscription - Latest"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldzbPvKDW1rEfzzb",
+                    "name": "Internal"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTggo5PS7FocySu",
+                        "fieldIdInLinkedTable": "fldsd1zpdAbMskHZI",
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldzpKmiPFWnJkVjQ",
+                    "name": "LastContactDate - Raw"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldzpKmiPFWnJkVjQ},\n  SET_TIMEZONE({fldzpKmiPFWnJkVjQ}, 'Asia/Bangkok'),\n  BLANK()\n)",
+                        "referencedFieldIds": [
+                            "fldzpKmiPFWnJkVjQ"
+                        ],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "12hour",
+                                    "format": "h:mma"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldYvbJzNxdgYIBAz",
+                    "name": "LastContactDate",
+                    "description": "Shows the last contact date in Bangkok time zone. Only if lastContactDate is not empty\n"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldYvbJzNxdgYIBAz}, DATETIME_DIFF(NOW(), {fldYvbJzNxdgYIBAz}, 'hours'), BLANK())",
+                        "referencedFieldIds": [
+                            "fldYvbJzNxdgYIBAz"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldFBEgqRIh1vtmL1",
+                    "name": "Time offline (h)",
+                    "description": "Calculates the number of hours between now and the last contact date."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel7mJjWfT0yFLXgz",
+                                "name": "Yes",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selgB1vqGKOykDRtS",
+                                "name": "No",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldT5ZsGQPGrpok6u",
+                    "name": "Player"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selpOeKzGTgVWY8Aa",
+                                "name": "Digital signage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selW3wtEQVwzSwV0c",
+                                "name": "Music streaming",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel1sM7hnmRH6r6bv",
+                                "name": "Office equipment",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldWlkDZR9SiTsjSe",
+                    "name": "Service"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldKZW7yMwNADWVMi",
+                    "name": "Notes"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldn4zxU5pRGQqkVT",
+                    "name": "Report incident"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selcrdEe3PXk4cgal",
+                                "name": "Adapters",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel2dT4elMyKhF2YI",
+                                "name": "Ceiling Mount",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selTabW6C2e8KrT33",
+                                "name": "Demo",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selfdcCIiOGgWbbrO",
+                                "name": "Display",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selVwr30Yef1jcLTY",
+                                "name": "Frames",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selGB3IQRkNxDnmVM",
+                                "name": "LED module",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seltVUHK0pST38RYY",
+                                "name": "Mounts",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selWBvD99j5rwKBWX",
+                                "name": "PC",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selzdQ6WNxJbqGBlu",
+                                "name": "Play box",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selNbUUFQV4vgPhVZ",
+                                "name": "Printer",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selnmuPpMl9zwKnD7",
+                                "name": "Routers",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selhwqcHa2oXosteq",
+                                "name": "Scent Diffuser",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selO5cpwm87ebsvx8",
+                                "name": "Scent Diffuser Tank",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selXIUGgAXguBOgGa",
+                                "name": "Services",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selJhczTMokFVvC7P",
+                                "name": "SIM card",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selzabDt52wJbKQGX",
+                                "name": "Smart camera",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selQJ7zGwsTa6ksvU",
+                                "name": "Software",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selimOaVd94gqng4m",
+                                "name": "Streaming Device",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selYnoSMrBntOJLrb",
+                                "name": "Switch",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seluwZ8NK2yj6CxtQ",
+                                "name": "TV stand - Vesa",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel9ACWOZOJA3vuUt",
+                                "name": "USB Cameras",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selHl68VhNAPHiYRm",
+                                "name": "USB Tracker",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel7MAdYSRM4q9XSr",
+                                "name": "Video processor",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seluDHoyUp8pxi0Ss",
+                                "name": "Warranty",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selm8IHi1Z41U7Q8N",
+                                "name": "Cable",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selBe0FEILMOMbkmG",
+                                "name": "Data storage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel50IVSe9Ck7DDBF",
+                                "name": "Office supplies",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldjAoAwnkZk7zWhj",
+                    "name": "Resource - Category"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld5EMw7bKB8WxdQH",
+                    "name": "Edit inventory - Link"
+                },
+                {
+                    "type": "button",
+                    "id": "fldrKZL1xtecrGunx",
+                    "name": "Edit inventory - Button"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "dot",
+                        "color": "orangeBright"
+                    },
+                    "id": "fldJD2H2lMkr04D9r",
+                    "name": "Alert - Report incident"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldonUSQx5lALn6mB",
+                    "name": "Tickets"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldQfgSU9FtOorKOs",
+                    "name": "Tickets - Open - Count"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldN9uOTH3ceVOJqA",
+                    "name": "Tickets - Count"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldkLnrivToQO0bT1",
+                    "name": "SN - Normalised"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selggKqk1RmA70Jht",
+                                "name": "TargetR",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel0HhivF2xnF8W0s",
+                                "name": "Visual Art",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldvmJw5dcg0FW4Sv",
+                    "name": "Player - Software"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selyxsTUmJFGwvtNl",
+                                "name": "EU",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selVTdbKPltZdRPBT",
+                                "name": "Asia",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldJ4mn1ZynitSoj4",
+                    "name": "Subscription contract - Latest - VA Server"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwdDaScYv2DsEg9h",
+                    "name": "All players",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwVr6QzCHujQjZS7",
+                    "name": "Signage",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwGbyDOeiQx94AFT",
+                    "name": "Audio",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwpYS4OthMCBg2RI",
+                    "name": "Dev",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblXHHHjzhIPEAsAc",
+            "name": "Customers",
+            "primaryFieldId": "fldCYXgbMzMrYGNm2",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldCYXgbMzMrYGNm2",
+                    "name": "ID"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selT7Y72c0fPmxK9G",
+                                "name": "Digital signage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "seljTmnUxawHlovyJ",
+                                "name": "Music streaming",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldTwZk9jtfO5Mp6K",
+                    "name": "Service"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl0pAi4fZA0XhnGM",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false
+                    },
+                    "id": "fldAHrLwZ81b3b1QO",
+                    "name": "Brand"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblUDdMyIG5CJOEPQ",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true
+                    },
+                    "id": "fldoEMgZgITL05j3u",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0D0mDqTdKnWuTG",
+                    "name": "Country"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldwF1XbPctLC3Asj",
+                    "name": "Country code"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldOo593XuvQUoORI",
+                    "name": "Notes"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selfi0cKHtB3ApSUw",
+                                "name": "On hold",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "seloRRih5R1mIA4rq",
+                                "name": "In progress",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "sel8bzprlPUj6vbz7",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldyinjjQ7jmngacr",
+                    "name": "Status"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblITuNdlHo7zofcV",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldy2E8lgZd52p3qO"
+                    },
+                    "id": "fldmxrFuvPfYEily7",
+                    "name": "Locations"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldDMRqJ58FfWayUA",
+                    "name": "Brand owner - Legal name"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldX05ZU54t3KroEf",
+                    "name": "Address"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblUzyBNnI3JU4z5M",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldoiAzXcKr4Da48L"
+                    },
+                    "id": "fldTlrzY4ksw2BpWM",
+                    "name": "Inventory"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fldfOhh14FnZ5Clot",
+                    "name": "Inventory - Count"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fldSmoUr9aFkzeK3y",
+                    "name": "Offline - Count"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fld0XvEo3Rrry3rPY",
+                    "name": "In CMS - Count"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fldXsEKygY2o0PKAG",
+                    "name": "Unpaired - Count"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "flddrhoX8eEYQ5YSR",
+                    "name": "Online - Count"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldSmoUr9aFkzeK3y} > 0, TRUE(), FALSE())",
+                        "referencedFieldIds": [
+                            "fldSmoUr9aFkzeK3y"
+                        ],
+                        "result": {
+                            "type": "checkbox",
+                            "options": {
+                                "icon": "check",
+                                "color": "greenBright"
+                            }
+                        }
+                    },
+                    "id": "fldWF3hgAY7mUFopD",
+                    "name": "Warning - Offline",
+                    "description": "Outputs 1 if Offline - Count is greater than 0, otherwise 0."
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "flds74srWRU4NuxLE",
+                    "name": "Installed - Not in CMS - Count"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fldBt1hO7HBKFFuq6",
+                    "name": "Spare - Count"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldTlrzY4ksw2BpWM"
+                    },
+                    "id": "fldsccGaukqS6p05g",
+                    "name": "Exempt - Count"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblMnBOv8zi5UuVey",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldXFG7Flelo11IuM"
+                    },
+                    "id": "flda0bBuIkGC1iCLc",
+                    "name": "Subscription contracts"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "flda0bBuIkGC1iCLc",
+                        "fieldIdInLinkedTable": "fldym2f0hXUWi2Qrv",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldGNZpuektQMFSmo",
+                    "name": "Subscriptions - Active - Count"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fld0XvEo3Rrry3rPY} - {fldGNZpuektQMFSmo}",
+                        "referencedFieldIds": [
+                            "fld0XvEo3Rrry3rPY",
+                            "fldGNZpuektQMFSmo"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fld0lnF4sZvBOEwKT",
+                    "name": "Delta - CMS/Subscriptions"
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fld0XvEo3Rrry3rPY} - {fldfOhh14FnZ5Clot} + {fldsccGaukqS6p05g}",
+                        "referencedFieldIds": [
+                            "fld0XvEo3Rrry3rPY",
+                            "fldfOhh14FnZ5Clot",
+                            "fldsccGaukqS6p05g"
+                        ],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldMkvSkEVAO0sAL5",
+                    "name": "Delta - CMS/Inventory"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwanM7jFy8Slop5j",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblITuNdlHo7zofcV",
+            "name": "Locations",
+            "primaryFieldId": "fldAepiEz6NTLhen6",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldAepiEz6NTLhen6",
+                    "name": "ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldY3s6CXgbloM4qI",
+                    "name": "Location code"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldJrYqcDC8FFb6sy",
+                    "name": "Location - Name - EN"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0yOnJM3xgszTSi",
+                    "name": "Location - Name - TH"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldpQhOosf1kEzB3d",
+                    "name": "Address - EN"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXHHHjzhIPEAsAc",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true
+                    },
+                    "id": "fldVPW9UeCSxHzNAs",
+                    "name": "Customer"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldWRHvXMlYg3Z026",
+                    "name": "Brand"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldaukJK9NZ0tvHIP",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldOYHqjCUuoG2jBu",
+                    "name": "Store"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldc2oj9O7HrkZlu2",
+                    "name": "Country"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldI2nRknYJQecGbb",
+                    "name": "Contact name - EN"
+                },
+                {
+                    "type": "phoneNumber",
+                    "id": "fld2OUS9oSWTfkwbv",
+                    "name": "Phone number"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selHPtKFAF88dwR9M",
+                                "name": "On hold",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selfCstNTzoJuEVBw",
+                                "name": "In progress",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selhZnHRNUVG1uSw8",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selCyZGiLDZCrn2AN",
+                                "name": "Opening soon",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selmQEWkluaSBduTG",
+                                "name": "Imported",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldUIBuQNjvyJ6yPe",
+                    "name": "Status"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldICg11owxr3wFaf",
+                    "name": "Note"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel3QTYWOH5arMQjB",
+                                "name": "Refill"
+                            },
+                            {
+                                "id": "selSIHjB21RZnKlwM",
+                                "name": "Premium refill"
+                            }
+                        ]
+                    },
+                    "id": "fldECyGVvdQkJyYDp",
+                    "name": "Price tier"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldTuwv5gqJYy6f6N",
+                    "name": "Opening hours"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld7WQO0n9ArZMVQp",
+                    "name": "Content hours"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldnYj9EcKTVFRx6D",
+                    "name": "Location type"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fld72HhpcrLw6feR3",
+                    "name": "Drive-through"
+                },
+                {
+                    "type": "richText",
+                    "id": "fld7IVgVSnIziqCiy",
+                    "name": "Extra numbers"
+                },
+                {
+                    "type": "email",
+                    "id": "fldWcESz49bXMEC9Q",
+                    "name": "Contact email"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldBS7eWOu8VqGwfQ",
+                    "name": "Images"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selT7Y72c0fPmxK9G",
+                                "name": "Digital signage"
+                            },
+                            {
+                                "id": "seljTmnUxawHlovyJ",
+                                "name": "Music streaming"
+                            }
+                        ]
+                    },
+                    "id": "fld0GiPK9hHcftC4S",
+                    "name": "Service"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "flddl5SlcH98hyapR",
+                    "name": "Record ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldH3VYkb6uSWPhT9",
+                    "name": "Lat"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldqhvZ7SEO2OuieR",
+                    "name": "Lon"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldZavEKnmEjkr56J",
+                    "name": "Country code"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldVkTfcVJMNCshfT",
+                    "name": "Edit location - Link"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flducmtu1JC0ZfaKy",
+                    "name": "Customer - Legal name"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldr8NC8tiCEs2Dx7",
+                    "name": "Customer - Address"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selnpXP0mgomVzwb2",
+                                "name": "3BB"
+                            },
+                            {
+                                "id": "selTQkUtZK6HbQPwx",
+                                "name": "AIS"
+                            },
+                            {
+                                "id": "sel06ZyFqCsJQ5Ku9",
+                                "name": "Cable Connect"
+                            },
+                            {
+                                "id": "sel9vxcKnRf37DTC1",
+                                "name": "DTAC"
+                            },
+                            {
+                                "id": "sel59vcRxSfSq3r5Q",
+                                "name": "Lintasarta"
+                            },
+                            {
+                                "id": "sel0r8RblKFJT5Z4H",
+                                "name": "Symphony"
+                            },
+                            {
+                                "id": "selSf7YXnIKp4RkQD",
+                                "name": "Telkom"
+                            },
+                            {
+                                "id": "selVddHPcaWZqneg6",
+                                "name": "True"
+                            },
+                            {
+                                "id": "selHyNnK7mVONSNuz",
+                                "name": "Uniqlo"
+                            }
+                        ]
+                    },
+                    "id": "fldzLArHnKUQUBHwV",
+                    "name": "Connectivity - Provider"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seldNNSL406GWxZQE",
+                                "name": "WiFi - Extender",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selo5q9FFpyX9u4Yo",
+                                "name": "WiFi - SIM card router",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selcoItpW0fwQanwx",
+                                "name": "Wired network",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldfFrhq1Ks7AvtFX",
+                    "name": "Connectivity - Connection"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldgjUfLxgoWqMzyO",
+                    "name": "Region"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldcQO8FtBQEtinIJ",
+                    "name": "Subdivision"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seliwqQNRjD8xtzfw",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldWZ7UvwDzCj0MTZ",
+                    "name": "KFC - Arigato"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selaAnajGkfFqhEV1",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel9R7qLyTVwIG4gE",
+                                "name": "TBD",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld37DXACeNgbIMZ0",
+                    "name": "KFC - Cafe on left"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldUhLNsvrODUjLxr",
+                    "name": "KFC - Content group"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selczkBYqQ7OZtvsg",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldAAIo7aF6fIe8CQ",
+                    "name": "KFC - Egg tart"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selHc76xvyebvnERS",
+                                "name": "Portrait",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selie4fTYuWJsa8NV",
+                                "name": "Landscape",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldDoEcmnu3wgHFCQ",
+                    "name": "KFC - FOH"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selH2TAS9LuUYzbot",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldtTE6t3ws3svkSi",
+                    "name": "KFC - No Orginal Tender (1MM)"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selxF7tC4PO6eC7nq",
+                                "name": "Premium",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selvQHdWwuqV0v1qc",
+                                "name": "Normal",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selpwxsx2ylx70PTj",
+                                "name": "Suwwanabhumi Tier",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld8EwsMnqMMX7e7c",
+                    "name": "KFC - Price tier"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seltZ8QKq05cxX0HW",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel2BSN9hzwkfmkeW",
+                                "name": "Premium Non-Refill",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel5bOwmpB5E46JRk",
+                                "name": "Non-Refill",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selDIQh33vHE8teUt",
+                                "name": "Premium Refill",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld5WxXA5FYBvjYH2",
+                    "name": "KFC - Refill"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selZcee33zwkJSkXN",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldlXsehqfhM3EIrB",
+                    "name": "KFC - So Coffee"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selu6rPJLYZEqRSJ0",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld8IAZeViOTDeCfG",
+                    "name": "KFC - SS"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel71k90FaRzp6EHw",
+                                "name": "Refill",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel11Wj7BzFptR9Wj",
+                                "name": "Non Refill",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld6VadS66KAC4NcV",
+                    "name": "KFC - Tank type"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldphQ3v3qGucYWLN",
+                    "name": "Arrangement"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldwZFnzubvmM55lb",
+                    "name": "Arrangement - Image"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selBoEdWk4Z0L6DlY",
+                                "name": "Done",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selgtA3ycALQZh7Gm",
+                                "name": "Incomplete",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "seltItuWsq1iVly3C",
+                                "name": "Installed",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selUCWFbZwJcB26Yl",
+                                "name": "Scheduled",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selCnuLS4M12XrABe",
+                                "name": "Tentative",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selThGf7ohJOFtWzO",
+                                "name": "Unscheduled",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sel2MRP9TQOIXRxAu",
+                                "name": "Cancelled",
+                                "color": "redBright"
+                            }
+                        ]
+                    },
+                    "id": "fldtdswPekySoJLj0",
+                    "name": "Jobs - Installation - Status"
+                },
+                {
+                    "type": "email",
+                    "id": "fldPapgtiN7KYqziQ",
+                    "name": "Ma - Contact email"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldeoS5IPxxLqnxhM",
+                    "name": "Postal code"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldNJlrE2NIAZZL4r",
+                    "name": "Time zone"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldloJhBC3Ac9qBL0",
+                    "name": "UTC offset"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fld8fN0rALZh7cZnH",
+                    "name": "Location - Image - Floor plan"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXHHHjzhIPEAsAc",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldmxrFuvPfYEily7"
+                    },
+                    "id": "fldy2E8lgZd52p3qO",
+                    "name": "Customers"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flde5ybYOeYuylZxA",
+                    "name": "Inventory"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwu4gUeowpEcfHVt",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblMnBOv8zi5UuVey",
+            "name": "Subscription contracts",
+            "primaryFieldId": "fldrjOGQdcRXUJox0",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldrjOGQdcRXUJox0",
+                    "name": "ID"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXHHHjzhIPEAsAc",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "flda0bBuIkGC1iCLc"
+                    },
+                    "id": "fldXFG7Flelo11IuM",
+                    "name": "Customer"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldk1f8LCEf0HuS8q",
+                    "name": "Start date"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldC1T7kxKIKnai03",
+                    "name": "End date"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 2
+                    },
+                    "id": "fldSFrP4Vxu7UpTMa",
+                    "name": "PPU/month"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldeOxL402goRZHZD",
+                    "name": "PPL/month"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel7eOgxD8FB9esQg",
+                                "name": "THB",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selCzbxuERXXLm8Li",
+                                "name": "USD",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldDGy0bpoZ2PpJ10",
+                    "name": "Currency"
+                },
+                {
+                    "type": "currency",
+                    "options": {
+                        "precision": 0,
+                        "symbol": ""
+                    },
+                    "id": "fldHZNv9TK0G2JOh5",
+                    "name": "PPU - THB"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldLAtLBw8HQiccfY",
+                    "name": "Revenue - Monthly - THB"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldviIMjLIIzJP1tj",
+                    "name": "Revenue - Monthly"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldf8cYq0TbTzvxof",
+                    "name": "Subscriptions - Count"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldjf10VipDEr57Hf",
+                    "name": "Subscriptions - Expired - Count"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldlTt7GourE2ZGfn",
+                    "name": "Subscriptions - Scheduled - Count"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldym2f0hXUWi2Qrv",
+                    "name": "Subscriptions - Active - Count"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldiKwJFbO7dy4XIa",
+                    "name": "Subscriptions - Terminated - Count"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fldrnYJ5iOWfMXLLZ",
+                    "name": "Subscriptions - Active - New - Count"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldJVmsJsAzbVmkSi",
+                    "name": "End date - \u221e"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selOtTxHGc7vO6VLc",
+                                "name": "Digital signage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel0AG301B6lLj82h",
+                                "name": "Music streaming",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldUZqEhdDT8Vj3dy",
+                    "name": "Service"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selFORMULADEFAULT",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selF6FD8Xxw2ohXc4",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selHcchGlc7lhpb5R",
+                                "name": "Terminated",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selfmvHfkfHEXCfJS",
+                                "name": "Scheduled",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selnMh3UiiL31BJeZ",
+                                "name": "Error",
+                                "color": "redBright"
+                            }
+                        ]
+                    },
+                    "id": "fldLblMWP9Di5Nerc",
+                    "name": "Status"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwBA5fgKEP6FnEbW",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbl0pAi4fZA0XhnGM",
+            "name": "Brands",
+            "primaryFieldId": "fldqdspbfrxT7Ww0p",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldqdspbfrxT7Ww0p",
+                    "name": "Brand"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXHHHjzhIPEAsAc",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false
+                    },
+                    "id": "fld8nb5ncfFqD56yJ",
+                    "name": "Customers"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld8nb5ncfFqD56yJ",
+                        "fieldIdInLinkedTable": "fldGNZpuektQMFSmo",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldcMlJ1gwAMOeFy1",
+                    "name": "Subscriptions - Active - Count"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld8nb5ncfFqD56yJ",
+                        "fieldIdInLinkedTable": "fld0lnF4sZvBOEwKT",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldoPF9Sn9vNbYgwq",
+                    "name": "Delta - CMS/Subscriptions"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld8nb5ncfFqD56yJ",
+                        "fieldIdInLinkedTable": "fldMkvSkEVAO0sAL5",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldtHkclxfaj17e5C",
+                    "name": "Delta - CMS/Inventory"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld8nb5ncfFqD56yJ",
+                        "fieldIdInLinkedTable": "fldfOhh14FnZ5Clot",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldvEiLdRhdhwRQS5",
+                    "name": "Inventory - Count"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld8nb5ncfFqD56yJ",
+                        "fieldIdInLinkedTable": "fld0XvEo3Rrry3rPY",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "flddfV6DP50PTbJRM",
+                    "name": "In CMS - Count"
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld8nb5ncfFqD56yJ",
+                        "fieldIdInLinkedTable": "fldTwZk9jtfO5Mp6K",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldNmkK8PawxgiCzx",
+                    "name": "Service"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwXNngZLe7zIuBQx",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblUDdMyIG5CJOEPQ",
+            "name": "Brand Owners",
+            "primaryFieldId": "fldzwXbqedOEcrWwF",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldzwXbqedOEcrWwF",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblXHHHjzhIPEAsAc",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false
+                    },
+                    "id": "fldFZUwuUjUCl0Ytk",
+                    "name": "Customers"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwr623xH3DL5Awl6",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        }
+    ]
+}

@@ -41,6 +41,7 @@ All assume the unit with that serial **already exists** in Inventory. If it does
 
 - `schema.json` — exported 2026-10-26
 - `webhooks.json` — exported 2026-10-26
-- [automations.md](automations.md)
+- [automations.md](automations.md) — all 27
+- [table-descriptions.md](table-descriptions.md)
 - [scripts/](scripts/) — automation and scripting-extension JS, one file each, named by automation ID
 - [interfaces.md](interfaces.md)

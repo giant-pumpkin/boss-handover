@@ -1,0 +1,3607 @@
+{
+    "tables": [
+        {
+            "id": "tblaMnDYwMhf8fk7d",
+            "name": "Locations",
+            "description": "- **Purpose:** Store all physical installation locations for customers  \n\n- **Key Data:**\n  - Link to customer  \n  - Location-specific attributes (enriched over time)  \n\n- **Relationship:**\n  - One customer \u2192 many locations  \n\n- **Scale:**\n  - Can contain hundreds of records per customer  \n\n- **Lifecycle:**\n  - Data can be enriched before or after installation  \n\n- **Role in system (Operational Endpoint):**\n  - Acts as the **central consolidation layer for all operational data**\n  - Represents the **end point of the operational lifecycle**, where all execution data converges  \n\n- **Data Consolidation Scope:**\n  - **Jobs:**\n    - All executed jobs (installation, maintenance, ad hoc)\n    - Scheduled future jobs (e.g. preventive maintenance)\n  - **Tickets:**\n    - Live ticket data with current statuses\n  - **Inventory:**\n    - Installed assets with status and history\n  - **Subscriptions & Contracts:**\n    - Active subscriptions linked to installed inventory\n    - Contractual context and lifecycle data\n  - **Documents & Media:**\n    - Job reports\n    - Installation images\n    - Maintenance images\n    - Multi-job historical media trail\n  - **Commercial Context:**\n    - Quotes and related commercial records  \n\n- **Data Flow Model:**\n  - Operational data originates in:\n    - Jobs base  \n    - Inventory base  \n    - Tickets base  \n  - Data is **synced and linked back into Locations**\n  - Consolidation is achieved with minimal integration complexity:\n    - Base syncs across Jobs, Inventory, and Tickets are sufficient  \n\n- **System Role:**\n  - Single point of truth for:\n    - Operational history  \n    - Current system state  \n    - Asset deployment  \n    - Support activity  ",
+            "primaryFieldId": "fldZboS6ow98y3Exd",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldZTv56eyCanXfvU} & ' - ' & {fldvp0sDfJop3jahZ} & IF({fldaAZeQK0jLKdWnh}, ' - ' & {fldaAZeQK0jLKdWnh}, '')",
+                        "referencedFieldIds": [
+                            "fldZTv56eyCanXfvU",
+                            "fldvp0sDfJop3jahZ",
+                            "fldaAZeQK0jLKdWnh"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldZboS6ow98y3Exd",
+                    "name": "ID",
+                    "description": "Concatenates Customer, Location Name, and Location Code if available, separated by ' - '."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl3iaef3xXCKE5UT",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldVvNGkJYSoZ3ZJV"
+                    },
+                    "id": "fldpkpCo7DMK6Qtl0",
+                    "name": "Arrangement",
+                    "description": "Link to Arrangements table. Display configurations at this location."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldpkpCo7DMK6Qtl0",
+                        "fieldIdInLinkedTable": "fldvj4G7QNI9ppFJx",
+                        "result": {
+                            "type": "multipleAttachments",
+                            "options": {
+                                "isReversed": false
+                            }
+                        }
+                    },
+                    "id": "fldbr2QhW8sByZ4bj",
+                    "name": "Arrangement - Image",
+                    "description": "Lookup of arrangement images from linked Arrangements."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldkl2UjBH78aFo2G",
+                    "name": "Address",
+                    "description": "Full street address in English."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldFz29tJ0dXu1lCa",
+                        "result": {
+                            "type": "multipleRecordLinks",
+                            "options": {
+                                "isReversed": false,
+                                "prefersSingleRecordLink": false
+                            }
+                        }
+                    },
+                    "id": "fldd7cmgKjIxe1FFc",
+                    "name": "Brand",
+                    "description": "Lookup of brand name via Customer link."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldSAlU4SQj43zSFi",
+                        "result": {
+                            "type": "multipleRecordLinks",
+                            "options": {
+                                "isReversed": false,
+                                "prefersSingleRecordLink": false
+                            }
+                        }
+                    },
+                    "id": "flddgIXJhRdxEM44r",
+                    "name": "Brand owner",
+                    "description": "Lookup of brand owner via Customer link."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "flduj9ASBYKmpfb2D",
+                    "name": "City",
+                    "description": "City where the location is situated."
+                },
+                {
+                    "type": "createdTime",
+                    "options": {
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldIW1mKVNaCpnoKY",
+                    "name": "Created"
+                },
+                {
+                    "type": "createdBy",
+                    "id": "fldHr9ddcyT9BcfIm",
+                    "name": "Created By"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seldNNSL406GWxZQE",
+                                "name": "WiFi - Extender",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selo5q9FFpyX9u4Yo",
+                                "name": "WiFi - SIM card router",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selcoItpW0fwQanwx",
+                                "name": "Wired network",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "flda2OMrXIwNwdd6u",
+                    "name": "Connectivity - Connection",
+                    "description": "Type of network connection at the location."
+                },
+                {
+                    "type": "email",
+                    "id": "fldf1I3DkUh6WiQxo",
+                    "name": "Contact email",
+                    "description": "Primary contact email for the location."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldenzAuQDeVenzWM",
+                    "name": "PIC - Name",
+                    "description": "Person-in-charge name at the location (English)."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldOipTrb5rUAc8cE",
+                        "result": {
+                            "type": "email"
+                        }
+                    },
+                    "id": "fldSuYM1V6L5x8hLX",
+                    "name": "Contact - Service desk - Email",
+                    "description": "Lookup of the service desk email from the Customers table."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldiaErLG87EJB2i2",
+                    "name": "Content hours",
+                    "description": "Hours during which signage content is displayed."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldXR546uALGjcTmp",
+                        "result": {
+                            "type": "multipleRecordLinks",
+                            "options": {
+                                "isReversed": false,
+                                "prefersSingleRecordLink": false
+                            }
+                        }
+                    },
+                    "id": "fld1RZ09XpVdwUZDy",
+                    "name": "Country",
+                    "description": "Lookup of country name via Customer link."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldBu1knRWLZwQbfT",
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldDrgPZNkvqe0gtw",
+                    "name": "Country code",
+                    "description": "Lookup of ISO3 country code via Customer link."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldP8wodUGYTmNKdL",
+                        "result": {
+                            "type": "richText"
+                        }
+                    },
+                    "id": "fldSn58IB4KiiO7Cf",
+                    "name": "Customer - Address",
+                    "description": "Lookup of customer billing address from Customer."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldunsYzQ36w35H2z",
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld3pvp4tWBrxqirp",
+                    "name": "Customer - Legal name",
+                    "description": "Lookup of legal entity name from Customer."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldDAkj0VhWcWkDWt",
+                    "name": "Connectivity - Data plan",
+                    "description": "Data plan details for the location's connectivity."
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldjKzrgAbr4mVpxp",
+                    "name": "Drive-through",
+                    "description": "Whether the location has a drive-through."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "CONCATENATE(\"https://airtable.com/appmFizJaAn7yKKVu/pagNBkQqIkwsVYUrr/\" & RECORD_ID() & \"?tableId=tblaMnDYwMhf8fk7d\")",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldQG4GkzYCNQlRbx",
+                    "name": "Edit location - Link",
+                    "description": "Generated URL for editing this location in a custom interface."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldn1wLxQbKWlDiq7",
+                    "name": "Extra numbers",
+                    "description": "Additional phone numbers or contact info."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "SWITCH(\n  {fldd7cmgKjIxe1FFc},\n  \"KFC\",\n  {flddgIXJhRdxEM44r} & \" | \" & {fldaAZeQK0jLKdWnh} & \" | \" & {fldvp0sDfJop3jahZ},\n  \"Apple\",\n    IF({fld68FSv3N9391Yi0} = BLANK(),\n    {fldDrgPZNkvqe0gtw} & \" | \" & {flddgIXJhRdxEM44r} & \" | \" & {fldvp0sDfJop3jahZ},\n    {fldDrgPZNkvqe0gtw} & \" | \" & {flddgIXJhRdxEM44r} & \" | \"  & {fld68FSv3N9391Yi0} & \" | \" & {fldvp0sDfJop3jahZ}\n    )\n)",
+                        "referencedFieldIds": [
+                            "fldd7cmgKjIxe1FFc",
+                            "flddgIXJhRdxEM44r",
+                            "fldaAZeQK0jLKdWnh",
+                            "fldvp0sDfJop3jahZ",
+                            "fld68FSv3N9391Yi0",
+                            "fldDrgPZNkvqe0gtw"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldL08eLZFIZ2eAKD",
+                    "name": "Freshdesk - Concat",
+                    "description": "Concatenated location values. To be used in Freshdesk."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldvp0sDfJop3jahZ} & \", \" & {fldkl2UjBH78aFo2G} & \", \" & {fld1RZ09XpVdwUZDy}",
+                        "referencedFieldIds": [
+                            "fldvp0sDfJop3jahZ",
+                            "fldkl2UjBH78aFo2G",
+                            "fld1RZ09XpVdwUZDy"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldflDYqsn48vYjU5",
+                    "name": "Geo code helper",
+                    "description": "Helper formula for geocoding automation."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9OuUMijtd3qRjK",
+                    "name": "Geocode - Cache",
+                    "description": "Cached geocode result to avoid repeated API calls."
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fld2POkIDYEC549Jl",
+                    "name": "Images",
+                    "description": "General location images."
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldfV9TKsSKSGKkQ1",
+                    "name": "Images - Support",
+                    "description": "Uploaded support/issue images directly on the location."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fldXxCpZgkdbvCg6P",
+                        "result": {
+                            "type": "singleSelect",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "id": "selBoEdWk4Z0L6DlY",
+                                        "name": "Done",
+                                        "color": "greenLight2"
+                                    },
+                                    {
+                                        "id": "selgtA3ycALQZh7Gm",
+                                        "name": "Incomplete",
+                                        "color": "redLight1"
+                                    },
+                                    {
+                                        "id": "seltItuWsq1iVly3C",
+                                        "name": "Installed",
+                                        "color": "tealLight2"
+                                    },
+                                    {
+                                        "id": "selUCWFbZwJcB26Yl",
+                                        "name": "Scheduled",
+                                        "color": "yellowLight2"
+                                    },
+                                    {
+                                        "id": "selCnuLS4M12XrABe",
+                                        "name": "Tentative",
+                                        "color": "blueLight2"
+                                    },
+                                    {
+                                        "id": "selThGf7ohJOFtWzO",
+                                        "name": "Unscheduled",
+                                        "color": "redLight2"
+                                    },
+                                    {
+                                        "id": "sel2MRP9TQOIXRxAu",
+                                        "name": "Cancelled",
+                                        "color": "redBright"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "id": "fld7wbUoSNwPq1MOV",
+                    "name": "Jobs - Installation - Status",
+                    "description": "Lookup of installation job status from linked Jobs."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seliwqQNRjD8xtzfw",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldBw7nGCIHxHZ5bJ",
+                    "name": "KFC - Arigato",
+                    "description": "KFC-specific: Arigato variant."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldlVOXBsOHwBKhTO",
+                    "name": "KFC - Content group",
+                    "description": "KFC-specific: content group assignment for signage."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selaAnajGkfFqhEV1",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel9R7qLyTVwIG4gE",
+                                "name": "TBD",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld4tnpa8w9PMoX1s",
+                    "name": "KFC - Cafe on left",
+                    "description": "KFC-specific: whether cafe is on the left side."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selczkBYqQ7OZtvsg",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldWJaofBJXNz16rs",
+                    "name": "KFC - Egg tart",
+                    "description": "KFC-specific: egg tart availability."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selHc76xvyebvnERS",
+                                "name": "Portrait",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selie4fTYuWJsa8NV",
+                                "name": "Landscape",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldNKPf5e2HPGRcn8",
+                    "name": "KFC - FOH",
+                    "description": "KFC-specific: front-of-house configuration."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selH2TAS9LuUYzbot",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldypk0W8MIn496ai",
+                    "name": "KFC - No Orginal Tender (1MM)",
+                    "description": "KFC-specific: whether Original Tender (1MM) is excluded."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selxF7tC4PO6eC7nq",
+                                "name": "Premium",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selvQHdWwuqV0v1qc",
+                                "name": "Normal",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selpwxsx2ylx70PTj",
+                                "name": "Suwwanabhumi Tier",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld2sjAvTkZ0JiFQG",
+                    "name": "KFC - Price tier",
+                    "description": "KFC-specific: pricing tier for this location."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seltZ8QKq05cxX0HW",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel2BSN9hzwkfmkeW",
+                                "name": "Premium Non-Refill",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "sel5bOwmpB5E46JRk",
+                                "name": "Non-Refill",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selDIQh33vHE8teUt",
+                                "name": "Premium Refill",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld887NqYSxt9qO6Z",
+                    "name": "KFC - Refill",
+                    "description": "KFC-specific: refill station availability."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selu6rPJLYZEqRSJ0",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldqKmTrJV5KqwCOV",
+                    "name": "KFC - SS",
+                    "description": "KFC-specific: self-service kiosk availability."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selZcee33zwkJSkXN",
+                                "name": "\u2713",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "flddIc9BLAvLQdNWo",
+                    "name": "KFC - So Coffee",
+                    "description": "KFC-specific: So Coffee service availability."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel71k90FaRzp6EHw",
+                                "name": "Refill",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel11Wj7BzFptR9Wj",
+                                "name": "Non Refill",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldv1H5TjPoWFKkyd",
+                    "name": "KFC - Tank type",
+                    "description": "KFC-specific: tank type classification."
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldt3vwN33ewmwyPp",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "lastModifiedBy",
+                    "id": "fldgHk9IdyS1rHBj8",
+                    "name": "Last Modified By"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldaAZeQK0jLKdWnh",
+                    "name": "Location code",
+                    "description": "Location code is customer imposed.\nCustomers' internal IDs describing location."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldvp0sDfJop3jahZ",
+                    "name": "Location - Name - EN",
+                    "description": "Location name in English."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldzZ6UW3AoskcX8A",
+                    "name": "Location - Name - Local",
+                    "description": "Location name in local language."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl8xmUZdqPdLSvrN",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld2R0c1vdME5d443"
+                    },
+                    "id": "fldSJUzjjaKaWD09m",
+                    "name": "Location type",
+                    "description": "Link to Location types table. Classifies the location."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldFyKr86ABxYq9cl",
+                    "name": "Lat",
+                    "description": "Latitude coordinate of the location."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldeuZ7NQZ5vBQmiv",
+                    "name": "Lon",
+                    "description": "Longitude coordinate of the location."
+                },
+                {
+                    "type": "email",
+                    "id": "fldpzrVEH1WnCjMYB",
+                    "name": "Ma - Contact email",
+                    "description": "Maintenance-specific contact email for the location."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldmxDDQQSg5bHJYw",
+                    "name": "Note",
+                    "description": "Free-text operational notes for the location."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldO6cUjKBm6rFwfl",
+                    "name": "Opening hours",
+                    "description": "Store opening hours."
+                },
+                {
+                    "type": "phoneNumber",
+                    "id": "fld3281bkBVn5WXy1",
+                    "name": "Phone number",
+                    "description": "Primary phone number for the location."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel3QTYWOH5arMQjB",
+                                "name": "Refill"
+                            },
+                            {
+                                "id": "selSIHjB21RZnKlwM",
+                                "name": "Premium refill"
+                            }
+                        ]
+                    },
+                    "id": "fldKdRoitTzPBqx9E",
+                    "name": "Price tier",
+                    "description": "Pricing tier classification for the location."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selnpXP0mgomVzwb2",
+                                "name": "3BB"
+                            },
+                            {
+                                "id": "selTQkUtZK6HbQPwx",
+                                "name": "AIS"
+                            },
+                            {
+                                "id": "sel06ZyFqCsJQ5Ku9",
+                                "name": "Cable Connect"
+                            },
+                            {
+                                "id": "sel9vxcKnRf37DTC1",
+                                "name": "DTAC"
+                            },
+                            {
+                                "id": "sel59vcRxSfSq3r5Q",
+                                "name": "Lintasarta"
+                            },
+                            {
+                                "id": "sel0r8RblKFJT5Z4H",
+                                "name": "Symphony"
+                            },
+                            {
+                                "id": "selSf7YXnIKp4RkQD",
+                                "name": "Telkom"
+                            },
+                            {
+                                "id": "selVddHPcaWZqneg6",
+                                "name": "True"
+                            },
+                            {
+                                "id": "selHyNnK7mVONSNuz",
+                                "name": "Uniqlo"
+                            }
+                        ]
+                    },
+                    "id": "fldEiWrB1MlTH6Me3",
+                    "name": "Connectivity - Provider",
+                    "description": "Internet service provider(s) at the location."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblZRwcVwuj5LbewW",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldGABr2TaAyStmK9"
+                    },
+                    "id": "fldCYg3AJEIw5Ragh",
+                    "name": "Subdivision",
+                    "description": "Link to the Subdivisions table. Formal administrative area (province/state)."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "RECORD_ID()",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldijAkabvYPvKW03",
+                    "name": "Record ID",
+                    "description": "Exposes the Airtable record ID for integration use."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldlPUlx2YyExBxHC",
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldEMIWcW4sp0LtFy",
+                    "name": "Record ID (From Brands)",
+                    "description": "Lookup of brand record ID via Customer for integration use."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl36FUpxfS4rEWLd",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fld6BgnbGY6lcBQz4"
+                    },
+                    "id": "fldnxoLIyakUvwIIs",
+                    "name": "Region (deprecated)",
+                    "description": "Deprecated. Previously linked directly to Regions. Now resolved via Subdivision."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "flde0ziYa4zRFC9kn",
+                        "result": {
+                            "type": "multipleSelects",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "id": "selT7Y72c0fPmxK9G",
+                                        "name": "Digital signage"
+                                    },
+                                    {
+                                        "id": "seljTmnUxawHlovyJ",
+                                        "name": "Music streaming"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "id": "fldPxVDmBsNspnJtE",
+                    "name": "Service",
+                    "description": "Lookup of service type(s) from Customer (e.g. Digital Signage, Music Streaming)."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selHPtKFAF88dwR9M",
+                                "name": "On hold",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selfCstNTzoJuEVBw",
+                                "name": "In progress",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selhZnHRNUVG1uSw8",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selCyZGiLDZCrn2AN",
+                                "name": "Opening soon",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selmQEWkluaSBduTG",
+                                "name": "Imported",
+                                "color": "cyanLight2"
+                            }
+                        ]
+                    },
+                    "id": "flduITjXHKm5KKdad",
+                    "name": "Status",
+                    "description": "Operational status of the location (e.g. Active, Inactive)."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fld00NY5rFOS6BvhT",
+                        "result": {
+                            "type": "multipleRecordLinks",
+                            "options": {
+                                "isReversed": false,
+                                "prefersSingleRecordLink": false
+                            }
+                        }
+                    },
+                    "id": "fld68FSv3N9391Yi0",
+                    "name": "Store",
+                    "description": "Lookup of store concept via Customer link."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seloCf0dxRjdGlGDq",
+                                "name": "Bumbee Labs",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldFtGr19JLHYPxR2",
+                    "name": "Tags",
+                    "description": "Flexible tagging for categorization or filtering."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fld2pXLu897wpIsIs"
+                    },
+                    "id": "fldZTv56eyCanXfvU",
+                    "name": "Customer",
+                    "description": "Link to the Customers table. Each location belongs to one customer."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldaPcg311fjTsivZ",
+                    "name": "Postal code",
+                    "description": "Postal or zip code for the location."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldLR2Fl4Ue1Phajn",
+                    "name": "Time zone",
+                    "description": "IANA time zone identifier for the location."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld7UmjWq2zIuPEGV",
+                    "name": "UTC offset",
+                    "description": "UTC offset string for the location."
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldpkpCo7DMK6Qtl0",
+                        "fieldIdInLinkedTable": "flds3OFe6vmqyQEoY",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "number",
+                            "options": {
+                                "precision": 0
+                            }
+                        }
+                    },
+                    "id": "fldmOaRXWhspK5F8z",
+                    "name": "Arrangements - Displays - Count",
+                    "description": "Rollup counting total displays across all linked arrangements."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fld0PYHmbxJYddRfu",
+                        "result": {
+                            "type": "date",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                }
+                            }
+                        }
+                    },
+                    "id": "fldTnN0p23YkXJkgT",
+                    "name": "Date - Actual",
+                    "description": "Lookup of actual job completion dates from Jobs."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fld0Iir8qd4iQF4VE",
+                        "result": {
+                            "type": "multipleAttachments",
+                            "options": {
+                                "isReversed": false
+                            }
+                        }
+                    },
+                    "id": "fldkaEh19gOexAmkM",
+                    "name": "Location - Documents - Job report",
+                    "description": "Lookup of job report documents from Jobs."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl6c4QsHZx3ZAq3n",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldMoxAhThx3IeC3d"
+                    },
+                    "id": "fldjOOHsKmGbN4H68",
+                    "name": "Jobs",
+                    "description": "Link to synced Jobs table. All jobs executed at this location."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fldA11qg6rWhyWWGj",
+                        "result": {
+                            "type": "multipleAttachments",
+                            "options": {
+                                "isReversed": false
+                            }
+                        }
+                    },
+                    "id": "fldipQKHZF7p2JLLo",
+                    "name": "Location - Images - Installation",
+                    "description": "Lookup of installation photos from Jobs."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fldxSy78p3wFRvYrY",
+                        "result": {
+                            "type": "multipleAttachments",
+                            "options": {
+                                "isReversed": false
+                            }
+                        }
+                    },
+                    "id": "fldEHOprqT1aavLFp",
+                    "name": "Location - Images - Support",
+                    "description": "Lookup of support/maintenance photos from Jobs."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fldNs7oLiv35WSBbD",
+                        "result": {
+                            "type": "multipleAttachments",
+                            "options": {
+                                "isReversed": false
+                            }
+                        }
+                    },
+                    "id": "fldwqkOy1fkDJie7G",
+                    "name": "Location - Document - Delivery note",
+                    "description": "Lookup of delivery note documents from Jobs."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fldupGN2Elxq4hBiw",
+                        "result": {
+                            "type": "date",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                }
+                            }
+                        }
+                    },
+                    "id": "fldOm71yKO2B7fNZ2",
+                    "name": "Date - Scheduled",
+                    "description": "Lookup of scheduled job dates from Jobs."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldjOOHsKmGbN4H68",
+                        "fieldIdInLinkedTable": "fldmJdKikcOpV1d6E",
+                        "result": {
+                            "type": "multipleAttachments",
+                            "options": {
+                                "isReversed": false
+                            }
+                        }
+                    },
+                    "id": "fld9YhLtLL9A9GfbM",
+                    "name": "Location - Image - Floor plan",
+                    "description": "Lookup of pre-installation floor plan images from Jobs."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{flddgIXJhRdxEM44r} & \" - \" & {fldaAZeQK0jLKdWnh}",
+                        "referencedFieldIds": [
+                            "flddgIXJhRdxEM44r",
+                            "fldaAZeQK0jLKdWnh"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldqKkdIyfA5nWdqF",
+                    "name": "Brand - Location code",
+                    "description": "Composite key combining brand and location code."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl4iIahvNOg0bhJq",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldiZrWkeubApNc9w"
+                    },
+                    "id": "fldZ3OvtuOqHVOBpb",
+                    "name": "Inventory",
+                    "description": "Link to synced Inventory table. All installed assets at this location."
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZ3OvtuOqHVOBpb"
+                    },
+                    "id": "fld59sJjyoXHvhOiR",
+                    "name": "Resources - Qty - Count",
+                    "description": "Count of linked inventory items at this location."
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldgpvKLzmdJGCXT3",
+                    "name": "Location - Images - Installation areas",
+                    "description": "Uploaded images of installation areas at the location."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblwn1jUAokpYOuxd",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldLu8hLLdl41ybVO"
+                    },
+                    "id": "fldBrlAKwFSEIXpyC",
+                    "name": "Tickets",
+                    "description": "Link to synced Tickets table. All support tickets for this location."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzc37sUyhDG502U",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldtvi43X6TXUoa5u"
+                    },
+                    "id": "fldQHE8DVhGXRAI7X",
+                    "name": "Import",
+                    "description": "Link to Import locations table. Source staging record."
+                },
+                {
+                    "type": "singleCollaborator",
+                    "id": "fldZAPzqPRfYVD4yG",
+                    "name": "Imported by",
+                    "description": "User who imported this location from staging."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldF56qRuWWknmWAu",
+                    "name": "Address - Local",
+                    "description": "Full street address in local language."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldGTacX7iVbbXGli",
+                    "name": "PIC - Name - Local",
+                    "description": "Person-in-charge name in local language."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZ3OvtuOqHVOBpb",
+                        "fieldIdInLinkedTable": "flde7IL9cjF2wcrFU",
+                        "result": {
+                            "type": "multipleSelects",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "id": "selFORMULADEFAULT",
+                                        "name": "Error",
+                                        "color": "redBright"
+                                    },
+                                    {
+                                        "id": "selXtyxaN942pfuON",
+                                        "name": "Terminated",
+                                        "color": "redLight2"
+                                    },
+                                    {
+                                        "id": "sel9wwHoqsYflZxXO",
+                                        "name": "Active",
+                                        "color": "greenLight2"
+                                    },
+                                    {
+                                        "id": "sel7dPNutFacYxZ43",
+                                        "name": "Expired",
+                                        "color": "yellowLight2"
+                                    },
+                                    {
+                                        "id": "selXsi2cKInnvcLI1",
+                                        "name": "Scheduled",
+                                        "color": "tealLight2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "id": "fldMv2vqTFVWHrSIB",
+                    "name": "Subscription - Status",
+                    "description": "Lookup of subscription statuses from linked Inventory."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldCYg3AJEIw5Ragh",
+                        "fieldIdInLinkedTable": "fld7Z4NltUTruEcl6",
+                        "result": {
+                            "type": "multipleRecordLinks",
+                            "options": {
+                                "isReversed": false,
+                                "prefersSingleRecordLink": false
+                            }
+                        }
+                    },
+                    "id": "fldO1py9nI5rwNHE2",
+                    "name": "Region - Lookup",
+                    "description": "Lookup of region name via the Subdivision link."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "IF({fldnxoLIyakUvwIIs} = {fldO1py9nI5rwNHE2}, \"TRUE\", \"FALSE\")",
+                        "referencedFieldIds": [
+                            "fldnxoLIyakUvwIIs",
+                            "fldO1py9nI5rwNHE2"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld9wq5FoS0UdytQB",
+                    "name": "Subdivision Check",
+                    "description": "Validation formula verifying subdivision assignment."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldO1py9nI5rwNHE2} & \"\"",
+                        "referencedFieldIds": [
+                            "fldO1py9nI5rwNHE2"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldNdJuUXsHGPjYTJ",
+                    "name": "Region - Formatted",
+                    "description": "Formatted region string for display purposes."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldaXIbk3V8ppp41T",
+                    "name": "State/Province",
+                    "description": "State or province name for the location."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "\"LOC-\" & RIGHT(\"0000000\" & {fldjVEjol8XecSLki}, 6)",
+                        "referencedFieldIds": [
+                            "fldjVEjol8XecSLki"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldIukNeVncgDPtQr",
+                    "name": " ID - Sync",
+                    "description": "Computed ID used for cross-base sync matching."
+                },
+                {
+                    "type": "autoNumber",
+                    "id": "fldjVEjol8XecSLki",
+                    "name": "Autonumber"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldcUuhhvNgujCrfl",
+                        "result": {
+                            "type": "checkbox",
+                            "options": {
+                                "icon": "check",
+                                "color": "greenBright"
+                            }
+                        }
+                    },
+                    "id": "fldn1KBgCD4NME2yo",
+                    "name": "is_esign_eligible",
+                    "description": "Lookup of esign eligibility from Customer."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZTv56eyCanXfvU",
+                        "fieldIdInLinkedTable": "fldLnicQOUPFzSZ0T",
+                        "result": {
+                            "type": "email"
+                        }
+                    },
+                    "id": "fldsOZEgeO51Y8ymR",
+                    "name": "Customer - Contact - Esign",
+                    "description": "Lookup of esign contact email from Customer."
+                },
+                {
+                    "type": "email",
+                    "id": "fldHpMX9ap3eAZkCN",
+                    "name": "Location - Contact - Esign",
+                    "description": "Location-level override for esign contact email."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldGNh7H6XcDKP8cU",
+                    "name": "Resources - Summary",
+                    "description": "Summarized resource description for quick reference."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblomN4KFzhzTeZyB",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldF27TuZgTjR2254"
+                    },
+                    "id": "fld2VKdI8wXUOhXWU",
+                    "name": "Customer - Alpha",
+                    "description": "Lookup of brand owner via Customer link."
+                },
+                {
+                    "type": "rollup",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldZ3OvtuOqHVOBpb",
+                        "fieldIdInLinkedTable": "fldVZX5j6DLVaKOGv",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldWzEueL0E1omoZ7",
+                    "name": "Resource Type at Location"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viw8Sh7lttYyMQHi0",
+                    "name": "A-Z",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwPmqOHy4NJh4KDV",
+                    "name": "Duplicate",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwsgulKDQdkqLlT4",
+                    "name": "All Locations",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwbN6tYm3slPkOVO",
+                    "name": "DA - Location Check",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwvsPOmGkU2T0JyC",
+                    "name": "DA - Create Location",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw2iX2OUyCAMCX5p",
+                    "name": "DA - Fix Location",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwbEuHBwh2zvq1G2",
+                    "name": "Dev view",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw0M4R1hhZZFSpRq",
+                    "name": "Apple",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwWZ4eggyNI4hZui",
+                    "name": "KFC",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwKhOQHYdgdwTZqZ",
+                    "name": "KFC Locations - 24hr",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwGplshimFsYtyGp",
+                    "name": "KFC - Installations - Scheduled",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwpmPNifqyvAOVWF",
+                    "name": "Sync to Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw3rRtX01CWdmapz",
+                    "name": "Sync to Data",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwF10tXLICVqyjhX",
+                    "name": "Sync to Monitoring",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwTSG4I1CQWM4QMB",
+                    "name": "Locations - KFC - RD",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwVZxQ0KnjEgZB3N",
+                    "name": "Locations - KFC - QSA",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw4kg0UqRr8suFgW",
+                    "name": "Locations - KFC - CRG",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwaMW8eXunZHO58s",
+                    "name": "Locations - Locations",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw2YMyHgy4Y0F1WL",
+                    "name": "KFC - Jobs - Installations",
+                    "type": "gallery"
+                },
+                {
+                    "id": "viwskqHyxdCdAJy6U",
+                    "name": "KFC - Installations - Done",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw3J2SHo5aRGQq4A",
+                    "name": "Ing View",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwKUW4EkzKPg8fPN",
+                    "name": "Fathom",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwzp7unAXQYwXYS2",
+                    "name": "Patlita's Grid",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblu9pLBFjxYX9RwL",
+            "name": "Customers",
+            "description": "- **Purpose:** Core master entity representing a commercial customer  \n- **Key Data:**\n  - Links to:\n    - Country  \n    - Brand  \n    - Brand Owner  \n    - Storefront (optional)  \n  - Derived Customer ID (composite)  \n- **Customer ID Logic:**\n  - Combination of:\n    - Country (ISO3 prefix)  \n    - Brand  \n    - Brand Owner  \n    - Storefront (if applicable)  \n- **Example:**\n  - THA - KFC - CRG  \n- **Role in system:**\n  - Central reference entity used across all operational bases  \n",
+            "primaryFieldId": "fld4bMRHZlQyIy0Ku",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldBu1knRWLZwQbfT} & \" - \" &\nIF(\n  {fldSAlU4SQj43zSFi},\n  IF(\n    AND({fldFz29tJ0dXu1lCa}, {fldFz29tJ0dXu1lCa} != {fldSAlU4SQj43zSFi}),\n    {fldSAlU4SQj43zSFi} & \" - \" & {fldFz29tJ0dXu1lCa},\n    {fldSAlU4SQj43zSFi}\n  ),\n  IF({fldFz29tJ0dXu1lCa}, {fldFz29tJ0dXu1lCa}, \"\")\n) &\nIF(\n  {fld00NY5rFOS6BvhT},\n  \" - \" & {fld00NY5rFOS6BvhT},\n  \"\"\n)",
+                        "referencedFieldIds": [
+                            "fldBu1knRWLZwQbfT",
+                            "fldSAlU4SQj43zSFi",
+                            "fldFz29tJ0dXu1lCa",
+                            "fld00NY5rFOS6BvhT"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fld4bMRHZlQyIy0Ku",
+                    "name": "ID",
+                    "description": "Composite customer ID: Country ISO3 + Brand + Brand Owner + Store."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldP8wodUGYTmNKdL",
+                    "name": "Address",
+                    "description": "Customer billing or registered address."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbllTcNIfg7TkJMUO",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldFf7J658iLAdK0y"
+                    },
+                    "id": "fldFz29tJ0dXu1lCa",
+                    "name": "Brands",
+                    "description": "Link to Brands table. The brand this customer operates."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblomN4KFzhzTeZyB",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldPUoEDusig1SALD"
+                    },
+                    "id": "fldSAlU4SQj43zSFi",
+                    "name": "Brand owner",
+                    "description": "Link to Brand owners table. Entity operating the brand."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldunsYzQ36w35H2z",
+                    "name": "Brand owner - Legal name",
+                    "description": "Legal entity name of the brand owner."
+                },
+                {
+                    "type": "richText",
+                    "id": "fldTltb1tjgkE1VZ9",
+                    "name": "Contact details",
+                    "description": "General contact information for the customer."
+                },
+                {
+                    "type": "email",
+                    "id": "fld5h1eFnoiodQwix",
+                    "name": "Contact - Finance - Email",
+                    "description": "Finance department contact email."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldIbcM4Gor8hgzPN",
+                    "name": "Contact - Finance - Name",
+                    "description": "Finance department contact name."
+                },
+                {
+                    "type": "createdTime",
+                    "options": {
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldkRCES7tQLSOlJC",
+                    "name": "Created"
+                },
+                {
+                    "type": "createdBy",
+                    "id": "fld9PJ6J0BVBu7J2s",
+                    "name": "Created By"
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldXR546uALGjcTmp",
+                        "fieldIdInLinkedTable": "fld0Ye4SqJCmEsBGk",
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldBu1knRWLZwQbfT",
+                    "name": "Country code",
+                    "description": "Lookup of ISO3 country code from Countries."
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldjbAvqja295nUQu",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "lastModifiedBy",
+                    "id": "fldpuiHibeq1jBgA9",
+                    "name": "Last Modified By"
+                },
+                {
+                    "type": "count",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fld2pXLu897wpIsIs"
+                    },
+                    "id": "fldtcC40RvZxH3vxi",
+                    "name": "Location - Count",
+                    "description": "Count of linked locations."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldICKNTlBizKSgVq",
+                    "name": "Notes",
+                    "description": "Free-text notes about the customer."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "RECORD_ID()",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldlPUlx2YyExBxHC",
+                    "name": "Record ID",
+                    "description": "Exposes the Airtable record ID for integration use."
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selT7Y72c0fPmxK9G",
+                                "name": "Digital signage"
+                            },
+                            {
+                                "id": "seljTmnUxawHlovyJ",
+                                "name": "Music streaming"
+                            }
+                        ]
+                    },
+                    "id": "flde0ziYa4zRFC9kn",
+                    "name": "Service",
+                    "description": "Service types provided (e.g. Digital Signage, Music Streaming)."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selfi0cKHtB3ApSUw",
+                                "name": "On hold",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "seloRRih5R1mIA4rq",
+                                "name": "In progress",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "sel8bzprlPUj6vbz7",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld3dTRdVdNduHHCJ",
+                    "name": "Status",
+                    "description": "Customer lifecycle status (e.g. Active, Churned)."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblcnY2DjETb7ixwI",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldS43VEIVj2uJVlg"
+                    },
+                    "id": "fld00NY5rFOS6BvhT",
+                    "name": "Store",
+                    "description": "Link to Stores table. Optional store concept within the brand."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblcveZqTa63GVMNm",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldbEtNEh3vgxvNAF"
+                    },
+                    "id": "fldXR546uALGjcTmp",
+                    "name": "Country",
+                    "description": "Link to Countries table. Country of operation."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldZTv56eyCanXfvU"
+                    },
+                    "id": "fld2pXLu897wpIsIs",
+                    "name": "Locations",
+                    "description": "Link to Locations table. All locations under this customer."
+                },
+                {
+                    "type": "email",
+                    "id": "fldOipTrb5rUAc8cE",
+                    "name": "Contact - Service desk - Email",
+                    "description": "Service desk contact email for ticket routing."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl3iaef3xXCKE5UT",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldleJEQy2dAySoXu"
+                    },
+                    "id": "fld9ydTr1XDCjowvF",
+                    "name": "Arrangements",
+                    "description": "Link to Arrangements table. Display configs linked to this customer."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzc37sUyhDG502U",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldLUzXGTNu7E1E7a"
+                    },
+                    "id": "fld42oqOoROtQPw6Y",
+                    "name": "Import locations",
+                    "description": "Link to Import locations table. Staging records for this customer."
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldcUuhhvNgujCrfl",
+                    "name": "is_esign_eligible",
+                    "description": "Determines if a customer can esign documents.\nWorks in tandem with \"Contact - Esign\""
+                },
+                {
+                    "type": "email",
+                    "id": "fldLnicQOUPFzSZ0T",
+                    "name": "Customer - Contact - Esign",
+                    "description": "Email address for sending esign documents."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "{fldBu1knRWLZwQbfT} & \" - \" &\nIF(\n    AND(\n        {fldGaiMgRI90yx6ly},\n        {fldBUoRnyMvelfpE9}\n    ),\n    {fldGaiMgRI90yx6ly} & \" - \" & {fldBUoRnyMvelfpE9},\n    IF(\n        AND(\n            {fldGaiMgRI90yx6ly}\n        ),\n        {fldGaiMgRI90yx6ly},\n        IF(\n            AND(\n                {fldBUoRnyMvelfpE9}\n            ),\n            {fldBUoRnyMvelfpE9},\n            IF(\n                AND(\n                    {fldGaiMgRI90yx6ly},\n                    {fldBUoRnyMvelfpE9}\n                ),\n                {fldGaiMgRI90yx6ly} & \" - \" & {fldBUoRnyMvelfpE9},\n                IF(\n                    IF(\n                        {fldGaiMgRI90yx6ly},\n                        {fldGaiMgRI90yx6ly},\n                        IF(\n                            {fldBUoRnyMvelfpE9},\n                            {fldBUoRnyMvelfpE9},\n                            BLANK()\n                        )\n                    )\n                )\n            )\n        )\n    )\n)",
+                        "referencedFieldIds": [
+                            "fldBu1knRWLZwQbfT",
+                            "fldGaiMgRI90yx6ly",
+                            "fldBUoRnyMvelfpE9"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldAPTYJJhnR6Blmo",
+                    "name": "Customer ID - Proposal",
+                    "description": "Proposed revised customer ID formula combining country, brand owner, and store."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbllTcNIfg7TkJMUO",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldvlRF47GfYUbDXz"
+                    },
+                    "id": "fld1KbrMJbTZUT3NL",
+                    "name": "Brand - Proposal",
+                    "description": "Proposed brand for this customer under the revised customer ID structure."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblomN4KFzhzTeZyB",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldKCvg9W491h7Vok"
+                    },
+                    "id": "fldGaiMgRI90yx6ly",
+                    "name": "Brand owner - Proposal",
+                    "description": "Proposed brand owner for this customer under the revised customer ID structure."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblcnY2DjETb7ixwI",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld2arovXbx9bVFdZ"
+                    },
+                    "id": "fldBUoRnyMvelfpE9",
+                    "name": "Store - Proposal",
+                    "description": "Proposed store concept for this customer under the revised customer ID structure."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldrVSFUayJBkBlcp",
+                    "name": "Short Name"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwONsWPuVYwj4RsX",
+                    "name": "A-Z",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw67tzHLQpX4MseG",
+                    "name": "Dev view",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw8CFn8GBgkizBr7",
+                    "name": "Sync to Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw1vGA1iU9H6E6qL",
+                    "name": "Sync to Data",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwErBaviFKTyyzOE",
+                    "name": "Sync to Monitoring",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwVAwIFCKoJam4qz",
+                    "name": "Sync to Inventory",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwIGplSriguR8pbI",
+                    "name": "Sync to Tickets",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwGLUsIZX1ePsLPU",
+                    "name": "Sync to LabOps",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwrwkAjFaN4O3O6G",
+                    "name": "Ing View",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwmI0mPI5z8d8z4a",
+                    "name": "Patlita's Grid",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwofVKmuxw8PaMFP",
+                    "name": "Pitchayut's Grid",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblomN4KFzhzTeZyB",
+            "name": "Brand owners",
+            "description": "- **Purpose:** Represent entities owning or operating a brand in a specific market  \n- **Examples:** Franchisees like CRG  \n- **Key Data:**\n  - Brand owner name  \n- **Role in system:**\n  - Combined with brand and country to define a customer  ",
+            "primaryFieldId": "fldpMdbPejCTMCpvC",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldpMdbPejCTMCpvC",
+                    "name": "Brand owner",
+                    "description": "Name of the brand owner entity (e.g. CRG, QSA)."
+                },
+                {
+                    "type": "createdBy",
+                    "id": "fldoOtnC0q2fSCMQM",
+                    "name": "Created By"
+                },
+                {
+                    "type": "createdTime",
+                    "options": {
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldPjRILjQU2Afrh9",
+                    "name": "Created"
+                },
+                {
+                    "type": "lastModifiedBy",
+                    "id": "fldz5eXqU2sb4QU61",
+                    "name": "Last Modified By"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldwt5qkdhLcGh8aS",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldSAlU4SQj43zSFi"
+                    },
+                    "id": "fldPUoEDusig1SALD",
+                    "name": "Customers",
+                    "description": "Link to Customers table. Reverse side of the Customer \u2192 Brand owner link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldGaiMgRI90yx6ly"
+                    },
+                    "id": "fldKCvg9W491h7Vok",
+                    "name": "Customers copy",
+                    "description": "Link to Customers table. Customers linked via the proposed brand owner field."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld2VKdI8wXUOhXWU"
+                    },
+                    "id": "fldF27TuZgTjR2254",
+                    "name": "Locations"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwLBRZZ89fdGA6Qe",
+                    "name": "Sync to Inventory",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwvU7F4x5lb1o2up",
+                    "name": "Sync to Monitoring",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwIlZdacBf38TMAT",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblcveZqTa63GVMNm",
+            "name": "Countries",
+            "description": "- **Purpose:** Master list of countries\n- **Key Data:**\n  - Country name  \n  - ISO3 country code  \n- **Role in system:**\n  - ISO3 code is used as a standardized prefix in customer identifiers  \n- **Type:** Master data  ",
+            "primaryFieldId": "fldukfzYEn91m55xn",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldukfzYEn91m55xn",
+                    "name": "Country",
+                    "description": "Country name."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0Ye4SqJCmEsBGk",
+                    "name": "Code",
+                    "description": "ISO3 country code."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldXR546uALGjcTmp"
+                    },
+                    "id": "fldbEtNEh3vgxvNAF",
+                    "name": "Customers",
+                    "description": "Link to Customers table. Reverse side of the Customer \u2192 Country link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl36FUpxfS4rEWLd",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld5sZg6Fqx2LZbrj"
+                    },
+                    "id": "fldLWOdZY0SzmLJrE",
+                    "name": "Regions",
+                    "description": "Link to Regions table. Reverse side of the Country \u2192 Regions link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblZRwcVwuj5LbewW",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldKn2WVAqkET6MrA"
+                    },
+                    "id": "fldKA4k7J81MDWlu1",
+                    "name": "Subdivisions",
+                    "description": "Link to Subdivisions table. Reverse side of the Country \u2192 Subdivisions link."
+                },
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "RECORD_ID()",
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldT0RZFQ6js66XtH",
+                    "name": "Record ID",
+                    "description": "Formula exposing the Airtable record ID for integration use."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwbxPWxLLexbdtPH",
+                    "name": "Sync to Jobs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwfLcZJxJ8WwNYqM",
+                    "name": "Overview",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbl36FUpxfS4rEWLd",
+            "name": "Regions",
+            "description": "- **Purpose:** Non-administrative geographic groupings within a country  \n- **Examples:** Northeast Thailand, South, East  \n- **Key Data:**\n  - Region name  \n  - Link to country  \n- **Role in system:**\n  - Enables flexible geographic segmentation beyond formal administrative divisions",
+            "primaryFieldId": "fldsqIYviua6cw5UM",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldsqIYviua6cw5UM",
+                    "name": "Region",
+                    "description": "Name of the geographic region (e.g. Northeast Thailand, South)."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblcveZqTa63GVMNm",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldLWOdZY0SzmLJrE"
+                    },
+                    "id": "fld5sZg6Fqx2LZbrj",
+                    "name": "Country",
+                    "description": "Link to Countries table. The country this region belongs to."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldnxoLIyakUvwIIs"
+                    },
+                    "id": "fld6BgnbGY6lcBQz4",
+                    "name": "Locations",
+                    "description": "Link to Locations table. Reverse side of the Locations \u2192 Regions (deprecated) link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblZRwcVwuj5LbewW",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld7Z4NltUTruEcl6"
+                    },
+                    "id": "fld595ByeuEO9ZlXX",
+                    "name": "Subdivisions",
+                    "description": "Link to Subdivisions table. Subdivisions within this region."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzc37sUyhDG502U",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldviiuCdlbznP1QO"
+                    },
+                    "id": "fldKJ8yPAJe4Clcc6",
+                    "name": "Import locations",
+                    "description": "Link to Import locations table. Staging records in this region."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viw79eWUpoRET0zft",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblZRwcVwuj5LbewW",
+            "name": "Subdivisions",
+            "description": "- **Purpose:** Represent formal administrative areas (states, provinces)  \n- **Key Data:**\n  - Division name  \n  - Link to region  \n  - Indirect link to country (via region)  \n- **Hierarchy:**\n  - Country \u2192 Region \u2192 Division  \n- **Role in system:**\n  - Provides structured geographic hierarchy for location classification  ",
+            "primaryFieldId": "fldKn3EFpJKktXfWm",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldKn3EFpJKktXfWm",
+                    "name": "Subdivision",
+                    "description": "Name of the administrative subdivision (province or state)."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblcveZqTa63GVMNm",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldKA4k7J81MDWlu1"
+                    },
+                    "id": "fldKn2WVAqkET6MrA",
+                    "name": "Country",
+                    "description": "Link to Countries table. The country this subdivision belongs to."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl36FUpxfS4rEWLd",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fld595ByeuEO9ZlXX"
+                    },
+                    "id": "fld7Z4NltUTruEcl6",
+                    "name": "Region",
+                    "description": "Link to Regions table. The region this subdivision belongs to."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldCYg3AJEIw5Ragh"
+                    },
+                    "id": "fldGABr2TaAyStmK9",
+                    "name": "Locations",
+                    "description": "Link to Locations table. Reverse side of the Location \u2192 Subdivisions link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblzc37sUyhDG502U",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldUhfzXAUQsI7U0x"
+                    },
+                    "id": "fld6FMgwmhVolm1bG",
+                    "name": "Import locations",
+                    "description": "Link to Import locations table. Staging records linked to this subdivision."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldgIsrcC6TGo6ckN",
+                    "name": "Code",
+                    "description": "ISO subdivision code for this province or state."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viw5MiC9nQksgM14o",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbl8xmUZdqPdLSvrN",
+            "name": "Location types",
+            "primaryFieldId": "fldct6Lp7X71B4fmk",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldct6Lp7X71B4fmk",
+                    "name": "Location type",
+                    "description": "Location type classification label (e.g. Restaurant, Airport)."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldSJUzjjaKaWD09m"
+                    },
+                    "id": "fld2R0c1vdME5d443",
+                    "name": "Locations",
+                    "description": "Link to Locations table. Reverse side of the Location type \u2192 Locations link."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viw4aoAUvQeHd56Sq",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbl3iaef3xXCKE5UT",
+            "name": "Arrangements",
+            "description": "- **Purpose:** Define display configurations at a location  \n- **Key Data:**\n  - Installation area (e.g. front-of-house, behind counter)  \n  - Orientation (landscape / portrait)  \n  - Number of displays  \n- **Examples:**\n  - 3 or 4 horizontal displays behind a KFC counter  \n- **Role in system:**\n  - Visual and structural representation of installed display setups  \n  - Multiple arrangements can exist per location  ",
+            "primaryFieldId": "fldU8ImbEzePoZNWr",
+            "fields": [
+                {
+                    "type": "formula",
+                    "options": {
+                        "isValid": true,
+                        "formula": "CONCATENATE({fldxRQL8dNCBilUnN}, \".\", {fldM7I0AxLamXJVDN})",
+                        "referencedFieldIds": [
+                            "fldxRQL8dNCBilUnN",
+                            "fldM7I0AxLamXJVDN"
+                        ],
+                        "result": {
+                            "type": "singleLineText"
+                        }
+                    },
+                    "id": "fldU8ImbEzePoZNWr",
+                    "name": "ID",
+                    "description": "Composite identifier for the arrangement: arrangement name + area (e.g. FoH.4-wide)."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selXwcd768PCs2d1b",
+                                "name": "FoH"
+                            },
+                            {
+                                "id": "selaVcok5aPZKH3vS",
+                                "name": "Centerline"
+                            },
+                            {
+                                "id": "selNz4TStQ6OQ2bx8",
+                                "name": "TOC"
+                            },
+                            {
+                                "id": "selH8EJXUtjClG7W6",
+                                "name": "Attract"
+                            },
+                            {
+                                "id": "selccfP6G0YXb8uF9",
+                                "name": "DriveTru"
+                            },
+                            {
+                                "id": "selDhMrqcJXiaYmDP",
+                                "name": "Window"
+                            },
+                            {
+                                "id": "sely2ZWWpZNyhhHR6",
+                                "name": "Counter"
+                            },
+                            {
+                                "id": "sel16rVxaZe2ycwSz",
+                                "name": "Kiosk"
+                            }
+                        ]
+                    },
+                    "id": "fldM7I0AxLamXJVDN",
+                    "name": "Area",
+                    "description": "Installation area for this arrangement (FoH, DriveTru, Counter, Kiosk, etc.)."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldxRQL8dNCBilUnN",
+                    "name": "Arrangement",
+                    "description": "Arrangement name or display configuration identifier (e.g. 4-wide, 3-stack)."
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldvj4G7QNI9ppFJx",
+                    "name": "Image",
+                    "description": "Reference image of this arrangement configuration."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldpkpCo7DMK6Qtl0"
+                    },
+                    "id": "fldVvNGkJYSoZ3ZJV",
+                    "name": "Locations",
+                    "description": "Link to Locations table. Reverse side of the Locations \u2192 Arrangements link."
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "flds3OFe6vmqyQEoY",
+                    "name": "Displays",
+                    "description": "Number of display screens in this arrangement configuration."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld9ydTr1XDCjowvF"
+                    },
+                    "id": "fldleJEQy2dAySoXu",
+                    "name": "Customers",
+                    "description": "Link to Customers table. Reverse side of the Customer \u2192 Arrangements link."
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selZEO1IGHLTsniSK",
+                                "name": "Landscape"
+                            },
+                            {
+                                "id": "selysRhTNwr7ayVkK",
+                                "name": "Portrait"
+                            }
+                        ]
+                    },
+                    "id": "fldNJV9HymH65gAG4",
+                    "name": "Orientation",
+                    "description": "Screen orientation for this arrangement (Landscape or Portrait)."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwVBpYvaccP7LV7y",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbl6c4QsHZx3ZAq3n",
+            "name": "Jobs",
+            "description": "Job sync to be able to link Locations to Jobs. ",
+            "primaryFieldId": "fldrxtCfCGO9GqQyT",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldrxtCfCGO9GqQyT",
+                    "name": "ID"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldjOOHsKmGbN4H68"
+                    },
+                    "id": "fldMoxAhThx3IeC3d",
+                    "name": "Location"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "friendly",
+                            "format": "LL"
+                        }
+                    },
+                    "id": "fldupGN2Elxq4hBiw",
+                    "name": "Date - Scheduled"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selBoEdWk4Z0L6DlY",
+                                "name": "Done",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selgtA3ycALQZh7Gm",
+                                "name": "Incomplete",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "seltItuWsq1iVly3C",
+                                "name": "Installed",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selUCWFbZwJcB26Yl",
+                                "name": "Scheduled",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selCnuLS4M12XrABe",
+                                "name": "Tentative",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selThGf7ohJOFtWzO",
+                                "name": "Unscheduled",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sel2MRP9TQOIXRxAu",
+                                "name": "Cancelled",
+                                "color": "redBright"
+                            }
+                        ]
+                    },
+                    "id": "fldXxCpZgkdbvCg6P",
+                    "name": "Status"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldYyfSlPiXYnMRzj",
+                    "name": "Location - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldcFEPgLWvZUe4z2",
+                    "name": "BOM"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldzPJXGwqUnd8LFX",
+                    "name": "BOM resources"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldJfOsF2GfupiGC4",
+                    "name": "Partner"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "friendly",
+                            "format": "LL"
+                        }
+                    },
+                    "id": "fld0PYHmbxJYddRfu",
+                    "name": "Date - Actual"
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        }
+                    },
+                    "id": "fldofmYdjSTZtNNr7",
+                    "name": "Completion date - Scheduled"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldM8Nw65Nf8LGGgC",
+                    "name": "Country"
+                },
+                {
+                    "type": "number",
+                    "options": {
+                        "precision": 0
+                    },
+                    "id": "fld9xQwFL0qo7ghWe",
+                    "name": "Autonumber"
+                },
+                {
+                    "type": "richText",
+                    "id": "fldEw3mccqILwsSa1",
+                    "name": "Notes"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        },
+                        "timeFormat": {
+                            "name": "24hour",
+                            "format": "HH:mm"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fld0NuHxJuEPjIPml",
+                    "name": "Created"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "european",
+                            "format": "D/M/YYYY"
+                        },
+                        "timeFormat": {
+                            "name": "24hour",
+                            "format": "HH:mm"
+                        },
+                        "timeZone": "client"
+                    },
+                    "id": "fldTYtOSkJ5rvon0C",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldBfTp1hrBGMa9A2",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldA11qg6rWhyWWGj",
+                    "name": "Images - Installation"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld9YwWBGcnArLNtF",
+                    "name": "Error"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldZoDeBEmerhuRJy",
+                    "name": "QR code - Job ID"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldSwAmFEMVxQzkhm",
+                    "name": "Images - URL"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldwyXgylMqkAoIni",
+                    "name": "Record ID"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selVJ56y3eS8AHVJq",
+                                "name": "Collect",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sellzgyrhBcC31NmK",
+                                "name": "Delivery",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selggFiF7dkcNm45p",
+                                "name": "Installation",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "sel7TZQvrXsi2ezHL",
+                                "name": "Rework",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selGtLmSMqX4xnTHB",
+                                "name": "Survey",
+                                "color": "tealLight2"
+                            },
+                            {
+                                "id": "selFdslEPA4H5123M",
+                                "name": "Un-installation",
+                                "color": "pinkLight2"
+                            },
+                            {
+                                "id": "selCGYykH9w2NJ6jV",
+                                "name": "Ma - Audit",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selQpo7JCFhpcq7zb",
+                                "name": "Ma - Preventive",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selPt9ELbKB3o6PYC",
+                                "name": "Ma - Reactive",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "sel01n6V1gaeKShCj",
+                                "name": "Account setup",
+                                "color": "purpleLight2"
+                            },
+                            {
+                                "id": "selLM4OvcpBOJf1cB",
+                                "name": "Pre-sale",
+                                "color": "greenLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldvAtIqHcJN0y1pa",
+                    "name": "Job type"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel1jm2COAyGMegGt",
+                                "name": "Digital signage",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selv4J2uItQO3xAm8",
+                                "name": "Music streaming",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldorSHkJgyLqBt6S",
+                    "name": "Service"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldOYRZlikrY0mei3",
+                    "name": "Image - FS - Sign-off - Signature"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldjmCk1rUMQfOQwz",
+                    "name": "Subscription - Type"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldsJSVBd8Ahown9Q",
+                    "name": "Subscription - Start date"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldZRgR5tm9SsvxXm",
+                    "name": "Subscription - End date"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld6YP4HszHFhmBua",
+                    "name": "Subscription - Contract"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fld0Iir8qd4iQF4VE",
+                    "name": "Document - Job report"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldmJdKikcOpV1d6E",
+                    "name": "Pre-installation - Floor plan"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldxSy78p3wFRvYrY",
+                    "name": "Images - Support"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldoCrMzEb98bPJAM",
+                    "name": "Images - Delivery note"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldNs7oLiv35WSBbD",
+                    "name": "Document - Delivery note"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldmO8XFG3CO2map2",
+                    "name": "Inventory  - Resources"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldrRRapJ9naczUIa",
+                    "name": "Inventory - Pre-assign"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwgh5RtidkVdqT7j",
+                    "name": "Grid view",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwlRh9iCzH9QXxn3",
+                    "name": "Jobs - Images & docs",
+                    "type": "grid"
+                },
+                {
+                    "id": "viw5ZAMp3NnzRjMMQ",
+                    "name": "\u0e21\u0e32\u0e22",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwvih6bVT1FJnj27",
+                    "name": "Location completed dates",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbllTcNIfg7TkJMUO",
+            "name": "Brands",
+            "description": "- **Purpose:** Store brand identities (e.g. KFC, Apple)  \n- **Key Data:**\n  - Brand name  \n- **Role in system:**\n  - Used as one component in defining a customer ",
+            "primaryFieldId": "fldmjCUNO0sdd7cRP",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldmjCUNO0sdd7cRP",
+                    "name": "Brand",
+                    "description": "Name of the brand (e.g. KFC, Apple)."
+                },
+                {
+                    "type": "createdBy",
+                    "id": "fldllS6AA7Szj7zcZ",
+                    "name": "Created By"
+                },
+                {
+                    "type": "createdTime",
+                    "options": {
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldMQgrJTxKm1KeDm",
+                    "name": "Created"
+                },
+                {
+                    "type": "lastModifiedBy",
+                    "id": "fldwCDGouJivvlHse",
+                    "name": "Last Modified By"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldt0u9iNYBw7MVw5",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldFz29tJ0dXu1lCa"
+                    },
+                    "id": "fldFf7J658iLAdK0y",
+                    "name": "Customers",
+                    "description": "Link to Customers table. Reverse side of the Customer \u2192 Brand link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld1KbrMJbTZUT3NL"
+                    },
+                    "id": "fldvlRF47GfYUbDXz",
+                    "name": "Customers copy",
+                    "description": "Link to Customers table via the proposed brand field. Used during customer ID restructuring."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldjFMjXZR6LW6oO7",
+                    "name": "Locations",
+                    "description": "Synced location identifier or count field from the Brands table."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwRiQdheYvVG03YL",
+                    "name": "Sync to Inventory",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwyVWElvMxT0AQKP",
+                    "name": "Sync to Monitoring",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwFSoW8Mi5nzozW6",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblcnY2DjETb7ixwI",
+            "name": "Stores",
+            "description": "- **Purpose:** Represent specific store concepts or formats under a brand  \n- **Key Data:**\n  - Storefront name/type  \n- **Role in system:**\n  - Optional component in defining a customer ",
+            "primaryFieldId": "flddNo9ISoev0GXtJ",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "flddNo9ISoev0GXtJ",
+                    "name": "Store",
+                    "description": "Name of the store concept or format (e.g. Airport, Express)."
+                },
+                {
+                    "type": "createdBy",
+                    "id": "fldcPElvEvER6GkOT",
+                    "name": "Created By"
+                },
+                {
+                    "type": "createdTime",
+                    "options": {
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldDk2GEXVwEOjZfg",
+                    "name": "Created"
+                },
+                {
+                    "type": "lastModifiedBy",
+                    "id": "fldn6pVjy74NiUs48",
+                    "name": "Last Modified By"
+                },
+                {
+                    "type": "lastModifiedTime",
+                    "options": {
+                        "isValid": true,
+                        "referencedFieldIds": [],
+                        "result": {
+                            "type": "dateTime",
+                            "options": {
+                                "dateFormat": {
+                                    "name": "european",
+                                    "format": "D/M/YYYY"
+                                },
+                                "timeFormat": {
+                                    "name": "24hour",
+                                    "format": "HH:mm"
+                                },
+                                "timeZone": "client"
+                            }
+                        }
+                    },
+                    "id": "fldkugodRmnOUlG8Z",
+                    "name": "Last Modified"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fld00NY5rFOS6BvhT"
+                    },
+                    "id": "fldS43VEIVj2uJVlg",
+                    "name": "Customers",
+                    "description": "Link to Customers table. Reverse side of the Customer \u2192 Store link."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldBUoRnyMvelfpE9"
+                    },
+                    "id": "fld2arovXbx9bVFdZ",
+                    "name": "Customers - Proposal",
+                    "description": "Link to Customers table. Customers linked via the proposed new customer ID structure."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwwmab3QGRFmXky0",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbl4iIahvNOg0bhJq",
+            "name": "Inventory",
+            "primaryFieldId": "fldiLRm6V2UlFVTCt",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldiLRm6V2UlFVTCt",
+                    "name": "ID"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "seld6ZRmO4dviZGkD",
+                                "name": "Available",
+                                "color": "greenLight1"
+                            },
+                            {
+                                "id": "selypfYKC8bUSNiR4",
+                                "name": "Defect",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selfF5zMYj2dPp3vO",
+                                "name": "Delivered",
+                                "color": "cyanLight2"
+                            },
+                            {
+                                "id": "selWHkt0UABBfSHEb",
+                                "name": "Demo",
+                                "color": "blueLight2"
+                            },
+                            {
+                                "id": "selWrWXiQss4TuJZj",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selkVKGJvwlJ6EoU2",
+                                "name": "In production",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selDcTzjrnaFZj7T4",
+                                "name": "In transit",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selkf3JSmbEzlG5G5",
+                                "name": "Incomplete",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "selHoervxurPKzgxT",
+                                "name": "Installed",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selljocEoBq2KQT08",
+                                "name": "Lost",
+                                "color": "redLight1"
+                            },
+                            {
+                                "id": "seldsOhhyBFmwj1gJ",
+                                "name": "Pending",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selWuqAXg3RRt274z",
+                                "name": "Swapped",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selSl6sCNLorTRPi5",
+                                "name": "Spare",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldJjCJdJnb8B04aB",
+                    "name": "Status"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldZ3OvtuOqHVOBpb"
+                    },
+                    "id": "fldiZrWkeubApNc9w",
+                    "name": "Location - Installation"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldVZX5j6DLVaKOGv",
+                    "name": "Resource - Name"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldT61afV9YcMHgzL",
+                    "name": "Display - Size \""
+                },
+                {
+                    "type": "date",
+                    "options": {
+                        "dateFormat": {
+                            "name": "friendly",
+                            "format": "LL"
+                        }
+                    },
+                    "id": "fldmdjW1jxH39K70p",
+                    "name": "Installation date"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld0GEszQXpkqvquE",
+                    "name": "Subscriptions"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selFORMULADEFAULT",
+                                "name": "Error",
+                                "color": "redBright"
+                            },
+                            {
+                                "id": "selXtyxaN942pfuON",
+                                "name": "Terminated",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "sel9wwHoqsYflZxXO",
+                                "name": "Active",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "sel7dPNutFacYxZ43",
+                                "name": "Expired",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "selXsi2cKInnvcLI1",
+                                "name": "Scheduled",
+                                "color": "tealLight2"
+                            }
+                        ]
+                    },
+                    "id": "flde7IL9cjF2wcrFU",
+                    "name": "Subscription - Status"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldPCHzhnfVnLGFrO",
+                    "name": "Set"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldDPdY14mSo886fI",
+                    "name": "Installation - Area"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldvVs6agEspX0nan",
+                    "name": "Edit inventory - Link"
+                },
+                {
+                    "type": "button",
+                    "id": "fldWj4KmufEIAiE7O",
+                    "name": "Edit inventory - Button"
+                },
+                {
+                    "type": "multipleSelects",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "sel7mJjWfT0yFLXgz",
+                                "name": "Yes",
+                                "color": "grayLight2"
+                            },
+                            {
+                                "id": "selgB1vqGKOykDRtS",
+                                "name": "No",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldOCkTetvLNNSa4o",
+                    "name": "Player"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwH6PFveqzUFtYdZ",
+                    "name": "Grid view",
+                    "type": "grid"
+                },
+                {
+                    "id": "viwcYvD6aC67z70oI",
+                    "name": "Patlita's Grid",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblwn1jUAokpYOuxd",
+            "name": "Tickets",
+            "primaryFieldId": "fldvx9uYteyCfxOwH",
+            "fields": [
+                {
+                    "type": "multilineText",
+                    "id": "fldvx9uYteyCfxOwH",
+                    "name": "ID"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld7lJELM3lQInRe9",
+                    "name": "Ticket - Subject"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldqT01fA1RA3Crd9",
+                    "name": "Ticket - Description - AI"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selFORMULADEFAULT",
+                                "name": "Yes",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selDcO3RQvuBeIrec",
+                                "name": "No",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selRAZvKYGdK5UpvO",
+                                "name": "-",
+                                "color": "grayLight2"
+                            }
+                        ]
+                    },
+                    "id": "fldYeRdfeYWGJFKn2",
+                    "name": "Within SLA"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldNJ7qQpHd3zcSqx",
+                    "name": "Brand owner"
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldBrlAKwFSEIXpyC"
+                    },
+                    "id": "fldLu8hLLdl41ybVO",
+                    "name": "Location"
+                },
+                {
+                    "type": "dateTime",
+                    "options": {
+                        "dateFormat": {
+                            "name": "local",
+                            "format": "l"
+                        },
+                        "timeFormat": {
+                            "name": "24hour",
+                            "format": "HH:mm"
+                        },
+                        "timeZone": "Asia/Bangkok"
+                    },
+                    "id": "fldK5wOXBoYJFDEZY",
+                    "name": "Created - Normalised"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selR6HKZcX7lefhlM",
+                                "name": "Abandoned",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selfUOAIt5wzwIU4H",
+                                "name": "Closed",
+                                "color": "greenLight1"
+                            },
+                            {
+                                "id": "selOD6ux3tkq43IOi",
+                                "name": "Open",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selNxJOpG83FVJSe0",
+                                "name": "Pending",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "sel9AsopDQ47a0CZp",
+                                "name": "Resolved",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selinvNU3n69VLPeW",
+                                "name": "Deleted",
+                                "color": "redBright"
+                            },
+                            {
+                                "id": "selJFlc2Sn2MADCxi",
+                                "name": "Work in progress",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld4hUPnzspzpSTJ2",
+                    "name": "Ticket - Status"
+                },
+                {
+                    "type": "singleSelect",
+                    "options": {
+                        "choices": [
+                            {
+                                "id": "selxm5pCN1liGfzNw",
+                                "name": "Low",
+                                "color": "greenLight2"
+                            },
+                            {
+                                "id": "selDSQCHxonJS1ilP",
+                                "name": "Medium",
+                                "color": "yellowLight2"
+                            },
+                            {
+                                "id": "sel6JBBfGr9bK71ft",
+                                "name": "High",
+                                "color": "orangeLight2"
+                            },
+                            {
+                                "id": "selvIb4WZh4b70Zmx",
+                                "name": "Urgent",
+                                "color": "redLight2"
+                            },
+                            {
+                                "id": "selYkBm6S1anuJ32z",
+                                "name": "Ticket - Priority",
+                                "color": "blueLight2"
+                            }
+                        ]
+                    },
+                    "id": "fld9bIG4f5vYF65kO",
+                    "name": "Ticket - Priority"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "flddzxEoFjXdCBwRF",
+                    "name": "URL - Ticket - FD"
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldt7qOqzaFBhLfBH",
+                    "name": "URL - Ticket - AT"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldVvURPaYVGYECoO",
+                    "name": "Create job"
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldTJ6Hbom8lpjFeR",
+                    "name": "SLA"
+                },
+                {
+                    "type": "multipleAttachments",
+                    "options": {
+                        "isReversed": false
+                    },
+                    "id": "fldnPS53H3JL58n9I",
+                    "name": "Location - Images"
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldkvVA49nklZCwOZ",
+                    "name": "Send"
+                },
+                {
+                    "type": "button",
+                    "id": "fldKxK0mfI9QIss4F",
+                    "name": "Button - Open ticket - AT"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwsY9s3UbSdVgEOv",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tblzc37sUyhDG502U",
+            "name": "Import locations",
+            "primaryFieldId": "fldxsQ83XnX35BYTW",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fldxsQ83XnX35BYTW",
+                    "name": "Location name - EN",
+                    "description": "Location name in English for the import staging record."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldcQCoIDzkXxlciP",
+                    "name": "Location name - TH",
+                    "description": "Location name in Thai for the import staging record."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldDuV7h3bTeE2SE2",
+                    "name": "Location code",
+                    "description": "Customer-imposed location code for the import staging record."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblu9pLBFjxYX9RwL",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fld42oqOoROtQPw6Y"
+                    },
+                    "id": "fldLUzXGTNu7E1E7a",
+                    "name": "Customer",
+                    "description": "Link to Customers table. The customer this import staging record belongs to."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fld46ukeE01iZI2Ee",
+                    "name": "Address - EN",
+                    "description": "Location address in English for the import staging record."
+                },
+                {
+                    "type": "multilineText",
+                    "id": "fldQQ4xyLxqBnCDpg",
+                    "name": "Address - Local",
+                    "description": "Location address in local language for the import staging record."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldKV2SFd5qfwURsI",
+                    "name": "Contact name - EN",
+                    "description": "Primary contact name in English for the import staging record."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fld3sHnDbGdjwifmq",
+                    "name": "Contact name - Local",
+                    "description": "Contact name in local language for the import staging record."
+                },
+                {
+                    "type": "singleLineText",
+                    "id": "fldW9wEVrmxnNG8kA",
+                    "name": "Contact phone number",
+                    "description": "Contact phone number for the import staging record."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tbl36FUpxfS4rEWLd",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fldKJ8yPAJe4Clcc6"
+                    },
+                    "id": "fldviiuCdlbznP1QO",
+                    "name": "Region",
+                    "description": "Link to Regions table. The region assigned to this import staging record."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblZRwcVwuj5LbewW",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": true,
+                        "inverseLinkFieldId": "fld6FMgwmhVolm1bG"
+                    },
+                    "id": "fldUhfzXAUQsI7U0x",
+                    "name": "Subdivision",
+                    "description": "Link to Subdivisions table. The subdivision assigned to this import staging record."
+                },
+                {
+                    "type": "multipleRecordLinks",
+                    "options": {
+                        "linkedTableId": "tblaMnDYwMhf8fk7d",
+                        "isReversed": false,
+                        "prefersSingleRecordLink": false,
+                        "inverseLinkFieldId": "fldQHE8DVhGXRAI7X"
+                    },
+                    "id": "fldtvi43X6TXUoa5u",
+                    "name": "Locations",
+                    "description": "Link to Locations table. The location created from this import staging record."
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldEc02PFH8YDuzXP",
+                    "name": "Import location",
+                    "description": "Trigger checkbox: when checked, initiates the location import automation."
+                },
+                {
+                    "type": "checkbox",
+                    "options": {
+                        "icon": "check",
+                        "color": "greenBright"
+                    },
+                    "id": "fldAIanxLzQ8p23hg",
+                    "name": "Imported",
+                    "description": "Flag indicating this staging record has been successfully imported as a location."
+                },
+                {
+                    "type": "multipleLookupValues",
+                    "options": {
+                        "isValid": true,
+                        "recordLinkFieldId": "fldtvi43X6TXUoa5u",
+                        "fieldIdInLinkedTable": "fldZAPzqPRfYVD4yG",
+                        "result": {
+                            "type": "singleCollaborator"
+                        }
+                    },
+                    "id": "fldUK49n1bMCLFcIE",
+                    "name": "Imported by",
+                    "description": "Lookup of the user who imported the linked location from staging."
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwDg408TrYAkVzOp",
+                    "name": "Grid view",
+                    "type": "grid"
+                }
+            ]
+        },
+        {
+            "id": "tbldZ1QzDII5urslI",
+            "name": "TestObject",
+            "primaryFieldId": "fld1t27yAHIokDTpr",
+            "fields": [
+                {
+                    "type": "singleLineText",
+                    "id": "fld1t27yAHIokDTpr",
+                    "name": "Name"
+                }
+            ],
+            "views": [
+                {
+                    "id": "viwZbIYbT73AXzkaQ",
+                    "name": "Sync to Inventory",
+                    "type": "grid"
+                }
+            ]
+        }
+    ]
+}

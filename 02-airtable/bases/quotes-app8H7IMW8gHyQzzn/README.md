@@ -1,6 +1,6 @@
-# Quotes base (`app8H7IMW8gHyQzzn`)
+# Quotes base, named **Data** in Airtable (`app8H7IMW8gHyQzzn`)
 
-Mirror of HubSpot quotes, plus the landing table for Xero invoices.
+Mirror of HubSpot quotes, the landing table for Xero invoices, reporting copies, and the documentation registry.
 
 | Table | ID | Populated by | Notes |
 | --- | --- | --- | --- |
@@ -22,13 +22,14 @@ Mirror of HubSpot quotes, plus the landing table for Xero invoices.
 | Table | ID | Notes |
 | --- | --- | --- |
 | HS - Deals, HS - Contacts | `tblvb3PYTSa2fRa6T`, `tblhiRXqTSX9QCqyO` | HubSpot mirrors |
-| Sync Meta (HubSpot) | `tblzGCr7RKJCGNGBM` | leftover from the old incremental sync; unused by the Python script |
+| Sync Meta (HubSpot) | `tblzGCr7RKJCGNGBM` | used by the **still-deployed** in-Airtable `Sync HS Quotes` automation (`wflmPH9mROs9nyH4M`, every 15 min). See [automations.md](automations.md) |
 | Quote - Line Items | `tblpZg6JsXtzkb0li` | |
 | Subscriptions, Subscriptions - Date range | `tbloG2fLQls9ESIrY`, `tblfA08VVwMAme3V3` | reporting copies |
 | Signage Scraper, Device Portal Scraper | `tblC3p1fkNrxk4tMO`, `tblgyESkug0TcBVHK` | landing tables of the abandoned scrapers ([deprecated](../../../03-data-pipelines/deprecated/)) |
-| Documentation - Base - Structure / Fields / Automations / Workflows / Integrations | `tbldD6iYBnufCyTaf`, `tblHG3NOPuDoLUm9H`, `tblqUMQCesQgeeaIp`, `tblINNYKKKgFdFvlL`, `tbldOLA5Jet12VNM1` | an earlier attempt to document the stack **inside Airtable**. Check what is there before rewriting it here. <!-- TODO --> |
+| Documentation - Base - Structure / Fields / Automations / Workflows / Integrations | `tbldD6iYBnufCyTaf`, `tblHG3NOPuDoLUm9H`, `tblqUMQCesQgeeaIp`, `tblINNYKKKgFdFvlL`, `tbldOLA5Jet12VNM1` | exported to [../../documentation-registry/](../../documentation-registry/) |
 | Employees, Terminated Employees | `tblzRNXv6tFfHDs0K`, `tblzUch1Ra0jrgqbH` | from the Workable pull |
 
 - `schema.json` — exported 2026-10-26 (21 tables). No webhooks on this base.
 
-<!-- TODO: automations.md -->
+- [automations.md](automations.md)
+- table descriptions: see [../../sync-topology.md](../../sync-topology.md) (the registry has only one-line descriptions for this base)

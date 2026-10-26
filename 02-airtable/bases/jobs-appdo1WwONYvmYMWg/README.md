@@ -35,4 +35,7 @@ Maintenance rules: [07-business-logic/maintenance-packages.md](../../../07-busin
 
 - `schema.json` — exported 2026-10-26 (26 tables, Jobs alone has 200 fields)
 
-<!-- TODO: automations.md, interfaces.md (job creation wizard, bulk creator, jobs dashboard) -->
+- [automations.md](automations.md) — all 37, with the DocsAutomator template codes
+- [table-descriptions.md](table-descriptions.md)
+
+<!-- TODO: interfaces.md (job creation wizard, bulk creator, jobs dashboard) -->

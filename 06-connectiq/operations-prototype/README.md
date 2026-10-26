@@ -14,7 +14,7 @@ React 19 + TypeScript + Vite + Tailwind 4 + Supabase (`odpdnucjvgingrrwaaiv`). B
 
 ## What it deliberately left open
 
-No auth/RLS, no movement reversal, phantom product rows in Stock Overview, serial loops in Adjustment still app-side. Kit tables exist but are unused.
+No auth and **no RLS on any of its 20 tables** (Supabase flags this as critical: the anon key can read and write everything; acceptable only because it holds test data), no movement reversal, phantom product rows in Stock Overview, serial loops in Adjustment still app-side. Kit tables exist but are unused.
 
 ## How it maps to production
 

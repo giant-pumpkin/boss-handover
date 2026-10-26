@@ -28,4 +28,5 @@ Mirror of Freshdesk tickets plus the Locations table used for site picking.
 
 - `schema.json`, `webhooks.json` — exported 2026-10-26
 
-<!-- TODO: automations.md -->
+- [automations.md](automations.md)
+- [table-descriptions.md](table-descriptions.md)
