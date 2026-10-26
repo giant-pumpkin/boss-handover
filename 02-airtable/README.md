@@ -1,0 +1,33 @@
+# 02 — Airtable
+
+Four bases matter. Base IDs are in folder names so nothing is ambiguous.
+
+| Base | ID | Source of truth for | Folder |
+| --- | --- | --- | --- |
+| Inventory | `appRor1ipbYAb4K7z` | Products (`Resources`), inventory units, subscriptions | [bases/inventory-appRor1ipbYAb4K7z/](bases/inventory-appRor1ipbYAb4K7z/) |
+| Quotes | `app8H7IMW8gHyQzzn` | HubSpot quote mirror (`HS - Quotes`), Xero invoice mirror | [bases/quotes-app8H7IMW8gHyQzzn/](bases/quotes-app8H7IMW8gHyQzzn/) |
+| Jobs | `appdo1WwONYvmYMWg` | Jobs, BOMs, maintenance packages/items/cycles | [bases/jobs-appdo1WwONYvmYMWg/](bases/jobs-appdo1WwONYvmYMWg/) |
+| Tickets | `apprGGdynxDTZMZmO` | Freshdesk ticket mirror, Locations | [bases/tickets-apprGGdynxDTZMZmO/](bases/tickets-apprGGdynxDTZMZmO/) |
+
+Cross-base links are **synced tables**, not real links. Synced tables cannot be written through the REST API from inside an interface extension (the sandbox blocks it); use the SDK there.
+
+## Workspace
+
+- Workspace admin: <!-- TODO -->
+- Plan: <!-- TODO -->
+- PATs in circulation: see [HANDOFF-CHECKLIST.md](../HANDOFF-CHECKLIST.md). Several are hard-coded in extension files and in one automation script.
+
+## Cross-cutting docs
+
+- [webhooks.md](webhooks.md) — every Airtable webhook, its consumer, and the **weekly refresh** duty
+- [formulas.md](formulas.md) — the non-obvious formulas (customer ID dedupe, `ticket_open_mins`, subscription start-date MAX)
+- [known-issues.md](known-issues.md)
+- [interface-extensions/](interface-extensions/) — the custom `.tsx` interface pages and the SDK-vs-REST rules
+
+## How to export a base's schema
+
+```bash
+curl -s "https://api.airtable.com/v0/meta/bases/<baseId>/tables" -H "Authorization: Bearer $AT_PAT" | python3 -m json.tool > schema.json
+```
+
+Commit the JSON next to each base's README as `schema.json`.

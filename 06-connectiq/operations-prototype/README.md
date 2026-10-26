@@ -1,0 +1,23 @@
+# Operations prototype (`connectiq-inventory-demo`)
+
+React 19 + TypeScript + Vite + Tailwind 4 + Supabase (`odpdnucjvgingrrwaaiv`). Branch `master`. Code stays in its own repo <!-- TODO: link -->; this folder holds the knowledge.
+
+## What it proved
+
+- Serial-tracked units (displays) and quantity-only items (cables, SD cards) across warehouses, repair centres and client sites.
+- **Pool allocation** per client; a deployed serial must be unallocated or in the job client's pool.
+- Warranty auto-activates on first installation.
+- **Inventory moves on serial entry, not on job status** — the core design decision.
+- All quantity operations and fulfilment via Postgres functions (`stock_in_quantity`, `transfer_quantity_stock`, `reallocate_quantity_stock`, `adjust_quantity_stock`, `fulfill_job_quantity`, `link_job_serial`); DB constraints backstop the rules; `trg_movement_chronology` rejects back-dated movements.
+- Transfer and Return are one page that infers movement type from source location.
+- CRM bridge (2026-09-22): quotes, quote↔job M:N, expected receipts, `job_readiness` / greenlight, deposit gate = every deposit-before-work quote paid, quotes immutable once sent.
+
+## What it deliberately left open
+
+No auth/RLS, no movement reversal, phantom product rows in Stock Overview, serial loops in Adjustment still app-side. Kit tables exist but are unused.
+
+## How it maps to production
+
+Prototype `job_`, `crm_`, `mock_cl_` → `ops_`, `com_`/`plan_`, `cl_`. Its cross-domain RPCs (e.g. `link_job_serial` writing inv + ops) are **forbidden** in production and become events. Carry pool identity, the chronology trigger and atomic-write lessons into the `inv_` object model as decision records.
+
+Files to copy here: `airtable-job-lifecycle.md`, `next_steps.md`, `progress_report.md`, `connectiq-design-system.md`. <!-- TODO -->

@@ -1,0 +1,32 @@
+# Secrets — never commit
+.env
+.env.*
+*.secrets
+secrets*
+*_tokens.json
+xero_tokens.json
+service-account*.json
+*.pem
+*.key
+
+# Python
+venv/
+*venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+
+# Data dumps that belong in Drive, not git
+*.xlsx
+*.csv
+!**/sample-*.csv
+*.db
+session.json
+browser_data/
+
+# OS / editor
+.DS_Store
+*.code-workspace
