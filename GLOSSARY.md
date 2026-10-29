@@ -27,14 +27,14 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **MPA- / MPI-** | Maintenance Package / Maintenance Package Item record IDs in the Jobs base. |
 | **Omni** | Airtable's built-in AI assistant in the interface editor. The only way to create a blank custom (code) page, see [02-airtable/interface-extensions](02-airtable/interface-extensions/). |
 | **PAT** | Airtable Personal Access Token. Several are hard-coded in interface extensions and droplet scripts. Must be rotated at handoff. |
-| **POC** | <!-- TODO: proof of concept (ConnectIQ operations prototype) or point of contact? Define. --> |
+| **POC** | Proof of concept, e.g. the ConnectIQ operations prototype in [06-connectiq](06-connectiq/). |
 | **Pool allocation** | Inventory units are allocated to a client "pool" before deployment; a unit deployed to a client must be unallocated or in that client's pool. |
 | **Quad** | Quarter-like cohort of a store's first install (Year + Quad). Drives which MA cycle a package starts in. |
 | **Provisioning order** | What an Airtable "Subscription contract" really is: terms stapled to a BOM line so the automation can create subscription rows. The commercial contract is the HubSpot quote. |
 | **Quote Staging** | The five-stage Quotes-to-Job pipeline: Needs Customer → Needs Allocation → Ready → Done → Exempt. |
 | **Resources** | The products table in the Inventory base (`tbl3eqL9QVNgZfNgZ`). Synced to HubSpot as products. The name is historical. |
 | **SN - Normalised / 14-char rule** | Samsung serials are 15 characters on the device and 14 in Airtable; every match drops the 15th character. Implemented in three places. |
-| **Sky** | Sky Chew, colleague building the ConnectIQ CRM side (Phase 1). |
+| **Sky** | Sky Chew, head of the digital department at GP. Builds the ConnectIQ CRM side (Phase 1) and owns the Looker dashboards; received Handover Part 1 on 2026-10-27. |
 | **sync tick** | The `sync` checkbox on a job (`fldhTpGWsywbFFSU7`) that sends serial numbers to the Inventory base. The main human gate in the lifecycle. |
 | **V1 / V2** | Maintenance contract generation. V1 (2024) = 3 PM visits; V2 and everything from 2025 = 1 PM + 2 RM. |
 | **Watermelon** | The DigitalOcean droplet (`Watermelon-ubuntu-sgp1`, 168.144.43.182) hosting n8n, the sync scripts and the ConnectIQ docs site. |
