@@ -8,10 +8,10 @@ Three Airtable bases and HubSpot. Every step assumes a physical unit with a seri
 | 2 | Sales records the deal and sends a quote whose line items are synced Resources | HubSpot | human |
 | 3 | Customer accepts the quote | HubSpot | human |
 | 4 | Quotes sync to `HS - Quotes` every 15 min | [hubspot-to-airtable](../03-data-pipelines/hubspot-to-airtable/) | automatic |
-| 5 | Accepted quotes in certain categories appear on **Quotes-to-Job** | Quotes base interface | — |
+| 5 | Accepted quotes appear on **Quote-to-job** (Jobs base interface); software-only renewals and support quotes are marked **Exempt** by hand | Jobs base interface | human, see [daily-operations.md](daily-operations.md) |
 | 6 | Deployment creates job records by hand in Jobs `tblwHj9cO37wp1fVx`, does the field work | Jobs base | **human gate** |
 | 7 | Job → `Installed` (done, awaiting signed delivery note/photos) or `Done`. Installer **must type deployed serials** into `fldIeKaFA33hZdtBG` | Jobs base | **human gate** |
-| 8 | Data analyst ticks `sync` (`fldhTpGWsywbFFSU7`) → `wflsW0LoP8zU6XBzv` sends serials to Inventory | Jobs base | **human gate** |
+| 8 | Data analyst runs the availability check, imports missing units, then ticks `sync` (`fldhTpGWsywbFFSU7`) → `wflsW0LoP8zU6XBzv` sends serials to Inventory. Routine in [daily-operations.md](daily-operations.md) | Jobs base | **human gate** |
 | 9 | Inventory automation matches the serial to an **existing** unit in `tblp7sqsv25DVYs7T` (view `viwpizVY6u1Z6C4He`); one of `wfl1YUiIjdVT3b66E` / `wfli2h0Tnt6I56dSM` / `wfl3MhVWITaKix6QN` / `wflKuBDk5Z6MYZzHq` fires by job type | Inventory base | automatic, **fails silently if the unit does not exist** |
 | 10 | `wfl1YUiIjdVT3b66E` sets `subscription contract add new` (`fldOUlb0lN9Ogcheg`) → `wflzWWNSCGdhtHrbv` creates the subscription | Inventory base | automatic |
 

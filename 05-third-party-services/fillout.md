@@ -21,9 +21,11 @@ Observed 2026-10-26. The product has been rebranded: `build.fillout.com` now red
 | Job - Survey | `m1WDn9Jymvus` | Yves | Airtable connected, no table shown <!-- confirm --> |
 | Ma - PM - Jobs (copy) | `gnXXAxcGCwus` | me, 4 months ago | copy for testing |
 
-Plus "My form" in my private space (test). Each form's Airtable connection is under Integrate → Your connections and uses an Airtable login/PAT of its creator. <!-- TODO: whose -->
+Plus "My form" in my private space: a one-off Moss used to load inventory items into the warehouse; no longer used. Adding members is free on this plan; the organization is mine and Yves's with three members. Each form's Airtable connection is under Integrate → Your connections and uses an Airtable login/PAT of its creator. <!-- TODO: whose -->
 
 ## Where it is wired in
+
+**Start job button.** On the Jobs table the `Open job form` button field (surfaced as **Start job** on the dispatch list and on every Jobs X partner page) is an *Open URL* button: it builds the public Fillout URL for the right form and appends the job's **record ID** as a query parameter (`…?id=rec…`). That is the only link between a submission and the job; the form has no login and no Airtable lookup of its own. Photos, videos and serials written on the form go to the Airtable job record, not to Fillout, so there is nothing to retrieve from Fillout later.
 
 Technicians open the form link on site; a submission creates or updates the Airtable record, which the Jobs-base automations (`FS - Ma - PM - Close job`, job-report PDFs) then pick up.
 

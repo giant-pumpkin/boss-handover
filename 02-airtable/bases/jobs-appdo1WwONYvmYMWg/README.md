@@ -38,4 +38,4 @@ Maintenance rules: [07-business-logic/maintenance-packages.md](../../../07-busin
 - [automations.md](automations.md) — all 37, with the DocsAutomator template codes
 - [table-descriptions.md](table-descriptions.md)
 
-<!-- TODO: interfaces.md (job creation wizard, bulk creator, jobs dashboard) -->
+Interfaces: the Jobs interface's pages (Deployment list/calendar with the Unsynced tab, Quote-to-job, Create job, the Jobs X partner pages) are described from the user's side in [07-business-logic/daily-operations.md](../../../07-business-logic/daily-operations.md) and [installation-partners.md](../../../07-business-logic/installation-partners.md); how to edit the custom pages in [interface-extensions](../../interface-extensions/).

@@ -36,6 +36,11 @@ Honest list of what is unfinished and what can bite. Ordered by risk.
 | Fillout/Zite organization is owned by Yves's account (left) | | transfer ownership or recreate under a company login | [05-third-party-services/fillout.md](../05-third-party-services/fillout.md) |
 | Airtable: Yves still a workspace Owner; three snapshot bases (Inventory - Rollback, Jobs July 7 and July 10) can be deleted | | | [05-third-party-services/airtable.md](../05-third-party-services/airtable.md) |
 | Remove leftovers on the droplet: `n8n-caddy-1` container, `docker-compose.yml.save`, Supabase n8n credential `qktRU3RadWegJ0hz` | | | [01-infrastructure/digital-ocean-droplet](../01-infrastructure/digital-ocean-droplet/) |
+| **Daily unsynced-jobs check has no owner after I leave** | routine documented | assign (deployment team or Sky) | [07/daily-operations](../07-business-logic/daily-operations.md) |
+| Boost Juice Lot 1 (Singapore) cannot be synced: subscription contract not entered | blocked since 2026-10-27 | Mild / deployment team enters the contract, then tick `sync` | [07/daily-operations](../07-business-logic/daily-operations.md) |
+| n8n error trigger Slacks only me | agreed 2026-10-27 with Sky | switch the Slack node to a JSON expression and post to a shared error channel/group chat | [01-infrastructure/n8n](../01-infrastructure/n8n/) |
+| Confirm the droplet scripts use the digital team's HubSpot and Airtable tokens, not mine | to verify | check each `.env` on the droplet | [01-infrastructure/digital-ocean-droplet](../01-infrastructure/digital-ocean-droplet/) |
+| No inventory intake since Moss left; serials reach jobs before units exist in Inventory | ongoing | assign warehouse intake, or accept the manual import step | [07/daily-operations](../07-business-logic/daily-operations.md) |
 | Xero → Airtable on the real org | blocked on access approval | get a Standard user to click Allow; parse quote number | [03](../03-data-pipelines/xero-to-airtable/) |
 | Freshdesk location-picker sidebar app | in development | finish, publish privately, update ingest webhook | [03](../03-data-pipelines/freshdesk-to-airtable/) |
 | MA packages: 6 stores to add, Baan Silom cleanup, reinstall question | paused 2026-10-02 | see list | [07](../07-business-logic/maintenance-packages.md) |

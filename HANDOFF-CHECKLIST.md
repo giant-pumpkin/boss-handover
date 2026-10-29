@@ -45,7 +45,9 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 
 | Duty | Frequency | Doc |
 | --- | --- | --- |
-| Tick `sync` on finished jobs so serials reach Inventory | daily-ish | [07-business-logic/subscription-lifecycle.md](07-business-logic/subscription-lifecycle.md) |
+| Unsynced-jobs routine: availability check, import missing units, tick `sync` | daily | [07-business-logic/daily-operations.md](07-business-logic/daily-operations.md) |
+| Chase missing subscription contracts before syncing (e.g. Boost Juice Lot 1) | as they appear | [07-business-logic/daily-operations.md](07-business-logic/daily-operations.md) |
+| Invite partner staff to Jobs X pages as guests | as needed | [07-business-logic/installation-partners.md](07-business-logic/installation-partners.md) |
 | Create next year's MA cycles and packages | yearly, by Nov | [07-business-logic/maintenance-packages.md](07-business-logic/maintenance-packages.md) |
 | Monthly subscription report | monthly | [03-data-pipelines/subscription-report](03-data-pipelines/subscription-report/) |
 | Check droplet disk / snapshot | monthly | [01-infrastructure/digital-ocean-droplet](01-infrastructure/digital-ocean-droplet/) |
@@ -54,6 +56,7 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 
 <!-- TODO: list the walkthroughs you want to hold and with whom, with dates. -->
 
+- [x] Handover Part 1 with Sky, 2026-10-27: scripts and n8n, Quote Staging, partners and Jobs X, Fillout, delivery notes and e-sign, the daily sync routine (Gemini notes + transcript kept by me)
 - [ ] Airtable bases and automations walkthrough — with: ____ on: ____
 - [ ] Droplet + n8n walkthrough — with: ____ on: ____
 - [ ] Subscription lifecycle and report — with: ____ on: ____

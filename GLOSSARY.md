@@ -20,6 +20,7 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Installed vs Done** | Job statuses. `Installed` = field work finished, waiting on signed delivery note/photos. `Done` = closed. Not every job is an installation, so the name is misleading. |
 | **IXM Aqua** | Visual Art's Signage Player API/backend (`connect.as01.signageplayer.app`). GP's `gpapi` user is read-only. |
 | **Job types** | Installation, Reactive (RM), Preventive (PM), swap, removal, … <!-- TODO: full list in 07-business-logic/job-types-and-statuses.md --> |
+| **Jobs X** | The per-partner pages of the Jobs interface (`Jobs X - Audio Asis`, `Jobs X - Titanium`, …) shared with external installers as guests. See [07-business-logic/installation-partners.md](07-business-logic/installation-partners.md). |
 | **LISA box** | <!-- TODO: define (a player/device that needs a subscription contract, like displays) --> |
 | **Lugtan** | Head of the operations / deployment team. Processes accepted quotes on the Quote Staging page, usually within minutes, and owns scheduling with installers. |
 | **MA / PM / RM** | Maintenance Agreement. PM = preventive visit, RM = reactive call-out. One visit per store per contract year; an unused RM becomes a PM after the 4-month cut-off. |
