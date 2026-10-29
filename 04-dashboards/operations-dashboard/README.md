@@ -1,3 +1,16 @@
-# Operations dashboard (office screen)
+# Deployment team dashboard (Looker Studio)
 
-<!-- TODO: what it shows, where it is built (Airtable interface `jobs-dashboard.tsx`?), which screen/device, how it is kept logged in, current state -->
+| | |
+| --- | --- |
+| Report | https://datastudio.google.com/u/0/reporting/9d81425a-db1f-473e-8607-abf7215a8a37/page/KH05F/edit |
+| Shown | video wall, Experience Center office, right side |
+| Owner | Sky Chew (handed over 2026-10) |
+| Sources | DS002 - Airtable Jobs (`jobs-to-sheets.py`, every 15 min); possibly DS005 <!-- confirm --> |
+
+## What it shows
+
+<!-- TODO: pages and the main charts -->
+
+## Hosting
+
+<!-- TODO: TargetR player details, see ../README.md -->

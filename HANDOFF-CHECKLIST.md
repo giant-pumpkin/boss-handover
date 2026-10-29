@@ -16,7 +16,7 @@ Work through this before the last day. Tick as done, with a date. "Owner after" 
 | HubSpot private app `API - Quote line items` token | | | ☐ |
 | Freshdesk | agent-level; admins are Mark, Seb, Sky | | ☐ |
 | Google Workspace service account(s) for Sheets | | | ☐ |
-| Looker Studio report ownership | | | ☐ |
+| Looker Studio report ownership (4 reports) | owner | Sky | ☑ handed over 2026-10 |
 | Xero app "Airtable Integration" (Sky's app) | | | ☐ |
 | ApprovalMax | viewer | | ☐ |
 | DocsAutomator | | | ☐ |

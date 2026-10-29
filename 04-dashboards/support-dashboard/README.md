@@ -2,10 +2,11 @@
 
 | | |
 | --- | --- |
-| Report URL | <!-- TODO --> |
-| Owner | <!-- transfer at handoff --> |
-| Source sheet ID | <!-- TODO --> |
-| Fed by | `PROD_AT-2-sheets_support_daily.py` (5 min), `PROD_AT-2-sheets_support_monthly+weekly.py` (midnight) — see [03-data-pipelines/airtable-to-sheets](../../03-data-pipelines/airtable-to-sheets/) |
+| Report URL | https://datastudio.google.com/u/0/reporting/5b779fd0-4914-4de2-a786-bf348cca998e/page/KH05F/edit |
+| Shown | video wall, Experience Center office, left side |
+| Owner | Sky Chew (handed over 2026-10) |
+| Source sheets | DS014 - Airtable - Tickets `1nUD9MMQfmYU9auOobEvc49nXgHD6nbyOIsvjob5S2lo` (`tickets-to-sheets.py`) |
+| Fed by | `tickets-to-sheets.py` every 15 min — see [03-data-pipelines/airtable-to-sheets](../../03-data-pipelines/airtable-to-sheets/) |
 
 ## Sheet-side logic
 
@@ -13,4 +14,4 @@
 - SLA fields and OOS (out-of-service) fields: <!-- TODO -->
 - **NULL bug:** <!-- TODO what it is and the workaround -->
 
-Scripts and dashboard files: copy from `~/coding/support-dash/dashboard/`.
+Ruj's earlier `PROD_AT-2-sheets_support_*.py` scripts are deprecated; kept in [03-data-pipelines/deprecated/support-dash-scripts](../../03-data-pipelines/deprecated/support-dash-scripts/).

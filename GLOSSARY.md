@@ -13,7 +13,7 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Customer ID convention** | <!-- TODO: how customer IDs are formed and deduped; see 07-business-logic/customer-id-convention.md --> |
 | **Cycle (MAC-YYYY - N)** | Maintenance cycle = a 4-month calendar slot. N=1 Jan–Apr, 2 May–Aug, 3 Sep–Dec. Records carry no dates. |
 | **Deposit gate** | Rule that supplier POs for a job should not be approved until the customer's deposit is paid. Implemented as an approval step in ApprovalMax, not an integration. |
-| **DS002 / DS005 / DS014 / DS016** | My numbering for the n8n "data sync" workflows that exported Airtable to Google Sheets: DS002 jobs, DS005 contracts and subscriptions, DS014 tickets and OOS items, DS016 HS quotes. All archived; replaced by the `*-to-sheets.py` scripts. |
+| **DS0xx** | My numbering for the "data source" Google Sheets behind the Looker dashboards and the n8n workflows that used to fill them: DS002 jobs, DS005 contracts and subscriptions, DS014 tickets and OOS items, DS019 (earlier DS016) HS quotes. The n8n workflows are archived; the `*-to-sheets.py` scripts fill DS002, DS014 and DS019 now. |
 | **FoC** | Free-of-charge months at the start of a subscription (1–7). |
 | **Handover** | Sales → deployment handoff of an accepted quote. Happens on the Quotes-to-Job interface page. |
 | **HS** | HubSpot. `HS - Quotes` is the Airtable mirror table. |

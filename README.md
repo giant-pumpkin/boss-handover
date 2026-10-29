@@ -46,7 +46,7 @@ Folders are numbered in reading order. Every folder has a `README.md` that is it
 | `~/coding/email-scraper` | `03-data-pipelines/email-intelligence/` |
 | `~/coding/ixm-aqua-api`, `~/coding/aqua-api-probe` | `03-data-pipelines/cms-player-exports/` |
 | `~/coding/cms-scraper`, `~/coding/dp-scraper` | `03-data-pipelines/cms-scraper/`, `03-data-pipelines/dp-scraper/` (live copies run on the droplet) |
-| `~/coding/support-dash` | `04-dashboards/support-dashboard/` |
+| `~/coding/support-dash` (deprecated) | `03-data-pipelines/deprecated/support-dash-scripts/` |
 | `~/coding/airtable-interface-improvements` | `02-airtable/interface-extensions/` |
 | `~/coding/connectiq-inventory-demo` | `06-connectiq/operations-prototype/` (docs only; code stays in its own repo) |
 | `~/coding/massive-quote-project`, `~/coding/hubspot-line-item-parser`, `~/coding/workable-api` | `08-audits-and-analyses/` |
