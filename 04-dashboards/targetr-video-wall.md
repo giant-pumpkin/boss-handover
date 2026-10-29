@@ -32,10 +32,17 @@ Without `?hl=en` on the embed URL Looker Studio localises to the player's locale
 - Dashboard left slot 5 is an older web item pointing at a `lookerstudio.google.com/embed/reporting/7e…` report, expired on 2026-07-09. The live one is slot 6 (green dot = active).
 - A slot with only expired items is skipped entirely, so the sequence effectively plays the one live web item for 15 minutes and starts again.
 
+## Getting the embed URL from Looker Studio
+
+1. Open the report in Looker Studio (editor links in [README.md](README.md)).
+2. **Share ▾ → Embed report**.
+3. In the dialog pick **Embed URL** (not Embed Code) and **Copy to clipboard**. "Show report navigation in embedded mode" can stay ticked.
+4. The copied value looks like `https://datastudio.google.com/embed/reporting/<report-id>/page/<page-id>`. **Append `?hl=en`** before pasting it into TargetR; the dialog does not add it.
+
 ## Changing a dashboard
 
 1. Sequences → search `dash` → Open the sequence.
-2. Click the live web item → **Edit** → Display tab → change the Web address. Keep `?hl=en`.
+2. Click the live web item → **Edit** → Display tab → paste the embed URL from the step above, with `?hl=en`.
 3. Or add a new item in the next empty slot and **Expire** the old one (item menu → Expire sets the End date to now) rather than deleting it, so it can be restored by clearing the date.
 4. Save. Players pick the change up on their next sync; `Screens` shows last contact.
 
