@@ -13,7 +13,7 @@ Work through this before the last day. Tick as done, with a date. "Owner after" 
 | Supabase org — ConnectIQ project | member | Sky | ☐ |
 | GitHub `giant-pumpkin` org | | | ☐ |
 | HubSpot (portal 244131765) | Super Admin, one of two with Seb | | ☐ |
-| HubSpot private app `API - Quote line items` token | | | ☐ |
+| HubSpot private apps (4; Development › Legacy Apps) — [hubspot-api-access.md](05-third-party-services/hubspot-api-access.md) | Super Admin | | ☐ |
 | Freshdesk | agent-level; admins are Mark, Seb, Sky | | ☐ |
 | Google Workspace service account(s) for Sheets | | | ☐ |
 | Looker Studio report ownership (4 reports) | owner | Sky | ☑ handed over 2026-10 |
@@ -31,7 +31,8 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 | Secret (name only) | Where it is used | Done |
 | --- | --- | --- |
 | Airtable PAT (`AT_PAT`, and the ones hard-coded in `.tsx` extensions) | interface extensions, droplet scripts, xero sync, Freshdesk app | ☐ |
-| HubSpot private app token | `hubspot-to-airtable` | ☐ |
+| HubSpot private app token `API - Quote line items` (`pat-na2-a9f03`) | `hubspot-to-airtable` `.env` as `HS_TOKEN`, n8n HubSpot credential (confirm by prefix); use "rotate and expire later" | ☐ |
+| HubSpot `GP-Webhooks` client secret | nothing legitimate; rotate after repointing the webhook | ☐ |
 | Freshdesk API key (hard-coded in the ticket-ingest Airtable automation) | Airtable automation `wfluuR1cEWU3jmbW7` script | ☐ |
 | Supabase service-role key (data-pipeline) | abandoned airtable-to-supabase sync (delete the n8n credential) | ☐ |
 | Google service-account JSON | `*-to-sheets.py` | ☐ |
@@ -39,7 +40,7 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 | CMS / IXM Aqua `gpapi` credentials (`~/coding/cms-scraper/.env`) | cms scrapers, aqua probe | ☐ |
 | Droplet SSH keys (`droplet-new` in root's authorized_keys, plus the private half stored in n8n) | add successor's key, regenerate the n8n→droplet pair, remove mine | ☐ |
 | `N8N_ENCRYPTION_KEY` (in `/root/n8n/docker-compose.yml`) | put in the vault; needed to read any restored n8n DB | ☐ |
-| n8n Slack token "n8n integration Auth" | error alerts from the six workflows | ☐ |
+| n8n Slack token "n8n integration Auth" | error alerts from the six workflows (two Slack DM nodes each since 2026-10-29: me and Sky) | ☐ |
 
 ## Recurring duties that need a new owner
 

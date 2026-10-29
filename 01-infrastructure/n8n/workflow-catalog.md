@@ -1,6 +1,6 @@
 # n8n workflow catalog (2026-10-26)
 
-Times are Asia/Bangkok. All active workflows SSH into the droplet as root and run a script in `/root/sync_scripts/<folder>/`; failures post to Slack via the "n8n integration Auth" credential.
+Times are Asia/Bangkok. All active workflows SSH into the droplet as root and run a script in `/root/sync_scripts/<folder>/`; failures post to Slack via the "n8n integration Auth" credential, as DMs to me and (since 2026-10-29) Sky.
 
 ## Active (6)
 

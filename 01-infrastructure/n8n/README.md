@@ -11,7 +11,7 @@
 
 ## What it is for today
 
-n8n is **the scheduler for the Python scripts on the droplet**. Each active workflow is the same five-node shape: Schedule → SSH node (runs a script as root on the same box) → If exit code ≠ 0 → Slack message; plus an Error Trigger that also posts to Slack. Nothing else is active.
+n8n is **the scheduler for the Python scripts on the droplet**. Each active workflow is the same five-node shape: Schedule → SSH node (runs a script as root on the same box) → If exit code ≠ 0 → Slack message; plus an Error Trigger that also posts to Slack. Since 2026-10-29 each error branch has two Slack nodes, one DM to me and one to Sky (`U08NHRWAPSB`). Nothing else is active. The JSON exports in [workflows/](workflows/) predate the second node.
 
 ## Files
 

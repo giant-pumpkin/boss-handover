@@ -9,7 +9,7 @@ Replaced an Airtable automation script that hit the 50-fetch limit.
 | Entry point | `main.py` (from `~/coding/hubspot-airtable-sync`) |
 | Schedule | `8,23,38,53 * * * *` Bangkok time, by n8n workflow `BDRzM0LzjYKpuHYq` (SSH node) |
 | Runs on | droplet `/root/sync_scripts/hubspot-to-airtable-sync/`, `venv/bin/python3 main.py` |
-| Env | HubSpot private-app token, `AT_PAT` |
+| Env | `HS_TOKEN` = HubSpot private app **API - Quote line items** (prefix `pat-na2-a9f03`, see [hubspot-api-access.md](../../05-third-party-services/hubspot-api-access.md)), `AT_PAT` |
 
 ## Flow
 
@@ -32,7 +32,9 @@ HubSpot GET quotes (+deal/contact/line_item assoc)
 
 ## Failure modes
 
-A non-zero exit posts to Slack from n8n; stdout is in the n8n execution log (30 days). `cron.log` in the folder is stale since 2026-08-07. <!-- TODO: where main.py reads its HubSpot token (not from ~/.secrets) -->
+A non-zero exit posts to Slack from n8n; stdout is in the n8n execution log (30 days). `cron.log` in the folder is stale since 2026-08-07. `main.py` reads `HS_TOKEN` and `AT_PAT` from the environment (`os.getenv`), loaded from the folder's `.env` on the droplet; `~/.secrets` is the laptop equivalent for hand runs.
+
+**Known waste:** the HubSpot write-back skips `ARCHIVED`/`EXPIRED`/`VOID` quotes but not published ones, which HubSpot locks (`Published Quote cannot be edited`). Roughly 9,700 rejected calls a week land on the app, about half its budget. Filter to `hs_status = DRAFT` or drop the write-back; the per-record `PATCH …/quotes/{id}` shape in HubSpot's logs may come from the parallel Airtable automation `wflmPH9mROs9nyH4M` rather than this script, which uses `batch/update`. Details: [hubspot-api-access.md §5.1](../../05-third-party-services/hubspot-api-access.md).
 
 ## Re-run by hand
 

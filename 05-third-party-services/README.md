@@ -5,7 +5,7 @@ One file per service, all on the same template ([_template.md](_template.md)). T
 | Service | Purpose | Admin login held by | Billing | Doc |
 | --- | --- | --- | --- | --- |
 | Airtable | operations database | Business plan; owners Chris, Seb, Sky, Yves | | [airtable.md](airtable.md) |
-| HubSpot | CRM, quotes (being replaced by ConnectIQ Phase 1) | portal 244131765; Super Admins Seb + me | | [hubspot.md](hubspot.md) |
+| HubSpot | CRM, quotes (being replaced by ConnectIQ Phase 1) | portal 244131765; Super Admins Seb + me | | [hubspot.md](hubspot.md), [hubspot-api-access.md](hubspot-api-access.md) |
 | Freshdesk | support ticketing | giantpumpkin-help.freshdesk.com; admins Mark, Seb, Sky | | [freshdesk.md](freshdesk.md) |
 | Xero | accounting (Singapore org) | finance | | [xero.md](xero.md) |
 | ApprovalMax | PO / bill approvals on top of Xero (Advanced plan) | Seb (owner) | | [approvalmax.md](approvalmax.md) |
