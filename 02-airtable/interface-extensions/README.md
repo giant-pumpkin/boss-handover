@@ -23,12 +23,46 @@ Verified in the Jobs base on 2026-10-29. The code lives only inside Airtable; th
 
 **Download source code** on the same menu is how to refresh the copies in this repo (redact the PAT before committing). **History** lists earlier saves and is the quickest rollback.
 
-## Creating a new custom page: pitfalls
+## Page configuration: the half of the extension that is not in the code
 
-- **You cannot add a blank custom page by hand.** The *Create new…* menu has no "custom element" option. Ask Airtable's AI assistant (Omni, the sparkle icon in the editor) to create a blank custom page on the interface, then paste your code into it as above.
-- **Enable the fields the code reads.** On the *Page › Custom* panel, *Data › Fields* (e.g. *54 visible*) controls which fields of each table the element may read. A field referenced in the `.tsx` but hidden here makes the page error at load. After pasting new code, open *Fields*, pick each table in the dropdown and tick what the code uses (or *Show all*).
-- **Map the custom properties.** The *Custom properties* section (HS - Quotes, Locations, BOM, BOM Resources, Jobs, Resources, Customers, Partners in the Quote Staging page) binds each `useCustomProperties` slot to a table. Unmapped slots come back `null` and `useRecords(null)` crashes, see the table below.
+Learned the hard way on 2026-10-29 ([incidents/2026-10-29-quote-staging-contracts-not-created.md](incidents/2026-10-29-quote-staging-contracts-not-created.md)): identical code worked on *Create job* and silently created no contracts on *Quote-to-job*. The difference was page settings. A custom page can only read and write what the **page** exposes, through **three independent panels** under *Page › Custom* in the editor's right panel. None of them are in the `.tsx`, none are versioned, and none copy when the same code is pasted into a second page.
+
+| Panel | Controls | If wrong |
+| --- | --- | --- |
+| *Data › Table* (eye icons) | which tables the page can see at all | `getTableByIdIfExists` returns `null`; `useRecords(null)` crashes; a guarded `if (table)` skips silently |
+| *Data › Fields* (per table, e.g. "54 visible") | which fields the page can read and write | hidden field reads as empty or throws; a write to it is dropped |
+| *User actions › Edit records inline* and *Add records inline* (gear icon → per-table list) | SDK write permission per table | `Add` off → `createRecordAsync` throws *"not set to allow record creation"*; `Edit` off → writes dropped **including the reverse side of linked-record fields**, so the record is created with empty links |
+
+Rules that follow:
+
+- **Link targets need write permission too.** Setting a linked-record field writes both tables. Switch *Edit records inline* on for every table a link points at (for contracts: `Subscription contracts`, `Quotes`, `Customer (from Inventory base)`), not only the table receiving the record.
+- **Edit before Add.** The per-table *Add* toggle is greyed out until *Edit* is on for the same table. The tooltip says "Inline record editing is disabled for this table."
+- **Airtable drops, it does not always fail.** A create with some disallowed fields can succeed with those fields empty. A record that exists but is missing links is a permission problem first.
+- **Publish after changing any of these.** Saving the code and publishing the interface are separate steps.
+- **When a write works on one page and not another, diff these three panels on both pages before reading code.**
+
+### Checklist for any page that writes records
+
+For **every** table the code reads or writes, including tables reached only through linked-record fields:
+
+- [ ] *Data › Table*: enabled
+- [ ] *Data › Fields*: every field the code touches is visible (**Show all** unless there is a reason not to)
+- [ ] *User actions › Edit records inline* (gear): on for the table
+- [ ] *User actions › Add records inline* (gear): on for the table, if the code creates records in it
+- [ ] *Custom properties*: every `useCustomProperties` slot is bound to a table
+- [ ] **Publish**
+
+### Other pitfalls when creating a new custom page
+
+- **You cannot add a blank custom page by hand.** The *Create new…* menu has no "custom element" option. Ask Airtable's AI assistant (Omni) to create a blank custom page on the interface, then paste your code into it as above.
+- **Map the custom properties.** The *Custom properties* section (HS - Quotes, Locations, BOM, BOM Resources, Jobs, Resources, Customers, Partners on the Quote Staging page) binds each `useCustomProperties` slot to a table. Unmapped slots come back `null`.
 - Field IDs are in a `const F = {…}` at the top of each file. Update them if you copy a page to another base.
+
+### Code rules that came out of the same incident
+
+- **Never guard a write with a silent `if`.** `if (table) { create }` turns a misconfiguration into a fake success. Throw, or at least log, when a required table or field is missing. `quote-staging-extension.tsx` now throws and logs under `[QuoteStaging]`; `create-job-combined.tsx` still has the silent guard in both its single and bulk paths.
+- **Render errors next to the button that caused them.** A banner at the top of a long panel is invisible during a bottom-of-page action.
+- **The extension runs in a cross-origin iframe.** Browser automation on the parent page cannot read its console; an inline error on the page is the only observable signal from outside.
 
 ## Rules learned the hard way
 
@@ -43,4 +77,6 @@ Verified in the Jobs base on 2026-10-29. The code lives only inside Airtable; th
 | Dropdown position | `position: fixed` + `getBoundingClientRect()` | escapes `overflow:auto` |
 | Tooltips | CSS hover | `title` attribute does not render |
 
-Customer prefill from a location must match by **name** (old vs new customer table, see [known-issues.md](../known-issues.md)).
+Customer prefill from a location must match by **name** (old vs new customer table, see [known-issues.md](../known-issues.md)). The contract form on Quote-to-job still prefills Customer from the quote's `Customer (AT)` link, which is a Jobs-base `Customers` record, while the contract's Customer field links to the Inventory-base customers table: a contract saved with the prefill carries a record ID from the wrong table. Resolve by name against the dropdown list instead, as the seed button already does.
+
+**Repo copies are behind the live code** for `quote-staging-extension.tsx` since the 2026-10-29 diagnostics (inline error, `[QuoteStaging]` logging, seed button). Refresh with *Download source code* and redact the PAT before committing.
