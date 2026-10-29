@@ -22,7 +22,7 @@ The four cron expressions are staggered on purpose so the scripts never overlap 
 | `DnQfINO92jReUuBQ` | DS002 - Airtable - Jobs / Jobs | Airtable → Google Sheets, every 15 min, error mail via Gmail | `jobs-to-sheets.py` |
 | `ZTzd0xFe3ytRuiF3` | DS005 - Contracts | subscription contracts → Sheets | the subscription report scripts |
 | `Vghdyftp4nciQwoX` | DS005 - Subscriptions | subscriptions → Sheets | same |
-| `TL3qCEyJYjiPJgBZ`, `pLgKTGmpIS08BbGo` | DS014 - Incidents / OOS items, DS014 - OOS Items | OOS items → Sheets for the support dashboard | `tickets-to-sheets.py` / support-dash scripts |
+| `TL3qCEyJYjiPJgBZ`, `pLgKTGmpIS08BbGo` | DS014 - Incidents / OOS items, DS014 - OOS Items | OOS items → Sheets for the support dashboard | `tickets-to-sheets.py` |
 | `NEABk0wgYkJbYiYU` | DS014 - Tickets | tickets → Sheets | `tickets-to-sheets.py` |
 | `nr2OCePA23KZdPyU`, `3DvuKt6yrzIlL4gb` | DS016 - HS Quotes | HS quotes → Sheets | `hs-quotes-to-sheets.py` |
 | `qBiZjZTs8PUcv05H` | AT Subscriptions --> Supabase | webhook `/airtable-inventory` → Supabase | abandoned, archived 2026-10-26 |
