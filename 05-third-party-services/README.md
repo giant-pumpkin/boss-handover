@@ -17,7 +17,7 @@ One file per service, all on the same template ([_template.md](_template.md)). T
 | Supabase | Postgres for pipelines and ConnectIQ | | | [supabase.md](supabase.md) |
 | Vercel | ConnectIQ hosting | Sky | | [vercel.md](vercel.md) |
 | Resend | ConnectIQ email | Sky | | [vercel.md](vercel.md) |
-| AirDiff | daily snapshot/diff of the Jobs base (`wflqLnOhIgG6VBF2m`) | | | [airdiff.md](airdiff.md) |
+| AirDiff | daily snapshot/diff of the Jobs base (`wflqLnOhIgG6VBF2m`) | not in my scope | | — |
 | TargetR | signage player telemetry pulled into Inventory base every 30 min (`wflBANYMhf5P5djxI`) and PoP webhook | | | [targetr.md](targetr.md) |
 | Workable | HR; employee list pulled monthly into the Data base | HR, not me | | [workable.md](workable.md) |
 | Slack | alerts from ~12 automations | | | [slack.md](slack.md) |

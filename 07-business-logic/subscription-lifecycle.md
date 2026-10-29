@@ -18,6 +18,8 @@ Three Airtable bases and HubSpot. Every step assumes a physical unit with a seri
 ## Where it breaks
 
 - Unit not pre-registered in Inventory → step 9 does nothing (main source of "missing subscription").
+- Serial matching uses `contains` on a 14-character normalised serial, so `…137K` and `…137L` both match and both get a subscription: the likely source of duplicate billing rows.
+- Only the empty-start-date failure posts to Slack; `Player = No`, `Spare` ticked or the idempotency guard drop silently.
 - Services with no hardware (Delta Group content curation: 4 quarterly batches of 100 MP4s, USD 750 each, signed 2026-09-30) have no Resource, quote category, job, serial or subscription. Raised in Slack 2026-10-09; relates to M4 products in ConnectIQ.
 - Jobs created by hand (step 6) and the manual sync tick (step 8) depend on one person remembering.
 
@@ -25,6 +27,16 @@ Three Airtable bases and HubSpot. Every step assumes a physical unit with a seri
 
 Sales, Customer, Service, Subscription type, Duration FoC (1–7 months), Start date, Invoice frequency (Monthly/Annually), Units start, Units current, Currency, PPU/month, PPL/month. Displays and LISA boxes need a contract; stands and mounts do not.
 
-## Billing-start rules
+## Billing-start rule (fixed 2026-09-01, confirmed working)
 
-<!-- TODO: write these out exactly. Known so far: install month is never billed for signage; music is prorated; FoC months delay the first invoice; start date = MAX of … (see 02-airtable/formulas.md). -->
+- Install date derives from the job's `Date - Scheduled`, **not** `Date - Completed` (Completed = training sign-off, often weeks later).
+- Billing starts the **first of the month after installation**.
+- Subscription start date = `Start date - Override` if present, else `MAX(first-of-month-after(Installation date), contract Start date)`, with an empty contract start ignored.
+- Signage: no real contract term, so the date comes from the install and is then stamped onto the contract once. Music streaming under an umbrella contract: the later of the two wins.
+- FoC months extend the term; PPU (per unit) or PPL (per location) pricing is on the contract.
+
+The old repair harness (`Start date - Check`, `Alert - Start dates`, `Trigger - Align start dates`, `Start date - Rollback`, the `Rollback` table) exists because of the previous wrong rule and can be retired once the new rule has run clean for a month.
+
+## What a "Subscription contract" really is
+
+Not the commercial contract (that is the HubSpot quote). It is a **provisioning order**: terms stapled to a BOM line so the automation knows what subscription rows to create. One per job/install, which is why Boost Juice has ~170 of them. Full explanation and the known flaws in the chain: [quote-to-subscription-workflow.md](quote-to-subscription-workflow.md).

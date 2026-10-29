@@ -12,3 +12,10 @@
 | `Installed` status name | Jobs base | misleading for non-install jobs | rename when ConnectIQ takes over |
 | `Resources` is the products table | Inventory base | confusing name | documented in GLOSSARY |
 | Three record types in one inventory table <!-- TODO describe --> | Inventory base | | |
+| Ingest matches serials with `contains` on the 14-char form, so near-identical serials all get updated and each spawns a subscription | Inventory base `wfl1YUiIjdVT3b66E` | duplicate billing rows | exact match on `SN - Normalised`, assert one result |
+| 14/15-character serial rule lives in three places (availability script, ingest script, `SN - Normalised`) | Jobs + Inventory bases | drift | one formula, scripts read it |
+| Cross-base webhook sends display strings, and Airtable link-by-name **creates a new record** on no exact match | Jobs → Inventory | phantom Locations and Contracts after any rename | send record IDs |
+| Only the empty-start-date branch alerts; other guard failures are silent | `wflzWWNSCGdhtHrbv` | installed, never billed, no signal (~1,003 CMS devices without a subscription row) | Slack on every drop branch |
+| Idempotency guard blocks a legitimate second subscription on one item (signage + music on one screen) | `wflzWWNSCGdhtHrbv` | | key on item + contract + type |
+| `Location - Current` on subscriptions follows the hardware; swaps rewrite history | Inventory base | | use `Service location` |
+| Software-only and delivery-fee-only quotes never match the Quote Staging filter | Quotes-to-Job | stranded, no job, no subscription | |

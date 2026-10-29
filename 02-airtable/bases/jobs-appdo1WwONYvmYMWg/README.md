@@ -6,9 +6,9 @@ Work orders, BOMs, and the whole maintenance (MA) structure.
 
 | Table | ID | Notes |
 | --- | --- | --- |
-| Jobs | `tblwHj9cO37wp1fVx` | Serial numbers typed into `fldIeKaFA33hZdtBG`; `sync` checkbox `fldhTpGWsywbFFSU7` |
+| Jobs | `tblwHj9cO37wp1fVx` | `Close job - SN` `fldIeKaFA33hZdtBG` (comma-separated serials); `sync` `fldhTpGWsywbFFSU7`; `Inventory - Availability` `fld4nXGpbFqrNnI9r` (automation report); `BOM` link `fldMsBGHYoDkBxvBM` |
 | BOM | `tblMoXmjtWVO8Wyz7` | created by the job-creation extension |
-| BOM resources | `tblAHbCtXG4w9tzSF` | one per BOM line |
+| BOM resources | `tblAHbCtXG4w9tzSF` | one per BOM line; `Subscription Contract` link `fldWejNKXO8IhYzTs`; linked from BOM via `fldAc2IFjmNgqJfSy` |
 | Tasks | `tblh1SjKm6XTlBY8q` | |
 | Quotes (Airtable-native) | `tbldE1r6MKSgebujM` | |
 | HS - Quotes (copy) | `tblRSXCmjroNPaO5j` | the Quotes-to-Job extension writes here |

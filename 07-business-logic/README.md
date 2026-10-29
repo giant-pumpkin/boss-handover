@@ -4,7 +4,8 @@ Domain rules that outlive any tool. If you change an automation, report or schem
 
 | Doc | Covers |
 | --- | --- |
-| [subscription-lifecycle.md](subscription-lifecycle.md) | Product → quote → job → serial sync → inventory → subscription; billing-start rules |
+| [subscription-lifecycle.md](subscription-lifecycle.md) | Product → quote → job → serial sync → inventory → subscription, with every automation ID |
+| [quote-to-subscription-workflow.md](quote-to-subscription-workflow.md) | The same chain in depth: Quote Staging stages, what a "contract" really is, the scripts, the start-date rule, known flaws |
 | [maintenance-packages.md](maintenance-packages.md) | MA packages, items, cycles, the one-visit-per-year entitlement |
 | [job-types-and-statuses.md](job-types-and-statuses.md) | Every job type and status and what each means operationally |
 | [inventory-and-warehouses.md](inventory-and-warehouses.md) | GP vs Rangsit warehouses, designation, ownership, warranties |
