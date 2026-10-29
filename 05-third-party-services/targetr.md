@@ -4,8 +4,8 @@
 
 | | |
 | --- | --- |
-| What we use it for | |
-| URL | |
+| What we use it for | signage CMS for customer screens (Virgin Active Doha, Dusit Thani College, …) and the Experience Center screens, including the two dashboard players; its status mails feed Freshdesk and its logs feed the Inventory base |
+| URL | https://signage.giant-pumpkin.com |
 | Plan / tier | |
 | Admin account (email) | |
 | Other users | |

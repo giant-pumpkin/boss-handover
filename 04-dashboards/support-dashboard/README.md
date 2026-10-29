@@ -15,3 +15,7 @@
 - **NULL bug:** <!-- TODO what it is and the workaround -->
 
 Ruj's earlier `PROD_AT-2-sheets_support_*.py` scripts are deprecated; kept in [03-data-pipelines/deprecated/support-dash-scripts](../../03-data-pipelines/deprecated/support-dash-scripts/).
+
+## Hosting
+
+TargetR screen `ExpC - 1x1L(2) (Dashboard Left)`, sequence **Dashboard left**, slot 6 web item with the embed URL and `?hl=en`. See [../targetr-video-wall.md](../targetr-video-wall.md).

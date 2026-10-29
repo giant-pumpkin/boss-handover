@@ -13,4 +13,4 @@
 
 ## Hosting
 
-<!-- TODO: TargetR player details, see ../README.md -->
+TargetR screen `ExpC - 1x1L(3) (Dashboard Right)`, sequence **Dashboard Right**, slot 4 web item with the embed URL and `?hl=en`. See [../targetr-video-wall.md](../targetr-video-wall.md).

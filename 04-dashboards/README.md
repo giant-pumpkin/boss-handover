@@ -24,4 +24,4 @@ The `Deprecated` subfolder holds the sheets Coupler.io used to fill. Coupler is 
 
 ## Hosting on the video wall
 
-<!-- TODO: how the two team dashboards are displayed on TargetR: player, URL, login kept alive, refresh interval -->
+The two team dashboards are played by TargetR Android players as web items inside two sequences. Full detail, including the mandatory `?hl=en` on the embed URL: [targetr-video-wall.md](targetr-video-wall.md).
