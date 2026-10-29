@@ -21,8 +21,10 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **IXM Aqua** | Visual Art's Signage Player API/backend (`connect.as01.signageplayer.app`). GP's `gpapi` user is read-only. |
 | **Job types** | Installation, Reactive (RM), Preventive (PM), swap, removal, … <!-- TODO: full list in 07-business-logic/job-types-and-statuses.md --> |
 | **LISA box** | <!-- TODO: define (a player/device that needs a subscription contract, like displays) --> |
+| **Lugtan** | Head of the operations / deployment team. Processes accepted quotes on the Quote Staging page, usually within minutes, and owns scheduling with installers. |
 | **MA / PM / RM** | Maintenance Agreement. PM = preventive visit, RM = reactive call-out. One visit per store per contract year; an unused RM becomes a PM after the 4-month cut-off. |
 | **MPA- / MPI-** | Maintenance Package / Maintenance Package Item record IDs in the Jobs base. |
+| **Omni** | Airtable's built-in AI assistant in the interface editor. The only way to create a blank custom (code) page, see [02-airtable/interface-extensions](02-airtable/interface-extensions/). |
 | **PAT** | Airtable Personal Access Token. Several are hard-coded in interface extensions and droplet scripts. Must be rotated at handoff. |
 | **POC** | <!-- TODO: proof of concept (ConnectIQ operations prototype) or point of contact? Define. --> |
 | **Pool allocation** | Inventory units are allocated to a client "pool" before deployment; a unit deployed to a client must be unallocated or in that client's pool. |
