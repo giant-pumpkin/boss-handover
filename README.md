@@ -2,8 +2,8 @@
 
 **Author:** Pitchayut (Boss) · pitchayut@giant-pumpkin.com
 **Role handed off:** Data analyst / internal tooling (Airtable, pipelines, dashboards, ConnectIQ operations domain)
-**Last working day:** 20 November 2026 <!-- TODO confirm -->
-**Last updated:** 2026-10-26
+**Last day in office:** 13 November 2026 (employment ends 30 November; on leave 16–20, 23–25 and 30 November, reachable on Slack for questions until then)
+**Last updated:** 2026-11-03
 
 This repository is the single entry point for everything I built, configured or own at Giant Pumpkin. It is written for the person who inherits the work, not for me. If a fact here disagrees with a live system, the live system wins — then fix the doc.
 

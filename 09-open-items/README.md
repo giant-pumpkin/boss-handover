@@ -7,7 +7,7 @@ Honest list of what is unfinished and what can bite. Ordered by risk.
 | # | Risk | Likelihood | Impact | Mitigation / owner |
 | --- | --- | --- | --- | --- |
 | 1 | PATs hard-coded in extension files and one automation; one PAT was already exposed once | certain | account compromise | rotate at handoff ([HANDOFF-CHECKLIST.md](../HANDOFF-CHECKLIST.md)) |
-| 2 | `MAC-2027 - *` cycles do not exist; nobody creates them | high | no PM jobs planned for 2027 | create before leaving or assign |
+| 2 | `MAC-2027 - *` cycles do not exist; nobody creates them | high | no PM jobs planned for 2027 | create before 13 Nov or assign |
 | 3 | Serial-not-pre-registered → subscription never created; plus silent guard drops and a `contains` match that double-bills near-identical serials | ongoing | revenue not billed or billed twice | pre-register units; exact match on `SN - Normalised`; Slack on every drop — [known-issues](../02-airtable/known-issues.md), [workflow doc §5](../07-business-logic/quote-to-subscription-workflow.md) |
 | 4 | Droplet is a single box with <!-- TODO backup state --> | medium | all pipelines down | snapshots + [rebuild doc](../01-infrastructure/digital-ocean-droplet/rebuild-from-scratch.md) |
 | 6 | Droplet: n8n image tag unpinned, no swap, DO backups status unknown | low | surprise upgrade; no restore point | pin `n8nio/n8n:2.32.7`, confirm backups — [01-infrastructure/digital-ocean-droplet](../01-infrastructure/digital-ocean-droplet/) |
