@@ -23,7 +23,7 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Jobs X** | The per-partner pages of the Jobs interface (`Jobs X - Audio Asis`, `Jobs X - Titanium`, …) shared with external installers as guests. See [07-business-logic/installation-partners.md](07-business-logic/installation-partners.md). |
 | **LISA box** | <!-- TODO: define (a player/device that needs a subscription contract, like displays) --> |
 | **Lugtan** | Head of the operations / deployment team. Processes accepted quotes on the Quote Staging page, usually within minutes, and owns scheduling with installers. |
-| **MA / PM / RM** | Maintenance Agreement. PM = preventive visit, RM = reactive call-out. One visit per store per contract year; an unused RM becomes a PM after the 4-month cut-off. |
+| **MA / PM / RM** | Maintenance Agreement. PM = preventive visit, RM = reactive call-out. One visit per store per contract year; an unused RM becomes a PM after the 4-month cut-off. Sales and QSA also say "MA" for a *reactive* visit ("4 visits = 3 MA + 1 PM"), so ask which meaning when a quote says MA. |
 | **MPA- / MPI-** | Maintenance Package / Maintenance Package Item record IDs in the Jobs base. |
 | **Omni** | Airtable's built-in AI assistant in the interface editor. The only way to create a blank custom (code) page, see [02-airtable/interface-extensions](02-airtable/interface-extensions/). |
 | **PAT** | Airtable Personal Access Token. Several are hard-coded in interface extensions and droplet scripts. Must be rotated at handoff. |
@@ -33,6 +33,7 @@ GP-internal vocabulary. Alphabetical. If a term is in a doc and not here, add it
 | **Provisioning order** | What an Airtable "Subscription contract" really is: terms stapled to a BOM line so the automation can create subscription rows. The commercial contract is the HubSpot quote. |
 | **Quote Staging** | The five-stage Quotes-to-Job pipeline: Needs Customer → Needs Allocation → Ready → Done → Exempt. |
 | **Resources** | The products table in the Inventory base (`tbl3eqL9QVNgZfNgZ`). Synced to HubSpot as products. The name is historical. |
+| **Software services** | The CMS subscription and management fee GP charges per screen. Zus Coffee and Chagee have none: hardware only, see [07-business-logic/installation-partners.md](07-business-logic/installation-partners.md). |
 | **SN - Normalised / 14-char rule** | Samsung serials are 15 characters on the device and 14 in Airtable; every match drops the 15th character. Implemented in three places. |
 | **Sky** | Sky Chew, head of the digital department at GP. Builds the ConnectIQ CRM side (Phase 1) and owns the Looker dashboards; received Handover Part 1 on 2026-10-27. |
 | **sync tick** | The `sync` checkbox on a job (`fldhTpGWsywbFFSU7`) that sends serial numbers to the Inventory base. The main human gate in the lifecycle. |

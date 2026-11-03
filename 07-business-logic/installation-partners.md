@@ -6,16 +6,16 @@ Giant Pumpkin does not install with its own staff. Each customer programme has a
 
 | Partner | Customers / regions | Notes |
 | --- | --- | --- |
-| **Audio Oasis** | KFC (CRG, QSA, RD), Boost Juice, Chagee | main Thailand installer |
+| **AudioAsis** (spelled that way; the Jobs X page is `Jobs X - Audio Asis`) | KFC (CRG, QSA, RD), Boost Juice, Chagee | main Thailand installer |
 | **Titanium** (Titanium Synergy) | Singapore, Philippines, Malaysia, Indonesia; Zus Coffee in Thailand | multinational with Titanium Malaysia, Titanium Singapore etc. Titanium is our **partner, not a customer**, but it is the project owner for Zus Coffee, Chagee and "Yoshi" <!-- confirm name -->, which is why their delivery notes carry the **Titanium heading** (DocsAutomator template GP/TEM-017) |
 | **Ofar** <!-- confirm spelling; interface page is "Jobs X - Ofar - Starbucks" --> | Starbucks | |
 | POP Media | Mexico (`Jobs X - POP Media - MX`) | |
 
-Contacts at Titanium I dealt with: the shared admin account (a Titanium Synergy Gmail), **Longway** (the CEO's son) and **Yog** (based in Malaysia). Audio Oasis contacts: <!-- TODO -->.
+Contacts at Titanium I dealt with: the shared admin account (a Titanium Synergy Gmail), **Longway** (the CEO's son) and **Yog** (based in Malaysia). AudioAsis contacts: <!-- TODO -->.
 
 ## The Jobs X pages
 
-The Jobs interface has one **Jobs X - <partner>** page per partner (Audio Oasis, KFC - CRG / QSA / RD, Ofar - Starbucks, Titanium, POP Media - MX; plus `Ma - Reports X - KFC` and `Locations X - KFC`). Each is filtered to that partner's jobs and shows only the fields we choose to expose. External people see **that page only**, so:
+The Jobs interface has one **Jobs X - <partner>** page per partner (AudioAsis, KFC - CRG / QSA / RD, Ofar - Starbucks, Titanium, POP Media - MX; plus `Ma - Reports X - KFC` and `Locations X - KFC`). Each is filtered to that partner's jobs and shows only the fields we choose to expose. External people see **that page only**, so:
 
 - anything added to a Jobs X page is visible to the partner, check before adding a field;
 - the **Start job** button on the dispatch list is what the installer uses to reach the Fillout form ([05-third-party-services/fillout.md](../05-third-party-services/fillout.md));
@@ -25,6 +25,23 @@ The Jobs interface has one **Jobs X - <partner>** page per partner (Audio Oasis,
 
 Share the interface and invite the person as a **guest** (interface-only access). Do **not** add them as a base or workspace **collaborator**: every collaborator seat costs about **USD 50 per month** on our Airtable plan, and a collaborator can see the whole base. Guests are free and see only the pages shared with them. The current guest list is visible on the interface's Share dialog.
 
+## What GP delivers per customer
+
+The scope differs by customer, and it decides whether a job needs a subscription contract, whether a software subscription exists, and which delivery-note heading to use. Confirmed with the deployment team 2026-11-03.
+
+| Customer | GP sells / does | Who installs | Software (CMS, subscription) | Maintenance | Delivery-note heading |
+| --- | --- | --- | --- | --- | --- |
+| KFC (CRG, QSA, RD) | hardware, installation, software, MA packages | AudioAsis | **yes**, GP subscription per screen | **yes**, MA packages ([maintenance-packages.md](maintenance-packages.md)) | Giant Pumpkin (paper note) |
+| Boost Juice | hardware, installation, software | AudioAsis | yes | | Giant Pumpkin |
+| **Chagee** | hardware, **delivery and installation only** | AudioAsis | **none.** GP provides no software services; nothing to subscribe | none | **Titanium Synergy** (GP/TEM-017), Chagee is Titanium's project |
+| **Zus Coffee** | **screens only, delivery only.** A plain hardware sale | Titanium | **none.** GP provides no software services | none | **Titanium Synergy** (GP/TEM-017), Zus Coffee is Titanium's project |
+
+Consequences in Airtable:
+
+- Zus Coffee jobs are type **Delivery**, so the sync marks units `Delivered` and never creates a subscription; no subscription contract is needed on the BOM line ([daily-operations.md](daily-operations.md) step 6).
+- Chagee jobs are **Installation** jobs without a software subscription. The sync marks units `Installed`; do not attach a subscription contract and do not expect a subscription row to appear. <!-- TODO: confirm the sync does not require a contract on an Installation job whose BOM carries displays; if it does, Chagee needs an exemption -->
+- For both, the delivery-note automation must pick the Titanium heading. For Zus Coffee the template condition has to key on `customer string` or it falls back to the GP heading ([05-third-party-services/docsautomator.md](../05-third-party-services/docsautomator.md)).
+
 ## Delivery notes per partner / customer
 
 | Customer | Delivery note | Signature |
@@ -32,4 +49,4 @@ Share the interface and invite the person as a **guest** (interface-only access)
 | KFC | **physical** note, signed on paper, PDF uploaded to the job by the deployment team | paper |
 | Chagee, Boost Juice, Zus Coffee | digital, generated by DocsAutomator from the job | manual-signature button or e-signature, see [05-third-party-services/docsautomator.md](../05-third-party-services/docsautomator.md) |
 
-Zus Coffee is **delivery only**: we ship, Titanium installs, so the job needs no subscription contract ([daily-operations.md](daily-operations.md)).
+Zus Coffee is **delivery only** and Chagee is **delivery and install only**; neither has GP software, see the scope table above.

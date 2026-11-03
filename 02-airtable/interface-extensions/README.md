@@ -8,6 +8,8 @@ Custom interface pages written as single `.tsx` files with `@airtable/blocks/int
 | `jobs/quote-to-job/quote-staging-extension.tsx` | Jobs | Quote-to-job (`pagyNqW4yhwE7GbRE`) | sales → deployment handover (Quote Staging) |
 | `jobs/dashboards/jobs-dashboard.tsx` | Jobs | Dashboard | |
 | `inventory/inventory-swap.tsx` | Inventory | Swap | |
+| `inventory/stock-movement-manager/stock-movement-manager.tsx` (in `~/coding/airtable-interface-improvements`) | Inventory | Stock Movement Manager (`pagFXuhPOtuYDAEzU`) | serial transfers / send to site / return / defect / lost + consumable ledger with balance check; SDK-only, no PAT. Config in `CONFIG.md` next to it |
+| `inventory/stock-overview/stock-overview.tsx` (same repo) | Inventory | Stock Overview (`pagEYdfSFlZdmjqsf`) | read-only product × warehouse matrix (serial), consumable balances, attention list (no-warehouse units, deployed units still carrying a warehouse). Config in `CONFIG.md` next to it |
 
 ## How to edit an existing custom page
 
