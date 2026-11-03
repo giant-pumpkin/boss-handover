@@ -46,4 +46,4 @@ A job cannot be synced while its contract is missing. Example on 2026-10-27: **B
 
 ## 5. Other recurring duties
 
-See [HANDOFF-CHECKLIST.md](../HANDOFF-CHECKLIST.md): yearly MA cycles, monthly subscription report, droplet checks.
+See [HANDOFF-CHECKLIST.md](../HANDOFF-CHECKLIST.md): yearly MA cycles, the subscription report when Chris asks, droplet checks.

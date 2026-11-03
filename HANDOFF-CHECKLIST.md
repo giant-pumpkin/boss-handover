@@ -50,7 +50,8 @@ Every one of these has been in my shell, a script, or an extension file. Rotate,
 | Chase missing subscription contracts before syncing (e.g. Boost Juice Lot 1) | as they appear | [07-business-logic/daily-operations.md](07-business-logic/daily-operations.md) |
 | Invite partner staff to Jobs X pages as guests | as needed | [07-business-logic/installation-partners.md](07-business-logic/installation-partners.md) |
 | Create next year's MA cycles and packages | yearly, by Nov | [07-business-logic/maintenance-packages.md](07-business-logic/maintenance-packages.md) |
-| Monthly subscription report | monthly | [03-data-pipelines/subscription-report](03-data-pipelines/subscription-report/) |
+| Subscription timeline report when Chris asks | on request | [03-data-pipelines/subscription-report](03-data-pipelines/subscription-report/) |
+| Re-own the Apps Script trigger that snapshots the CMS/DP Information sheet daily | once, before my Google account goes | [03-data-pipelines/cms-scraper](03-data-pipelines/cms-scraper/) |
 | Check droplet disk / snapshot | monthly | [01-infrastructure/digital-ocean-droplet](01-infrastructure/digital-ocean-droplet/) |
 
 ## Knowledge transfer sessions
