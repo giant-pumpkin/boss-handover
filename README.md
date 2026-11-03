@@ -42,7 +42,7 @@ Folders are numbered in reading order. Every folder has a `README.md` that is it
 | `~/coding/airtable-to-sheets`, `~/coding/jobs-to-sheets` | `03-data-pipelines/airtable-to-sheets/` |
 | `~/coding/freshdesk-backfill`, `~/coding/freshdesk-location-picker` | `03-data-pipelines/freshdesk-to-airtable/` |
 | `~/coding/xero-demo` | `03-data-pipelines/xero-to-airtable/` |
-| `~/coding/subscription-reconciliation`, `~/coding/parse-subscriptions` | `03-data-pipelines/subscription-report/` |
+| subscription report package (`code/`, HANDOVER.md), and the May 2026 `~/coding/subscription-reconciliation` attempt | `03-data-pipelines/subscription-report/` |
 | `~/coding/email-scraper` | `03-data-pipelines/email-intelligence/` |
 | `~/coding/ixm-aqua-api`, `~/coding/aqua-api-probe` | `03-data-pipelines/cms-player-exports/` |
 | `~/coding/cms-scraper`, `~/coding/dp-scraper` | `03-data-pipelines/cms-scraper/`, `03-data-pipelines/dp-scraper/` (live copies run on the droplet) |

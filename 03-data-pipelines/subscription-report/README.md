@@ -1,38 +1,37 @@
 # subscription-report
 
-Subscription timeline report, produced **on request** (Chris asks for it now and then; it is not on a schedule). Last produced 2026-05-11, Jan 2026 to date. Keep it runnable.
+The monthly screens-serviced report Chris asks for, roughly monthly, to validate what GP pays the VA and to reconcile client invoicing. Signage only. Last run: Jan–Sep 2026 (v5, sent Oct 2026).
 
-Source on my Mac: `~/coding/subscription-reconciliation` (`main.py`, plus two HubSpot helpers from the same exercise). Copies are in [reconciliation/](reconciliation/). The repo copy reads the Airtable token from `AT_PAT`; the original on my Mac still has a PAT hard-coded, which is one of the reasons the PAT is on the rotation list.
+**Start with [HANDOVER.md](HANDOVER.md).** It is written for someone who has never run it: inputs, the three commands, how to read the output, the checks to do before sending, and what to do when a number looks wrong.
 
-## What `main.py` produces
-
-`subscription_report_output.xlsx`, one sheet per customer group, one row per location, one column per month from April 2022 to the current month. A cell holds the number of active subscriptions for that location in that month (active = `Start date` ≤ month end and `End date` ≥ month start). Extra columns: the location's installation job completion date, and the installation date. Rows whose Airtable start month differs from the Sales tracker are highlighted, and fuzzy name matches below the confidence threshold are listed in the console output for a human to check.
-
-Inputs:
-
-| Input | Where |
+| File | What |
 | --- | --- |
-| Subscriptions | Inventory base `appRor1ipbYAb4K7z`, table `tblyNA73D9jldeEir` (Location - Installation, Start date, End date, Status, Customer group) |
-| Installation jobs | Jobs base `appdo1WwONYvmYMWg`, Jobs table (Location, Date completed / Date scheduled, Job type, Status) |
-| Sales tracker | `new_digital_signage_subscription_tracker_sales.xlsx`, Sales' own sheet exported to xlsx; one tab per customer group, a few template tabs skipped (`SKIP_SHEETS`) |
+| [HANDOVER.md](HANDOVER.md) | the runbook, read first |
+| [process.md](process.md) | full technical reference: every rule, every bug found and fixed, the regression checklist, change log (long; §12 embeds the script) |
+| [code/](code/) | `convert_subscriptions.py` → `convert_cms_snapshots.py` → `build_report.py`, in that order; needs only `pandas` and `openpyxl` |
+| [reference/](reference/) | the last report sent (`subscription_report_2026_jan_sep_v5.xlsx`) and the Oct 2026 Airtable fix list (56 record errors found by the report; 53 still open at handover) |
+| [legacy-2026-05/](legacy-2026-05/) | the first attempt (May 2026): Airtable timeline vs the Sales tracker xlsx, plus two HubSpot quote helpers. Superseded; kept because the quote-type patch is referenced from [05/hubspot-api-access.md](../../05-third-party-services/hubspot-api-access.md). The original on my Mac has a PAT hard-coded. |
 
-The other two scripts are a one-off from May 2026 and are not part of the report: `quote_line_items.py` dumps every HubSpot quote's line items to Excel; `patch_quote_types.py` wrote `quote_type` / `quote_service` back onto HubSpot quotes from a grouped xlsx. `parse-subscriptions/` is an abandoned stub.
+## Inputs, in one line each
 
-## Run
+1. Airtable Subscriptions view **"Subscriptions - Generate Report"**, downloaded as CSV. Must keep `Duration - FoC` and `Service Location`.
+2. Airtable Inventory view **"Installed - No active subscription (Signage)"**, CSV.
+3. End-of-month copies of the CMS/DP Information sheet from the `cms_daily` Drive folder (`1ZkT9fA3v7X8k9h2GXNrpqiVpQWmCDYnB`), one per month, sheet `CMS Asia`. These exist because of the Apps Script snapshot described in [../cms-scraper/README.md](../cms-scraper/README.md); if that trigger dies with my Google account, this report loses its source of truth for "was the screen on site".
+4. Optional CMS Europe export for the Iceland Starbucks screens.
 
-```bash
-cd ~/coding/subscription-reconciliation
-source venv/bin/activate   # requests openpyxl rapidfuzz python-dateutil
-export AT_PAT=...
-python main.py [path/to/sales_tracker.xlsx]
-```
+## Rules the report encodes
 
-Takes a few minutes (full table scans of subscriptions and jobs). Send Chris the xlsx.
+- CMS says whether a screen is installed (Online or Offline = installed, Unpaired = removed). Airtable says what is billed. The report joins them and lists every disagreement on its own tab.
+- Billing starts the 1st of the month after installation; the install month is never billed.
+- FOC months count from the contract start, not from each screen's record.
+- Serial match is on the first 14 characters (Airtable truncates, CMS does not).
 
-## Billing-start rules
+The same rules in prose: [07-business-logic/subscription-lifecycle.md](../../07-business-logic/subscription-lifecycle.md).
 
-The report counts a subscription as active from its Airtable `Start date`; it does not apply the billing rules itself. Those are in [07-business-logic/subscription-lifecycle.md](../../07-business-logic/subscription-lifecycle.md) (install month never billed for signage, FoC months, etc.). If Chris wants billed months rather than active months, that is a change to `is_active`.
+## Open at handover
 
-## Data-fix backlog
+See HANDOVER.md §7: Robinsons Butuan replacement screen with no subscription record, Nysa Hotel lapsed contract with 9 screens still on site, no CMS snapshot for January 2026, Virgin Active absent from CMS. Plus the 53 open rows in the fix list.
 
-The May 2026 run found start-date discrepancies against the Sales tracker; the fixes were applied in Airtable at the time. Rerun and read the console output for the current list. <!-- TODO: the known remaining mismatches, if any -->
+## Where it should go
+
+A screen-month fact table in Supabase next to the existing sync, with the exception buckets as views (HANDOVER.md §9). Not urgent; the report as it stands is defensible.

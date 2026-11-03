@@ -16,7 +16,7 @@ Portal login changes or layout changes break the scrape; n8n posts the non-zero 
 
 ## The "CMS/DP Information" Google Sheet
 
-Sheet `19AQuRcClma4uzMvGz9kFG7shcxontNVRZGliAu2Mx0k` ("CMS/DP Information"). Tab `raw_data` is what `scraper.py` uploads (cleared and rewritten every run, `LAST UPDATED:` stamp in the header row); `raw_data_dp` is the same from [dp-scraper](../dp-scraper/). The front tab is a `=QUERY(raw_data!A:N, …)` over it: Client, PlayerName, LastContactDate, ScreenModels, SerialNumber, ScreenStatus (Online / Offline / Unpaired), ClientId. This is the sheet Support and Chris look at for player status; the Airtable `Signage Scraper` table is the same data. <!-- confirm: the GSHEET_ID in the droplet .env files should be this ID; the copies in ~/coding/*/.env on my Mac hold a different one -->
+Sheet `19AQuRcClma4uzMvGz9kFG7shcxontNVRZGliAu2Mx0k` ("CMS/DP Information"). Tab `raw_data` is what `scraper.py` uploads (cleared and rewritten every run, `LAST UPDATED:` stamp in the header row); `raw_data_dp` is the same from [dp-scraper](../dp-scraper/). The front tab (`CMS Asia`) is a `=QUERY(raw_data!A:N, …)` over it: Client, PlayerName, LastContactDate, ScreenModels, SerialNumber, ScreenStatus (Online / Offline / Unpaired), ClientId. This is the sheet Support and Chris look at for player status; the Airtable `Signage Scraper` table is the same data. <!-- confirm: the GSHEET_ID in the droplet .env files should be this ID; the copies in ~/coding/*/.env on my Mac hold a different one -->
 
 ### Daily snapshot (Google Apps Script)
 
@@ -40,4 +40,4 @@ function backupAsSheets() {
 | Owner | **Boss's Google account** (trigger "Owned by: Me"). Apps Script triggers die with the account, and the copies are made as the trigger owner. |
 | Last seen running | 2026-11-03 04:56 |
 
-**Handover:** someone who keeps a Google account must open the script, delete this trigger and create the same one under their own account (Triggers › Add Trigger). The folder should be moved to a shared drive or at least shared with that person. Nothing reads the snapshots automatically; they are there for "what did this player look like on date X" questions. Old copies are never deleted.
+**Handover:** someone who keeps a Google account must open the script, delete this trigger and create the same one under their own account (Triggers › Add Trigger). The folder should be moved to a shared drive or at least shared with that person. Nothing reads the snapshots automatically, but the **subscription report depends on them**: it takes the last-day-of-month copy for each month as the source of truth for whether a screen was on site ([../subscription-report/](../subscription-report/)). Old copies are never deleted. The folder is called `cms_daily`; snapshots start Feb 2026, so January 2026 cannot be validated.

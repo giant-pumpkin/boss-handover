@@ -8,7 +8,7 @@ One folder per pipeline. Each has a `README.md` (flow, schedule, where it runs, 
 | [airtable-to-sheets](airtable-to-sheets/) | Jobs / Tickets / HS Quotes → Google Sheets | <!-- --> | droplet | live |
 | [freshdesk-to-airtable](freshdesk-to-airtable/) | Freshdesk tickets → Tickets base; sidebar location-picker app | on ticket create | Freshdesk automations + Airtable | live; sidebar app in dev |
 | [xero-to-airtable](xero-to-airtable/) | Xero sales invoices → `Invoices` | manual | my Mac | demo org only; blocked on access to real Xero |
-| [subscription-report](subscription-report/) | Airtable subscriptions → Excel timeline report for Chris | on request | my Mac | last run 2026-05 |
+| [subscription-report](subscription-report/) | Airtable subscriptions × CMS snapshots → screens-serviced Excel for Chris (VA payment, invoicing) | roughly monthly, when Chris asks | any laptop with pandas | last run Jan–Sep 2026 |
 | [email-intelligence](email-intelligence/) | Gmail → Claude extraction → DB | — | — | designed, not built |
 | [cms-scraper](cms-scraper/) | CMS Asia (Signage Player) player/location status → Data › Signage Scraper → Monitoring › CMS status | `3,18,33,48 * * * *` | droplet, n8n `Y7V6fDXdUsGlDaKj` | live |
 | [dp-scraper](dp-scraper/) | Display Player portal → Data › Device Portal Scraper | `5,20,35,50 * * * *` | droplet, n8n `nUpnbCswyRIc8FR8` | live |
