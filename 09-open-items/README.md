@@ -51,6 +51,7 @@ Honest list of what is unfinished and what can bite. Ordered by risk.
 | Xero → Airtable on the real org | blocked on access approval | get a Standard user to click Allow; parse quote number | [03](../03-data-pipelines/xero-to-airtable/) |
 | Freshdesk location-picker sidebar app | in development | finish, publish privately, update ingest webhook | [03](../03-data-pipelines/freshdesk-to-airtable/) |
 | MA packages: 6 stores to add, Baan Silom cleanup, reinstall question | paused 2026-10-02 | see list | [07](../07-business-logic/maintenance-packages.md) |
+| `MPA-0049` (Jomthien) built as 1 PM + 1 RM but sold as 5 visits; `JOB-00007089` (1691 RM) marked Done on creation day | found 2026-11-02 | add 3 RM items to MPA-0049 and regenerate; ask Support about 7089 | [07 §QSA single-store](../07-business-logic/maintenance-packages.md) |
 | Email intelligence pipeline | designed only | decide store, build | [03](../03-data-pipelines/email-intelligence/) |
 | Deposit gate approval step in ApprovalMax | <!-- implemented? --> | | [05](../05-third-party-services/approvalmax.md) |
 | ConnectIQ Phase 2: DR-12, DR-41 evidence, `inv_` object model, event list | decisions pending | | [06](../06-connectiq/open-decisions.md) |
